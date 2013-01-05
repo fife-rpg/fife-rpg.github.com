@@ -1,0 +1,421 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>fife_rpg.world &mdash; fife-rpg 0.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="fife-rpg 0.0 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">fife-rpg 0.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for fife_rpg.world</h1><div class="highlight"><pre>
+<span class="c"># -*- coding: utf-8 -*-</span>
+<span class="c">#   This program is free software: you can redistribute it and/or modify</span>
+<span class="c">#   it under the terms of the GNU General Public License as published by</span>
+<span class="c">#   the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c">#   (at your option) any later version.</span>
+<span class="c">#</span>
+<span class="c">#   This program is distributed in the hope that it will be useful,</span>
+<span class="c">#   but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c">#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c">#   GNU General Public License for more details.</span>
+<span class="c">#</span>
+<span class="c">#   You should have received a copy of the GNU General Public License</span>
+<span class="c">#   along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<span class="c">#</span>
+<span class="c"># This module is based on the PARPGWorld class.</span>
+
+<span class="sd">&quot;&quot;&quot;This module contains the world class used used by the entity system.</span>
+
+<span class="sd">.. module:: world</span>
+<span class="sd">    :synopsis: Contains the world class.</span>
+
+<span class="sd">.. moduleauthor:: Karsten Bock &lt;KarstenBock@gmx.net&gt;</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">bGrease.grease_fife.world</span> <span class="kn">import</span> <span class="n">World</span>
+<span class="kn">from</span> <span class="nn">fife.extensions.serializers.xmlobject</span> <span class="kn">import</span> <span class="n">XMLObjectLoader</span>
+<span class="kn">from</span> <span class="nn">fife.extensions.serializers.xml_loader_tools</span> <span class="kn">import</span> <span class="n">loadImportDirRec</span>
+<span class="kn">import</span> <span class="nn">yaml</span>
+<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="kn">from</span> <span class="nn">fife_rpg.components</span> <span class="kn">import</span> <span class="n">ComponentManager</span>
+<span class="kn">from</span> <span class="nn">fife_rpg.systems</span> <span class="kn">import</span> <span class="n">SystemManager</span>
+<span class="kn">from</span> <span class="nn">fife_rpg.entities.rpg_entity</span> <span class="kn">import</span> <span class="n">RPGEntity</span>
+<span class="kn">from</span> <span class="nn">fife_rpg.systems</span> <span class="kn">import</span> <span class="n">GameVariables</span>
+<span class="kn">from</span> <span class="nn">fife_rpg.components.agent</span> <span class="kn">import</span> <span class="n">Agent</span>
+<span class="kn">from</span> <span class="nn">fife_rpg.components.fifeagent</span> <span class="kn">import</span> <span class="n">FifeAgent</span>
+<span class="kn">from</span> <span class="nn">fife_rpg.components.general</span> <span class="kn">import</span> <span class="n">General</span>
+
+<div class="viewcode-block" id="RPGWorld"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.world.RPGWorld">[docs]</a><span class="k">class</span> <span class="nc">RPGWorld</span><span class="p">(</span><span class="n">World</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;The Base world for all rpgs.</span>
+<span class="sd">    </span>
+<span class="sd">    Sets up the generic systems and components</span>
+<span class="sd">    </span>
+<span class="sd">    Properties:</span>
+<span class="sd">        application: The :class:`fife_rpg.rpg_application.RPGApplication` that </span>
+<span class="sd">        uses this engine</span>
+<span class="sd">        </span>
+<span class="sd">        object_db: Stores the template data        </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">MAX_ID_NUMBER</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">maxint</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">application</span><span class="p">):</span>
+        <span class="n">World</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">application</span><span class="o">.</span><span class="n">engine</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">application</span> <span class="o">=</span> <span class="n">application</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">object_db</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">registered_as</span> <span class="o">=</span> <span class="n">GameVariables</span><span class="o">.</span><span class="n">registered_as</span>
+        <span class="k">if</span> <span class="n">registered_as</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">systems</span><span class="p">,</span> <span class="n">registered_as</span><span class="p">):</span>
+            <span class="n">environment</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">systems</span><span class="p">,</span> <span class="n">registered_as</span><span class="p">)</span> 
+            <span class="n">environment</span><span class="o">.</span><span class="n">add_callback</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">update_game_variables</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">Agent</span><span class="o">.</span><span class="n">registered_as</span><span class="p">:</span>
+            <span class="n">Agent</span><span class="o">.</span><span class="n">register</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">FifeAgent</span><span class="o">.</span><span class="n">registered_as</span><span class="p">:</span>
+            <span class="n">FifeAgent</span><span class="o">.</span><span class="n">register</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">General</span><span class="o">.</span><span class="n">registered_as</span><span class="p">:</span>
+            <span class="n">General</span><span class="o">.</span><span class="n">register</span><span class="p">()</span>
+        <span class="n">yaml</span><span class="o">.</span><span class="n">add_representer</span><span class="p">(</span><span class="n">RPGEntity</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">entity_representer</span><span class="p">)</span>
+        <span class="n">yaml</span><span class="o">.</span><span class="n">add_constructor</span><span class="p">(</span><span class="s">&#39;!Entity&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">entity_constructor</span><span class="p">,</span> <span class="n">yaml</span><span class="o">.</span><span class="n">SafeLoader</span><span class="p">)</span>
+                
+<div class="viewcode-block" id="RPGWorld.get_entity"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.world.RPGWorld.get_entity">[docs]</a>    <span class="k">def</span> <span class="nf">get_entity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">identifier</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the entity with the identifier</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            identifier: The identifier of the entity</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            The entity with the identifier or None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">extent</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="n">RPGEntity</span><span class="p">],</span> <span class="n">General</span><span class="o">.</span><span class="n">registered_as</span><span class="p">)</span>
+        <span class="n">entities</span> <span class="o">=</span> <span class="n">extent</span><span class="o">.</span><span class="n">identifier</span> <span class="o">==</span> <span class="n">identifier</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">entities</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">entities</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">None</span>
+</div>
+<div class="viewcode-block" id="RPGWorld.is_identifier_used"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.world.RPGWorld.is_identifier_used">[docs]</a>    <span class="k">def</span> <span class="nf">is_identifier_used</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">identifier</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Checks whether the idenfier is used</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            identifier: The identifier to check</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            True if the identifier is used, false if not</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">entity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_entity</span><span class="p">(</span><span class="n">identifier</span><span class="p">)</span> 
+        <span class="k">return</span> <span class="ow">not</span> <span class="n">entity</span> <span class="ow">is</span> <span class="bp">None</span>    
+    </div>
+<div class="viewcode-block" id="RPGWorld.create_unique_identifier"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.world.RPGWorld.create_unique_identifier">[docs]</a>    <span class="k">def</span> <span class="nf">create_unique_identifier</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">identifier</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns an unused identifier based on the given identifier</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            identifier: The base identifier</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            A unique unused identifier based in the given identifier</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">id_number</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_identifier_used</span><span class="p">(</span><span class="n">identifier</span> <span class="o">+</span> <span class="s">&quot;_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">id_number</span><span class="p">)):</span>
+            <span class="n">id_number</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">id_number</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">MAX_ID_NUMBER</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s">&quot;Number exceeds MAX_ID_NUMBER:&quot;</span> <span class="o">+</span> 
+                    <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">MAX_ID_NUMBER</span><span class="p">)</span>
+                <span class="p">)</span>
+        <span class="n">identifier</span> <span class="o">=</span> <span class="n">identifier</span> <span class="o">+</span> <span class="s">&quot;_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">id_number</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">identifier</span>
+    </div>
+<div class="viewcode-block" id="RPGWorld.configure"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.world.RPGWorld.configure">[docs]</a>    <span class="k">def</span> <span class="nf">configure</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Configure the worlds components and systems&quot;&quot;&quot;</span>
+        <span class="n">World</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">components</span> <span class="o">=</span> <span class="n">ComponentManager</span><span class="o">.</span><span class="n">get_components</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">component</span> <span class="ow">in</span> <span class="n">components</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">component</span><span class="p">)</span>
+        <span class="n">systems</span> <span class="o">=</span> <span class="n">SystemManager</span><span class="o">.</span><span class="n">get_systems</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">system</span> <span class="ow">in</span> <span class="n">systems</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">systems</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">system</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">General</span><span class="o">.</span><span class="n">registered_as</span><span class="p">:</span>
+            <span class="n">General</span><span class="o">.</span><span class="n">register</span><span class="p">()</span>
+    </div>
+<div class="viewcode-block" id="RPGWorld.get_or_create_entity"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.world.RPGWorld.get_or_create_entity">[docs]</a>    <span class="k">def</span> <span class="nf">get_or_create_entity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">identifier</span><span class="p">,</span> <span class="n">info</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">extra</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create an entity if not already present and return it.</span>
+<span class="sd">        </span>
+<span class="sd">            Args:</span>
+<span class="sd">                identifier: The identifier of the new object</span>
+<span class="sd">                </span>
+<span class="sd">                info: Stores information about the object we want to create</span>
+<span class="sd">                </span>
+<span class="sd">                extra: Stores additionally required attributes</span>
+<span class="sd">        </span>
+<span class="sd">            Returns:</span>
+<span class="sd">                The entity with the identifier.</span>
+<span class="sd">                None: If there is no info dictionary and no entity with the</span>
+<span class="sd">                identifier</span>
+<span class="sd">           &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_identifier_used</span><span class="p">(</span><span class="n">identifier</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_entity</span><span class="p">(</span><span class="n">identifier</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">info</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">extra</span> <span class="o">=</span> <span class="n">extra</span> <span class="ow">or</span> <span class="p">{}</span>
+            
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">extra</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">info</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>      
+           
+            <span class="n">new_ent</span> <span class="o">=</span> <span class="n">RPGEntity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">identifier</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">component</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">info</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">comp_obj</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">new_ent</span><span class="p">,</span> <span class="n">component</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="nb">setattr</span><span class="p">(</span><span class="n">comp_obj</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">new_ent</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">None</span>
+        </div>
+<div class="viewcode-block" id="RPGWorld.update_game_variables"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.world.RPGWorld.update_game_variables">[docs]</a>    <span class="k">def</span> <span class="nf">update_game_variables</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Called by the game environment when it wants to update its globals</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            variables: The globals dictionary of the GameEnvironment that is </span>
+<span class="sd">            filled by the GameScene</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">extent</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="n">RPGEntity</span><span class="p">],</span> <span class="n">General</span><span class="o">.</span><span class="n">registered_as</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="n">extent</span><span class="p">:</span>            
+            <span class="n">variables</span><span class="p">[</span><span class="n">entity</span><span class="o">.</span><span class="n">identifier</span><span class="p">]</span> <span class="o">=</span> <span class="n">entity</span>
+        </div>
+<div class="viewcode-block" id="RPGWorld.import_agent_objects"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.world.RPGWorld.import_agent_objects">[docs]</a>    <span class="k">def</span> <span class="nf">import_agent_objects</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">object_path</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Import the objects used by agents from the given path</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            object_path: The root path in which the objects are.</span>
+<span class="sd">            If set to None it the path will be read from the settings</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">object_path</span><span class="p">:</span>
+            <span class="n">object_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+                <span class="s">&quot;fife-rpg&quot;</span><span class="p">,</span> <span class="s">&quot;AgentObjectsPath&quot;</span><span class="p">,</span> <span class="s">&quot;objects/agents&quot;</span><span class="p">)</span>
+        <span class="n">engine</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span>
+        <span class="n">obj_loader</span> <span class="o">=</span> <span class="n">XMLObjectLoader</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span>
+        <span class="n">loadImportDirRec</span><span class="p">(</span><span class="n">obj_loader</span><span class="p">,</span> <span class="n">object_path</span><span class="p">,</span> <span class="n">engine</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="RPGWorld.read_object_db"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.world.RPGWorld.read_object_db">[docs]</a>    <span class="k">def</span> <span class="nf">read_object_db</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">db_filename</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Reads the Object Information Database from a file</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            db_filename: The yaml file to read from. Overwrites the</span>
+<span class="sd">            ObjectDBFile setting if not set to None.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">db_filename</span><span class="p">:</span>
+            <span class="n">db_filename</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+                <span class="s">&quot;fife-rpg&quot;</span><span class="p">,</span> <span class="s">&quot;ObjectDBFile&quot;</span><span class="p">,</span> <span class="s">&quot;objects/object_database.yaml&quot;</span><span class="p">)</span>
+        <span class="n">vfs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">getVFS</span><span class="p">()</span>
+        <span class="n">database_file</span> <span class="o">=</span> <span class="n">vfs</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">db_filename</span><span class="p">)</span>
+        <span class="n">database</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load_all</span><span class="p">(</span><span class="n">database_file</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">object_info</span> <span class="ow">in</span> <span class="n">database</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">object_db</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">object_info</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="RPGWorld.update_from_template"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.world.RPGWorld.update_from_template">[docs]</a>    <span class="k">def</span> <span class="nf">update_from_template</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity_data</span><span class="p">,</span> <span class="n">template_name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Copies missing data from a template into an entity dictionary.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            entity_data: The dictionary in which the data should be put.</span>
+<span class="sd">            </span>
+<span class="sd">            template_name: The name of the template to use</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The modified entity dictionary</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">object_db</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="n">template_name</span><span class="p">):</span>
+            <span class="n">template_data</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">object_db</span><span class="p">[</span><span class="n">template_name</span><span class="p">])</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">template_data</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">entity_data</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>                    
+                    <span class="n">tmp_attributes</span> <span class="o">=</span> <span class="n">template_data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+                    <span class="n">tmp_attributes</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">entity_data</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+                    <span class="n">entity_data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp_attributes</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">entity_data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">template_data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">entity_data</span>
+    </div>
+<div class="viewcode-block" id="RPGWorld.load_and_create_entities"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.world.RPGWorld.load_and_create_entities">[docs]</a>    <span class="k">def</span> <span class="nf">load_and_create_entities</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entities_file_name</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Reads the entities from a file and creates them</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            entities_file_name: The path to the entities file. Overwrites</span>
+<span class="sd">            the EntitiesFile setting if not set to None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">entities_file_name</span><span class="p">:</span>
+            <span class="n">entities_file_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+                <span class="s">&quot;fife-rpg&quot;</span><span class="p">,</span> <span class="s">&quot;EntitiesFile&quot;</span><span class="p">,</span> <span class="s">&quot;objects/entities.yaml&quot;</span><span class="p">)</span>
+        <span class="n">vfs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">getVFS</span><span class="p">()</span>
+        <span class="n">entities_file</span> <span class="o">=</span> <span class="n">vfs</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">entities_file_name</span><span class="p">)</span>
+        <span class="n">entities</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load_all</span><span class="p">(</span><span class="n">entities_file</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">while</span> <span class="n">entities</span><span class="o">.</span><span class="n">next</span><span class="p">():</span>
+                <span class="n">entities</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
+            <span class="k">pass</span>
+        </div>
+<div class="viewcode-block" id="RPGWorld.create_entity_dictionary"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.world.RPGWorld.create_entity_dictionary">[docs]</a>    <span class="k">def</span> <span class="nf">create_entity_dictionary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Creates a dictionary containing the values of the Entity</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            entity: The Entity instance</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            The created dictionary</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">entity_dict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">components_data</span> <span class="o">=</span> <span class="n">entity_dict</span><span class="p">[</span><span class="s">&quot;components&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">components</span> <span class="o">=</span> <span class="n">ComponentManager</span><span class="o">.</span><span class="n">get_components</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">component</span> <span class="ow">in</span> <span class="n">components</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="n">component_values</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">component_values</span><span class="p">:</span>
+                <span class="n">component_data</span> <span class="o">=</span> <span class="bp">None</span>
+                <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">component</span><span class="o">.</span><span class="n">saveable_fields</span><span class="p">:</span>                
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">component_data</span><span class="p">:</span>
+                        <span class="n">component_data</span> <span class="o">=</span> <span class="n">components_data</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>                
+                    <span class="n">component_data</span><span class="p">[</span><span class="n">field</span><span class="p">]</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">component_values</span><span class="p">,</span> <span class="n">field</span><span class="p">)</span>    
+        <span class="k">return</span> <span class="n">entity_dict</span>
+</div>
+<div class="viewcode-block" id="RPGWorld.entity_representer"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.world.RPGWorld.entity_representer">[docs]</a>    <span class="k">def</span> <span class="nf">entity_representer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dumper</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Creates a yaml node representing an entity</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            dumper: A yaml BaseRepresenter</span>
+<span class="sd">            </span>
+<span class="sd">            data: The Entity</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            The created node</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">entity_dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_entity_dictionary</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">entity_node</span> <span class="o">=</span> <span class="n">dumper</span><span class="o">.</span><span class="n">represent_mapping</span><span class="p">(</span><span class="s">u&quot;!Entity&quot;</span><span class="p">,</span> <span class="n">entity_dict</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">entity_node</span>
+    </div>
+<div class="viewcode-block" id="RPGWorld.entity_constructor"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.world.RPGWorld.entity_constructor">[docs]</a>    <span class="k">def</span> <span class="nf">entity_constructor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">loader</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Constructs an Entity from a yaml node</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            loader: A yaml BaseConstructor</span>
+<span class="sd">            </span>
+<span class="sd">            node: The yaml node</span>
+<span class="sd">            </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            The created Entity</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">entity_dict</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">construct_mapping</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">template</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="k">if</span> <span class="n">entity_dict</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="s">&quot;Template&quot;</span><span class="p">):</span>
+            <span class="n">template</span> <span class="o">=</span> <span class="n">entity_dict</span><span class="p">[</span><span class="s">&quot;Template&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">entity_dict</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="s">&quot;Components&quot;</span><span class="p">):</span>
+            <span class="n">components_data</span> <span class="o">=</span> <span class="n">entity_dict</span><span class="p">[</span><span class="s">&quot;Components&quot;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">template</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">update_from_template</span><span class="p">(</span><span class="n">components_data</span><span class="p">,</span> <span class="n">template</span><span class="p">)</span>
+            <span class="n">general_name</span> <span class="o">=</span> <span class="n">General</span><span class="o">.</span><span class="n">registered_as</span>
+            <span class="n">identifier</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">components_data</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="n">general_name</span><span class="p">):</span>
+                <span class="n">identifier</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_unique_identifier</span><span class="p">(</span><span class="n">template</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">general_data</span> <span class="o">=</span> <span class="n">components_data</span><span class="p">[</span><span class="n">General</span><span class="o">.</span><span class="n">registered_as</span><span class="p">]</span>
+                <span class="n">identifier</span> <span class="o">=</span> <span class="n">general_data</span><span class="p">[</span><span class="s">&quot;identifier&quot;</span><span class="p">]</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_or_create_entity</span><span class="p">(</span><span class="n">identifier</span><span class="p">,</span> <span class="n">components_data</span><span class="p">)</span>  
+        <span class="k">elif</span> <span class="n">template</span><span class="p">:</span>
+            <span class="n">components_data</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">update_from_template</span><span class="p">(</span><span class="n">components_data</span><span class="p">,</span> <span class="n">template</span><span class="p">)</span>
+            <span class="n">identifier</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_unique_identifier</span><span class="p">(</span><span class="n">template</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_or_create_entity</span><span class="p">(</span><span class="n">identifier</span><span class="p">,</span> <span class="n">components_data</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;There is no identifier and no Template set.&quot;</span> 
+                             <span class="s">&quot;Can&#39;t create an Entity without an identifier.&quot;</span><span class="p">)</span>
+            </div>
+<div class="viewcode-block" id="RPGWorld.pump"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.world.RPGWorld.pump">[docs]</a>    <span class="k">def</span> <span class="nf">pump</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time_delta</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Performs actions every frame</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            time_delta: Time that passed since the last call</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">World</span><span class="o">.</span><span class="n">pump</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time_delta</span><span class="p">)</span>
+        <span class="n">checkers</span> <span class="o">=</span> <span class="n">ComponentManager</span><span class="o">.</span><span class="n">get_checkers</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">names</span><span class="p">,</span> <span class="n">callback</span> <span class="ow">in</span> <span class="n">checkers</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">components</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="o">*</span><span class="n">names</span><span class="p">):</span>
+                <span class="n">callback</span><span class="p">(</span><span class="o">*</span><span class="n">components</span><span class="p">)</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">fife-rpg 0.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Karsten Bock.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

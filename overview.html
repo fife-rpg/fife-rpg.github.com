@@ -1,0 +1,211 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>FIFErpg Overview &mdash; fife-rpg 0.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="fife-rpg 0.0 documentation" href="index.html" />
+    <link rel="next" title="Tutorial" href="tutorial/tutorial.html" />
+    <link rel="prev" title="FIFErpg documentation content" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tutorial/tutorial.html" title="Tutorial"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="FIFErpg documentation content"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">fife-rpg 0.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="fiferpg-overview">
+<h1>FIFErpg Overview<a class="headerlink" href="#fiferpg-overview" title="Permalink to this headline">¶</a></h1>
+<p>FIFErpg is a framework for creating games utilizing a component-based entity
+system. It uses the FIFEngine and a modified version of the Grease framework.
+While the default components are specialized for RPGs it is not limited to
+those as one can create their own components and specify what components are
+used. The project started as a kind-of fork from PARPG but has been mostly
+rewritten to utilize components.</p>
+<p>The goals of FIFErpg are:</p>
+<ul class="simple">
+<li>To create a framework that makes it easy to create component based games
+with the FIFEngine by taking care of the basic setup needed for FIFE
+applications and providing the component system.</li>
+<li>To create tools that allows to edit the game assets like maps, dialogues,
+and scripts.</li>
+</ul>
+<p>Currently the first is (mostly) finished while there are no actual tools.</p>
+<div class="section" id="license">
+<h2>License<a class="headerlink" href="#license" title="Permalink to this headline">¶</a></h2>
+<p>FIFErpg is licensed under the GNU General Public License Version 3.
+The license text can be found in the gpl-3.0.txt file in the root directory of
+FIFErpg.</p>
+</div>
+<div class="section" id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<p>FIFErpg requires a Python 2.7 installation with the following modules:</p>
+<ul class="simple">
+<li>FIFE - <a class="reference external" href="http://www.fifengine.net">http://www.fifengine.net</a></li>
+<li>bGrease - <a class="reference external" href="https://github.com/Beliaar/bGrease">https://github.com/Beliaar/bGrease</a></li>
+<li>PyYAML - <a class="reference external" href="http://pyyaml.org/">http://pyyaml.org/</a></li>
+</ul>
+</div>
+<div class="section" id="downloading-fiferpg">
+<h2>Downloading FIFErpg<a class="headerlink" href="#downloading-fiferpg" title="Permalink to this headline">¶</a></h2>
+<p>Currently the only method to obtain FIFErpg is to clone the Mercurial
+source repository:</p>
+<div class="code bash highlight-python"><pre>hg clone https://bitbucket.org/fiferpg/fife-rpg</pre>
+</div>
+</div>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>To install FIFErpg from the source use:</p>
+<div class="code bash highlight-python"><pre>python setup.py install</pre>
+</div>
+<p>in the root directory of the source.</p>
+<p>After that you can test that everything was correctly installed by cloning the
+demo repository</p>
+<div class="code bash highlight-python"><pre>hg clone https://bitbucket.org/fiferpg/fife-rpg-demo</pre>
+</div>
+<p>and then running</p>
+<div class="code bash highlight-python"><pre>python run.py</pre>
+</div>
+<p>inside the root directory of the demo.</p>
+<p>If that opens a new window then everything was correctly installed.
+If the window is black, or the graphics appear blurry or otherwise incorrect
+it is mostly a problem with FIFE as that handles the graphical representation.
+You should check the <a class="reference external" href="http://wiki.fifengine.net/Known_Problems">Known Problems</a> page.</p>
+</div>
+<div class="section" id="documentation">
+<h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h2>
+<p>You can view the documentation online at <a class="reference external" href="http://fiferpg.bitbucket.org/">http://fiferpg.bitbucket.org/</a>.
+This will always contain the documentation for the Mercurial repository.</p>
+</div>
+<div class="section" id="development-status">
+<h2>Development status<a class="headerlink" href="#development-status" title="Permalink to this headline">¶</a></h2>
+<p>FIFErpg is currently under development and has no official release yet.
+The first official release, which will probably have a version number of 0.1,
+is planned to be made after the next version of FIFE is released and this
+manual is finished, or does have at least a Tutorial.</p>
+</div>
+<div class="section" id="contributing">
+<h2>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">¶</a></h2>
+<p>The easiest way to contribute is to make a fork of the Mercurial repository
+on Bitbucket and create a pull request.</p>
+<p>You can check the <a class="reference external" href="https://bitbucket.org/fiferpg/fife-rpg/issues?status=new&amp;status=open">issues</a> page for unassigned tasks. If you work on an issues
+check the comments if someone else is working on it and write a comment if you
+are working on it.</p>
+<p>You can of course create issues yourself, either as proposals for others or
+tasks that you work on yourself. Please note that there is no guarantee that
+issues that you create yourself are being added to FIFErpg.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">FIFErpg Overview</a><ul>
+<li><a class="reference internal" href="#license">License</a></li>
+<li><a class="reference internal" href="#requirements">Requirements</a></li>
+<li><a class="reference internal" href="#downloading-fiferpg">Downloading FIFErpg</a></li>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#documentation">Documentation</a></li>
+<li><a class="reference internal" href="#development-status">Development status</a></li>
+<li><a class="reference internal" href="#contributing">Contributing</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">FIFErpg documentation content</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tutorial/tutorial.html"
+                        title="next chapter">Tutorial</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/overview.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tutorial/tutorial.html" title="Tutorial"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="FIFErpg documentation content"
+             >previous</a> |</li>
+        <li><a href="index.html">fife-rpg 0.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Karsten Bock.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

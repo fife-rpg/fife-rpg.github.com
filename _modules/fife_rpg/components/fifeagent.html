@@ -1,0 +1,285 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>fife_rpg.components.fifeagent &mdash; fife-rpg 0.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="fife-rpg 0.0 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">fife-rpg 0.0 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for fife_rpg.components.fifeagent</h1><div class="highlight"><pre>
+<span class="c"># -*- coding: utf-8 -*-</span>
+<span class="c">#   This program is free software: you can redistribute it and/or modify</span>
+<span class="c">#   it under the terms of the GNU General Public License as published by</span>
+<span class="c">#   the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c">#   (at your option) any later version.</span>
+<span class="c">#</span>
+<span class="c">#   This program is distributed in the hope that it will be useful,</span>
+<span class="c">#   but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c">#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c">#   GNU General Public License for more details.</span>
+<span class="c">#</span>
+<span class="c">#   You should have received a copy of the GNU General Public License</span>
+<span class="c">#   along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<span class="sd">&quot;&quot;&quot;The FifeAgent component and functions</span>
+
+<span class="sd">.. module:: fifeagent</span>
+<span class="sd">    :synopsis: The FifeAgent component and functions</span>
+
+<span class="sd">.. moduleauthor:: Karsten Bock &lt;KarstenBock@gmx.net&gt;</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">fife</span> <span class="kn">import</span> <span class="n">fife</span>
+
+<span class="kn">from</span> <span class="nn">fife_rpg.components.base</span> <span class="kn">import</span> <span class="n">Base</span>
+<span class="kn">from</span> <span class="nn">fife_rpg.components.moving</span> <span class="kn">import</span> <span class="n">Moving</span>
+<span class="kn">from</span> <span class="nn">fife_rpg.components</span> <span class="kn">import</span> <span class="n">ComponentManager</span>
+<span class="kn">from</span> <span class="nn">fife_rpg.behaviours</span> <span class="kn">import</span> <span class="n">AGENT_STATES</span>
+<span class="kn">from</span> <span class="nn">fife_rpg.entities.rpg_entity</span> <span class="kn">import</span> <span class="n">RPGEntity</span>
+
+<div class="viewcode-block" id="FifeAgent"><a class="viewcode-back" href="../../../fife_rpg.components.html#fife_rpg.components.fifeagent.FifeAgent">[docs]</a><span class="k">class</span> <span class="nc">FifeAgent</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Component that stores the values for a fife agent</span>
+<span class="sd">    </span>
+<span class="sd">    Fields:</span>
+<span class="sd">        layer: The layer the agent is on</span>
+<span class="sd">        </span>
+<span class="sd">        behaviour: The behaviour object of this agent</span>
+<span class="sd">        </span>
+<span class="sd">        instance: The FIFE instance of this agent. </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">Base</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="nb">object</span><span class="p">,</span> <span class="n">behaviour</span><span class="o">=</span><span class="nb">object</span><span class="p">,</span> <span class="n">instance</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="FifeAgent.saveable_fields"><a class="viewcode-back" href="../../../fife_rpg.components.html#fife_rpg.components.fifeagent.FifeAgent.saveable_fields">[docs]</a>    <span class="k">def</span> <span class="nf">saveable_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the fields of the component that can be saved.&quot;&quot;&quot;</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+        <span class="n">fields</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s">&quot;layer&quot;</span><span class="p">)</span>
+        <span class="n">fields</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s">&quot;behaviour&quot;</span><span class="p">)</span>
+        <span class="n">fields</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s">&quot;instance&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">fields</span>
+</div>
+    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="FifeAgent.register"><a class="viewcode-back" href="../../../fife_rpg.components.html#fife_rpg.components.fifeagent.FifeAgent.register">[docs]</a>    <span class="k">def</span> <span class="nf">register</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;FifeAgent&quot;</span><span class="p">,</span> <span class="n">auto_register</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Registers the class as a component</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name: The name under which the class should be registered</span>
+<span class="sd">            </span>
+<span class="sd">            auto_register: This sets whether components this component</span>
+<span class="sd">            derives from will have their registered_as property set to the same</span>
+<span class="sd">            name as this class.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            True if the component was registered, False if not.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="nb">super</span><span class="p">(</span><span class="n">FifeAgent</span><span class="p">,</span> <span class="n">cls</span><span class="p">)</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">auto_register</span><span class="p">))</span>
+</div></div>
+<div class="viewcode-block" id="setup_behaviour"><a class="viewcode-back" href="../../../fife_rpg.components.html#fife_rpg.components.fifeagent.setup_behaviour">[docs]</a><span class="k">def</span> <span class="nf">setup_behaviour</span><span class="p">(</span><span class="n">agent</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Attach the behaviour to the layer</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        agent: A :class:`fife_rpg.components.fifeagent.FifeAgent` instance</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">agent</span><span class="o">.</span><span class="n">behaviour</span><span class="p">:</span>
+        <span class="n">agent</span><span class="o">.</span><span class="n">behaviour</span><span class="o">.</span><span class="n">attach_to_agent</span><span class="p">(</span><span class="n">agent</span><span class="p">)</span>
+        </div>
+<div class="viewcode-block" id="approach_and_execute"><a class="viewcode-back" href="../../../fife_rpg.components.html#fife_rpg.components.fifeagent.approach_and_execute">[docs]</a><span class="k">def</span> <span class="nf">approach_and_execute</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">target_or_location</span><span class="p">,</span> <span class="n">run_agent</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> 
+                    <span class="n">callback</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Move the entity to the given location, or follow the given target and</span>
+<span class="sd">    execute an action when reaching the target.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        entity: A :class:`fife_rpg.entities.rpg_entity.RPGEntity` with a </span>
+<span class="sd">        fifeagent and a moving component</span>
+<span class="sd">        </span>
+<span class="sd">        target_or_location: A fife.Location or position tuple </span>
+<span class="sd">        to move to or another entity  to follow</span>
+<span class="sd">        </span>
+<span class="sd">        run_agent: If true the run_animation will be performed otherwise</span>
+<span class="sd">        the walk_animation. </span>
+<span class="sd">        </span>
+<span class="sd">        callback: A function, that will be called after the agent has reached</span>
+<span class="sd">        its taeget.</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    <span class="n">fifeagent_name</span> <span class="o">=</span> <span class="n">FifeAgent</span><span class="o">.</span><span class="n">registered_as</span>
+    <span class="n">moving_name</span> <span class="o">=</span> <span class="n">Moving</span><span class="o">.</span><span class="n">registered_as</span>
+    <span class="k">if</span> <span class="n">fifeagent_name</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">or</span> <span class="n">moving_name</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">return</span>
+    <span class="n">fifeagent</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">fifeagent_name</span><span class="p">)</span>
+    <span class="n">moving</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">moving_name</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">fifeagent</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">moving</span><span class="p">:</span>
+        <span class="k">return</span>
+    <span class="n">fifeagent</span><span class="o">.</span><span class="n">behaviour</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">AGENT_STATES</span><span class="o">.</span><span class="n">APPROACH</span>
+    <span class="n">fifeagent</span><span class="o">.</span><span class="n">behaviour</span><span class="o">.</span><span class="n">callback</span> <span class="o">=</span> <span class="n">callback</span>
+
+    <span class="n">action</span> <span class="o">=</span> <span class="n">moving</span><span class="o">.</span><span class="n">run_animation</span> <span class="k">if</span> <span class="n">run_agent</span> <span class="k">else</span> <span class="n">moving</span><span class="o">.</span><span class="n">walk_animation</span>
+    <span class="n">speed</span> <span class="o">=</span> <span class="n">moving</span><span class="o">.</span><span class="n">run_speed</span> <span class="k">if</span> <span class="n">run_agent</span> <span class="k">else</span> <span class="n">moving</span><span class="o">.</span><span class="n">run_speed</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">target_or_location</span><span class="p">,</span> <span class="n">RPGEntity</span><span class="p">):</span>
+        <span class="n">target_agent</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">target_or_location</span><span class="p">,</span> <span class="n">fifeagent_name</span><span class="p">)</span> 
+        <span class="k">if</span><span class="p">(</span><span class="n">target_agent</span><span class="p">):</span>
+            <span class="n">target_or_location</span> <span class="o">=</span> <span class="n">target_agent</span><span class="o">.</span><span class="n">instance</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">target_or_location</span><span class="p">,</span> <span class="n">fife</span><span class="o">.</span><span class="n">Instance</span><span class="p">):</span>
+        <span class="n">agent</span> <span class="o">=</span> <span class="n">target_or_location</span>
+        <span class="n">fifeagent</span><span class="o">.</span><span class="n">instance</span><span class="o">.</span><span class="n">follow</span><span class="p">(</span><span class="n">action</span><span class="p">,</span> 
+                                  <span class="n">agent</span><span class="p">,</span> 
+                                  <span class="n">speed</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">location</span> <span class="o">=</span> <span class="n">target_or_location</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">location</span><span class="p">,</span> <span class="n">fife</span><span class="o">.</span><span class="n">Location</span><span class="p">):</span>
+            <span class="n">boxLocation</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">([</span><span class="nb">int</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">location</span><span class="p">])</span>
+            <span class="n">location</span> <span class="o">=</span> <span class="n">fife</span><span class="o">.</span><span class="n">Location</span><span class="p">(</span><span class="n">fifeagent</span><span class="o">.</span><span class="n">instance</span><span class="o">.</span><span class="n">getLocation</span><span class="p">())</span>
+            <span class="n">location</span><span class="o">.</span><span class="n">setLayerCoordinates</span><span class="p">(</span><span class="n">fife</span><span class="o">.</span><span class="n">ModelCoordinate</span><span class="p">(</span><span class="o">*</span><span class="n">boxLocation</span><span class="p">))</span>
+        <span class="n">fifeagent</span><span class="o">.</span><span class="n">instance</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">action</span><span class="p">,</span> 
+                                <span class="n">location</span><span class="p">,</span> 
+                                <span class="n">speed</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="run"><a class="viewcode-back" href="../../../fife_rpg.components.html#fife_rpg.components.fifeagent.run">[docs]</a><span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">location</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Makes the entity run to a certain location</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        entity: A :class:`fife_rpg.entities.rpg_entity.RPGEntity` with a </span>
+<span class="sd">        fifeagent and a moving component</span>
+<span class="sd">        </span>
+<span class="sd">        location: A fife.Location or position tuple to run to.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">fifeagent_name</span> <span class="o">=</span> <span class="n">FifeAgent</span><span class="o">.</span><span class="n">registered_as</span>
+    <span class="n">moving_name</span> <span class="o">=</span> <span class="n">Moving</span><span class="o">.</span><span class="n">registered_as</span>
+    <span class="k">if</span> <span class="n">fifeagent_name</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">or</span> <span class="n">moving_name</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">return</span>
+    <span class="n">fifeagent</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">fifeagent_name</span><span class="p">)</span>
+    <span class="n">moving</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">moving_name</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">fifeagent</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">moving</span><span class="p">:</span>
+        <span class="k">return</span>
+    <span class="n">fifeagent</span><span class="o">.</span><span class="n">behaviour</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">AGENT_STATES</span><span class="o">.</span><span class="n">RUN</span>
+    <span class="n">fifeagent</span><span class="o">.</span><span class="n">behaviour</span><span class="o">.</span><span class="n">clear_animations</span><span class="p">()</span>
+    <span class="n">fifeagent</span><span class="o">.</span><span class="n">behaviour</span><span class="o">.</span><span class="n">callback</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">location</span><span class="p">,</span> <span class="n">fife</span><span class="o">.</span><span class="n">Location</span><span class="p">):</span>
+        <span class="n">boxLocation</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">([</span><span class="nb">int</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">location</span><span class="p">])</span>
+        <span class="n">location</span> <span class="o">=</span> <span class="n">fife</span><span class="o">.</span><span class="n">Location</span><span class="p">(</span><span class="n">fifeagent</span><span class="o">.</span><span class="n">instance</span><span class="o">.</span><span class="n">getLocation</span><span class="p">())</span>
+        <span class="n">location</span><span class="o">.</span><span class="n">setLayerCoordinates</span><span class="p">(</span><span class="n">fife</span><span class="o">.</span><span class="n">ModelCoordinate</span><span class="p">(</span><span class="o">*</span><span class="n">boxLocation</span><span class="p">))</span>
+    <span class="n">fifeagent</span><span class="o">.</span><span class="n">instance</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">moving</span><span class="o">.</span><span class="n">run_animation</span><span class="p">,</span> 
+                            <span class="n">location</span><span class="p">,</span> 
+                            <span class="n">moving</span><span class="o">.</span><span class="n">run_speed</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="walk"><a class="viewcode-back" href="../../../fife_rpg.components.html#fife_rpg.components.fifeagent.walk">[docs]</a><span class="k">def</span> <span class="nf">walk</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">location</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Makes the entity walk to a certain location</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        entity: A :class:`fife_rpg.entities.rpg_entity.RPGEntity` with a </span>
+<span class="sd">        fifeagent and a moving component</span>
+<span class="sd">        </span>
+<span class="sd">        location: A fife.Location or position tuple to walk to.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">fifeagent_name</span> <span class="o">=</span> <span class="n">FifeAgent</span><span class="o">.</span><span class="n">registered_as</span>
+    <span class="n">moving_name</span> <span class="o">=</span> <span class="n">Moving</span><span class="o">.</span><span class="n">registered_as</span>
+    <span class="k">if</span> <span class="n">fifeagent_name</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">or</span> <span class="n">moving_name</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">return</span>
+    <span class="n">fifeagent</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">fifeagent_name</span><span class="p">)</span>
+    <span class="n">moving</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">moving_name</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">fifeagent</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">moving</span><span class="p">:</span>
+        <span class="k">return</span>
+    <span class="n">fifeagent</span><span class="o">.</span><span class="n">behaviour</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">AGENT_STATES</span><span class="o">.</span><span class="n">WALK</span>
+    <span class="n">fifeagent</span><span class="o">.</span><span class="n">behaviour</span><span class="o">.</span><span class="n">clear_animations</span><span class="p">()</span>
+    <span class="n">fifeagent</span><span class="o">.</span><span class="n">behaviour</span><span class="o">.</span><span class="n">callback</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">location</span><span class="p">,</span> <span class="n">fife</span><span class="o">.</span><span class="n">Location</span><span class="p">):</span>
+        <span class="n">boxLocation</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">([</span><span class="nb">int</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">location</span><span class="p">])</span>
+        <span class="n">location</span> <span class="o">=</span> <span class="n">fife</span><span class="o">.</span><span class="n">Location</span><span class="p">(</span><span class="n">fifeagent</span><span class="o">.</span><span class="n">instance</span><span class="o">.</span><span class="n">getLocation</span><span class="p">())</span>
+        <span class="n">location</span><span class="o">.</span><span class="n">setLayerCoordinates</span><span class="p">(</span><span class="n">fife</span><span class="o">.</span><span class="n">ModelCoordinate</span><span class="p">(</span><span class="o">*</span><span class="n">boxLocation</span><span class="p">))</span>
+    <span class="n">fifeagent</span><span class="o">.</span><span class="n">instance</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">moving</span><span class="o">.</span><span class="n">walk_animation</span><span class="p">,</span>
+                            <span class="n">location</span><span class="p">,</span>
+                            <span class="n">moving</span><span class="o">.</span><span class="n">walk_speed</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="register_script_commands"><a class="viewcode-back" href="../../../fife_rpg.components.html#fife_rpg.components.fifeagent.register_script_commands">[docs]</a><span class="k">def</span> <span class="nf">register_script_commands</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Register commands for this module&quot;&quot;&quot;</span>
+    <span class="n">ComponentManager</span><span class="o">.</span><span class="n">register_script_command</span><span class="p">(</span><span class="s">&quot;approach_and_execute&quot;</span><span class="p">,</span> 
+                                             <span class="n">approach_and_execute</span><span class="p">)</span>
+    <span class="n">ComponentManager</span><span class="o">.</span><span class="n">register_script_command</span><span class="p">(</span><span class="s">&quot;walk&quot;</span><span class="p">,</span> <span class="n">walk</span><span class="p">)</span>
+    <span class="n">ComponentManager</span><span class="o">.</span><span class="n">register_script_command</span><span class="p">(</span><span class="s">&quot;run&quot;</span><span class="p">,</span> <span class="n">run</span><span class="p">)</span>
+    </div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">fife-rpg 0.0 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Karsten Bock.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

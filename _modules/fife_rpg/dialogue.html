@@ -1,0 +1,340 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>fife_rpg.dialogue &mdash; fife-rpg 0.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="fife-rpg 0.0 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">fife-rpg 0.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for fife_rpg.dialogue</h1><div class="highlight"><pre>
+<span class="c"># -*- coding: utf-8 -*-</span>
+<span class="c">#   This program is free software: you can redistribute it and/or modify</span>
+<span class="c">#   it under the terms of the GNU General Public License as published by</span>
+<span class="c">#   the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c">#   (at your option) any later version.</span>
+<span class="c">#   </span>
+<span class="c">#   This program is distributed in the hope that it will be useful,</span>
+<span class="c">#   but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c">#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c">#   GNU General Public License for more details.</span>
+<span class="c">#   </span>
+<span class="c">#   You should have received a copy of the GNU General Public License</span>
+<span class="c">#   along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<span class="c">#</span>
+
+<span class="sd">&quot;&quot;&quot;This module contains the the functions and classes for playing dialogues.</span>
+
+<span class="sd">.. module:: controllers</span>
+<span class="sd">    :synopsis: Functions and classes for playing dialogues.</span>
+
+<span class="sd">.. moduleauthor:: Karsten Bock &lt;KarstenBock@gmx.net&gt;</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">yaml</span>
+
+<span class="kn">from</span> <span class="nn">fife_rpg.systems</span> <span class="kn">import</span> <span class="n">GameVariables</span>
+<span class="kn">from</span> <span class="nn">fife_rpg</span> <span class="kn">import</span> <span class="n">ControllerBase</span>
+<span class="kn">from</span> <span class="nn">fife_rpg.systems.scriptingsystem</span> <span class="kn">import</span> <span class="n">ScriptingSystem</span>
+
+<div class="viewcode-block" id="DialogueSection"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.dialogue.DialogueSection">[docs]</a><span class="k">class</span> <span class="nc">DialogueSection</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Represents a section of a dialogue</span>
+
+<span class="sd">    Properties:</span>
+<span class="sd">        talker: The Entity that is talking</span>
+
+<span class="sd">        text: The text that is being said</span>
+
+<span class="sd">        conditions: List of conditions that are evaluated</span>
+
+<span class="sd">        commands: Commands that are to be executed when </span>
+<span class="sd">        the section is displayed</span>
+
+<span class="sd">        responses: Possible responses for this section</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">talker</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> 
+                 <span class="n">conditions</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">commands</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">responses</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">talker</span> <span class="o">=</span> <span class="n">talker</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">text</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conditions</span> <span class="o">=</span> <span class="n">conditions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">commands</span> <span class="o">=</span> <span class="n">commands</span> <span class="ow">or</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">responses</span> <span class="o">=</span> <span class="n">responses</span> <span class="ow">or</span> <span class="p">[]</span>
+</div>
+<div class="viewcode-block" id="Dialogue"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.dialogue.Dialogue">[docs]</a><span class="k">class</span> <span class="nc">Dialogue</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Represents a single dialogue</span>
+
+<span class="sd">    Properties:</span>
+<span class="sd">        world: RPGWorld that the dialogue is run on</span>
+
+<span class="sd">        sections: The sections of the dialogue</span>
+<span class="sd">        </span>
+<span class="sd">        current_section: The section that is currently active</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">world</span><span class="p">,</span> <span class="n">dialogue_data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create the sections based on the dialogue data</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            dialogue_data: A dictionary containing the dialogue data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">world</span> <span class="o">=</span> <span class="n">world</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_section</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sections</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">sections_data</span> <span class="o">=</span> <span class="n">dialogue_data</span><span class="p">[</span><span class="s">&quot;Sections&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create_sections</span><span class="p">(</span><span class="n">sections_data</span><span class="p">)</span>
+        <span class="n">greetings_data</span> <span class="o">=</span> <span class="n">dialogue_data</span><span class="p">[</span><span class="s">&quot;Greetings&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">select_greeting</span><span class="p">(</span><span class="n">greetings_data</span><span class="p">)</span>
+        
+<div class="viewcode-block" id="Dialogue.get_dialogue_variables"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.dialogue.Dialogue.get_dialogue_variables">[docs]</a>    <span class="k">def</span> <span class="nf">get_dialogue_variables</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the game variables combined with dialogue specific</span>
+<span class="sd">        varialbes.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            section: A :class:`fife_rpg.dialogue.DialogueSection`. This will be</span>
+<span class="sd">            used to get dialogue variables</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">game_variables</span> <span class="o">=</span> <span class="n">GameVariables</span><span class="o">.</span><span class="n">registered_as</span>
+        <span class="k">if</span> <span class="n">game_variables</span><span class="p">:</span>
+            <span class="n">game_variables</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">world</span><span class="o">.</span><span class="n">systems</span><span class="p">,</span> 
+                                       <span class="n">game_variables</span><span class="p">)</span>
+            <span class="n">variables</span> <span class="o">=</span> <span class="n">game_variables</span><span class="o">.</span><span class="n">get_variables</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">variables</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">print</span> <span class="p">(</span><span class="s">&quot;The dialogue controller needs the GameVariables system &quot;</span>
+                   <span class="s">&quot;to function properly.&quot;</span><span class="p">)</span>
+        <span class="n">variables</span><span class="p">[</span><span class="s">&quot;DialogueTalker&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">world</span><span class="o">.</span><span class="n">get_entity</span><span class="p">(</span><span class="n">section</span><span class="o">.</span><span class="n">talker</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">variables</span>
+    </div>
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="Dialogue.possible_responses"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.dialogue.Dialogue.possible_responses">[docs]</a>    <span class="k">def</span> <span class="nf">possible_responses</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns a dictionary of the possible responses of the current section&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_section</span> <span class="ow">or</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_section</span><span class="o">.</span><span class="n">responses</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[]</span>
+        <span class="n">possible_responses</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">response_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_section</span><span class="o">.</span><span class="n">responses</span><span class="p">:</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sections</span><span class="p">[</span><span class="n">response_name</span><span class="p">]</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">conditions</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">or</span>
+                <span class="n">ScriptingSystem</span><span class="o">.</span><span class="n">check_condition</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">world</span><span class="o">.</span><span class="n">application</span><span class="p">,</span>
+                                                <span class="n">response</span><span class="o">.</span><span class="n">conditions</span><span class="p">)):</span> 
+                <span class="n">possible_responses</span><span class="p">[</span><span class="n">response_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">response</span>
+        <span class="k">return</span> <span class="n">possible_responses</span>
+    </div>
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="Dialogue.is_dialogue_finished"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.dialogue.Dialogue.is_dialogue_finished">[docs]</a>    <span class="k">def</span> <span class="nf">is_dialogue_finished</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns whether the dialogue is finished or not&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">possible_responses</span><span class="p">)</span>
+    </div>
+<div class="viewcode-block" id="Dialogue.run_section"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.dialogue.Dialogue.run_section">[docs]</a>    <span class="k">def</span> <span class="nf">run_section</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Runs the commands of the section</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            section: A :class:`fife_rpg.dialogue.DialogueSection`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">variables</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_dialogue_variables</span><span class="p">(</span><span class="n">section</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">command</span> <span class="ow">in</span> <span class="n">section</span><span class="o">.</span><span class="n">commands</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">command</span><span class="p">[</span><span class="s">&quot;Name&quot;</span><span class="p">]</span>
+            <span class="n">args</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">command</span><span class="p">[</span><span class="s">&quot;Args&quot;</span><span class="p">]:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">arg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">variables</span><span class="p">)</span>
+                <span class="n">args</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="n">arg_string</span> <span class="o">=</span> <span class="s">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+            <span class="n">command_string</span> <span class="o">=</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">arg_string</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">world</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">execute_console_command</span><span class="p">(</span><span class="n">command_string</span><span class="p">)</span>
+            </div>
+<div class="viewcode-block" id="Dialogue.select_response"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.dialogue.Dialogue.select_response">[docs]</a>    <span class="k">def</span> <span class="nf">select_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response_name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Selects the given response and performs its actions</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            response_name: The name of the response</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">sections</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="n">response_name</span><span class="p">)</span> <span class="ow">or</span>
+            <span class="ow">not</span> <span class="n">response_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">possible_responses</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s">&quot;There is no &#39;</span><span class="si">%s</span><span class="s">&#39; response available&quot;</span> <span class="o">%</span> <span class="n">response_name</span><span class="p">)</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sections</span><span class="p">[</span><span class="n">response_name</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_section</span> <span class="o">=</span> <span class="n">response</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">run_section</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="Dialogue.create_section"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.dialogue.Dialogue.create_section">[docs]</a>    <span class="k">def</span> <span class="nf">create_section</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section_data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create a section and return it</span>
+<span class="sd">        </span>
+<span class="sd">        Args: </span>
+<span class="sd">            section_data: A dictionary containing the data of a section</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">talker</span> <span class="o">=</span> <span class="n">section_data</span><span class="p">[</span><span class="s">&quot;talker&quot;</span><span class="p">]</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">section_data</span><span class="p">[</span><span class="s">&quot;text&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">section_data</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="s">&quot;conditions&quot;</span><span class="p">):</span>
+            <span class="n">condition</span> <span class="o">=</span> <span class="n">section_data</span><span class="p">[</span><span class="s">&quot;conditions&quot;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">condition</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="k">if</span> <span class="n">section_data</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="s">&quot;commands&quot;</span><span class="p">):</span>
+            <span class="n">commands</span> <span class="o">=</span> <span class="n">section_data</span><span class="p">[</span><span class="s">&quot;commands&quot;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">commands</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="k">if</span> <span class="n">section_data</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="s">&quot;responses&quot;</span><span class="p">):</span>
+            <span class="n">responses</span> <span class="o">=</span> <span class="n">section_data</span><span class="p">[</span><span class="s">&quot;responses&quot;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">responses</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="n">section</span> <span class="o">=</span> <span class="n">DialogueSection</span><span class="p">(</span><span class="n">talker</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">condition</span><span class="p">,</span> <span class="n">commands</span><span class="p">,</span> <span class="n">responses</span><span class="p">)</span>
+        <span class="n">variables</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_dialogue_variables</span><span class="p">(</span><span class="n">section</span><span class="p">)</span>
+        <span class="c">#pylint: disable=E0602</span>
+        <span class="n">section</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">_</span><span class="p">(</span><span class="n">section</span><span class="o">.</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">variables</span><span class="p">)</span>
+        <span class="c">#pylint: enable=E0602       </span>
+        <span class="k">return</span> <span class="n">section</span>
+</div>
+<div class="viewcode-block" id="Dialogue.create_sections"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.dialogue.Dialogue.create_sections">[docs]</a>    <span class="k">def</span> <span class="nf">create_sections</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sections_data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create the dialogue sections</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            sections_data: A dictionary containing the data of the sections</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">section_name</span><span class="p">,</span> <span class="n">section_data</span> <span class="ow">in</span> <span class="n">sections_data</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="n">section</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_section</span><span class="p">(</span><span class="n">section_data</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sections</span><span class="p">[</span><span class="n">section_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">section</span> 
+</div>
+<div class="viewcode-block" id="Dialogue.select_greeting"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.dialogue.Dialogue.select_greeting">[docs]</a>    <span class="k">def</span> <span class="nf">select_greeting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">greetings_data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Selects the first greeting which conditions passes</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            greetings_data: A dictionary containing the data of the greetings</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">greeting_data</span> <span class="ow">in</span> <span class="n">greetings_data</span><span class="o">.</span><span class="n">itervalues</span><span class="p">():</span>
+            <span class="n">greeting</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_section</span><span class="p">(</span><span class="n">greeting_data</span><span class="p">)</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">greeting</span><span class="o">.</span><span class="n">conditions</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">or</span>
+                <span class="n">ScriptingSystem</span><span class="o">.</span><span class="n">check_condition</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">world</span><span class="o">.</span><span class="n">application</span><span class="p">,</span>
+                                                <span class="n">greeting</span><span class="o">.</span><span class="n">conditions</span><span class="p">)):</span> 
+                <span class="bp">self</span><span class="o">.</span><span class="n">current_section</span> <span class="o">=</span> <span class="n">greeting</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">run_section</span><span class="p">(</span><span class="n">greeting</span><span class="p">)</span>
+</div></div>
+<div class="viewcode-block" id="DialogueController"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.dialogue.DialogueController">[docs]</a><span class="k">class</span> <span class="nc">DialogueController</span><span class="p">(</span><span class="n">ControllerBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Controller that handles Dialogues</span>
+
+<span class="sd">    Properties:</span>
+<span class="sd">        application: The application that created this controller</span>
+
+<span class="sd">        view: The view that is used by this controller</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">view</span><span class="p">,</span> <span class="n">application</span><span class="p">):</span>
+        <span class="n">ControllerBase</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">view</span><span class="p">,</span> <span class="n">application</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dialogues</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_dialogue</span> <span class="o">=</span> <span class="bp">None</span>
+        
+<div class="viewcode-block" id="DialogueController.add_dialogue"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.dialogue.DialogueController.add_dialogue">[docs]</a>    <span class="k">def</span> <span class="nf">add_dialogue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">identifier</span><span class="p">,</span> <span class="n">dialogue_data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add a dialogue to the controller</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            identifier: The name of the dialogue</span>
+<span class="sd">            </span>
+<span class="sd">            dialogue_data: The data of the dialogue</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dialogues</span><span class="p">[</span><span class="n">identifier</span><span class="p">]</span> <span class="o">=</span> <span class="n">dialogue_data</span>
+    </div>
+<div class="viewcode-block" id="DialogueController.add_dialogue_from_file"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.dialogue.DialogueController.add_dialogue_from_file">[docs]</a>    <span class="k">def</span> <span class="nf">add_dialogue_from_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Loads a dialogue from a file and adds it to the controller</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            filename: The path to the file</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">dialogue_file</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">getVFS</span><span class="p">()</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        <span class="n">dialogue_data</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">dialogue_file</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_dialogue</span><span class="p">(</span><span class="n">dialogue_data</span><span class="p">[</span><span class="s">&quot;Identifier&quot;</span><span class="p">],</span> <span class="n">dialogue_data</span><span class="p">)</span>
+        </div>
+<div class="viewcode-block" id="DialogueController.start_dialogue"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.dialogue.DialogueController.start_dialogue">[docs]</a>    <span class="k">def</span> <span class="nf">start_dialogue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">identifier</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Starts a dialogue</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            identifier: The name of the dialogue to start</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">dialogues</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="n">identifier</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s">&quot;Dialogue &#39;</span><span class="si">%s</span><span class="s">&#39; not found&quot;</span> <span class="o">%</span> <span class="n">identifier</span><span class="p">)</span>
+        <span class="n">dialogue_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dialogues</span><span class="p">[</span><span class="n">identifier</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_dialogue</span> <span class="o">=</span> <span class="n">Dialogue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">world</span><span class="p">,</span> <span class="n">dialogue_data</span><span class="p">)</span>
+        </div>
+<div class="viewcode-block" id="DialogueController.end_dialogue"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.dialogue.DialogueController.end_dialogue">[docs]</a>    <span class="k">def</span> <span class="nf">end_dialogue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Ends the current dialogue&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_dialogue</span> <span class="o">=</span> <span class="bp">None</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">fife-rpg 0.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Karsten Bock.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
