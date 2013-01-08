@@ -77,12 +77,12 @@
 <span class="kn">from</span> <span class="nn">fife_rpg.components.lockable</span> <span class="kn">import</span> <span class="n">open_lock</span>
 <span class="kn">from</span> <span class="nn">fife_rpg.components.fifeagent</span> <span class="kn">import</span> <span class="n">FifeAgent</span>
 
-<div class="viewcode-block" id="OpenAction"><a class="viewcode-back" href="../../../fife_rpg.actions.html#fife_rpg.actions.open.OpenAction">[docs]</a><span class="k">class</span> <span class="nc">OpenAction</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+<div class="viewcode-block" id="Open"><a class="viewcode-back" href="../../../fife_rpg.actions.html#fife_rpg.actions.open.Open">[docs]</a><span class="k">class</span> <span class="nc">Open</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Action for opening unlocked lockables&quot;&quot;&quot;</span>
 
     <span class="n">dependencies</span> <span class="o">=</span> <span class="p">[</span><span class="n">Lockable</span><span class="p">]</span>
         
-<div class="viewcode-block" id="OpenAction.execute"><a class="viewcode-back" href="../../../fife_rpg.actions.html#fife_rpg.actions.open.OpenAction.execute">[docs]</a>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Open.execute"><a class="viewcode-back" href="../../../fife_rpg.actions.html#fife_rpg.actions.open.Open.execute">[docs]</a>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Execute the action</span>
 <span class="sd">        </span>
 <span class="sd">        Raises:</span>
@@ -102,7 +102,7 @@
         <span class="n">Base</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         </div>
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="OpenAction.check_agent"><a class="viewcode-back" href="../../../fife_rpg.actions.html#fife_rpg.actions.open.OpenAction.check_agent">[docs]</a>    <span class="k">def</span> <span class="nf">check_agent</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">entity</span><span class="p">):</span> <span class="c">#pylint: disable-msg=W0613</span>
+<div class="viewcode-block" id="Open.check_agent"><a class="viewcode-back" href="../../../fife_rpg.actions.html#fife_rpg.actions.open.Open.check_agent">[docs]</a>    <span class="k">def</span> <span class="nf">check_agent</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">entity</span><span class="p">):</span> <span class="c">#pylint: disable-msg=W0613</span>
         <span class="sd">&quot;&quot;&quot;Checks whether the entity qualifies as an agent for this action</span>
 <span class="sd">        </span>
 <span class="sd">        Args:</span>
@@ -114,7 +114,7 @@
         <span class="k">return</span> <span class="bp">True</span>
     </div>
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="OpenAction.check_target"><a class="viewcode-back" href="../../../fife_rpg.actions.html#fife_rpg.actions.open.OpenAction.check_target">[docs]</a>    <span class="k">def</span> <span class="nf">check_target</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">entity</span><span class="p">):</span> <span class="c">#pylint: disable-msg=W0613</span>
+<div class="viewcode-block" id="Open.check_target"><a class="viewcode-back" href="../../../fife_rpg.actions.html#fife_rpg.actions.open.Open.check_target">[docs]</a>    <span class="k">def</span> <span class="nf">check_target</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">entity</span><span class="p">):</span> <span class="c">#pylint: disable-msg=W0613</span>
         <span class="sd">&quot;&quot;&quot;Checks whether the entity qualifies as a target for this action</span>
 <span class="sd">        </span>
 <span class="sd">        Args:</span>
@@ -129,7 +129,7 @@
         <span class="k">return</span> <span class="bp">False</span>
 </div>
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="OpenAction.register"><a class="viewcode-back" href="../../../fife_rpg.actions.html#fife_rpg.actions.open.OpenAction.register">[docs]</a>    <span class="k">def</span> <span class="nf">register</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;Open&quot;</span><span class="p">):</span>
+<div class="viewcode-block" id="Open.register"><a class="viewcode-back" href="../../../fife_rpg.actions.html#fife_rpg.actions.open.Open.register">[docs]</a>    <span class="k">def</span> <span class="nf">register</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;Open&quot;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Registers the class as an action</span>
 
 <span class="sd">        Args:</span>
@@ -138,7 +138,7 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            True if the action was registered, False if not.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">OpenAction</span><span class="p">,</span> <span class="n">cls</span><span class="p">)</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">name</span><span class="p">)</span></div></div>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">Open</span><span class="p">,</span> <span class="n">cls</span><span class="p">)</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">name</span><span class="p">)</span></div></div>
 </pre></div>
 
           </div>

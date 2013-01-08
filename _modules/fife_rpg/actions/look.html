@@ -75,12 +75,12 @@
 <span class="kn">from</span> <span class="nn">fife_rpg.actions.base</span> <span class="kn">import</span> <span class="n">Base</span>
 <span class="kn">from</span> <span class="nn">fife_rpg.components.description</span> <span class="kn">import</span> <span class="n">Description</span>
 
-<div class="viewcode-block" id="LookAction"><a class="viewcode-back" href="../../../fife_rpg.actions.html#fife_rpg.actions.look.LookAction">[docs]</a><span class="k">class</span> <span class="nc">LookAction</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+<div class="viewcode-block" id="Look"><a class="viewcode-back" href="../../../fife_rpg.actions.html#fife_rpg.actions.look.Look">[docs]</a><span class="k">class</span> <span class="nc">Look</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Action for unlocking lockables&quot;&quot;&quot;</span>
 
     <span class="n">dependencies</span> <span class="o">=</span> <span class="p">[</span><span class="n">Description</span><span class="p">]</span>
 
-<div class="viewcode-block" id="LookAction.execute"><a class="viewcode-back" href="../../../fife_rpg.actions.html#fife_rpg.actions.look.LookAction.execute">[docs]</a>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Look.execute"><a class="viewcode-back" href="../../../fife_rpg.actions.html#fife_rpg.actions.look.Look.execute">[docs]</a>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Execute the action</span>
 <span class="sd">        </span>
 <span class="sd">        Raises:</span>
@@ -98,7 +98,7 @@
         <span class="k">return</span> <span class="n">text</span>
 </div>
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="LookAction.check_agent"><a class="viewcode-back" href="../../../fife_rpg.actions.html#fife_rpg.actions.look.LookAction.check_agent">[docs]</a>    <span class="k">def</span> <span class="nf">check_agent</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">entity</span><span class="p">):</span> <span class="c">#pylint: disable-msg=W0613</span>
+<div class="viewcode-block" id="Look.check_agent"><a class="viewcode-back" href="../../../fife_rpg.actions.html#fife_rpg.actions.look.Look.check_agent">[docs]</a>    <span class="k">def</span> <span class="nf">check_agent</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">entity</span><span class="p">):</span> <span class="c">#pylint: disable-msg=W0613</span>
         <span class="sd">&quot;&quot;&quot;Checks whether the entity qualifies as an agent for this action</span>
 <span class="sd">        </span>
 <span class="sd">        Args:</span>
@@ -110,7 +110,7 @@
         <span class="k">return</span> <span class="bp">True</span>
     </div>
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="LookAction.check_target"><a class="viewcode-back" href="../../../fife_rpg.actions.html#fife_rpg.actions.look.LookAction.check_target">[docs]</a>    <span class="k">def</span> <span class="nf">check_target</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">entity</span><span class="p">):</span> <span class="c">#pylint: disable-msg=W0613</span>
+<div class="viewcode-block" id="Look.check_target"><a class="viewcode-back" href="../../../fife_rpg.actions.html#fife_rpg.actions.look.Look.check_target">[docs]</a>    <span class="k">def</span> <span class="nf">check_target</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">entity</span><span class="p">):</span> <span class="c">#pylint: disable-msg=W0613</span>
         <span class="sd">&quot;&quot;&quot;Checks whether the entity qualifies as a target for this action</span>
 <span class="sd">        </span>
 <span class="sd">        Args:</span>
@@ -125,7 +125,7 @@
         <span class="k">return</span> <span class="bp">False</span>
 </div>
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="LookAction.register"><a class="viewcode-back" href="../../../fife_rpg.actions.html#fife_rpg.actions.look.LookAction.register">[docs]</a>    <span class="k">def</span> <span class="nf">register</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;Look&quot;</span><span class="p">):</span>
+<div class="viewcode-block" id="Look.register"><a class="viewcode-back" href="../../../fife_rpg.actions.html#fife_rpg.actions.look.Look.register">[docs]</a>    <span class="k">def</span> <span class="nf">register</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;Look&quot;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Registers the class as an action</span>
 
 <span class="sd">        Args:</span>
@@ -134,7 +134,7 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            True if the action was registered, False if not.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">LookAction</span><span class="p">,</span> <span class="n">cls</span><span class="p">)</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">name</span><span class="p">)</span></div></div>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">Look</span><span class="p">,</span> <span class="n">cls</span><span class="p">)</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">name</span><span class="p">)</span></div></div>
 </pre></div>
 
           </div>

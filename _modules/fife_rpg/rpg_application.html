@@ -175,7 +175,7 @@
         <span class="k">if</span> <span class="n">keyval</span> <span class="o">==</span> <span class="n">fife</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">ESCAPE</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">quit</span> <span class="o">=</span> <span class="bp">True</span>
             <span class="n">event</span><span class="o">.</span><span class="n">consume</span><span class="p">()</span>
-        <span class="k">elif</span> <span class="n">keyval</span> <span class="o">==</span> <span class="n">fife</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">BACKQUOTE</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">keyval</span> <span class="o">==</span> <span class="n">fife</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">CARET</span><span class="p">:</span>
             <span class="n">get_manager</span><span class="p">()</span><span class="o">.</span><span class="n">getConsole</span><span class="p">()</span><span class="o">.</span><span class="n">toggleShowHide</span><span class="p">()</span>
             <span class="n">event</span><span class="o">.</span><span class="n">consume</span><span class="p">()</span>
         <span class="k">elif</span> <span class="n">keyval</span> <span class="o">==</span> <span class="n">fife</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">PRINT_SCREEN</span><span class="p">:</span>
@@ -587,8 +587,7 @@
         </div>
 <div class="viewcode-block" id="RPGApplication.register_component"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.rpg_application.RPGApplication.register_component">[docs]</a>    <span class="k">def</span> <span class="nf">register_component</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">component_name</span><span class="p">,</span> <span class="n">registered_name</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
                            <span class="n">register_checkers</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> 
-                           <span class="n">register_script_commands</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
-                           <span class="n">register_console_commands</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+                           <span class="n">register_script_commands</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Calls the components register method.</span>
 <span class="sd">        </span>
 <span class="sd">        Args:</span>
@@ -600,9 +599,6 @@
 <span class="sd">            in the module and called</span>
 <span class="sd">            </span>
 <span class="sd">            register_script_commands: If True a &quot;register_script_commands&quot; functions</span>
-<span class="sd">            will be searched in the module and called</span>
-
-<span class="sd">            register_console_commands: If True a &quot;register_console_commands&quot; functions</span>
 <span class="sd">            will be searched in the module and called</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">component_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__components</span><span class="p">[</span><span class="n">component_name</span><span class="p">]</span>
@@ -616,8 +612,6 @@
             <span class="n">module</span><span class="o">.</span><span class="n">register_checkers</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">register_script_commands</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="s">&quot;register_script_commands&quot;</span><span class="p">):</span>
             <span class="n">module</span><span class="o">.</span><span class="n">register_script_commands</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">register_console_commands</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="s">&quot;register_console_commands&quot;</span><span class="p">):</span>
-            <span class="n">module</span><span class="o">.</span><span class="n">register_console_commands</span><span class="p">()</span>
 </div>
 <div class="viewcode-block" id="RPGApplication.register_components"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.rpg_application.RPGApplication.register_components">[docs]</a>    <span class="k">def</span> <span class="nf">register_components</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">component_list</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">register_checkers</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
                             <span class="n">register_script_commands</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>

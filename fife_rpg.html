@@ -414,6 +414,26 @@ with game process.</p>
 </dl>
 </dd></dl>
 
+<dl class="method">
+<dt id="fife_rpg.game_scene.GameSceneListener.mouseWheelMovedDown">
+<tt class="descname">mouseWheelMovedDown</tt><big>(</big><em>event</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/game_scene.html#GameSceneListener.mouseWheelMovedDown"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.game_scene.GameSceneListener.mouseWheelMovedDown" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called when the mouse wheel is moved downwards</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>event: The mouse event</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.game_scene.GameSceneListener.mouseWheelMovedUp">
+<tt class="descname">mouseWheelMovedUp</tt><big>(</big><em>event</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/game_scene.html#GameSceneListener.mouseWheelMovedUp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.game_scene.GameSceneListener.mouseWheelMovedUp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called when the mouse wheel is moved upwards</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>event: The mouse event</dd>
+</dl>
+</dd></dl>
+
 <dl class="attribute">
 <dt id="fife_rpg.game_scene.GameSceneListener.outline_ignore">
 <tt class="descname">outline_ignore</tt><a class="reference internal" href="_modules/fife_rpg/game_scene.html#GameSceneListener.outline_ignore"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.game_scene.GameSceneListener.outline_ignore" title="Permalink to this definition">¶</a></dt>
@@ -1015,7 +1035,7 @@ settings will be used.</dd>
 
 <dl class="method">
 <dt id="fife_rpg.rpg_application.RPGApplication.register_component">
-<tt class="descname">register_component</tt><big>(</big><em>component_name</em>, <em>registered_name=None</em>, <em>register_checkers=True</em>, <em>register_script_commands=True</em>, <em>register_console_commands=True</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/rpg_application.html#RPGApplication.register_component"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.rpg_application.RPGApplication.register_component" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">register_component</tt><big>(</big><em>component_name</em>, <em>registered_name=None</em>, <em>register_checkers=True</em>, <em>register_script_commands=True</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/rpg_application.html#RPGApplication.register_component"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.rpg_application.RPGApplication.register_component" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calls the components register method.</p>
 <dl class="docutils">
 <dt>Args:</dt>
@@ -1023,9 +1043,7 @@ settings will be used.</dd>
 <p>registered_name: Name under which the component should be registered</p>
 <p>register_checkers: If True a &#8220;register_checkers&#8221; function will be searched
 in the module and called</p>
-<p>register_script_commands: If True a &#8220;register_script_commands&#8221; functions
-will be searched in the module and called</p>
-<p class="last">register_console_commands: If True a &#8220;register_console_commands&#8221; functions
+<p class="last">register_script_commands: If True a &#8220;register_script_commands&#8221; functions
 will be searched in the module and called</p>
 </dd>
 </dl>
