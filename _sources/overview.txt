@@ -11,11 +11,11 @@ rewritten to utilize components.
 The goals of FIFErpg are:
 
 * To create a framework that makes it easy to create component based games
-  with the FIFEngine by taking care of the basic setup needed for FIFE 
+  with the FIFEngine by taking care of the basic setup needed for FIFE
   applications and providing the component system.
 * To create tools that allows to edit the game assets like maps, dialogues,
   and scripts.
-  
+
 Currently the first is (mostly) finished while there are no actual tools.
 
 License
@@ -34,13 +34,13 @@ FIFErpg requires a Python 2.7 installation with the following modules:
 
 Downloading FIFErpg
 -------------------
-Currently the only method to obtain FIFErpg is to clone the Mercurial
+Currently the only method to obtain FIFErpg is to clone the git
 source repository:
 
 .. code:: bash
 
- hg clone https://bitbucket.org/fiferpg/fife-rpg
- 
+ git clone git://github.com/fife-rpg/fife-rpg.git
+
 Installation
 ------------
 To install FIFErpg from the source use:
@@ -48,7 +48,7 @@ To install FIFErpg from the source use:
 .. code:: bash
  
  python setup.py install
- 
+
 in the root directory of the source.
 
 After that you can test that everything was correctly installed by cloning the
@@ -56,27 +56,27 @@ demo repository
 
 .. code:: bash 
  
- hg clone https://bitbucket.org/fiferpg/fife-rpg-demo
- 
+ git clone git://github.com/fife-rpg/fife-rpg-demo.git
+
 and then running
 
 .. code:: bash
  
  python run.py
- 
+
 inside the root directory of the demo.
 
 If that opens a new window then everything was correctly installed.
 If the window is black, or the graphics appear blurry or otherwise incorrect
 it is mostly a problem with FIFE as that handles the graphical representation.
-You should check the `Known Problems`_ page.  
+You should check the `Known Problems`_ page.
 
 .. _Known Problems: http://wiki.fifengine.net/Known_Problems
 
 Documentation
 -------------
-You can view the documentation online at http://fiferpg.bitbucket.org/.
-This will always contain the documentation for the Mercurial repository.
+You can view the documentation online at http://fife-rpg.github.com/.
+This will always contain the documentation for the Git repository.
 
 Development status
 ------------------
@@ -88,8 +88,8 @@ manual is finished, or does have at least a Tutorial.
 
 Contributing
 ------------
-The easiest way to contribute is to make a fork of the Mercurial repository
-on Bitbucket and create a pull request.
+The easiest way to contribute is to make a fork of the Git repository
+on Github and create a pull request.
 
 You can check the issues_ page for unassigned tasks. If you work on an issues
 check the comments if someone else is working on it and write a comment if you
@@ -99,4 +99,4 @@ You can of course create issues yourself, either as proposals for others or
 tasks that you work on yourself. Please note that there is no guarantee that
 issues that you create yourself are being added to FIFErpg.
 
-.. _issues: https://bitbucket.org/fiferpg/fife-rpg/issues?status=new&status=open
+.. _issues: https://github.com/fife-rpg/fife-rpg/issues
