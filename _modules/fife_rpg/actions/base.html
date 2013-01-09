@@ -81,7 +81,7 @@
 <span class="sd">    Properties:</span>
 <span class="sd">        application: A :class:`fife_rpg.rpg_application.RPGApplication`</span>
 <span class="sd">        </span>
-<span class="sd">        agent: The agent initiating the action</span>
+<span class="sd">        performer: The performer initiating the action</span>
 <span class="sd">        </span>
 <span class="sd">        target: The target of the action</span>
 <span class="sd">        </span>
@@ -95,10 +95,10 @@
     <span class="n">__registered_as</span> <span class="o">=</span> <span class="bp">None</span>
     <span class="n">dependencies</span> <span class="o">=</span> <span class="p">[]</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">application</span><span class="p">,</span> <span class="n">agent</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">commands</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">application</span><span class="p">,</span> <span class="n">performer</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">commands</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">commands</span> <span class="o">=</span> <span class="n">commands</span> <span class="ow">or</span> <span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">application</span> <span class="o">=</span> <span class="n">application</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">agent</span> <span class="o">=</span> <span class="n">agent</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">performer</span> <span class="o">=</span> <span class="n">performer</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">target</span> <span class="o">=</span> <span class="n">target</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">executed</span> <span class="o">=</span> <span class="bp">False</span>
         
@@ -125,8 +125,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">executed</span> <span class="o">=</span> <span class="bp">True</span>
 </div>
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="Base.check_agent"><a class="viewcode-back" href="../../../fife_rpg.actions.html#fife_rpg.actions.base.Base.check_agent">[docs]</a>    <span class="k">def</span> <span class="nf">check_agent</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">entity</span><span class="p">):</span> <span class="c">#pylint: disable-msg=W0613</span>
-        <span class="sd">&quot;&quot;&quot;Checks whether the entity qualifies as an agent for this action</span>
+<div class="viewcode-block" id="Base.check_performer"><a class="viewcode-back" href="../../../fife_rpg.actions.html#fife_rpg.actions.base.Base.check_performer">[docs]</a>    <span class="k">def</span> <span class="nf">check_performer</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">entity</span><span class="p">):</span> <span class="c">#pylint: disable-msg=W0613</span>
+        <span class="sd">&quot;&quot;&quot;Checks whether the entity qualifies as an performer for this action</span>
 <span class="sd">        </span>
 <span class="sd">        Args:</span>
 <span class="sd">            entity: The entity to ceck. </span>
