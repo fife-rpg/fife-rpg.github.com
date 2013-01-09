@@ -248,4 +248,4 @@ run.py
    if __name__ == '__main__':
        main()
 
-The next Tutorial will look at the actions system of FIFErpg.
+The :ref:`next <actions>` Tutorial will look at the actions system of FIFErpg.

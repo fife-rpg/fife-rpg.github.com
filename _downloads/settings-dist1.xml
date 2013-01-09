@@ -23,8 +23,6 @@
     	<Setting name="Lighting" type="int"> 0 </Setting>
 	</Module>
 	<Module name="fife-rpg">
-    	<Setting name="ProjectName" type="str">Tutorial 2</Setting>
-    	<Setting name="Camera" type="str">camera1</Setting>
-        <Setting name="Components" type="list">Agent</Setting>
+    	<Setting name="ProjectName" type="str">Tutorial 1</Setting>
     </Module>
 </Settings>

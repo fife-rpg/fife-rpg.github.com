@@ -11,3 +11,4 @@ It won't go much into detail about FIFE itself, unless necessary.
    display
    entities
    controlling
+   actions

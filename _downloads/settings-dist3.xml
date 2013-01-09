@@ -23,10 +23,9 @@
     	<Setting name="Lighting" type="int"> 0 </Setting>
 	</Module>
 	<Module name="fife-rpg">
-    	<Setting name="ProjectName" type="str">Tutorial 4</Setting>
+    	<Setting name="ProjectName" type="str">Tutorial 3</Setting>
     	<Setting name="Camera" type="str">camera1</Setting>
-        <Setting name="Actions" type="list">Look</Setting>
-        <Setting name="Components" type="list">General ; Agent ; FifeAgent ; Moving ; Description</Setting>
+        <Setting name="Components" type="list">General ; Agent ; FifeAgent</Setting>
         <Setting name="Behaviours" type="list">Base</Setting>
     </Module>
 </Settings>

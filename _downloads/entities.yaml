@@ -1,0 +1,33 @@
+!Entity
+Components:
+  General:
+      identifier: PlayerCharacter
+  Agent:
+      gfx: player
+      map: Level1
+      layer: actors
+      position: [-5, 0]
+      rotation: 180
+      behaviour_type: Base
+  Moving:
+      walk_speed: 1
+      run_speed: 4
+---
+!Entity
+Components:
+  General:
+      identifier: David
+  Agent:
+      gfx: player
+      map: Level1
+      layer: actors
+      position: [-1, 0]
+      rotation: 180
+      behaviour_type: Base
+  Moving:
+      walk_speed: 1
+      run_speed: 4
+  Description:
+      real_name: David
+      view_name: David
+      desc: This is David.
