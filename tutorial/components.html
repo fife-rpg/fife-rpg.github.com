@@ -1,0 +1,243 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Components &mdash; fife-rpg 0.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="fife-rpg 0.0 documentation" href="../index.html" />
+    <link rel="up" title="Tutorial" href="tutorial.html" />
+    <link rel="next" title="fife_rpg" href="../modules.html" />
+    <link rel="prev" title="Context based actions" href="actions.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../modules.html" title="fife_rpg"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="actions.html" title="Context based actions"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">fife-rpg 0.0 documentation</a> &raquo;</li>
+          <li><a href="tutorial.html" accesskey="U">Tutorial</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="components">
+<span id="id1"></span><h1>Components<a class="headerlink" href="#components" title="Permalink to this headline">¶</a></h1>
+<p>This tutorial will explain the component system FIFErpg uses and show
+how to create your own components.</p>
+<div class="section" id="bgrease">
+<h2>bGrease<a class="headerlink" href="#bgrease" title="Permalink to this headline">¶</a></h2>
+<p>FIFErpg uses bGrease, which is a fork of the the
+<a class="reference external" href="http://packages.python.org/grease/index.html">Grease Framework</a>.
+Grease components are simple classes that only contain information about
+what fields a component has.
+Adding a grease component is as simple as putting this code inside the
+configure method of a grease world:</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">health</span> <span class="o">=</span> <span class="n">component</span><span class="o">.</span><span class="n">Component</span><span class="p">(</span>
+    <span class="n">health</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">max_health</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="fiferpg">
+<h2>FIFErpg<a class="headerlink" href="#fiferpg" title="Permalink to this headline">¶</a></h2>
+<p>While this would also perfectly work with FIFErpg this does not use the auto
+registering functions. For that you would need to make your own component
+class, that inherits from the <a class="reference internal" href="../fife_rpg.components.html#fife_rpg.components.base.Base" title="fife_rpg.components.base.Base"><tt class="xref py py-class docutils literal"><span class="pre">Base</span></tt></a>
+component class.</p>
+<p>First we will need to import the Base class.</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">fife_rpg.components.base</span> <span class="kn">import</span> <span class="n">Base</span>
+</pre></div>
+</div>
+<p>Then make a class that derives from that.</p>
+<div class="code python highlight-python"><pre>class Health(Base):</pre>
+</div>
+<p>To define the fields you will need to call the Base class constructor with
+their information:</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">__init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+   <span class="n">Base</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">health</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">max_health</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The possible types for the fields can be found in the components
+<a class="reference external" href="http://beliaar.github.com/bGrease/mod/component.html#bGrease.component.Component">documentation</a>.</p>
+<p>If you want to set the default value for a field you need to add this in the
+constructor:</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s">&quot;health&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">default</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="mi">100</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s">&quot;max_health&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">default</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="mi">100</span>
+</pre></div>
+</div>
+<p>You can also set the default to a type that can be constructed with no
+arguments, you won&#8217;t need the lambda then.</p>
+<p>Now, the next important part is the &#8220;register&#8221; class method, which needs to be
+overwritten. The following code is all that is needed for that:</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="nd">@classmethod</span>
+<span class="k">def</span> <span class="nf">register</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;Health&quot;</span><span class="p">,</span> <span class="n">auto_register</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="nb">super</span><span class="p">(</span><span class="n">Health</span><span class="p">,</span> <span class="n">cls</span><span class="p">)</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">auto_register</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="dependencies-and-inheriting-from-another-component">
+<h2>Dependencies and inheriting from another component<a class="headerlink" href="#dependencies-and-inheriting-from-another-component" title="Permalink to this headline">¶</a></h2>
+<p>If you want to have the component automatically register other components,
+or any of the other FIFErpg classes the support auto registering. You can
+set the dependencies class member. It is a list of classes. When registering
+a component the register method will look through all the classes in that
+list and calls their register method if the class is not already registered.
+This is done before registering the component itself.</p>
+<p>Also, if the component derives from a component that is not the Base component,
+the register method will, by default, make it so that the class that the
+component derives from will appear as registered but points to the component
+that derives from it. This can be used to make components that replace other
+components. This can be disabled by setting the &#8220;auto_register&#8221; argument
+of the register method to False.</p>
+</div>
+<div class="section" id="component-functions">
+<h2>Component functions<a class="headerlink" href="#component-functions" title="Permalink to this headline">¶</a></h2>
+<p>While components only store data and have no methods attached that work with
+them, the modules of the default components have functions in them that do
+various things with the components. They don&#8217;t have any specific format, so
+when you want to write your own functions you can write them however you need
+them to be.</p>
+</div>
+<div class="section" id="script-commands">
+<h2>Script commands<a class="headerlink" href="#script-commands" title="Permalink to this headline">¶</a></h2>
+<p>The component manager, to which every components registers itself when the
+register method is called, can also be used to register script commands.
+These commands will automatically be available to scripts if the scripting
+system is activated.</p>
+<p>You may need to import the manager, this is done with this code:</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">fife_rpg.components</span> <span class="kn">import</span> <span class="n">ComponentManager</span>
+</pre></div>
+</div>
+<p>Then to register a command:</p>
+<div class="code python highlight-python"><pre>ComponentManager.register_script_command(&lt;command_name&gt;, &lt;function&gt;)</pre>
+</div>
+<p>When registering the components to the application one can disable the
+auto registering of script commands. For this to work the register commands
+have to be inside a &#8220;register_script_commands&#8221; function, inside the same module
+as the component, which takes no arguments.</p>
+</div>
+<div class="section" id="checkers">
+<h2>Checkers<a class="headerlink" href="#checkers" title="Permalink to this headline">¶</a></h2>
+<p>Another feature, which the component manager has, is to register
+checker functions. These functions should look for inconsistencies in
+components and, if possible, fix them, e.g. for the lockable component that an
+possibly attached fifeagent is playing the appropriate animation. The functions
+are called every pump/tick by the world.</p>
+<p>As for component functions what the functions actually do is up to you.</p>
+<p>Registering such a function is done as follows:</p>
+<div class="code python highlight-python"><pre>ComponentManager.register_checker(
+    &lt;list of component names&gt;,
+    &lt;checker function&gt;)</pre>
+</div>
+<p>As with the script commands you should these functions inside a
+&#8220;register_checkers&#8221; function inside the same module as the component.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Components</a><ul>
+<li><a class="reference internal" href="#bgrease">bGrease</a></li>
+<li><a class="reference internal" href="#fiferpg">FIFErpg</a></li>
+<li><a class="reference internal" href="#dependencies-and-inheriting-from-another-component">Dependencies and inheriting from another component</a></li>
+<li><a class="reference internal" href="#component-functions">Component functions</a></li>
+<li><a class="reference internal" href="#script-commands">Script commands</a></li>
+<li><a class="reference internal" href="#checkers">Checkers</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="actions.html"
+                        title="previous chapter">Context based actions</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../modules.html"
+                        title="next chapter">fife_rpg</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/tutorial/components.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../modules.html" title="fife_rpg"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="actions.html" title="Context based actions"
+             >previous</a> |</li>
+        <li><a href="../index.html">fife-rpg 0.0 documentation</a> &raquo;</li>
+          <li><a href="tutorial.html" >Tutorial</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012-2013, Karsten Bock.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
