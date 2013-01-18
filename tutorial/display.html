@@ -83,6 +83,38 @@ components are used by the application. This will be explained more later.
 For now the list only needs to contain &#8216;Agent&#8217;.</p>
 <p>You can verify with the updated
 <a class="reference download internal" href="../_downloads/settings-dist2.xml"><tt class="xref download docutils literal"><span class="pre">settings-dist.xml</span></tt></a> file.</p>
+<div class="highlight-python"><pre>&lt;?xml version='1.0' encoding='UTF-8'?&gt;
+&lt;Settings&gt;
+	&lt;Module name="FIFE"&gt;
+		&lt;Setting name="FullScreen" type="bool"&gt; False &lt;/Setting&gt;
+		&lt;Setting name="PlaySounds" type="bool"&gt; True &lt;/Setting&gt;
+		&lt;Setting name="RenderBackend" type="str"&gt; OpenGL &lt;/Setting&gt;
+		&lt;Setting name="ScreenResolution" type="str"&gt;1024x768&lt;/Setting&gt;
+		&lt;Setting name="BitsPerPixel" type="int"&gt; 0 &lt;/Setting&gt;
+		&lt;Setting name="InitialVolume" type="float"&gt; 5.0 &lt;/Setting&gt;
+		&lt;Setting name="SDLRemoveFakeAlpha" type="int"&gt; 1 &lt;/Setting&gt;
+		&lt;Setting name="GLCompressImages" type="bool"&gt; False &lt;/Setting&gt;
+		&lt;Setting name="WindowTitle" type="str"&gt; FIFErpg Tutorial &lt;/Setting&gt;
+		&lt;Setting name="WindowIcon" type="str"&gt; &lt;/Setting&gt;
+		&lt;Setting name="Font" type="str"&gt; fonts/FreeSans.ttf &lt;/Setting&gt;
+		&lt;Setting name="FontGlyphs" strip="0" type="str"&gt; abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!?-+/():;%&amp;amp;`'*#=[]\"&lt;/Setting&gt;
+		&lt;Setting name="DefaultFontSize" type="int"&gt; 16 &lt;/Setting&gt;
+		&lt;Setting name="LogModules" type="list"&gt; controller ; script &lt;/Setting&gt;
+		&lt;Setting name="PychanDebug" type="bool"&gt; False &lt;/Setting&gt;
+		&lt;Setting name="LogToPrompt" type="int"&gt; 1 &lt;/Setting&gt;
+ 		&lt;Setting name="UsePsyco" type="bool"&gt; False &lt;/Setting&gt;
+		&lt;Setting name="ProfilingOn" type="bool"&gt; False &lt;/Setting&gt;
+		&lt;Setting name="LogToFile" type="int"&gt; 0 &lt;/Setting&gt;
+    	&lt;Setting name="Lighting" type="int"&gt; 0 &lt;/Setting&gt;
+	&lt;/Module&gt;
+	&lt;Module name="fife-rpg"&gt;
+    	&lt;Setting name="ProjectName" type="str"&gt;Tutorial 2&lt;/Setting&gt;
+    	&lt;Setting name="Camera" type="str"&gt;camera1&lt;/Setting&gt;
+        &lt;Setting name="Components" type="list"&gt;Agent&lt;/Setting&gt;
+    &lt;/Module&gt;
+&lt;/Settings&gt;
+</pre>
+</div>
 </div>
 <div class="section" id="new-files">
 <h2>New Files<a class="headerlink" href="#new-files" title="Permalink to this headline">¶</a></h2>

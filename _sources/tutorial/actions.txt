@@ -17,6 +17,8 @@ The actions are set in the "Actions" setting which works the same as
 You can review the changes in the
 :download:`settings <actions/settings-dist.xml>` file.
 
+.. literalinclude:: actions/settings-dist.xml
+
 We are also going to add another entity, on which we can perform the action.
 In "entities.yaml" add a new yaml document with the following content:
 
@@ -43,6 +45,7 @@ In "entities.yaml" add a new yaml document with the following content:
          
 Compare the result with the :download:`entities <actions/objects/entities.yaml>`
 file.
+
 The entity is mostly exact like the PlayerCharacter with an "Description"
 component added. This is needed for the "Look" action.
 

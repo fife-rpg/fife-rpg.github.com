@@ -4,15 +4,19 @@ Basics
 Like FIFE FIFErpg applications need a settings_ file. FIFErpg adds a few
 settings to the FIFE ones which are inside the "fife-rpg" module. The only one
 that is absolutely required is the "ProjectName" setting, which is of the
-type "str". This is the (project) name of your game. For the basic example 
-this is enough, but you would not be able to use most of the features of 
-FIFErpg. The other settings will be shown when the features are explained 
+type "str". This is the (project) name of your game. For the basic example
+this is enough, but you would not be able to use most of the features of
+FIFErpg. The other settings will be shown when the features are explained
 in this tutorial.
 
 .. _settings : http://wiki.fifengine.net/Engine_Extensions#Engine_Settings
 
-An example of a basic settings file for FIFErpg looks like 
-:download:`this  <basics/settings-dist.xml>`
+An example of a basic settings file for FIFErpg looks like this:
+
+:download:`settings-dist.xml  <basics/settings-dist.xml>`
+
+.. literalinclude:: basics/settings-dist.xml
+
 
 Note that it is named "settings-dist.xml" and not "settings.xml". This is a
 feature that is already in FIFE itself. If it can't find the "settings.xml"
@@ -26,7 +30,7 @@ Also while there is no text being actually shown in the basic example a font is
 needed. The tutorial uses the FreeSans font. The version used can obtained from
 :download:`here  <basics/fonts/FreeSans.ttf>`. You are free, of course, to use
 whatever font you want, but you will need to adjust the settings file to point
-to the font. The default settings will look for a "FreeSans.ttf" file inside a 
+to the font. The default settings will look for a "FreeSans.ttf" file inside a
 "fonts" directory.
 
 With those things taken care of we can move on to the code.
@@ -47,7 +51,7 @@ application should either use this or have a class that inherits from this.
 The GameSceneView and GameSceneController classes are dummy classes that
 can be used when no actual functionality is required for either the controller
 or the view. For the basic example these will suffice, but you will need to
-write your own views and controllers, and inherit those from 
+write your own views and controllers, and inherit those from
 ViewBase and ControllerBase respectively. That will be for a later tutorial
 though.
 
@@ -123,8 +127,8 @@ Here is the complete code:
    if __name__ == '__main__':
        main()
        
-If you run this code a window with a black background will appear. 
-You can either use the Escape key, or the X button in the title bar of the 
+If you run this code a window with a black background will appear.
+You can either use the Escape key, or the X button in the title bar of the
 window to close it.
 
 The :ref:`next <display>` part of the tutorial will show how to actually display a FIFE map.

@@ -65,8 +65,38 @@ type &#8220;str&#8221;. This is the (project) name of your game. For the basic e
 this is enough, but you would not be able to use most of the features of
 FIFErpg. The other settings will be shown when the features are explained
 in this tutorial.</p>
-<p>An example of a basic settings file for FIFErpg looks like
-<a class="reference download internal" href="../_downloads/settings-dist1.xml"><tt class="xref download docutils literal"><span class="pre">this</span></tt></a></p>
+<p>An example of a basic settings file for FIFErpg looks like this:</p>
+<p><a class="reference download internal" href="../_downloads/settings-dist1.xml"><tt class="xref download docutils literal"><span class="pre">settings-dist.xml</span></tt></a></p>
+<div class="highlight-python"><pre>&lt;?xml version='1.0' encoding='UTF-8'?&gt;
+&lt;Settings&gt;
+	&lt;Module name="FIFE"&gt;
+		&lt;Setting name="FullScreen" type="bool"&gt; False &lt;/Setting&gt;
+		&lt;Setting name="PlaySounds" type="bool"&gt; True &lt;/Setting&gt;
+		&lt;Setting name="RenderBackend" type="str"&gt; OpenGL &lt;/Setting&gt;
+		&lt;Setting name="ScreenResolution" type="str"&gt;1024x768&lt;/Setting&gt;
+		&lt;Setting name="BitsPerPixel" type="int"&gt; 0 &lt;/Setting&gt;
+		&lt;Setting name="InitialVolume" type="float"&gt; 5.0 &lt;/Setting&gt;
+		&lt;Setting name="SDLRemoveFakeAlpha" type="int"&gt; 1 &lt;/Setting&gt;
+		&lt;Setting name="GLCompressImages" type="bool"&gt; False &lt;/Setting&gt;
+		&lt;Setting name="WindowTitle" type="str"&gt; FIFErpg Tutorial &lt;/Setting&gt;
+		&lt;Setting name="WindowIcon" type="str"&gt; &lt;/Setting&gt;
+		&lt;Setting name="Font" type="str"&gt; fonts/FreeSans.ttf &lt;/Setting&gt;
+		&lt;Setting name="FontGlyphs" strip="0" type="str"&gt; abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!?-+/():;%&amp;amp;`'*#=[]\"&lt;/Setting&gt;
+		&lt;Setting name="DefaultFontSize" type="int"&gt; 16 &lt;/Setting&gt;
+		&lt;Setting name="LogModules" type="list"&gt; controller ; script &lt;/Setting&gt;
+		&lt;Setting name="PychanDebug" type="bool"&gt; False &lt;/Setting&gt;
+		&lt;Setting name="LogToPrompt" type="int"&gt; 1 &lt;/Setting&gt;
+ 		&lt;Setting name="UsePsyco" type="bool"&gt; False &lt;/Setting&gt;
+		&lt;Setting name="ProfilingOn" type="bool"&gt; False &lt;/Setting&gt;
+		&lt;Setting name="LogToFile" type="int"&gt; 0 &lt;/Setting&gt;
+    	&lt;Setting name="Lighting" type="int"&gt; 0 &lt;/Setting&gt;
+	&lt;/Module&gt;
+	&lt;Module name="fife-rpg"&gt;
+    	&lt;Setting name="ProjectName" type="str"&gt;Tutorial 1&lt;/Setting&gt;
+    &lt;/Module&gt;
+&lt;/Settings&gt;
+</pre>
+</div>
 <p>Note that it is named &#8220;settings-dist.xml&#8221; and not &#8220;settings.xml&#8221;. This is a
 feature that is already in FIFE itself. If it can&#8217;t find the &#8220;settings.xml&#8221;
 file it will use a settings-dist.xml file to create a default one. So a
