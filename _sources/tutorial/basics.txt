@@ -15,7 +15,7 @@ An example of a basic settings file for FIFErpg looks like this:
 
 :download:`settings-dist.xml  <basics/settings-dist.xml>`
 
-.. literalinclude:: basics/settings-dist.xml
+.. hidden-literalinclude:: basics/settings-dist.xml
 
 
 Note that it is named "settings-dist.xml" and not "settings.xml". This is a

@@ -67,7 +67,18 @@ FIFErpg. The other settings will be shown when the features are explained
 in this tutorial.</p>
 <p>An example of a basic settings file for FIFErpg looks like this:</p>
 <p><a class="reference download internal" href="../_downloads/settings-dist1.xml"><tt class="xref download docutils literal"><span class="pre">settings-dist.xml</span></tt></a></p>
-<div class="highlight-python"><pre>&lt;?xml version='1.0' encoding='UTF-8'?&gt;
+<script type="text/javascript">
+    function showhide(element){
+        if (!document.getElementById)
+            return
+
+        if (element.style.display == "block")
+            element.style.display = "none"
+        else
+            element.style.display = "block"
+    };
+</script>
+<a href="javascript:showhide(document.getElementById('hiddencodeblock2'))">+ show/hide contents</a><br /><div id="hiddencodeblock2" style="display: block"><div class="highlight-python"><pre>&lt;?xml version='1.0' encoding='UTF-8'?&gt;
 &lt;Settings&gt;
 	&lt;Module name="FIFE"&gt;
 		&lt;Setting name="FullScreen" type="bool"&gt; False &lt;/Setting&gt;
@@ -97,7 +108,7 @@ in this tutorial.</p>
 &lt;/Settings&gt;
 </pre>
 </div>
-<p>Note that it is named &#8220;settings-dist.xml&#8221; and not &#8220;settings.xml&#8221;. This is a
+</div><p>Note that it is named &#8220;settings-dist.xml&#8221; and not &#8220;settings.xml&#8221;. This is a
 feature that is already in FIFE itself. If it can&#8217;t find the &#8220;settings.xml&#8221;
 file it will use a settings-dist.xml file to create a default one. So a
 &#8220;settings-dist.xml&#8221; should only contain settings that work on every system.</p>

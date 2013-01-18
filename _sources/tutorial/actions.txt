@@ -17,7 +17,7 @@ The actions are set in the "Actions" setting which works the same as
 You can review the changes in the
 :download:`settings <actions/settings-dist.xml>` file.
 
-.. literalinclude:: actions/settings-dist.xml
+.. hidden-literalinclude:: actions/settings-dist.xml
 
 We are also going to add another entity, on which we can perform the action.
 In "entities.yaml" add a new yaml document with the following content:

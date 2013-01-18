@@ -70,7 +70,18 @@ The actions are set in the &#8220;Actions&#8221; setting which works the same as
 &#8220;Components&#8221; and &#8220;Behaviours&#8221; do. The only action we need is the &#8220;Look&#8221; action.</p>
 <p>You can review the changes in the
 <a class="reference download internal" href="../_downloads/settings-dist.xml"><tt class="xref download docutils literal"><span class="pre">settings</span></tt></a> file.</p>
-<div class="highlight-python"><pre>&lt;?xml version='1.0' encoding='UTF-8'?&gt;
+<script type="text/javascript">
+    function showhide(element){
+        if (!document.getElementById)
+            return
+
+        if (element.style.display == "block")
+            element.style.display = "none"
+        else
+            element.style.display = "block"
+    };
+</script>
+<a href="javascript:showhide(document.getElementById('hiddencodeblock1'))">+ show/hide contents</a><br /><div id="hiddencodeblock1" style="display: block"><div class="highlight-python"><pre>&lt;?xml version='1.0' encoding='UTF-8'?&gt;
 &lt;Settings&gt;
 	&lt;Module name="FIFE"&gt;
 		&lt;Setting name="FullScreen" type="bool"&gt; False &lt;/Setting&gt;
@@ -104,7 +115,7 @@ The actions are set in the &#8220;Actions&#8221; setting which works the same as
 &lt;/Settings&gt;
 </pre>
 </div>
-<p>We are also going to add another entity, on which we can perform the action.
+</div><p>We are also going to add another entity, on which we can perform the action.
 In &#8220;entities.yaml&#8221; add a new yaml document with the following content:</p>
 <div class="code yaml highlight-python"><pre>!Entity
 Components:

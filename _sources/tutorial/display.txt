@@ -31,7 +31,7 @@ For now the list only needs to contain 'Agent'.
 You can verify with the updated
 :download:`settings-dist.xml <display/settings-dist.xml>` file.
 
-.. literalinclude:: display/settings-dist.xml
+.. hidden-literalinclude:: display/settings-dist.xml
 
 New Files
 ---------

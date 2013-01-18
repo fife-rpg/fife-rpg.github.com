@@ -77,7 +77,7 @@ For this tutorial you will need to add the "Base" behaviour to this list.
 You can review the changes in the
 :download:`settings <entities/settings-dist.xml>` file.
 
-.. literalinclude:: entities/settings-dist.xml
+.. hidden-literalinclude:: entities/settings-dist.xml
 
 Adding Entities
 ---------------
