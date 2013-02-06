@@ -94,9 +94,9 @@ function: The function to call</dd>
 <p>Represents a single dialogue</p>
 <dl class="docutils">
 <dt>Properties:</dt>
-<dd><p class="first">world: RPGWorld that the dialogue is run on</p>
-<p>sections: The sections of the dialogue</p>
-<p class="last">current_section: The section that is currently active</p>
+<dd><p class="first">world: <a class="reference internal" href="#fife_rpg.world.RPGWorld" title="fife_rpg.world.RPGWorld"><tt class="xref py py-class docutils literal"><span class="pre">RPGWorld</span></tt></a> that the dialogue is run on</p>
+<p>sections: A list of <a class="reference internal" href="#fife_rpg.dialogue.DialogueSection" title="fife_rpg.dialogue.DialogueSection"><tt class="xref py py-class docutils literal"><span class="pre">DialogueSection</span></tt></a></p>
+<p class="last">current_section: The <a class="reference internal" href="#fife_rpg.dialogue.DialogueSection" title="fife_rpg.dialogue.DialogueSection"><tt class="xref py py-class docutils literal"><span class="pre">DialogueSection</span></tt></a> that is currently active</p>
 </dd>
 </dl>
 <dl class="method">
@@ -123,10 +123,10 @@ function: The function to call</dd>
 <dt id="fife_rpg.dialogue.Dialogue.get_dialogue_variables">
 <tt class="descname">get_dialogue_variables</tt><big>(</big><em>section</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/dialogue.html#Dialogue.get_dialogue_variables"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.dialogue.Dialogue.get_dialogue_variables" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the game variables combined with dialogue specific
-varialbes.</p>
+variables.</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd>section: A <a class="reference internal" href="#fife_rpg.dialogue.DialogueSection" title="fife_rpg.dialogue.DialogueSection"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.dialogue.DialogueSection</span></tt></a>. This will be
+<dd>section: A <a class="reference internal" href="#fife_rpg.dialogue.DialogueSection" title="fife_rpg.dialogue.DialogueSection"><tt class="xref py py-class docutils literal"><span class="pre">DialogueSection</span></tt></a>. This will be
 used to get dialogue variables</dd>
 </dl>
 </dd></dl>
@@ -149,7 +149,7 @@ used to get dialogue variables</dd>
 <dd><p>Runs the commands of the section</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd>section: A <a class="reference internal" href="#fife_rpg.dialogue.DialogueSection" title="fife_rpg.dialogue.DialogueSection"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.dialogue.DialogueSection</span></tt></a></dd>
+<dd>section: A <a class="reference internal" href="#fife_rpg.dialogue.DialogueSection" title="fife_rpg.dialogue.DialogueSection"><tt class="xref py py-class docutils literal"><span class="pre">DialogueSection</span></tt></a></dd>
 </dl>
 </dd></dl>
 
@@ -177,35 +177,20 @@ used to get dialogue variables</dd>
 
 <dl class="class">
 <dt id="fife_rpg.dialogue.DialogueController">
-<em class="property">class </em><tt class="descclassname">fife_rpg.dialogue.</tt><tt class="descname">DialogueController</tt><big>(</big><em>view</em>, <em>application</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/dialogue.html#DialogueController"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.dialogue.DialogueController" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">fife_rpg.dialogue.</tt><tt class="descname">DialogueController</tt><big>(</big><em>view</em>, <em>application</em>, <em>dialogue</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/dialogue.html#DialogueController"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.dialogue.DialogueController" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#fife_rpg.mvc.ControllerBase" title="fife_rpg.mvc.ControllerBase"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.mvc.ControllerBase</span></tt></a></p>
 <p>Controller that handles Dialogues</p>
 <dl class="docutils">
 <dt>Properties:</dt>
-<dd><p class="first">application: The application that created this controller</p>
-<p class="last">view: The view that is used by this controller</p>
+<dd><p class="first">application: The <a class="reference internal" href="#fife_rpg.rpg_application.RPGApplication" title="fife_rpg.rpg_application.RPGApplication"><tt class="xref py py-class docutils literal"><span class="pre">RPGApplication</span></tt></a> that created this controller</p>
+<p>view: The <a class="reference internal" href="#fife_rpg.mvc.ViewBase" title="fife_rpg.mvc.ViewBase"><tt class="xref py py-class docutils literal"><span class="pre">View</span></tt></a> that is used by this controller</p>
+<p class="last">dialogue: The active <a class="reference internal" href="#fife_rpg.dialogue.Dialogue" title="fife_rpg.dialogue.Dialogue"><tt class="xref py py-class docutils literal"><span class="pre">Dialogue</span></tt></a></p>
 </dd>
 </dl>
-<dl class="method">
-<dt id="fife_rpg.dialogue.DialogueController.add_dialogue">
-<tt class="descname">add_dialogue</tt><big>(</big><em>identifier</em>, <em>dialogue_data</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/dialogue.html#DialogueController.add_dialogue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.dialogue.DialogueController.add_dialogue" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add a dialogue to the controller</p>
-<dl class="docutils">
-<dt>Args:</dt>
-<dd><p class="first">identifier: The name of the dialogue</p>
-<p class="last">dialogue_data: The data of the dialogue</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="fife_rpg.dialogue.DialogueController.add_dialogue_from_file">
-<tt class="descname">add_dialogue_from_file</tt><big>(</big><em>filename</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/dialogue.html#DialogueController.add_dialogue_from_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.dialogue.DialogueController.add_dialogue_from_file" title="Permalink to this definition">¶</a></dt>
-<dd><p>Loads a dialogue from a file and adds it to the controller</p>
-<dl class="docutils">
-<dt>Args:</dt>
-<dd>filename: The path to the file</dd>
-</dl>
+<dl class="attribute">
+<dt id="fife_rpg.dialogue.DialogueController.current_section">
+<tt class="descname">current_section</tt><a class="reference internal" href="_modules/fife_rpg/dialogue.html#DialogueController.current_section"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.dialogue.DialogueController.current_section" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the current section of the active dialogue</p>
 </dd></dl>
 
 <dl class="method">
@@ -214,13 +199,26 @@ used to get dialogue variables</dd>
 <dd><p>Ends the current dialogue</p>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="fife_rpg.dialogue.DialogueController.is_dialogue_finished">
+<tt class="descname">is_dialogue_finished</tt><a class="reference internal" href="_modules/fife_rpg/dialogue.html#DialogueController.is_dialogue_finished"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.dialogue.DialogueController.is_dialogue_finished" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns whether the active dialogue is finished or not</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fife_rpg.dialogue.DialogueController.possible_responses">
+<tt class="descname">possible_responses</tt><a class="reference internal" href="_modules/fife_rpg/dialogue.html#DialogueController.possible_responses"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.dialogue.DialogueController.possible_responses" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dictionary of the possible responses of the active
+dialogue</p>
+</dd></dl>
+
 <dl class="method">
-<dt id="fife_rpg.dialogue.DialogueController.start_dialogue">
-<tt class="descname">start_dialogue</tt><big>(</big><em>identifier</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/dialogue.html#DialogueController.start_dialogue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.dialogue.DialogueController.start_dialogue" title="Permalink to this definition">¶</a></dt>
-<dd><p>Starts a dialogue</p>
+<dt id="fife_rpg.dialogue.DialogueController.select_response">
+<tt class="descname">select_response</tt><big>(</big><em>response_name</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/dialogue.html#DialogueController.select_response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.dialogue.DialogueController.select_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Selects the given response and performs its actions</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd>identifier: The name of the dialogue to start</dd>
+<dd>response_name: The name of the response</dd>
 </dl>
 </dd></dl>
 

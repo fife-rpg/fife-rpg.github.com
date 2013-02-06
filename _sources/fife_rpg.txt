@@ -1,6 +1,8 @@
 fife_rpg Package
 ================
 
+.. include:: include.inc
+
 :mod:`fife_rpg` Package
 -----------------------
 
