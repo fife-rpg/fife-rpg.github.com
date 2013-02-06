@@ -193,12 +193,6 @@ used to get dialogue variables</dd>
 <dd><p>Returns the current section of the active dialogue</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="fife_rpg.dialogue.DialogueController.end_dialogue">
-<tt class="descname">end_dialogue</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/fife_rpg/dialogue.html#DialogueController.end_dialogue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.dialogue.DialogueController.end_dialogue" title="Permalink to this definition">¶</a></dt>
-<dd><p>Ends the current dialogue</p>
-</dd></dl>
-
 <dl class="attribute">
 <dt id="fife_rpg.dialogue.DialogueController.is_dialogue_finished">
 <tt class="descname">is_dialogue_finished</tt><a class="reference internal" href="_modules/fife_rpg/dialogue.html#DialogueController.is_dialogue_finished"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.dialogue.DialogueController.is_dialogue_finished" title="Permalink to this definition">¶</a></dt>
@@ -210,6 +204,16 @@ used to get dialogue variables</dd>
 <tt class="descname">possible_responses</tt><a class="reference internal" href="_modules/fife_rpg/dialogue.html#DialogueController.possible_responses"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.dialogue.DialogueController.possible_responses" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a dictionary of the possible responses of the active
 dialogue</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.dialogue.DialogueController.pump">
+<tt class="descname">pump</tt><big>(</big><em>time_delta</em><big>)</big><a class="headerlink" href="#fife_rpg.dialogue.DialogueController.pump" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs actions every frame</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>time_delta: Time that passed since the last call</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">

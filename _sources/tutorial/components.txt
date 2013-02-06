@@ -1,4 +1,5 @@
 .. _components:
+.. include:: ..\include.inc
 
 Components
 ==========

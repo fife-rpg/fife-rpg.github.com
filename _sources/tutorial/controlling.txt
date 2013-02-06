@@ -1,4 +1,5 @@
 .. _controlling:
+.. include:: ..\include.inc
 
 Accessing and controlling entities
 ==================================

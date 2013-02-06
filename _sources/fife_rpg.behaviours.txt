@@ -1,5 +1,6 @@
 behaviours Package
 ==================
+.. include:: include.inc
 
 :mod:`behaviours` Package
 -------------------------

@@ -1,4 +1,5 @@
 .. _display:
+.. include:: ..\include.inc
 
 Getting something displayed
 ===========================

@@ -1,5 +1,6 @@
 Basics
 ======
+.. include:: ..\include.inc
 
 Like FIFE FIFErpg applications need a settings_ file. FIFErpg adds a few
 settings to the FIFE ones which are inside the "fife-rpg" module. The only one

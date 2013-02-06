@@ -1,5 +1,6 @@
 components Package
 ==================
+.. include:: include.inc
 
 :mod:`components` Package
 -------------------------

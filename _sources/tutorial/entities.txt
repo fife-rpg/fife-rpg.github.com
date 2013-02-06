@@ -1,4 +1,5 @@
 .. _entities:
+.. include:: ..\include.inc
 
 Filling the map
 ===============

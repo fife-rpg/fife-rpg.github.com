@@ -1,5 +1,6 @@
 entities Package
 ================
+.. include:: include.inc
 
 :mod:`entities` Package
 -----------------------

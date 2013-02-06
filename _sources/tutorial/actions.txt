@@ -1,4 +1,5 @@
 .. _actions:
+.. include:: ..\include.inc
 
 Context based actions
 =====================

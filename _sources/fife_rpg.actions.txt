@@ -1,5 +1,6 @@
 actions Package
 ===============
+.. include:: include.inc
 
 :mod:`actions` Package
 ----------------------
