@@ -164,7 +164,7 @@
     <span class="nd">@property</span>
 <div class="viewcode-block" id="Dialogue.is_dialogue_finished"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.dialogue.Dialogue.is_dialogue_finished">[docs]</a>    <span class="k">def</span> <span class="nf">is_dialogue_finished</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns whether the dialogue is finished or not&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">possible_responses</span><span class="p">)</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">possible_responses</span><span class="p">)</span>
     </div>
 <div class="viewcode-block" id="Dialogue.run_section"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.dialogue.Dialogue.run_section">[docs]</a>    <span class="k">def</span> <span class="nf">run_section</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Runs the commands of the section</span>
@@ -240,13 +240,14 @@
 <span class="sd">        Args:</span>
 <span class="sd">            greetings_data: A dictionary containing the data of the greetings</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">for</span> <span class="n">greeting_data</span> <span class="ow">in</span> <span class="n">greetings_data</span><span class="o">.</span><span class="n">itervalues</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">greeting_data</span> <span class="ow">in</span> <span class="n">greetings_data</span><span class="p">:</span>
             <span class="n">greeting</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_section</span><span class="p">(</span><span class="n">greeting_data</span><span class="p">)</span>
             <span class="k">if</span> <span class="p">(</span><span class="n">greeting</span><span class="o">.</span><span class="n">conditions</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">or</span>
                 <span class="n">ScriptingSystem</span><span class="o">.</span><span class="n">check_condition</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">world</span><span class="o">.</span><span class="n">application</span><span class="p">,</span>
                                                 <span class="n">greeting</span><span class="o">.</span><span class="n">conditions</span><span class="p">)):</span> 
                 <span class="bp">self</span><span class="o">.</span><span class="n">current_section</span> <span class="o">=</span> <span class="n">greeting</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">run_section</span><span class="p">(</span><span class="n">greeting</span><span class="p">)</span>
+                <span class="k">break</span>
 </div></div>
 <div class="viewcode-block" id="DialogueController"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.dialogue.DialogueController">[docs]</a><span class="k">class</span> <span class="nc">DialogueController</span><span class="p">(</span><span class="n">ControllerBase</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Controller that handles Dialogues</span>
@@ -296,11 +297,17 @@
 <span class="sd">        Args:</span>
 <span class="sd">            response_name: The name of the response</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dialogue</span><span class="o">.</span><span class="n">select_response</span><span class="p">(</span><span class="n">response_name</span><span class="p">)</span>
-        </div>
-<div class="viewcode-block" id="DialogueController.end_dialogue"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.dialogue.DialogueController.end_dialogue">[docs]</a>    <span class="k">def</span> <span class="nf">end_dialogue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Ends the current dialogue&quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">dialogue</span> <span class="o">=</span> <span class="bp">None</span></div></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dialogue</span><span class="o">.</span><span class="n">select_response</span><span class="p">(</span><span class="n">response_name</span><span class="p">)</span>        
+</div>
+<div class="viewcode-block" id="DialogueController.pump"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.dialogue.DialogueController.pump">[docs]</a>    <span class="k">def</span> <span class="nf">pump</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time_delta</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Performs actions every frame</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            time_delta: Time that passed since the last call</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ControllerBase</span><span class="o">.</span><span class="n">pump</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time_delta</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_dialogue_finished</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">manager</span><span class="o">.</span><span class="n">remove_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div></div>
 </pre></div>
 
           </div>

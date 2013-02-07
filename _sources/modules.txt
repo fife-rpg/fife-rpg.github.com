@@ -1,5 +1,6 @@
 fife_rpg
 ========
+.. include:: include.inc
 
 .. toctree::
    :maxdepth: 4
