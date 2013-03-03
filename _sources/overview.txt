@@ -38,16 +38,29 @@ FIFErpg requires a Python 2.7 installation with the following modules:
 
 Downloading FIFErpg
 -------------------
-Currently the only method to obtain FIFErpg is to clone the git
-source repository:
+Currently there are two methods to obtain FIFErpg:
+
+Download an official release
+............................
+
+These can be obtained here:
+
+https://sourceforge.net/projects/fife-rpg/files/
+
+Clone the git source repository
+...............................
+
+The following command clones the repository:
 
 .. code:: bash
 
  git clone git://github.com/fife-rpg/fife-rpg.git
 
-Installation
-------------
-To install FIFErpg from the source use:
+Installation from source
+------------------------
+
+If you downloaded a source release or cloned the repository you have to run
+the following command:
 
 .. code:: bash
  
