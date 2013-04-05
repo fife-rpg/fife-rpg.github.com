@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>fife_rpg.components.fifeagent &mdash; fife-rpg 0.1 documentation</title>
+    <title>fife_rpg.components.fifeagent &mdash; fife-rpg 0.1c documentation</title>
     
     <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.1',
+        VERSION:     '0.1c',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="top" title="fife-rpg 0.1 documentation" href="../../../index.html" />
+    <link rel="top" title="fife-rpg 0.1c documentation" href="../../../index.html" />
     <link rel="up" title="Module code" href="../../index.html" /> 
   </head>
   <body>
@@ -38,7 +38,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">fife-rpg 0.1 documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">fife-rpg 0.1c documentation</a> &raquo;</li>
           <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
@@ -141,7 +141,7 @@
 <span class="sd">        the walk_animation. </span>
 <span class="sd">        </span>
 <span class="sd">        callback: A function, that will be called after the agent has reached</span>
-<span class="sd">        its taeget.</span>
+<span class="sd">        its target.</span>
 <span class="sd">    &quot;&quot;&quot;</span>    
     <span class="n">fifeagent_name</span> <span class="o">=</span> <span class="n">FifeAgent</span><span class="o">.</span><span class="n">registered_as</span>
     <span class="n">moving_name</span> <span class="o">=</span> <span class="n">Moving</span><span class="o">.</span><span class="n">registered_as</span>
@@ -235,10 +235,8 @@
 </div>
 <div class="viewcode-block" id="register_script_commands"><a class="viewcode-back" href="../../../fife_rpg.components.html#fife_rpg.components.fifeagent.register_script_commands">[docs]</a><span class="k">def</span> <span class="nf">register_script_commands</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;Register commands for this module&quot;&quot;&quot;</span>
-    <span class="n">ComponentManager</span><span class="o">.</span><span class="n">register_script_command</span><span class="p">(</span><span class="s">&quot;approach_and_execute&quot;</span><span class="p">,</span> 
+    <span class="n">ComponentManager</span><span class="o">.</span><span class="n">register_script_command</span><span class="p">(</span><span class="s">&quot;move&quot;</span><span class="p">,</span> 
                                              <span class="n">approach_and_execute</span><span class="p">)</span>
-    <span class="n">ComponentManager</span><span class="o">.</span><span class="n">register_script_command</span><span class="p">(</span><span class="s">&quot;walk&quot;</span><span class="p">,</span> <span class="n">walk</span><span class="p">)</span>
-    <span class="n">ComponentManager</span><span class="o">.</span><span class="n">register_script_command</span><span class="p">(</span><span class="s">&quot;run&quot;</span><span class="p">,</span> <span class="n">run</span><span class="p">)</span>
     </div>
 </pre></div>
 
@@ -273,7 +271,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">fife-rpg 0.1 documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">fife-rpg 0.1c documentation</a> &raquo;</li>
           <li><a href="../../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>

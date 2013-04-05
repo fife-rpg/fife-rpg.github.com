@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>fife_rpg.systems.scriptingsystem &mdash; fife-rpg 0.1 documentation</title>
+    <title>fife_rpg.systems.scriptingsystem &mdash; fife-rpg 0.1c documentation</title>
     
     <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.1',
+        VERSION:     '0.1c',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="top" title="fife-rpg 0.1 documentation" href="../../../index.html" />
+    <link rel="top" title="fife-rpg 0.1c documentation" href="../../../index.html" />
     <link rel="up" title="Module code" href="../../index.html" /> 
   </head>
   <body>
@@ -38,7 +38,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">fife-rpg 0.1 documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">fife-rpg 0.1c documentation</a> &raquo;</li>
           <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
@@ -87,7 +87,7 @@
 <span class="sd">    Properties:</span>
 <span class="sd">        actions: The actions that the script will run</span>
 <span class="sd">        </span>
-<span class="sd">        system: The Scriptsystem that this script will run on</span>
+<span class="sd">        system: The ScriptingSystem that this script will run on</span>
 <span class="sd">        </span>
 <span class="sd">        running_actions: The actions that are currently running</span>
 <span class="sd">        </span>
@@ -151,18 +151,20 @@
                 <span class="k">if</span> <span class="n">action_data</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="s">&quot;Command&quot;</span><span class="p">):</span>
                     <span class="n">vals</span> <span class="o">=</span> <span class="p">[]</span>
                     <span class="n">types</span> <span class="o">=</span> <span class="p">{}</span>
-                    <span class="n">types</span><span class="p">[</span><span class="s">&quot;String&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span>
-                    <span class="n">types</span><span class="p">[</span><span class="s">&quot;Entity&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">world</span><span class="o">.</span><span class="n">getEntity</span>
+                    <span class="n">types</span><span class="p">[</span><span class="s">&quot;Entity&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">world</span><span class="o">.</span><span class="n">get_entity</span>
                     
                     <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">action_data</span><span class="p">[</span><span class="s">&quot;Command&quot;</span><span class="p">][</span><span class="s">&quot;Variables&quot;</span><span class="p">]:</span>
-                        <span class="n">val_type</span> <span class="o">=</span> <span class="n">val</span><span class="p">[</span><span class="s">&quot;Type&quot;</span><span class="p">]</span>
-                        <span class="n">value</span> <span class="o">=</span> <span class="n">types</span><span class="p">[</span><span class="n">val_type</span><span class="p">](</span><span class="n">val</span><span class="p">[</span><span class="s">&quot;Value&quot;</span><span class="p">])</span>
+                        <span class="k">if</span> <span class="n">val</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="s">&quot;Type&quot;</span><span class="p">):</span>
+                            <span class="n">val_type</span> <span class="o">=</span> <span class="n">val</span><span class="p">[</span><span class="s">&quot;Type&quot;</span><span class="p">]</span>
+                            <span class="n">value</span> <span class="o">=</span> <span class="n">types</span><span class="p">[</span><span class="n">val_type</span><span class="p">](</span><span class="n">val</span><span class="p">[</span><span class="s">&quot;Value&quot;</span><span class="p">])</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">value</span> <span class="o">=</span> <span class="n">val</span><span class="p">[</span><span class="s">&quot;Value&quot;</span><span class="p">]</span>
                         <span class="n">vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
                     <span class="n">command</span> <span class="o">=</span> <span class="n">action_data</span><span class="p">[</span><span class="s">&quot;Command&quot;</span><span class="p">][</span><span class="s">&quot;Name&quot;</span><span class="p">]</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">commands</span><span class="p">[</span><span class="n">command</span><span class="p">](</span>
                         <span class="o">*</span><span class="n">vals</span><span class="p">,</span> 
-                        <span class="n">action</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cur_action</span>
-                    <span class="p">)</span>
+                        <span class="n">callback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cur_action</span><span class="o">.</span><span class="n">execute</span>
+                        <span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">cur_action</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
             <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
@@ -375,7 +377,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">fife-rpg 0.1 documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">fife-rpg 0.1c documentation</a> &raquo;</li>
           <li><a href="../../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>
