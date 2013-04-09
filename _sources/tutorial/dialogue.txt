@@ -73,12 +73,15 @@ Conditions
 ----------
 The conditions themselves are dictionaries with 2 keys:
 Type: The type of the condition. What conditions are available is determined
-by what conditions are registered to the Scripting System. It also follows the
+by what conditions are registered to the |ScriptingSystem|. It also follows the
 same rules as for the scripting system: If a condition is prefixed with "Not\_"
 then the condition will pass if it evaluates to False. The conditions are also
 case sensitive.
 Args: A list of arguments to pass to the condition. This depends on the
 condition.
+
+See also:
+:doc:`scripting`
 
 Commands
 --------

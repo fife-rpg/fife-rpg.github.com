@@ -32,3 +32,4 @@ This section contains tutorials that teach advanced aspects of FIFErpg.
    
    components
    dialogue
+   systems
