@@ -22,3 +22,4 @@ The default systems of FIFErpg are explained in separate tutorials:
    :maxdepth: 2
    
    scripting
+   game_variables
