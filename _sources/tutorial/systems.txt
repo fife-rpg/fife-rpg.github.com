@@ -23,3 +23,4 @@ The default systems of FIFErpg are explained in separate tutorials:
    
    scripting
    game_variables
+   char_stats
