@@ -1,0 +1,336 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>fife_rpg.components.equip &mdash; fife-rpg 0.1c documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.1c',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="fife-rpg 0.1c documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">fife-rpg 0.1c documentation</a> &raquo;</li>
+          <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for fife_rpg.components.equip</h1><div class="highlight"><pre>
+<span class="c"># -*- coding: utf-8 -*-</span>
+<span class="c">#   This program is free software: you can redistribute it and/or modify</span>
+<span class="c">#   it under the terms of the GNU General Public License as published by</span>
+<span class="c">#   the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c">#   (at your option) any later version.</span>
+
+<span class="c">#   This program is distributed in the hope that it will be useful,</span>
+<span class="c">#   but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c">#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c">#   GNU General Public License for more details.</span>
+
+<span class="c">#   You should have received a copy of the GNU General Public License</span>
+<span class="c">#   along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+
+<span class="sd">&quot;&quot;&quot;The Equip component and functions</span>
+
+<span class="sd">.. module:: equip</span>
+<span class="sd">    :synopsis: The Equip component and functions</span>
+
+<span class="sd">.. moduleauthor:: Karsten Bock &lt;KarstenBock@gmx.net&gt;</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">fife_rpg.components.base</span> <span class="kn">import</span> <span class="n">Base</span>
+<span class="kn">from</span> <span class="nn">fife_rpg.components.equipable</span> <span class="kn">import</span> <span class="n">Equipable</span>
+
+<div class="viewcode-block" id="Equip"><a class="viewcode-back" href="../../../fife_rpg.components.html#fife_rpg.components.equip.Equip">[docs]</a><span class="k">class</span> <span class="nc">Equip</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Basic equipment container component</span>
+<span class="sd">    </span>
+<span class="sd">    Fields:</span>
+<span class="sd">        Slots are dynamically set on construction</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dependencies</span> <span class="o">=</span> <span class="p">[</span><span class="n">Equipable</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">fields</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create the slots.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            fields: kwargs argument containing the data of the fields</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">Base</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">fields</span><span class="p">)</span>
+    
+    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="Equip.register"><a class="viewcode-back" href="../../../fife_rpg.components.html#fife_rpg.components.equip.Equip.register">[docs]</a>    <span class="k">def</span> <span class="nf">register</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;Equip&quot;</span><span class="p">,</span> <span class="n">auto_register</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Registers the class as a component</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name: The name under which the class should be registered</span>
+<span class="sd">            </span>
+<span class="sd">            auto_register: This sets whether components this component</span>
+<span class="sd">            derives from will have their registered_as property set to the same</span>
+<span class="sd">            name as this class.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            True if the component was registered, False if not.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="nb">super</span><span class="p">(</span><span class="n">Equip</span><span class="p">,</span> <span class="n">cls</span><span class="p">)</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">auto_register</span><span class="p">))</span>
+</div></div>
+<div class="viewcode-block" id="RPGEquip"><a class="viewcode-back" href="../../../fife_rpg.components.html#fife_rpg.components.equip.RPGEquip">[docs]</a><span class="k">class</span> <span class="nc">RPGEquip</span><span class="p">(</span><span class="n">Equip</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Example component for storing equipped items </span>
+<span class="sd">    (what is being worn/wielded).</span>
+<span class="sd">    </span>
+<span class="sd">    Fields:</span>
+<span class="sd">        head: Head equipment slot</span>
+<span class="sd">        neck: Neck equipment slot</span>
+<span class="sd">        body: Body equipment slot</span>
+<span class="sd">        belt: Belt equipment slot</span>
+<span class="sd">        leg: Legs equipment slot</span>
+<span class="sd">        feet: Feet equipment slot</span>
+<span class="sd">        l_arm: Left arm equipment slot</span>
+<span class="sd">        r_arm: Right arm equipment slot</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">Equip</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">head</span><span class="o">=</span><span class="nb">object</span><span class="p">,</span> <span class="n">neck</span><span class="o">=</span><span class="nb">object</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="nb">object</span><span class="p">,</span> <span class="n">belt</span><span class="o">=</span><span class="nb">object</span><span class="p">,</span> 
+                      <span class="n">leg</span><span class="o">=</span><span class="nb">object</span><span class="p">,</span> <span class="n">feet</span><span class="o">=</span><span class="nb">object</span><span class="p">,</span> <span class="n">l_arm</span><span class="o">=</span><span class="nb">object</span><span class="p">,</span> <span class="n">r_arm</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s">&quot;head&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">default</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s">&quot;neck&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">default</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s">&quot;body&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">default</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s">&quot;belt&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">default</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s">&quot;leg&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">default</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s">&quot;feet&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">default</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s">&quot;l_arm&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">default</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s">&quot;r_arm&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">default</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="bp">None</span>
+
+    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="RPGEquip.register"><a class="viewcode-back" href="../../../fife_rpg.components.html#fife_rpg.components.equip.RPGEquip.register">[docs]</a>    <span class="k">def</span> <span class="nf">register</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;equip&quot;</span><span class="p">,</span> <span class="n">auto_register</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Registers the class as a component</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name: The name under which the class should be registered</span>
+<span class="sd">            </span>
+<span class="sd">            auto_register: This sets whether components this component</span>
+<span class="sd">            derives from will have their registered_as property set to the same</span>
+<span class="sd">            name as this class.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            True if the component was registered, False if not.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="nb">super</span><span class="p">(</span><span class="n">RPGEquip</span><span class="p">,</span> <span class="n">cls</span><span class="p">)</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">auto_register</span><span class="p">))</span>
+</div></div>
+<div class="viewcode-block" id="SlotInvalidError"><a class="viewcode-back" href="../../../fife_rpg.components.html#fife_rpg.components.equip.SlotInvalidError">[docs]</a><span class="k">class</span> <span class="nc">SlotInvalidError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Error that gets raised when the slot is invalid</span>
+
+<span class="sd">    Properties:</span>
+<span class="sd">        The slot that was found to be invalid</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">slot</span><span class="p">):</span>
+        <span class="ne">Exception</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">slot</span> <span class="o">=</span> <span class="n">slot</span>
+    
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the string representing the exception&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s">&quot;</span><span class="se">\&quot;</span><span class="si">%s</span><span class="se">\&quot;</span><span class="s"> is not a valid slot.&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">slot</span>
+</div>
+<div class="viewcode-block" id="AlreadyEquippedError"><a class="viewcode-back" href="../../../fife_rpg.components.html#fife_rpg.components.equip.AlreadyEquippedError">[docs]</a><span class="k">class</span> <span class="nc">AlreadyEquippedError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Error that gets raised when the equipable already has a wearer&quot;&quot;&quot;</span>
+    
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the string representing the exception&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s">&quot;The equipable is already weared.&quot;</span>
+</div>
+<div class="viewcode-block" id="CannotBeEquippedInSlot"><a class="viewcode-back" href="../../../fife_rpg.components.html#fife_rpg.components.equip.CannotBeEquippedInSlot">[docs]</a><span class="k">class</span> <span class="nc">CannotBeEquippedInSlot</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Error that gets raised when the equipable can&#39;t be equiped in that </span>
+<span class="sd">    slot</span>
+<span class="sd">    </span>
+<span class="sd">    Properties:</span>
+<span class="sd">        slot: The slot that was being tried to equip to</span>
+<span class="sd">        </span>
+<span class="sd">        equipable: The item that was being tried to equipped</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">slot</span><span class="p">,</span> <span class="n">equipable</span><span class="p">):</span>
+        <span class="ne">Exception</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">slot</span> <span class="o">=</span> <span class="n">slot</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">equipable</span> <span class="o">=</span> <span class="n">equipable</span>
+        
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the string representing the exception&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="s">&quot;</span><span class="si">%s</span><span class="s"> is not in the equipables slots. (</span><span class="si">%s</span><span class="s">)&quot;</span> <span class="o">%</span> 
+                <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">slot</span><span class="p">,</span> <span class="s">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">equipable</span><span class="o">.</span><span class="n">possible_slots</span><span class="p">))</span>
+                <span class="p">)</span>
+    
+    </div>
+<div class="viewcode-block" id="equip"><a class="viewcode-back" href="../../../fife_rpg.components.html#fife_rpg.components.equip.equip">[docs]</a><span class="k">def</span> <span class="nf">equip</span><span class="p">(</span><span class="n">wearer</span><span class="p">,</span> <span class="n">equipable</span><span class="p">,</span> <span class="n">slot</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Equip the wearer with the given equipable.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        wearer: An :class:`fife_rpg.entites.rpg_entity.RPGEntity` with a</span>
+<span class="sd">        equip component</span>
+<span class="sd">        </span>
+<span class="sd">        equipable: An :class:`fife_rpg.entites.rpg_entity.RPGEntity` with a</span>
+<span class="sd">        equipable component</span>
+<span class="sd">        </span>
+<span class="sd">        slot: The slot to which the equipable shoud be equipped</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        The Entities of the equipable that had to be unqeuipped, or None</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        :class:`fife_rpg.components.equip.AlreadyEquippedError` if the</span>
+<span class="sd">        equipable is already equipped elsewhere.</span>
+<span class="sd">        </span>
+<span class="sd">        :class:`fife_rpg.components.equip.SlotInvalidError` if the slot</span>
+<span class="sd">        does not exists</span>
+<span class="sd">        </span>
+<span class="sd">        :class:`fife_rpg.components.equip.CannotBeEquippedInSlot` if the</span>
+<span class="sd">        equipable cannot be equipped in that slot</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">wearer_data</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">wearer</span><span class="p">,</span> <span class="n">Equip</span><span class="o">.</span><span class="n">registered_as</span><span class="p">)</span>
+    <span class="n">equipable_data</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">equipable</span><span class="p">,</span> <span class="n">Equipable</span><span class="o">.</span><span class="n">registered_as</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">equipable_data</span><span class="o">.</span><span class="n">wearer</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">AlreadyEquippedError</span>
+    <span class="k">for</span> <span class="n">possible_slots</span> <span class="ow">in</span> <span class="n">equipable_data</span><span class="o">.</span><span class="n">possible_slots</span><span class="p">:</span>
+        <span class="n">possible_slots</span> <span class="o">=</span> <span class="n">possible_slots</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;,&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">slot</span> <span class="ow">in</span> <span class="n">possible_slots</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">old_items</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">possible_slots</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                    <span class="n">possible_slots</span> <span class="o">=</span> <span class="p">[</span><span class="n">possible_slots</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">possible_slot</span> <span class="ow">in</span> <span class="n">possible_slots</span><span class="p">:</span>
+                    <span class="n">old_item</span> <span class="o">=</span> <span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">wearer_data</span><span class="p">,</span> <span class="n">possible_slot</span><span class="p">)</span>
+                                <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">wearer_data</span><span class="p">,</span> <span class="n">possible_slot</span><span class="p">)</span> 
+                                <span class="k">else</span> <span class="bp">None</span><span class="p">)</span>
+                    <span class="nb">setattr</span><span class="p">(</span><span class="n">wearer_data</span><span class="p">,</span> <span class="n">slot</span><span class="p">,</span> <span class="n">equipable</span><span class="o">.</span><span class="n">identifier</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">old_item</span><span class="p">:</span>
+                        <span class="n">old_item_entity</span> <span class="o">=</span> <span class="n">wearer</span><span class="o">.</span><span class="n">world</span><span class="o">.</span><span class="n">get_entity</span><span class="p">(</span><span class="n">old_item</span><span class="p">)</span>
+                        <span class="n">old_item_data</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">old_item_entity</span><span class="p">,</span> 
+                                                <span class="n">Equipable</span><span class="o">.</span><span class="n">registered_as</span><span class="p">)</span>
+                        <span class="n">old_item_data</span><span class="o">.</span><span class="n">in_slot</span> <span class="o">=</span> <span class="bp">None</span>
+                        <span class="n">old_item_data</span><span class="o">.</span><span class="n">wearer</span> <span class="o">=</span> <span class="bp">None</span>
+                        <span class="n">old_items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">old_item_entity</span><span class="p">)</span>
+
+                <span class="n">equipable_data</span><span class="o">.</span><span class="n">in_slot</span> <span class="o">=</span> <span class="s">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">possible_slots</span><span class="p">)</span>
+                <span class="n">equipable_data</span><span class="o">.</span><span class="n">wearer</span> <span class="o">=</span> <span class="n">wearer</span><span class="o">.</span><span class="n">identifier</span>
+                <span class="k">return</span> <span class="n">old_items</span>
+            <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">SlotInvalidError</span><span class="p">(</span><span class="n">slot</span><span class="p">)</span>
+    <span class="k">raise</span> <span class="n">CannotBeEquippedInSlot</span><span class="p">(</span><span class="n">slot</span><span class="p">,</span> <span class="n">equipable_data</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="get_equipable"><a class="viewcode-back" href="../../../fife_rpg.components.html#fife_rpg.components.equip.get_equipable">[docs]</a><span class="k">def</span> <span class="nf">get_equipable</span><span class="p">(</span><span class="n">wearer</span><span class="p">,</span> <span class="n">slot</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return the equipable in the given slot.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        wearer: An :class:`fife_rpg.entites.rpg_entity.RPGEntity`</span>
+<span class="sd">        with a equip component</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        SlotInvalidError if there is no such slot</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">wearer</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    <span class="n">wearer_data</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">wearer</span><span class="p">,</span> <span class="n">Equip</span><span class="o">.</span><span class="n">registered_as</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">item</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">wearer_data</span><span class="p">,</span> <span class="n">slot</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">item</span>
+    <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">SlotInvalidError</span><span class="p">(</span><span class="n">slot</span><span class="p">)</span>
+    </div>
+<div class="viewcode-block" id="take_equipable"><a class="viewcode-back" href="../../../fife_rpg.components.html#fife_rpg.components.equip.take_equipable">[docs]</a><span class="k">def</span> <span class="nf">take_equipable</span><span class="p">(</span><span class="n">wearer</span><span class="p">,</span> <span class="n">slot</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Remove equipable from the given slot and return it.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        wearer: An :class:`fife_rpg.components.equip.Equip` instance</span>
+<span class="sd">        </span>
+<span class="sd">        slot: The slot from which should be unequipped.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">item</span> <span class="o">=</span> <span class="n">wearer</span><span class="o">.</span><span class="n">world</span><span class="o">.</span><span class="n">get_entity</span><span class="p">(</span><span class="n">get_equipable</span><span class="p">(</span><span class="n">wearer</span><span class="p">,</span> <span class="n">slot</span><span class="p">))</span>
+    <span class="n">wearer_data</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">wearer</span><span class="p">,</span> <span class="n">Equip</span><span class="o">.</span><span class="n">registered_as</span><span class="p">)</span>
+    <span class="n">item_data</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">Equipable</span><span class="o">.</span><span class="n">registered_as</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item_data</span><span class="o">.</span><span class="n">in_slot</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="n">wearer_data</span><span class="p">,</span> <span class="n">slot</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>     
+        <span class="k">for</span> <span class="n">in_slot</span> <span class="ow">in</span> <span class="n">item_data</span><span class="o">.</span><span class="n">in_slot</span><span class="p">:</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="n">wearer_data</span><span class="p">,</span> <span class="n">in_slot</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">item_data</span><span class="p">:</span>
+        <span class="n">item_data</span><span class="o">.</span><span class="n">in_slot</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="n">item_data</span><span class="o">.</span><span class="n">wearer</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="k">return</span> <span class="n">item</span>
+    
+    </div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">fife-rpg 0.1c documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012-2013, Karsten Bock.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

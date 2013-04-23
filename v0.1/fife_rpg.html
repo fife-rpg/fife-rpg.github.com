@@ -1,0 +1,1564 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>fife_rpg Package &mdash; fife-rpg 0.1c documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1c',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="fife-rpg 0.1c documentation" href="index.html" />
+    <link rel="up" title="fife_rpg" href="modules.html" />
+    <link rel="next" title="actions Package" href="fife_rpg.actions.html" />
+    <link rel="prev" title="fife_rpg" href="modules.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="fife_rpg.actions.html" title="actions Package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="modules.html" title="fife_rpg"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">fife-rpg 0.1c documentation</a> &raquo;</li>
+          <li><a href="modules.html" accesskey="U">fife_rpg</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="fife-rpg-package">
+<h1>fife_rpg Package<a class="headerlink" href="#fife-rpg-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2><tt class="xref py py-mod docutils literal"><span class="pre">fife_rpg</span></tt> Package<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-fife_rpg.__init__"></span><p>The goal of fife-rpg is to create an rpg-framework using the FIFEngine
+and bGrease. It will use the source of PARPG as a basis and build upon it.</p>
+</div>
+<div class="section" id="module-fife_rpg.console_commands">
+<span id="console-commands-module"></span><h2><a class="reference internal" href="#module-console_commands" title="console_commands: Manages commands for the console."><tt class="xref py py-mod docutils literal"><span class="pre">console_commands</span></tt></a> Module<a class="headerlink" href="#module-fife_rpg.console_commands" title="Permalink to this headline">¶</a></h2>
+<p>This module manages commands for the console.</p>
+<span class="target" id="module-console_commands"></span><dl class="function">
+<dt id="fife_rpg.console_commands.get_commands">
+<tt class="descclassname">fife_rpg.console_commands.</tt><tt class="descname">get_commands</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/fife_rpg/console_commands.html#get_commands"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.console_commands.get_commands" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a copy of the commands</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="fife_rpg.console_commands.register_command">
+<tt class="descclassname">fife_rpg.console_commands.</tt><tt class="descname">register_command</tt><big>(</big><em>name</em>, <em>function</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/console_commands.html#register_command"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.console_commands.register_command" title="Permalink to this definition">¶</a></dt>
+<dd><p>Registers a function as a command</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>name: The keyword for the command
+function: The function to call</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-fife_rpg.dialogue">
+<span id="dialogue-module"></span><h2><a class="reference internal" href="fife_rpg.components.html#module-dialogue" title="dialogue: The Dialogue component and functions"><tt class="xref py py-mod docutils literal"><span class="pre">dialogue</span></tt></a> Module<a class="headerlink" href="#module-fife_rpg.dialogue" title="Permalink to this headline">¶</a></h2>
+<p>This module contains the the functions and classes for playing dialogues.</p>
+<span class="target" id="module-controllers"></span><dl class="class">
+<dt id="fife_rpg.dialogue.Dialogue">
+<em class="property">class </em><tt class="descclassname">fife_rpg.dialogue.</tt><tt class="descname">Dialogue</tt><big>(</big><em>world</em>, <em>dialogue_data</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/dialogue.html#Dialogue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.dialogue.Dialogue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Represents a single dialogue</p>
+<dl class="docutils">
+<dt>Properties:</dt>
+<dd><p class="first">world: <a class="reference internal" href="#fife_rpg.world.RPGWorld" title="fife_rpg.world.RPGWorld"><tt class="xref py py-class docutils literal"><span class="pre">RPGWorld</span></tt></a> that the dialogue is run on</p>
+<p>sections: A list of <a class="reference internal" href="#fife_rpg.dialogue.DialogueSection" title="fife_rpg.dialogue.DialogueSection"><tt class="xref py py-class docutils literal"><span class="pre">DialogueSection</span></tt></a></p>
+<p class="last">current_section: The <a class="reference internal" href="#fife_rpg.dialogue.DialogueSection" title="fife_rpg.dialogue.DialogueSection"><tt class="xref py py-class docutils literal"><span class="pre">DialogueSection</span></tt></a> that is currently active</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="fife_rpg.dialogue.Dialogue.create_section">
+<tt class="descname">create_section</tt><big>(</big><em>section_data</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/dialogue.html#Dialogue.create_section"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.dialogue.Dialogue.create_section" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a section and return it</p>
+<dl class="docutils">
+<dt>Args: </dt>
+<dd>section_data: A dictionary containing the data of a section</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.dialogue.Dialogue.create_sections">
+<tt class="descname">create_sections</tt><big>(</big><em>sections_data</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/dialogue.html#Dialogue.create_sections"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.dialogue.Dialogue.create_sections" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create the dialogue sections</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>sections_data: A dictionary containing the data of the sections</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.dialogue.Dialogue.get_dialogue_variables">
+<tt class="descname">get_dialogue_variables</tt><big>(</big><em>section</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/dialogue.html#Dialogue.get_dialogue_variables"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.dialogue.Dialogue.get_dialogue_variables" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the game variables combined with dialogue specific
+variables.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>section: A <a class="reference internal" href="#fife_rpg.dialogue.DialogueSection" title="fife_rpg.dialogue.DialogueSection"><tt class="xref py py-class docutils literal"><span class="pre">DialogueSection</span></tt></a>. This will be
+used to get dialogue variables</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fife_rpg.dialogue.Dialogue.is_dialogue_finished">
+<tt class="descname">is_dialogue_finished</tt><a class="reference internal" href="_modules/fife_rpg/dialogue.html#Dialogue.is_dialogue_finished"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.dialogue.Dialogue.is_dialogue_finished" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns whether the dialogue is finished or not</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fife_rpg.dialogue.Dialogue.possible_responses">
+<tt class="descname">possible_responses</tt><a class="reference internal" href="_modules/fife_rpg/dialogue.html#Dialogue.possible_responses"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.dialogue.Dialogue.possible_responses" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dictionary of the possible responses of the current section</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.dialogue.Dialogue.run_section">
+<tt class="descname">run_section</tt><big>(</big><em>section</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/dialogue.html#Dialogue.run_section"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.dialogue.Dialogue.run_section" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs the commands of the section</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>section: A <a class="reference internal" href="#fife_rpg.dialogue.DialogueSection" title="fife_rpg.dialogue.DialogueSection"><tt class="xref py py-class docutils literal"><span class="pre">DialogueSection</span></tt></a></dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.dialogue.Dialogue.select_greeting">
+<tt class="descname">select_greeting</tt><big>(</big><em>greetings_data</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/dialogue.html#Dialogue.select_greeting"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.dialogue.Dialogue.select_greeting" title="Permalink to this definition">¶</a></dt>
+<dd><p>Selects the first greeting which conditions passes</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>greetings_data: A dictionary containing the data of the greetings</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.dialogue.Dialogue.select_response">
+<tt class="descname">select_response</tt><big>(</big><em>response_name</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/dialogue.html#Dialogue.select_response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.dialogue.Dialogue.select_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Selects the given response and performs its actions</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>response_name: The name of the response</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="fife_rpg.dialogue.DialogueController">
+<em class="property">class </em><tt class="descclassname">fife_rpg.dialogue.</tt><tt class="descname">DialogueController</tt><big>(</big><em>view</em>, <em>application</em>, <em>dialogue</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/dialogue.html#DialogueController"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.dialogue.DialogueController" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#fife_rpg.mvc.ControllerBase" title="fife_rpg.mvc.ControllerBase"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.mvc.ControllerBase</span></tt></a></p>
+<p>Controller that handles Dialogues</p>
+<dl class="docutils">
+<dt>Properties:</dt>
+<dd><p class="first">application: The <a class="reference internal" href="#fife_rpg.rpg_application.RPGApplication" title="fife_rpg.rpg_application.RPGApplication"><tt class="xref py py-class docutils literal"><span class="pre">RPGApplication</span></tt></a> that created this controller</p>
+<p>view: The <a class="reference internal" href="#fife_rpg.mvc.ViewBase" title="fife_rpg.mvc.ViewBase"><tt class="xref py py-class docutils literal"><span class="pre">View</span></tt></a> that is used by this controller</p>
+<p class="last">dialogue: The active <a class="reference internal" href="#fife_rpg.dialogue.Dialogue" title="fife_rpg.dialogue.Dialogue"><tt class="xref py py-class docutils literal"><span class="pre">Dialogue</span></tt></a></p>
+</dd>
+</dl>
+<dl class="attribute">
+<dt id="fife_rpg.dialogue.DialogueController.current_section">
+<tt class="descname">current_section</tt><a class="reference internal" href="_modules/fife_rpg/dialogue.html#DialogueController.current_section"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.dialogue.DialogueController.current_section" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the current section of the active dialogue</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fife_rpg.dialogue.DialogueController.is_dialogue_finished">
+<tt class="descname">is_dialogue_finished</tt><a class="reference internal" href="_modules/fife_rpg/dialogue.html#DialogueController.is_dialogue_finished"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.dialogue.DialogueController.is_dialogue_finished" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns whether the active dialogue is finished or not</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fife_rpg.dialogue.DialogueController.possible_responses">
+<tt class="descname">possible_responses</tt><a class="reference internal" href="_modules/fife_rpg/dialogue.html#DialogueController.possible_responses"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.dialogue.DialogueController.possible_responses" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dictionary of the possible responses of the active
+dialogue</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.dialogue.DialogueController.pump">
+<tt class="descname">pump</tt><big>(</big><em>time_delta</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/dialogue.html#DialogueController.pump"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.dialogue.DialogueController.pump" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs actions every frame</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>time_delta: Time that passed since the last call</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.dialogue.DialogueController.select_response">
+<tt class="descname">select_response</tt><big>(</big><em>response_name</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/dialogue.html#DialogueController.select_response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.dialogue.DialogueController.select_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Selects the given response and performs its actions</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>response_name: The name of the response</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="fife_rpg.dialogue.DialogueSection">
+<em class="property">class </em><tt class="descclassname">fife_rpg.dialogue.</tt><tt class="descname">DialogueSection</tt><big>(</big><em>talker</em>, <em>text</em>, <em>conditions=None</em>, <em>commands=None</em>, <em>responses=None</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/dialogue.html#DialogueSection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.dialogue.DialogueSection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Represents a section of a dialogue</p>
+<dl class="docutils">
+<dt>Properties:</dt>
+<dd><p class="first">talker: The Entity that is talking</p>
+<p>text: The text that is being said</p>
+<p>conditions: List of conditions that are evaluated</p>
+<p>commands: Commands that are to be executed when 
+the section is displayed</p>
+<p class="last">responses: Possible responses for this section</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-fife_rpg.exceptions">
+<span id="exceptions-module"></span><h2><a class="reference internal" href="#module-exceptions" title="exceptions: Contains the exceptions from fife-rpg."><tt class="xref py py-mod docutils literal"><span class="pre">exceptions</span></tt></a> Module<a class="headerlink" href="#module-fife_rpg.exceptions" title="Permalink to this headline">¶</a></h2>
+<p>This module contains the exceptions from fife-rpg.</p>
+<span class="target" id="module-exceptions"></span><dl class="exception">
+<dt id="fife_rpg.exceptions.AlreadyRegisteredError">
+<em class="property">exception </em><tt class="descclassname">fife_rpg.exceptions.</tt><tt class="descname">AlreadyRegisteredError</tt><big>(</big><em>name</em>, <em>obj_type</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/exceptions.html#AlreadyRegisteredError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.exceptions.AlreadyRegisteredError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></tt></p>
+<p>Exception that gets raised when an object with the name is already
+registered</p>
+<dl class="docutils">
+<dt>Properties:</dt>
+<dd><p class="first">name: The name of the action that was already registered</p>
+<p class="last">obj_type: The obj_type of the object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="exception">
+<dt id="fife_rpg.exceptions.NoSuchCommandError">
+<em class="property">exception </em><tt class="descclassname">fife_rpg.exceptions.</tt><tt class="descname">NoSuchCommandError</tt><big>(</big><em>name</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/exceptions.html#NoSuchCommandError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.exceptions.NoSuchCommandError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></tt></p>
+<p>Exception that gets raised when the command is not found</p>
+<dl class="docutils">
+<dt>Properties:</dt>
+<dd>name: The name of the command that was being tried to execute</dd>
+</dl>
+</dd></dl>
+
+<dl class="exception">
+<dt id="fife_rpg.exceptions.NotRegisteredError">
+<em class="property">exception </em><tt class="descclassname">fife_rpg.exceptions.</tt><tt class="descname">NotRegisteredError</tt><big>(</big><em>obj_type</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/exceptions.html#NotRegisteredError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.exceptions.NotRegisteredError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></tt></p>
+<p>Exception that gets raised when a class is not registered</p>
+<dl class="docutils">
+<dt>Properties:</dt>
+<dd>obj_type: The obj_type of the object</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-fife_rpg.game_scene">
+<span id="game-scene-module"></span><h2><a class="reference internal" href="#module-game_scene" title="game_scene: The generic controller and view to display a fife_rpg map."><tt class="xref py py-mod docutils literal"><span class="pre">game_scene</span></tt></a> Module<a class="headerlink" href="#module-fife_rpg.game_scene" title="Permalink to this headline">¶</a></h2>
+<p>This module contains the generic controller and view to display a
+<tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.map.GameMap</span></tt>.</p>
+<span class="target" id="module-game_scene"></span><dl class="class">
+<dt id="fife_rpg.game_scene.BaseOutliner">
+<em class="property">class </em><tt class="descclassname">fife_rpg.game_scene.</tt><tt class="descname">BaseOutliner</tt><a class="reference internal" href="_modules/fife_rpg/game_scene.html#BaseOutliner"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.game_scene.BaseOutliner" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Determines the outline of an instance</p>
+<dl class="method">
+<dt id="fife_rpg.game_scene.BaseOutliner.get_data">
+<tt class="descname">get_data</tt><big>(</big><em>world</em>, <em>identifier</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/game_scene.html#BaseOutliner.get_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.game_scene.BaseOutliner.get_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determines whether an instance should be outline and the data
+used for the outline.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><p class="first">world: The world</p>
+<p class="last">identifier: The name of the instance</p>
+</dd>
+</dl>
+<p>Returns: The data as a list, if the instance should be
+outlined. None, if it should not.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="fife_rpg.game_scene.GameSceneController">
+<em class="property">class </em><tt class="descclassname">fife_rpg.game_scene.</tt><tt class="descname">GameSceneController</tt><big>(</big><em>view</em>, <em>application</em>, <em>outliner=None</em>, <em>listener=None</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/game_scene.html#GameSceneController"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.game_scene.GameSceneController" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#fife_rpg.mvc.ControllerBase" title="fife_rpg.mvc.ControllerBase"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.mvc.ControllerBase</span></tt></a></p>
+<p>Handles the input for a game scene</p>
+<dl class="docutils">
+<dt>Properties:</dt>
+<dd><p class="first">view: A <a class="reference internal" href="#fife_rpg.game_scene.GameSceneView" title="fife_rpg.game_scene.GameSceneView"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.game_scene.GameSceneView</span></tt></a></p>
+<p>application: A <a class="reference internal" href="#fife_rpg.rpg_application.RPGApplication" title="fife_rpg.rpg_application.RPGApplication"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.rpg_application.RPGApplication</span></tt></a></p>
+<p>listener: The listener used by the game scene</p>
+<p class="last">outliner: The outliner that will be used to determine outlines</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="fife_rpg.game_scene.GameSceneController.on_activate">
+<tt class="descname">on_activate</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/fife_rpg/game_scene.html#GameSceneController.on_activate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.game_scene.GameSceneController.on_activate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Being called when the Mode is activated</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.game_scene.GameSceneController.on_deactivate">
+<tt class="descname">on_deactivate</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/fife_rpg/game_scene.html#GameSceneController.on_deactivate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.game_scene.GameSceneController.on_deactivate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Being called when the Mode is deactivated</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.game_scene.GameSceneController.pump">
+<tt class="descname">pump</tt><big>(</big><em>time_delta</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/game_scene.html#GameSceneController.pump"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.game_scene.GameSceneController.pump" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs actions every frame</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>time_delta: Time that passed since the last call</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="fife_rpg.game_scene.GameSceneListener">
+<em class="property">class </em><tt class="descclassname">fife_rpg.game_scene.</tt><tt class="descname">GameSceneListener</tt><big>(</big><em>engine</em>, <em>gamecontroller=None</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/game_scene.html#GameSceneListener"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.game_scene.GameSceneListener" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">fife.fife.IMouseListener</span></tt></p>
+<p>The game listener.</p>
+<p>Handle mouse events in relation
+with game process.</p>
+<dl class="docutils">
+<dt>Properties:</dt>
+<dd><p class="first">engine: The FIFE engine</p>
+<p>gamecontroller: A <a class="reference internal" href="#fife_rpg.game_scene.GameSceneController" title="fife_rpg.game_scene.GameSceneController"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.game_scene.GameSceneController</span></tt></a></p>
+<p>eventmanager: The engines eventmanager. A <tt class="xref py py-class docutils literal"><span class="pre">fife.EventManager</span></tt></p>
+<p class="last">is_outlined: If true then outlines for instances will be drawn.</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="fife_rpg.game_scene.GameSceneListener.activate">
+<tt class="descname">activate</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/fife_rpg/game_scene.html#GameSceneListener.activate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.game_scene.GameSceneListener.activate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Makes the listener receive events</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.game_scene.GameSceneListener.deactivate">
+<tt class="descname">deactivate</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/fife_rpg/game_scene.html#GameSceneListener.deactivate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.game_scene.GameSceneListener.deactivate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Makes the listener receive events</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.game_scene.GameSceneListener.mouseDragged">
+<tt class="descname">mouseDragged</tt><big>(</big><em>event</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/game_scene.html#GameSceneListener.mouseDragged"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.game_scene.GameSceneListener.mouseDragged" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called when the mouse is moved while a button is being pressed.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>event: The mouse event</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.game_scene.GameSceneListener.mouseMoved">
+<tt class="descname">mouseMoved</tt><big>(</big><em>event</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/game_scene.html#GameSceneListener.mouseMoved"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.game_scene.GameSceneListener.mouseMoved" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called when the mouse was moved.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>event: The mouse event</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.game_scene.GameSceneListener.mousePressed">
+<tt class="descname">mousePressed</tt><big>(</big><em>event</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/game_scene.html#GameSceneListener.mousePressed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.game_scene.GameSceneListener.mousePressed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called when a mouse button was pressed.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>event: The mouse event</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.game_scene.GameSceneListener.mouseReleased">
+<tt class="descname">mouseReleased</tt><big>(</big><em>event</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/game_scene.html#GameSceneListener.mouseReleased"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.game_scene.GameSceneListener.mouseReleased" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called when a mouse button was released.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>event: The mouse event</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.game_scene.GameSceneListener.mouseWheelMovedDown">
+<tt class="descname">mouseWheelMovedDown</tt><big>(</big><em>event</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/game_scene.html#GameSceneListener.mouseWheelMovedDown"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.game_scene.GameSceneListener.mouseWheelMovedDown" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called when the mouse wheel is moved downwards</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>event: The mouse event</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.game_scene.GameSceneListener.mouseWheelMovedUp">
+<tt class="descname">mouseWheelMovedUp</tt><big>(</big><em>event</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/game_scene.html#GameSceneListener.mouseWheelMovedUp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.game_scene.GameSceneListener.mouseWheelMovedUp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called when the mouse wheel is moved upwards</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>event: The mouse event</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fife_rpg.game_scene.GameSceneListener.outline_ignore">
+<tt class="descname">outline_ignore</tt><a class="reference internal" href="_modules/fife_rpg/game_scene.html#GameSceneListener.outline_ignore"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.game_scene.GameSceneListener.outline_ignore" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns outline_ignore</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="fife_rpg.game_scene.GameSceneView">
+<em class="property">class </em><tt class="descclassname">fife_rpg.game_scene.</tt><tt class="descname">GameSceneView</tt><big>(</big><em>application</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/game_scene.html#GameSceneView"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.game_scene.GameSceneView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#fife_rpg.mvc.ViewBase" title="fife_rpg.mvc.ViewBase"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.mvc.ViewBase</span></tt></a></p>
+<p>The view responsible for showing the in-game gui</p>
+<dl class="docutils">
+<dt>Properties:</dt>
+<dd>application: A <a class="reference internal" href="#fife_rpg.rpg_application.RPGApplication" title="fife_rpg.rpg_application.RPGApplication"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.rpg_application.RPGApplication</span></tt></a> instance</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="fife_rpg.game_scene.SimpleOutliner">
+<em class="property">class </em><tt class="descclassname">fife_rpg.game_scene.</tt><tt class="descname">SimpleOutliner</tt><big>(</big><em>outline_data=None</em>, <em>outline_ignore=None</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/game_scene.html#SimpleOutliner"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.game_scene.SimpleOutliner" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#fife_rpg.game_scene.BaseOutliner" title="fife_rpg.game_scene.BaseOutliner"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.game_scene.BaseOutliner</span></tt></a></p>
+<p>Outliner that determines the outline based on a list of identifiers
+to ignore and a single data element for instances that should be outlined.</p>
+<dl class="docutils">
+<dt>Properties:</dt>
+<dd><p class="first">outline_data: A tuple of values for the outlines. It is in the order:
+(Red, Green, Blue, Width, Threshold)</p>
+<p class="last">outline_ignore: A list of identifiers to ignore when drawing outlines</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="fife_rpg.game_scene.SimpleOutliner.get_data">
+<tt class="descname">get_data</tt><big>(</big><em>world</em>, <em>identifier</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/game_scene.html#SimpleOutliner.get_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.game_scene.SimpleOutliner.get_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determines whether an instance should be outline and the data
+used for the outline.</p>
+<dl class="docutils">
+<dt>Args:                </dt>
+<dd><p class="first">world: The world</p>
+<p class="last">identifier: The name of the instance</p>
+</dd>
+</dl>
+<p>Returns: The data as a list, if the instance should be
+outlined. None, if it should not.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fife_rpg.game_scene.SimpleOutliner.outline_ignore">
+<tt class="descname">outline_ignore</tt><a class="reference internal" href="_modules/fife_rpg/game_scene.html#SimpleOutliner.outline_ignore"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.game_scene.SimpleOutliner.outline_ignore" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns outline_ignore</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-fife_rpg.helpers">
+<span id="helpers-module"></span><h2><a class="reference internal" href="#module-helpers" title="helpers: Various functions and classes"><tt class="xref py py-mod docutils literal"><span class="pre">helpers</span></tt></a> Module<a class="headerlink" href="#module-fife_rpg.helpers" title="Permalink to this headline">¶</a></h2>
+<p>Various functions and classes</p>
+<span class="target" id="module-helpers"></span><dl class="attribute">
+<dt id="fife_rpg.helpers.ClassProperty">
+<tt class="descclassname">fife_rpg.helpers.</tt><tt class="descname">ClassProperty</tt><a class="reference internal" href="_modules/fife_rpg/helpers.html#ClassProperty"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.helpers.ClassProperty" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to make class properties</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="fife_rpg.helpers.Enum">
+<em class="property">class </em><tt class="descclassname">fife_rpg.helpers.</tt><tt class="descname">Enum</tt><a class="reference internal" href="_modules/fife_rpg/helpers.html#Enum"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.helpers.Enum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/stdtypes.html#set" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">set</span></tt></a></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-fife_rpg.map">
+<span id="map-module"></span><h2><a class="reference internal" href="#module-map" title="map: contains everything for handling fife-rpg maps."><tt class="xref py py-mod docutils literal"><span class="pre">map</span></tt></a> Module<a class="headerlink" href="#module-fife_rpg.map" title="Permalink to this headline">¶</a></h2>
+<p>This module contains everything for handling fife-rpg maps</p>
+<span class="target" id="module-map"></span><dl class="class">
+<dt id="fife_rpg.map.Map">
+<em class="property">class </em><tt class="descclassname">fife_rpg.map.</tt><tt class="descname">Map</tt><big>(</big><em>fife_map</em>, <em>name</em>, <em>camera</em>, <em>regions</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/map.html#Map"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.map.Map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Contains the data of a map</p>
+<dl class="docutils">
+<dt>Properties:</dt>
+<dd><p class="first">fife_map: A fife.Map instance, representing the fife_map</p>
+<p>name: The name of the fife_map.</p>
+<p>camera: The name of the default camera</p>
+<p>regions: A dictionary that defines specific regions on the fife_map, as
+<tt class="xref py py-class docutils literal"><span class="pre">fife.DoubleRect</span></tt> instances.</p>
+<p class="last">is_active: Whether the map is currently active or nor</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="fife_rpg.map.Map.activate">
+<tt class="descname">activate</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/fife_rpg/map.html#Map.activate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.map.Map.activate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Activates the map</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fife_rpg.map.Map.camera">
+<tt class="descname">camera</tt><a class="reference internal" href="_modules/fife_rpg/map.html#Map.camera"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.map.Map.camera" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the camera of the map</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.map.Map.deactivate">
+<tt class="descname">deactivate</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/fife_rpg/map.html#Map.deactivate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.map.Map.deactivate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deactivates the map</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fife_rpg.map.Map.entities">
+<tt class="descname">entities</tt><a class="reference internal" href="_modules/fife_rpg/map.html#Map.entities"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.map.Map.entities" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the entities that are on this map</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fife_rpg.map.Map.fife_map">
+<tt class="descname">fife_map</tt><a class="reference internal" href="_modules/fife_rpg/map.html#Map.fife_map"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.map.Map.fife_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the fife.Map</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.map.Map.get_instances_at">
+<tt class="descname">get_instances_at</tt><big>(</big><em>point</em>, <em>layer</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/map.html#Map.get_instances_at"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.map.Map.get_instances_at" title="Permalink to this definition">¶</a></dt>
+<dd><p>Query the main camera for instances on the specified layer.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><p class="first">point: A <tt class="xref py py-class docutils literal"><span class="pre">fife.ScreenPoint</span></tt></p>
+<p class="last">layer: The <tt class="xref py py-class docutils literal"><span class="pre">fife.Layer</span></tt> from which we want the instances</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.map.Map.get_layer">
+<tt class="descname">get_layer</tt><big>(</big><em>layer</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/map.html#Map.get_layer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.map.Map.get_layer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the layer with the given name</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>layer: The name of the layer</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fife_rpg.map.Map.is_active">
+<tt class="descname">is_active</tt><a class="reference internal" href="_modules/fife_rpg/map.html#Map.is_active"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.map.Map.is_active" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns wheter the map is active or not</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.map.Map.is_in_region">
+<tt class="descname">is_in_region</tt><big>(</big><em>location</em>, <em>region</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/map.html#Map.is_in_region"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.map.Map.is_in_region" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if a given point is inside the given region</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><p class="first">location: A fife.DoublePoint instance or a tuple with 2 elements</p>
+<p class="last">region: The name of the region</p>
+</dd>
+<dt>Raises:</dt>
+<dd><a class="reference internal" href="#fife_rpg.map.NoSuchRegionError" title="fife_rpg.map.NoSuchRegionError"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.map.NoSuchRegionError</span></tt></a> if the specified region does 
+not exist.</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fife_rpg.map.Map.name">
+<tt class="descname">name</tt><a class="reference internal" href="_modules/fife_rpg/map.html#Map.name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.map.Map.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the name of the map</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fife_rpg.map.Map.regions">
+<tt class="descname">regions</tt><a class="reference internal" href="_modules/fife_rpg/map.html#Map.regions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.map.Map.regions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the regions of the map</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.map.Map.remove_entity">
+<tt class="descname">remove_entity</tt><big>(</big><em>identifier</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/map.html#Map.remove_entity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.map.Map.remove_entity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes an entity from the map</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>identifier: The name of the entity</dd>
+<dt>Raises:</dt>
+<dd><p class="first">KeyError: If the map has no entity with that name</p>
+<p class="last">TypeError: If the identifier is not a string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.map.Map.update_entities">
+<tt class="descname">update_entities</tt><big>(</big><em>world</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/map.html#Map.update_entities"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.map.Map.update_entities" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the maps entites from the entities of the world</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>world: The <a class="reference internal" href="#fife_rpg.world.RPGWorld" title="fife_rpg.world.RPGWorld"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.world.RPGWorld</span></tt></a> on which the map looks
+for its entities</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.map.Map.update_entities_fife">
+<tt class="descname">update_entities_fife</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/fife_rpg/map.html#Map.update_entities_fife"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.map.Map.update_entities_fife" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates the fife instances to the values of the agent</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.map.Map.update_entitities_agent">
+<tt class="descname">update_entitities_agent</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/fife_rpg/map.html#Map.update_entitities_agent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.map.Map.update_entitities_agent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the values of the agent component of the maps entities</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="fife_rpg.map.NoSuchRegionError">
+<em class="property">exception </em><tt class="descclassname">fife_rpg.map.</tt><tt class="descname">NoSuchRegionError</tt><big>(</big><em>map_name</em>, <em>region_name</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/map.html#NoSuchRegionError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.map.NoSuchRegionError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></tt></p>
+<p>Gets thrown when the code tried to access a region that does not exits 
+on the map.</p>
+<dl class="docutils">
+<dt>Properties:</dt>
+<dd><p class="first">map_name: The name of the map_name</p>
+<p class="last">region_name: The name of the region_name</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-fife_rpg.mvc">
+<span id="mvc-module"></span><h2><a class="reference internal" href="#module-mvc" title="mvc: Contains classes for a Model-View-Controller system"><tt class="xref py py-mod docutils literal"><span class="pre">mvc</span></tt></a> Module<a class="headerlink" href="#module-fife_rpg.mvc" title="Permalink to this headline">¶</a></h2>
+<p>Contains classes for a Model-View-Controller system</p>
+<span class="target" id="module-mvc"></span><dl class="class">
+<dt id="fife_rpg.mvc.ControllerBase">
+<em class="property">class </em><tt class="descclassname">fife_rpg.mvc.</tt><tt class="descname">ControllerBase</tt><big>(</big><em>view</em>, <em>application</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/mvc.html#ControllerBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.mvc.ControllerBase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">bGrease.grease_fife.mode.Mode</span></tt></p>
+<p>Base of Controllers</p>
+<dl class="docutils">
+<dt>Properties:</dt>
+<dd><p class="first">application: The <a class="reference internal" href="#fife_rpg.rpg_application.RPGApplication" title="fife_rpg.rpg_application.RPGApplication"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.rpg_application.RPGApplication</span></tt></a> that
+created this controller</p>
+<p class="last">view: The <tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.mcs.ViewBase</span></tt> that is used by this
+controller</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="fife_rpg.mvc.ControllerBase.pump">
+<tt class="descname">pump</tt><big>(</big><em>time_delta</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/mvc.html#ControllerBase.pump"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.mvc.ControllerBase.pump" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs actions every frame</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>time_delta: Time that passed since the last call</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="fife_rpg.mvc.ViewBase">
+<em class="property">class </em><tt class="descclassname">fife_rpg.mvc.</tt><tt class="descname">ViewBase</tt><big>(</big><em>application</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/mvc.html#ViewBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.mvc.ViewBase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Base class for views</p>
+<dl class="docutils">
+<dt>Properties:</dt>
+<dd>application: A <a class="reference internal" href="#fife_rpg.rpg_application.RPGApplication" title="fife_rpg.rpg_application.RPGApplication"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.rpg_application.RPGApplication</span></tt></a> instance</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-fife_rpg.rpg_application">
+<span id="rpg-application-module"></span><h2><a class="reference internal" href="#module-rpg_application" title="rpg_application: Contains the main application class."><tt class="xref py py-mod docutils literal"><span class="pre">rpg_application</span></tt></a> Module<a class="headerlink" href="#module-fife_rpg.rpg_application" title="Permalink to this headline">¶</a></h2>
+<p>This module contains the main application class.</p>
+<span class="target" id="module-rpg_application"></span><dl class="class">
+<dt id="fife_rpg.rpg_application.ApplicationListener">
+<em class="property">class </em><tt class="descclassname">fife_rpg.rpg_application.</tt><tt class="descname">ApplicationListener</tt><big>(</big><em>engine</em>, <em>application</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/rpg_application.html#ApplicationListener"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.rpg_application.ApplicationListener" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">fife.fife.IKeyListener</span></tt>, <tt class="xref py py-class docutils literal"><span class="pre">fife.fife.ICommandListener</span></tt>, <tt class="xref py py-class docutils literal"><span class="pre">fife.fife.ConsoleExecuter</span></tt></p>
+<p>A basic listener for window commands, console commands and keyboard
+inputs.</p>
+<p>Does not process game related input.</p>
+<dl class="docutils">
+<dt>Properties:</dt>
+<dd>quit: Sets whether to quit the application on the next pump or not.</dd>
+</dl>
+<dl class="method">
+<dt id="fife_rpg.rpg_application.ApplicationListener.keyPressed">
+<tt class="descname">keyPressed</tt><big>(</big><em>event</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/rpg_application.html#ApplicationListener.keyPressed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.rpg_application.ApplicationListener.keyPressed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Processes any non game related keyboard input.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>event: The fife.KeyEvent that happened</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.rpg_application.ApplicationListener.keyReleased">
+<tt class="descname">keyReleased</tt><big>(</big><em>event</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/rpg_application.html#ApplicationListener.keyReleased"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.rpg_application.ApplicationListener.keyReleased" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets called when a key is released</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>event: The fife.KeyEvent that happened</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.rpg_application.ApplicationListener.onCommand">
+<tt class="descname">onCommand</tt><big>(</big><em>command</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/rpg_application.html#ApplicationListener.onCommand"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.rpg_application.ApplicationListener.onCommand" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process commands</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>command: The fife.Command that is being processed</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.rpg_application.ApplicationListener.onConsoleCommand">
+<tt class="descname">onConsoleCommand</tt><big>(</big><em>command</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/rpg_application.html#ApplicationListener.onConsoleCommand"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.rpg_application.ApplicationListener.onConsoleCommand" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process console commands</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>command: A string containing the command</dd>
+<dt>Returns:</dt>
+<dd>A string representing the result of the command</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.rpg_application.ApplicationListener.onToolsClick">
+<tt class="descname">onToolsClick</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/fife_rpg/rpg_application.html#ApplicationListener.onToolsClick"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.rpg_application.ApplicationListener.onToolsClick" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets called when the the &#8216;tool&#8217; button on the console is clicked</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="fife_rpg.rpg_application.KeyFilter">
+<em class="property">class </em><tt class="descclassname">fife_rpg.rpg_application.</tt><tt class="descname">KeyFilter</tt><big>(</big><em>keys</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/rpg_application.html#KeyFilter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.rpg_application.KeyFilter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">fife.fife.IKeyFilter</span></tt></p>
+<p>This is the implementation of the fife.IKeyFilter class.</p>
+<p>Prevents any filtered keys from being consumed by guichan.</p>
+<dl class="method">
+<dt id="fife_rpg.rpg_application.KeyFilter.isFiltered">
+<tt class="descname">isFiltered</tt><big>(</big><em>event</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/rpg_application.html#KeyFilter.isFiltered"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.rpg_application.KeyFilter.isFiltered" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether the key is filtered or not.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>event: A fife.KeyEvent instance</dd>
+<dt>Returns:</dt>
+<dd>True if the key is filtered, False if not.</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="fife_rpg.rpg_application.RPGApplication">
+<em class="property">class </em><tt class="descclassname">fife_rpg.rpg_application.</tt><tt class="descname">RPGApplication</tt><big>(</big><em>TDS</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/rpg_application.html#RPGApplication"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.rpg_application.RPGApplication" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">bGrease.grease_fife.mode.FifeManager</span></tt>, <tt class="xref py py-class docutils literal"><span class="pre">fife.extensions.basicapplication.ApplicationBase</span></tt></p>
+<p>The main application.  It inherits fife.extensions.ApplicationBase.</p>
+<dl class="docutils">
+<dt>Properties:</dt>
+<dd><p class="first">name: The name of the Application</p>
+<p>world: The fife_rpg.world.RPGWorld this application uses</p>
+<p>language: The language the application uses</p>
+<p>settings: A fife_settings.Setting instance that stores the settings of
+the application</p>
+<p>maps: A dictionary containing the maps the application has</p>
+<p>current_map: The current active map</p>
+<p>log_manager: The log manager of the application</p>
+<p class="last">engine: A fife.Engine instance</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="fife_rpg.rpg_application.RPGApplication.add_map">
+<tt class="descname">add_map</tt><big>(</big><em>name</em>, <em>filename_or_map</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/rpg_application.html#RPGApplication.add_map"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.rpg_application.RPGApplication.add_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a map to the maps dictionary.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><p class="first">name: The name of the map</p>
+<p class="last">filename_or_map: The file name map, without the extension,
+or a Map instance.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.rpg_application.RPGApplication.add_map_switch_callback">
+<tt class="descname">add_map_switch_callback</tt><big>(</big><em>callback</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/rpg_application.html#RPGApplication.add_map_switch_callback"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.rpg_application.RPGApplication.add_map_switch_callback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a callback function which gets called after 
+the map switched</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>callback: The function to add</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.rpg_application.RPGApplication.check_agent_changes">
+<tt class="descname">check_agent_changes</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/fife_rpg/rpg_application.html#RPGApplication.check_agent_changes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.rpg_application.RPGApplication.check_agent_changes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks all agents for changes</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.rpg_application.RPGApplication.createListener">
+<tt class="descname">createListener</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/fife_rpg/rpg_application.html#RPGApplication.createListener"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.rpg_application.RPGApplication.createListener" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates the listener for the application and returns it.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.rpg_application.RPGApplication.create_world">
+<tt class="descname">create_world</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/fife_rpg/rpg_application.html#RPGApplication.create_world"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.rpg_application.RPGApplication.create_world" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates the world used by this application</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fife_rpg.rpg_application.RPGApplication.current_map">
+<tt class="descname">current_map</tt><a class="reference internal" href="_modules/fife_rpg/rpg_application.html#RPGApplication.current_map"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.rpg_application.RPGApplication.current_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the current active map</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.rpg_application.RPGApplication.execute_console_command">
+<tt class="descname">execute_console_command</tt><big>(</big><em>command</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/rpg_application.html#RPGApplication.execute_console_command"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.rpg_application.RPGApplication.execute_console_command" title="Permalink to this definition">¶</a></dt>
+<dd><p>Executes a console command</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>command: The command string to execute</dd>
+</dl>
+<p>Returns: The result of the command</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.rpg_application.RPGApplication.is_agent_in_region">
+<tt class="descname">is_agent_in_region</tt><big>(</big><em>map_name</em>, <em>agent_name</em>, <em>region_name</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/rpg_application.html#RPGApplication.is_agent_in_region"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.rpg_application.RPGApplication.is_agent_in_region" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether the agent is in the region of the map</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><p class="first">map_name: Name of the map. If None the current map will be used</p>
+<p>region_name: Name of the region</p>
+<p class="last">agent_name: Name of the agent</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.rpg_application.RPGApplication.is_location_in_region">
+<tt class="descname">is_location_in_region</tt><big>(</big><em>map_name</em>, <em>location</em>, <em>region_name</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/rpg_application.html#RPGApplication.is_location_in_region"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.rpg_application.RPGApplication.is_location_in_region" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether the location is in the region of the map</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><p class="first">map_name: Name of the map. If None the current map will be used</p>
+<p>region_name: Name of the region</p>
+<p class="last">location: A list or tuple containing the location</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fife_rpg.rpg_application.RPGApplication.language">
+<tt class="descname">language</tt><a class="reference internal" href="_modules/fife_rpg/rpg_application.html#RPGApplication.language"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.rpg_application.RPGApplication.language" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the current set language</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.rpg_application.RPGApplication.load_actions">
+<tt class="descname">load_actions</tt><big>(</big><em>filename=None</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/rpg_application.html#RPGApplication.load_actions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.rpg_application.RPGApplication.load_actions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load the action definitions from a file</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>filename: The path to the actions file. If this is set to None the
+ActionsFile setting will be used.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.rpg_application.RPGApplication.load_behaviours">
+<tt class="descname">load_behaviours</tt><big>(</big><em>filename=None</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/rpg_application.html#RPGApplication.load_behaviours"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.rpg_application.RPGApplication.load_behaviours" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load the behaviour definitions from a file</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>filename: The path to the behaviours file. If this is set to None the
+BehavioursFile setting will be used.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.rpg_application.RPGApplication.load_components">
+<tt class="descname">load_components</tt><big>(</big><em>filename=None</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/rpg_application.html#RPGApplication.load_components"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.rpg_application.RPGApplication.load_components" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load the component definitions from a file</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>filename: The path to the components file. If this is set to None the
+ComponentsFile setting will be used.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.rpg_application.RPGApplication.load_map">
+<tt class="descname">load_map</tt><big>(</big><em>name</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/rpg_application.html#RPGApplication.load_map"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.rpg_application.RPGApplication.load_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load the map with the given name</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>name: The name of the map to load</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.rpg_application.RPGApplication.load_maps">
+<tt class="descname">load_maps</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/fife_rpg/rpg_application.html#RPGApplication.load_maps"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.rpg_application.RPGApplication.load_maps" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load the names of the available maps from a map file.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.rpg_application.RPGApplication.load_systems">
+<tt class="descname">load_systems</tt><big>(</big><em>filename=None</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/rpg_application.html#RPGApplication.load_systems"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.rpg_application.RPGApplication.load_systems" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load the system definitions from a file</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>filename: The path to the systems file. If this is set to None the
+SystemsFile setting will be used.</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fife_rpg.rpg_application.RPGApplication.log_manager">
+<tt class="descname">log_manager</tt><a class="reference internal" href="_modules/fife_rpg/rpg_application.html#RPGApplication.log_manager"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.rpg_application.RPGApplication.log_manager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the log manager of the application.</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>a fifelog.LogManager instance that contains the log manager of
+the application.</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fife_rpg.rpg_application.RPGApplication.maps">
+<tt class="descname">maps</tt><a class="reference internal" href="_modules/fife_rpg/rpg_application.html#RPGApplication.maps"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.rpg_application.RPGApplication.maps" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a copy of the maps dictionary</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.rpg_application.RPGApplication.pump">
+<tt class="descname">pump</tt><big>(</big><em>dt</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/rpg_application.html#RPGApplication.pump"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.rpg_application.RPGApplication.pump" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs actions every frame.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>dt: Time elapsed since last call to pump</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.rpg_application.RPGApplication.register_action">
+<tt class="descname">register_action</tt><big>(</big><em>action_name</em>, <em>registered_name=None</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/rpg_application.html#RPGApplication.register_action"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.rpg_application.RPGApplication.register_action" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls the actions register method.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><p class="first">action_name: Name of the action</p>
+<p class="last">registered_name: Name under which the action should be registered</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.rpg_application.RPGApplication.register_actions">
+<tt class="descname">register_actions</tt><big>(</big><em>action_list=None</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/rpg_application.html#RPGApplication.register_actions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.rpg_application.RPGApplication.register_actions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls the register method of the actions in the action list</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>action_list: A list of actions if an item is not a string
+it will be interpreted as a tuple or list with the second item
+as the name to use when registering. If this is None the Actions
+settings will be used.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.rpg_application.RPGApplication.register_behaviour">
+<tt class="descname">register_behaviour</tt><big>(</big><em>behaviour_name</em>, <em>registered_name=None</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/rpg_application.html#RPGApplication.register_behaviour"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.rpg_application.RPGApplication.register_behaviour" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls the behaviours register method.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><p class="first">behaviour_name: Name of the behaviour</p>
+<p class="last">registered_name: Name under which the behaviour should be registered</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.rpg_application.RPGApplication.register_behaviours">
+<tt class="descname">register_behaviours</tt><big>(</big><em>behaviour_list=None</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/rpg_application.html#RPGApplication.register_behaviours"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.rpg_application.RPGApplication.register_behaviours" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls the register method of the behaviours in the behaviour list</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>behaviour_list: A list of behaviours if an item is not a string
+it will be interpreted as a tuple or list with the second item
+as the name to use when registering. If this is None the Behaviours
+settings will be used.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.rpg_application.RPGApplication.register_component">
+<tt class="descname">register_component</tt><big>(</big><em>component_name</em>, <em>registered_name=None</em>, <em>register_checkers=True</em>, <em>register_script_commands=True</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/rpg_application.html#RPGApplication.register_component"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.rpg_application.RPGApplication.register_component" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls the components register method.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><p class="first">component_name: Name of the component</p>
+<p>registered_name: Name under which the component should be registered</p>
+<p>register_checkers: If True a &#8220;register_checkers&#8221; function will be searched
+in the module and called</p>
+<p class="last">register_script_commands: If True a &#8220;register_script_commands&#8221; functions
+will be searched in the module and called</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.rpg_application.RPGApplication.register_components">
+<tt class="descname">register_components</tt><big>(</big><em>component_list=None</em>, <em>register_checkers=True</em>, <em>register_script_commands=True</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/rpg_application.html#RPGApplication.register_components"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.rpg_application.RPGApplication.register_components" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls the register method of the components in the component list</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><p class="first">component_list: A list of components if an item is not a string
+it will be interpreted as a tuple or list with the second item
+as the name to use when registering. If this is None the Components
+settings will be used.</p>
+<p>register_checkers: If True a &#8220;register_checkers&#8221; function will be search
+in the module and called</p>
+<p class="last">register_script_commands: If True a &#8220;register_script_commands&#8221; functions
+will be searched in the module and called</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.rpg_application.RPGApplication.register_system">
+<tt class="descname">register_system</tt><big>(</big><em>system_name</em>, <em>registered_name=None</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/rpg_application.html#RPGApplication.register_system"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.rpg_application.RPGApplication.register_system" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls the systems register method.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><p class="first">system_name: Name of the system</p>
+<p class="last">registered_name: Name under which the system should be registered</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.rpg_application.RPGApplication.register_systems">
+<tt class="descname">register_systems</tt><big>(</big><em>system_list=None</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/rpg_application.html#RPGApplication.register_systems"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.rpg_application.RPGApplication.register_systems" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls the register method of the systems in the system list</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>system_list: A list of systems if an item is not a string
+it will be interpreted as a tuple or list with the second item
+as the name to use when registering. If this is None the Systems
+settings will be used.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.rpg_application.RPGApplication.remove_map_switch_callback">
+<tt class="descname">remove_map_switch_callback</tt><big>(</big><em>callback</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/rpg_application.html#RPGApplication.remove_map_switch_callback"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.rpg_application.RPGApplication.remove_map_switch_callback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes a callback function that got called after the map
+switched.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>callback: The function to remove</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.rpg_application.RPGApplication.request_quit">
+<tt class="descname">request_quit</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/fife_rpg/rpg_application.html#RPGApplication.request_quit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.rpg_application.RPGApplication.request_quit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sends the quit command to the application&#8217;s listener.</p>
+<p>We could set self.quitRequested to true also but this is a
+good example on how to build and dispatch a fife.Command.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.rpg_application.RPGApplication.screen_coords_to_map_coords">
+<tt class="descname">screen_coords_to_map_coords</tt><big>(</big><em>click</em>, <em>layer</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/rpg_application.html#RPGApplication.screen_coords_to_map_coords"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.rpg_application.RPGApplication.screen_coords_to_map_coords" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the screen coordinates to coordinates on the active map</p>
+<p>Args:</p>
+<blockquote>
+<div><p>click: Screen coordinates as fife.ScreenPoint or position tuple</p>
+<p>layer: The name of the layer the converted position should be on</p>
+</div></blockquote>
+<p>Returns: Converted coordinates as fife.Location</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fife_rpg.rpg_application.RPGApplication.settings">
+<tt class="descname">settings</tt><a class="reference internal" href="_modules/fife_rpg/rpg_application.html#RPGApplication.settings"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.rpg_application.RPGApplication.settings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the settings of the application.</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>A fife_settings.Setting instance that contains the settings of the
+application.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.rpg_application.RPGApplication.switch_language">
+<tt class="descname">switch_language</tt><big>(</big><em>language</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/rpg_application.html#RPGApplication.switch_language"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.rpg_application.RPGApplication.switch_language" title="Permalink to this definition">¶</a></dt>
+<dd><p>Switch to the given language</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.rpg_application.RPGApplication.switch_map">
+<tt class="descname">switch_map</tt><big>(</big><em>name</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/rpg_application.html#RPGApplication.switch_map"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.rpg_application.RPGApplication.switch_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Switches to the given map.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>name: The name of the map</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.rpg_application.RPGApplication.update_agents">
+<tt class="descname">update_agents</tt><big>(</big><em>game_map</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/rpg_application.html#RPGApplication.update_agents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.rpg_application.RPGApplication.update_agents" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates the map to be in sync with the entities</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>game_map: The name of the map, or a Map instance</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.rpg_application.RPGApplication.update_game_variables">
+<tt class="descname">update_game_variables</tt><big>(</big><em>variables</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/rpg_application.html#RPGApplication.update_game_variables"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.rpg_application.RPGApplication.update_game_variables" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called by the game environment when it wants to update its globals</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>globals: The globals dictionary of the GameEnvironment that is 
+filled by the GameScene</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-fife_rpg.sound_engine">
+<span id="sound-engine-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">sound_engine</span></tt> Module<a class="headerlink" href="#module-fife_rpg.sound_engine" title="Permalink to this headline">¶</a></h2>
+<p>This module holds the object code to play sounds and sound effects</p>
+<span class="target" id="module-__sound_manager"></span><dl class="class">
+<dt id="fife_rpg.sound_engine.SoundEngine">
+<em class="property">class </em><tt class="descclassname">fife_rpg.sound_engine.</tt><tt class="descname">SoundEngine</tt><big>(</big><em>fife_engine</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/sound_engine.html#SoundEngine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.sound_engine.SoundEngine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plays sounds and __music</p>
+<dl class="docutils">
+<dt>Properties:</dt>
+<dd>is_music_on: Indicates whether there is currently music playing or not</dd>
+</dl>
+<dl class="attribute">
+<dt id="fife_rpg.sound_engine.SoundEngine.is_music_on">
+<tt class="descname">is_music_on</tt><a class="reference internal" href="_modules/fife_rpg/sound_engine.html#SoundEngine.is_music_on"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.sound_engine.SoundEngine.is_music_on" title="Permalink to this definition">¶</a></dt>
+<dd><p>Indicates whether there is currently music playing or not</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.sound_engine.SoundEngine.pause_music">
+<tt class="descname">pause_music</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/fife_rpg/sound_engine.html#SoundEngine.pause_music"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.sound_engine.SoundEngine.pause_music" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pauses current music playback</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.sound_engine.SoundEngine.play_music">
+<tt class="descname">play_music</tt><big>(</big><em>sfile=None</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/sound_engine.html#SoundEngine.play_music"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.sound_engine.SoundEngine.play_music" title="Permalink to this definition">¶</a></dt>
+<dd><p>Play music, with the given file if passed</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>sfile: Filename to play</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.sound_engine.SoundEngine.setVolume">
+<tt class="descname">setVolume</tt><big>(</big><em>volume</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/sound_engine.html#SoundEngine.setVolume"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.sound_engine.SoundEngine.setVolume" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the volume of the music</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>volume: The volume wanted, 0 to 100</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.sound_engine.SoundEngine.toggle_music">
+<tt class="descname">toggle_music</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/fife_rpg/sound_engine.html#SoundEngine.toggle_music"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.sound_engine.SoundEngine.toggle_music" title="Permalink to this definition">¶</a></dt>
+<dd><p>Toggle status of music, either on or off</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-fife_rpg.world">
+<span id="world-module"></span><h2><a class="reference internal" href="#module-world" title="world: Contains the world class."><tt class="xref py py-mod docutils literal"><span class="pre">world</span></tt></a> Module<a class="headerlink" href="#module-fife_rpg.world" title="Permalink to this headline">¶</a></h2>
+<p>This module contains the world class used used by the entity system.</p>
+<span class="target" id="module-world"></span><dl class="class">
+<dt id="fife_rpg.world.RPGWorld">
+<em class="property">class </em><tt class="descclassname">fife_rpg.world.</tt><tt class="descname">RPGWorld</tt><big>(</big><em>application</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/world.html#RPGWorld"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.world.RPGWorld" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">bGrease.grease_fife.world.World</span></tt></p>
+<p>The Base world for all rpgs.</p>
+<p>Sets up the generic systems and components</p>
+<dl class="docutils">
+<dt>Properties:</dt>
+<dd><p class="first">application: The <a class="reference internal" href="#fife_rpg.rpg_application.RPGApplication" title="fife_rpg.rpg_application.RPGApplication"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.rpg_application.RPGApplication</span></tt></a> that 
+uses this engine</p>
+<p class="last">object_db: Stores the template data</p>
+</dd>
+</dl>
+<dl class="attribute">
+<dt id="fife_rpg.world.RPGWorld.MAX_ID_NUMBER">
+<tt class="descname">MAX_ID_NUMBER</tt><em class="property"> = 2147483647</em><a class="headerlink" href="#fife_rpg.world.RPGWorld.MAX_ID_NUMBER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.world.RPGWorld.configure">
+<tt class="descname">configure</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/fife_rpg/world.html#RPGWorld.configure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.world.RPGWorld.configure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configure the worlds components and systems</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.world.RPGWorld.create_entity_dictionary">
+<tt class="descname">create_entity_dictionary</tt><big>(</big><em>entity</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/world.html#RPGWorld.create_entity_dictionary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.world.RPGWorld.create_entity_dictionary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a dictionary containing the values of the Entity</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>entity: The Entity instance</dd>
+<dt>Returns:</dt>
+<dd>The created dictionary</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.world.RPGWorld.create_unique_identifier">
+<tt class="descname">create_unique_identifier</tt><big>(</big><em>identifier</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/world.html#RPGWorld.create_unique_identifier"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.world.RPGWorld.create_unique_identifier" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an unused identifier based on the given identifier</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>identifier: The base identifier</dd>
+<dt>Returns:</dt>
+<dd>A unique unused identifier based in the given identifier</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.world.RPGWorld.entity_constructor">
+<tt class="descname">entity_constructor</tt><big>(</big><em>loader</em>, <em>node</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/world.html#RPGWorld.entity_constructor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.world.RPGWorld.entity_constructor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructs an Entity from a yaml node</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><p class="first">loader: A yaml BaseConstructor</p>
+<p class="last">node: The yaml node</p>
+</dd>
+<dt>Returns:</dt>
+<dd>The created Entity</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.world.RPGWorld.entity_representer">
+<tt class="descname">entity_representer</tt><big>(</big><em>dumper</em>, <em>data</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/world.html#RPGWorld.entity_representer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.world.RPGWorld.entity_representer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a yaml node representing an entity</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><p class="first">dumper: A yaml BaseRepresenter</p>
+<p class="last">data: The Entity</p>
+</dd>
+<dt>Returns:</dt>
+<dd>The created node</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.world.RPGWorld.get_entity">
+<tt class="descname">get_entity</tt><big>(</big><em>identifier</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/world.html#RPGWorld.get_entity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.world.RPGWorld.get_entity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the entity with the identifier</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>identifier: The identifier of the entity</dd>
+<dt>Returns:</dt>
+<dd>The entity with the identifier or None</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.world.RPGWorld.get_or_create_entity">
+<tt class="descname">get_or_create_entity</tt><big>(</big><em>identifier</em>, <em>info=None</em>, <em>extra=None</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/world.html#RPGWorld.get_or_create_entity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.world.RPGWorld.get_or_create_entity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an entity if not already present and return it.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><p class="first">identifier: The identifier of the new object</p>
+<p>info: Stores information about the object we want to create</p>
+<p class="last">extra: Stores additionally required attributes</p>
+</dd>
+<dt>Returns:</dt>
+<dd>The entity with the identifier.
+None: If there is no info dictionary and no entity with the
+identifier</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.world.RPGWorld.import_agent_objects">
+<tt class="descname">import_agent_objects</tt><big>(</big><em>object_path=None</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/world.html#RPGWorld.import_agent_objects"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.world.RPGWorld.import_agent_objects" title="Permalink to this definition">¶</a></dt>
+<dd><p>Import the objects used by agents from the given path</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>object_path: The root path in which the objects are.
+If set to None it the path will be read from the settings</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.world.RPGWorld.is_identifier_used">
+<tt class="descname">is_identifier_used</tt><big>(</big><em>identifier</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/world.html#RPGWorld.is_identifier_used"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.world.RPGWorld.is_identifier_used" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether the idenfier is used</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>identifier: The identifier to check</dd>
+<dt>Returns:</dt>
+<dd>True if the identifier is used, false if not</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.world.RPGWorld.load_and_create_entities">
+<tt class="descname">load_and_create_entities</tt><big>(</big><em>entities_file_name=None</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/world.html#RPGWorld.load_and_create_entities"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.world.RPGWorld.load_and_create_entities" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads the entities from a file and creates them</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>entities_file_name: The path to the entities file. Overwrites
+the EntitiesFile setting if not set to None</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.world.RPGWorld.pump">
+<tt class="descname">pump</tt><big>(</big><em>time_delta</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/world.html#RPGWorld.pump"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.world.RPGWorld.pump" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs actions every frame</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>time_delta: Time that passed since the last call</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.world.RPGWorld.read_object_db">
+<tt class="descname">read_object_db</tt><big>(</big><em>db_filename=None</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/world.html#RPGWorld.read_object_db"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.world.RPGWorld.read_object_db" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads the Object Information Database from a file</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>db_filename: The yaml file to read from. Overwrites the
+ObjectDBFile setting if not set to None.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.world.RPGWorld.update_from_template">
+<tt class="descname">update_from_template</tt><big>(</big><em>entity_data</em>, <em>template_name</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/world.html#RPGWorld.update_from_template"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.world.RPGWorld.update_from_template" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copies missing data from a template into an entity dictionary.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><p class="first">entity_data: The dictionary in which the data should be put.</p>
+<p class="last">template_name: The name of the template to use</p>
+</dd>
+<dt>Returns:</dt>
+<dd>The modified entity dictionary</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.world.RPGWorld.update_game_variables">
+<tt class="descname">update_game_variables</tt><big>(</big><em>variables</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/world.html#RPGWorld.update_game_variables"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.world.RPGWorld.update_game_variables" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called by the game environment when it wants to update its globals</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>variables: The globals dictionary of the GameEnvironment that is 
+filled by the GameScene</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="fife_rpg.actions.html">actions Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="fife_rpg.actions.html#id1"><tt class="docutils literal"><span class="pre">actions</span></tt> Package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fife_rpg.actions.html#module-fife_rpg.actions.action_manager"><tt class="docutils literal"><span class="pre">action_manager</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fife_rpg.actions.html#module-fife_rpg.actions.base"><tt class="docutils literal"><span class="pre">base</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fife_rpg.actions.html#module-fife_rpg.actions.move_agent"><tt class="docutils literal"><span class="pre">move_agent</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fife_rpg.actions.html#module-fife_rpg.actions.close"><tt class="docutils literal"><span class="pre">close</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fife_rpg.actions.html#module-fife_rpg.actions.lock"><tt class="docutils literal"><span class="pre">lock</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fife_rpg.actions.html#module-fife_rpg.actions.look"><tt class="docutils literal"><span class="pre">look</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fife_rpg.actions.html#module-fife_rpg.actions.open"><tt class="docutils literal"><span class="pre">open</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fife_rpg.actions.html#module-fife_rpg.actions.pick_up"><tt class="docutils literal"><span class="pre">pick_up</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fife_rpg.actions.html#module-fife_rpg.actions.read"><tt class="docutils literal"><span class="pre">read</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fife_rpg.actions.html#module-fife_rpg.actions.unlock"><tt class="docutils literal"><span class="pre">unlock</span></tt> Module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="fife_rpg.behaviours.html">behaviours Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="fife_rpg.behaviours.html#id1"><tt class="docutils literal"><span class="pre">behaviours</span></tt> Package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fife_rpg.behaviours.html#module-fife_rpg.behaviours.base"><tt class="docutils literal"><span class="pre">base</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fife_rpg.behaviours.html#module-fife_rpg.behaviours.behaviour_manager"><tt class="docutils literal"><span class="pre">behaviour_manager</span></tt> Module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="fife_rpg.components.html">components Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="fife_rpg.components.html#id1"><tt class="docutils literal"><span class="pre">components</span></tt> Package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fife_rpg.components.html#module-fife_rpg.components.agent"><tt class="docutils literal"><span class="pre">agent</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fife_rpg.components.html#module-fife_rpg.components.base"><tt class="docutils literal"><span class="pre">base</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fife_rpg.components.html#module-fife_rpg.components.move_agent"><tt class="docutils literal"><span class="pre">move_agent</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fife_rpg.components.html#module-fife_rpg.components.character_statistics"><tt class="docutils literal"><span class="pre">character_statistics</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fife_rpg.components.html#module-fife_rpg.components.component_manager"><tt class="docutils literal"><span class="pre">component_manager</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fife_rpg.components.html#module-fife_rpg.components.containable"><tt class="docutils literal"><span class="pre">containable</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fife_rpg.components.html#module-fife_rpg.components.container"><tt class="docutils literal"><span class="pre">container</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fife_rpg.components.html#module-fife_rpg.components.description"><tt class="docutils literal"><span class="pre">description</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fife_rpg.components.html#module-fife_rpg.components.dialogue"><tt class="docutils literal"><span class="pre">dialogue</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fife_rpg.components.html#module-fife_rpg.components.equip"><tt class="docutils literal"><span class="pre">equip</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fife_rpg.components.html#module-fife_rpg.components.equipable"><tt class="docutils literal"><span class="pre">equipable</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fife_rpg.components.html#module-fife_rpg.components.fifeagent"><tt class="docutils literal"><span class="pre">fifeagent</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fife_rpg.components.html#module-fife_rpg.components.general"><tt class="docutils literal"><span class="pre">general</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fife_rpg.components.html#module-fife_rpg.components.lockable"><tt class="docutils literal"><span class="pre">lockable</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fife_rpg.components.html#module-fife_rpg.components.readable"><tt class="docutils literal"><span class="pre">readable</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fife_rpg.components.html#module-fife_rpg.components.moving"><tt class="docutils literal"><span class="pre">moving</span></tt> Module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="fife_rpg.entities.html">entities Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="fife_rpg.entities.html#id1"><tt class="docutils literal"><span class="pre">entities</span></tt> Package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fife_rpg.entities.html#module-fife_rpg.entities.rpg_entity"><tt class="docutils literal"><span class="pre">rpg_entity</span></tt> Module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="fife_rpg.systems.html">systems Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="fife_rpg.systems.html#id1"><tt class="docutils literal"><span class="pre">systems</span></tt> Package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fife_rpg.systems.html#module-fife_rpg.systems.base"><tt class="docutils literal"><span class="pre">base</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fife_rpg.systems.html#module-fife_rpg.systems.character_statistics"><tt class="docutils literal"><span class="pre">character_statistics</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fife_rpg.systems.html#module-fife_rpg.systems.game_variables"><tt class="docutils literal"><span class="pre">game_variables</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fife_rpg.systems.html#module-fife_rpg.systems.scriptingsystem"><tt class="docutils literal"><span class="pre">scriptingsystem</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fife_rpg.systems.html#module-fife_rpg.systems.system_manager"><tt class="docutils literal"><span class="pre">system_manager</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">fife_rpg Package</a><ul>
+<li><a class="reference internal" href="#id1"><tt class="docutils literal"><span class="pre">fife_rpg</span></tt> Package</a></li>
+<li><a class="reference internal" href="#module-fife_rpg.console_commands"><tt class="docutils literal"><span class="pre">console_commands</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-fife_rpg.dialogue"><tt class="docutils literal"><span class="pre">dialogue</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-fife_rpg.exceptions"><tt class="docutils literal"><span class="pre">exceptions</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-fife_rpg.game_scene"><tt class="docutils literal"><span class="pre">game_scene</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-fife_rpg.helpers"><tt class="docutils literal"><span class="pre">helpers</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-fife_rpg.map"><tt class="docutils literal"><span class="pre">map</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-fife_rpg.mvc"><tt class="docutils literal"><span class="pre">mvc</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-fife_rpg.rpg_application"><tt class="docutils literal"><span class="pre">rpg_application</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-fife_rpg.sound_engine"><tt class="docutils literal"><span class="pre">sound_engine</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-fife_rpg.world"><tt class="docutils literal"><span class="pre">world</span></tt> Module</a></li>
+<li><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="modules.html"
+                        title="previous chapter">fife_rpg</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="fife_rpg.actions.html"
+                        title="next chapter">actions Package</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/fife_rpg.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="fife_rpg.actions.html" title="actions Package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="modules.html" title="fife_rpg"
+             >previous</a> |</li>
+        <li><a href="index.html">fife-rpg 0.1c documentation</a> &raquo;</li>
+          <li><a href="modules.html" >fife_rpg</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012-2013, Karsten Bock.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
