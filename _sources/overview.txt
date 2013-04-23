@@ -92,8 +92,11 @@ You should check the `Known Problems`_ page.
 
 Documentation
 -------------
-You can view the documentation online at http://fife-rpg.github.com/.
+You can view the documentation online at http://fife-rpg.github.io.
 This will always contain the documentation for the Git repository.
+
+The documentation for major versions are available as a subdirectory with the
+version. v0.1, for example, can be accessed here: http://fife-rpg.github.io/v0.1/
 
 Development status
 ------------------
