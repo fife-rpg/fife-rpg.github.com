@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>fife_rpg.components.base &mdash; fife-rpg 0.1c documentation</title>
+    <title>fife_rpg.components.base &mdash; fife-rpg 0.2 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.1c',
+        VERSION:     '0.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="top" title="fife-rpg 0.1c documentation" href="../../../index.html" />
+    <link rel="top" title="fife-rpg 0.2 documentation" href="../../../index.html" />
     <link rel="up" title="Module code" href="../../index.html" /> 
   </head>
   <body>
@@ -38,7 +38,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">fife-rpg 0.1c documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">fife-rpg 0.2 documentation</a> &raquo;</li>
           <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
@@ -50,6 +50,7 @@
             
   <h1>Source code for fife_rpg.components.base</h1><div class="highlight"><pre>
 <span class="c"># -*- coding: utf-8 -*-</span>
+
 <span class="c">#   This program is free software: you can redistribute it and/or modify</span>
 <span class="c">#   it under the terms of the GNU General Public License as published by</span>
 <span class="c">#   the Free Software Foundation, either version 3 of the License, or</span>
@@ -76,17 +77,18 @@
 
 <span class="kn">from</span> <span class="nn">fife_rpg.components</span> <span class="kn">import</span> <span class="n">ComponentManager</span>
 <span class="kn">from</span> <span class="nn">fife_rpg.exceptions</span> <span class="kn">import</span> <span class="n">AlreadyRegisteredError</span>
-<span class="kn">from</span> <span class="nn">fife_rpg.exceptions</span> <span class="kn">import</span> <span class="n">NotRegisteredError</span>
 <span class="kn">from</span> <span class="nn">fife_rpg.helpers</span> <span class="kn">import</span> <span class="n">ClassProperty</span>
+
 
 <div class="viewcode-block" id="Base"><a class="viewcode-back" href="../../../fife_rpg.components.html#fife_rpg.components.base.Base">[docs]</a><span class="k">class</span> <span class="nc">Base</span><span class="p">(</span><span class="n">Component</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Base component for fife-rpg.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Properties:</span>
 <span class="sd">        registered_as: Class property that sets under what name the class is</span>
 <span class="sd">        registered</span>
-<span class="sd">        </span>
-<span class="sd">        dependencies: Class property that sets the classes this System depends on</span>
+
+<span class="sd">        dependencies: Class property that sets the classes this Component</span>
+<span class="sd">        depends on</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">__registered_as</span> <span class="o">=</span> <span class="bp">None</span>
     <span class="n">dependencies</span> <span class="o">=</span> <span class="p">[]</span>
@@ -108,7 +110,7 @@
 
 <span class="sd">        Args:</span>
 <span class="sd">            name: The name under which the class should be registered</span>
-<span class="sd">            </span>
+
 <span class="sd">            auto_register: This sets whether components this component</span>
 <span class="sd">            derives from will have their registered_as property set to the same</span>
 <span class="sd">            name as this class.</span>
@@ -123,7 +125,9 @@
                 <span class="k">for</span> <span class="n">sub_cls</span> <span class="ow">in</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getmro</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
                     <span class="k">if</span> <span class="p">((</span><span class="ow">not</span> <span class="p">(</span><span class="n">sub_cls</span> <span class="ow">is</span> <span class="n">cls</span> <span class="ow">or</span> <span class="n">sub_cls</span> <span class="ow">is</span> <span class="n">Base</span><span class="p">))</span>
                          <span class="ow">and</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">sub_cls</span><span class="p">,</span> <span class="n">Base</span><span class="p">)):</span>
+                        <span class="c"># pylint: disable-msg=W0212</span>
                         <span class="n">sub_cls</span><span class="o">.</span><span class="n">__registered_as</span> <span class="o">=</span> <span class="n">name</span>
+                        <span class="c"># pylint: enable-msg=W0212</span>
             <span class="k">for</span> <span class="n">dependency</span> <span class="ow">in</span> <span class="n">cls</span><span class="o">.</span><span class="n">dependencies</span><span class="p">:</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="n">dependency</span><span class="o">.</span><span class="n">registered_as</span><span class="p">:</span>
                     <span class="n">dependency</span><span class="o">.</span><span class="n">register</span><span class="p">()</span>
@@ -164,7 +168,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">fife-rpg 0.1c documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">fife-rpg 0.2 documentation</a> &raquo;</li>
           <li><a href="../../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>

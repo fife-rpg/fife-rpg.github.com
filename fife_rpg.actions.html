@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>actions Package &mdash; fife-rpg 0.1c documentation</title>
+    <title>actions Package &mdash; fife-rpg 0.2 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '0.1c',
+        VERSION:     '0.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="fife-rpg 0.1c documentation" href="index.html" />
+    <link rel="top" title="fife-rpg 0.2 documentation" href="index.html" />
     <link rel="up" title="fife_rpg Package" href="fife_rpg.html" />
     <link rel="next" title="behaviours Package" href="fife_rpg.behaviours.html" />
     <link rel="prev" title="fife_rpg Package" href="fife_rpg.html" /> 
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="fife_rpg.html" title="fife_rpg Package"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">fife-rpg 0.1c documentation</a> &raquo;</li>
+        <li><a href="index.html">fife-rpg 0.2 documentation</a> &raquo;</li>
           <li><a href="modules.html" >fife_rpg</a> &raquo;</li>
           <li><a href="fife_rpg.html" accesskey="U">fife_rpg Package</a> &raquo;</li> 
       </ul>
@@ -66,7 +66,7 @@
 <div class="section" id="module-fife_rpg.actions.action_manager">
 <span id="action-manager-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">action_manager</span></tt> Module<a class="headerlink" href="#module-fife_rpg.actions.action_manager" title="Permalink to this headline">¶</a></h2>
 <p>This module manages the actions of fife-rpg.</p>
-<p>An action is a object that can be executed later. This can be used, 
+<p>An action is a object that can be executed later. This can be used,
 for example, in menus,</p>
 <span class="target" id="module-action"></span><dl class="function">
 <dt id="fife_rpg.actions.action_manager.clear_actions">
@@ -95,14 +95,15 @@ for example, in menus,</p>
 <dl class="function">
 <dt id="fife_rpg.actions.action_manager.get_possible_actions">
 <tt class="descclassname">fife_rpg.actions.action_manager.</tt><tt class="descname">get_possible_actions</tt><big>(</big><em>performer</em>, <em>target</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/actions/action_manager.html#get_possible_actions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.actions.action_manager.get_possible_actions" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the actions that can be performed with the performer and the target</p>
+<dd><p>Get the entity actions that can be performed with the performer and the
+target</p>
 <dl class="docutils">
 <dt>Args:</dt>
 <dd><p class="first">performer: The performer initiating the action</p>
 <p class="last">target: The target of the action</p>
 </dd>
 <dt>Returns:</dt>
-<dd>A dictionary with the actions that can be performed using the performer 
+<dd>A dictionary with the actions that can be performed using the performer
 and the target</dd>
 </dl>
 </dd></dl>
@@ -117,7 +118,7 @@ and the target</dd>
 <p class="last">action_class: The class of the action</p>
 </dd>
 <dt>Raises:</dt>
-<dd><a class="reference internal" href="fife_rpg.html#fife_rpg.exceptions.AlreadyRegisteredError" title="fife_rpg.exceptions.AlreadyRegisteredError"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.exceptions.AlreadyRegisteredError</span></tt></a> 
+<dd><a class="reference internal" href="fife_rpg.html#fife_rpg.exceptions.AlreadyRegisteredError" title="fife_rpg.exceptions.AlreadyRegisteredError"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.exceptions.AlreadyRegisteredError</span></tt></a>
 if the action already exists.</dd>
 </dl>
 </dd></dl>
@@ -140,55 +141,30 @@ if the command already exists.</dd>
 </div>
 <div class="section" id="module-fife_rpg.actions.base">
 <span id="base-module"></span><h2><a class="reference internal" href="fife_rpg.systems.html#module-base" title="base: The base system and functions"><tt class="xref py py-mod docutils literal"><span class="pre">base</span></tt></a> Module<a class="headerlink" href="#module-fife_rpg.actions.base" title="Permalink to this headline">¶</a></h2>
-<p>The base action</p>
+<p>Base class for actions</p>
 <span class="target" id="module-base"></span><dl class="class">
-<dt id="fife_rpg.actions.base.Base">
-<em class="property">class </em><tt class="descclassname">fife_rpg.actions.base.</tt><tt class="descname">Base</tt><big>(</big><em>application</em>, <em>performer</em>, <em>target</em>, <em>commands=None</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/actions/base.html#Base"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.actions.base.Base" title="Permalink to this definition">¶</a></dt>
+<dt id="fife_rpg.actions.base.BaseAction">
+<em class="property">class </em><tt class="descclassname">fife_rpg.actions.base.</tt><tt class="descname">BaseAction</tt><big>(</big><em>application</em>, <em>commands=None</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/actions/base.html#BaseAction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.actions.base.BaseAction" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
-<p>Base Action class, to define the structure</p>
+<p>Base class for actions</p>
 <dl class="docutils">
 <dt>Properties:</dt>
 <dd><p class="first">application: A <a class="reference internal" href="fife_rpg.html#fife_rpg.rpg_application.RPGApplication" title="fife_rpg.rpg_application.RPGApplication"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.rpg_application.RPGApplication</span></tt></a></p>
-<p>performer: The performer initiating the action</p>
-<p>target: The target of the action</p>
 <p>commands: List of additional commands to execute</p>
 <p>registered_as: Class property that sets under what name the class is
 registered</p>
-<p class="last">dependencies: Class property that sets the classes this System depends on</p>
+<p class="last">dependencies: Class property that sets the classes this System depends
+on</p>
 </dd>
 </dl>
-<dl class="classmethod">
-<dt id="fife_rpg.actions.base.Base.check_performer">
-<em class="property">classmethod </em><tt class="descname">check_performer</tt><big>(</big><em>entity</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/actions/base.html#Base.check_performer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.actions.base.Base.check_performer" title="Permalink to this definition">¶</a></dt>
-<dd><p>Checks whether the entity qualifies as an performer for this action</p>
-<dl class="docutils">
-<dt>Args:</dt>
-<dd>entity: The entity to ceck. 
-A <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.rpg_entity.RPGEntity" title="fife_rpg.entities.rpg_entity.RPGEntity"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.entities.rpg_entity.RPGEntity</span></tt></a> instance.</dd>
-</dl>
-<p>Returns: True if the entity qualifes. False otherwise</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="fife_rpg.actions.base.Base.check_target">
-<em class="property">classmethod </em><tt class="descname">check_target</tt><big>(</big><em>entity</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/actions/base.html#Base.check_target"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.actions.base.Base.check_target" title="Permalink to this definition">¶</a></dt>
-<dd><p>Checks whether the entity qualifies as a target for this action</p>
-<dl class="docutils">
-<dt>Args:</dt>
-<dd>entity: The entity to check. 
-A <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.rpg_entity.RPGEntity" title="fife_rpg.entities.rpg_entity.RPGEntity"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.entities.rpg_entity.RPGEntity</span></tt></a> instance.</dd>
-</dl>
-<p>Returns: True if the entity qualifes. False otherwise</p>
-</dd></dl>
-
 <dl class="attribute">
-<dt id="fife_rpg.actions.base.Base.dependencies">
-<tt class="descname">dependencies</tt><em class="property"> = []</em><a class="headerlink" href="#fife_rpg.actions.base.Base.dependencies" title="Permalink to this definition">¶</a></dt>
+<dt id="fife_rpg.actions.base.BaseAction.dependencies">
+<tt class="descname">dependencies</tt><em class="property"> = []</em><a class="headerlink" href="#fife_rpg.actions.base.BaseAction.dependencies" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="fife_rpg.actions.base.Base.execute">
-<tt class="descname">execute</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/fife_rpg/actions/base.html#Base.execute"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.actions.base.Base.execute" title="Permalink to this definition">¶</a></dt>
+<dt id="fife_rpg.actions.base.BaseAction.execute">
+<tt class="descname">execute</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/fife_rpg/actions/base.html#BaseAction.execute"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.actions.base.BaseAction.execute" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute the action</p>
 <dl class="docutils">
 <dt>Raises:</dt>
@@ -197,15 +173,9 @@ if a command is detected that is not registered.</dd>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="fife_rpg.actions.base.Base.menu_text">
-<tt class="descname">menu_text</tt><a class="reference internal" href="_modules/fife_rpg/actions/base.html#Base.menu_text"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.actions.base.Base.menu_text" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the text that is to be displayed in menus</p>
-</dd></dl>
-
 <dl class="classmethod">
-<dt id="fife_rpg.actions.base.Base.register">
-<em class="property">classmethod </em><tt class="descname">register</tt><big>(</big><em>name</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/actions/base.html#Base.register"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.actions.base.Base.register" title="Permalink to this definition">¶</a></dt>
+<dt id="fife_rpg.actions.base.BaseAction.register">
+<em class="property">classmethod </em><tt class="descname">register</tt><big>(</big><em>name</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/actions/base.html#BaseAction.register"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.actions.base.BaseAction.register" title="Permalink to this definition">¶</a></dt>
 <dd><p>Registers the class as an action</p>
 <dl class="docutils">
 <dt>Args:</dt>
@@ -216,8 +186,8 @@ if a command is detected that is not registered.</dd>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="fife_rpg.actions.base.Base.registered_as">
-<tt class="descname">registered_as</tt><em class="property"> = None</em><a class="reference internal" href="_modules/fife_rpg/actions/base.html#Base.registered_as"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.actions.base.Base.registered_as" title="Permalink to this definition">¶</a></dt>
+<dt id="fife_rpg.actions.base.BaseAction.registered_as">
+<tt class="descname">registered_as</tt><em class="property"> = None</em><a class="reference internal" href="_modules/fife_rpg/actions/base.html#BaseAction.registered_as"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.actions.base.BaseAction.registered_as" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -229,7 +199,7 @@ if a command is detected that is not registered.</dd>
 <span class="target" id="module-move_agent"></span><dl class="class">
 <dt id="fife_rpg.actions.move_agent.MoveAgent">
 <em class="property">class </em><tt class="descclassname">fife_rpg.actions.move_agent.</tt><tt class="descname">MoveAgent</tt><big>(</big><em>application</em>, <em>performer</em>, <em>target</em>, <em>commands=None</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/actions/move_agent.html#MoveAgent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.actions.move_agent.MoveAgent" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#fife_rpg.actions.base.Base" title="fife_rpg.actions.base.Base"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.actions.base.Base</span></tt></a></p>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.actions.entity_action.EntityAction</span></tt></p>
 <p>Positions the agent on a new map, layer and/or position</p>
 <dl class="classmethod">
 <dt id="fife_rpg.actions.move_agent.MoveAgent.check_performer">
@@ -237,7 +207,7 @@ if a command is detected that is not registered.</dd>
 <dd><p>Checks whether the entity qualifies as an performer for this action</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd>entity: The entity to ceck. 
+<dd>entity: The entity to ceck.
 A <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.rpg_entity.RPGEntity" title="fife_rpg.entities.rpg_entity.RPGEntity"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.entities.rpg_entity.RPGEntity</span></tt></a> instance.</dd>
 </dl>
 <p>Returns: True if the entity qualifes. False otherwise</p>
@@ -249,7 +219,7 @@ A <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.r
 <dd><p>Checks whether the entity qualifies as a target for this action</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd>entity: The entity to ceck. 
+<dd>entity: The entity to ceck.
 A <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.rpg_entity.RPGEntity" title="fife_rpg.entities.rpg_entity.RPGEntity"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.entities.rpg_entity.RPGEntity</span></tt></a> instance.</dd>
 </dl>
 <p>Returns: True if the entity qualifes. False otherwise</p>
@@ -298,7 +268,7 @@ if a command is detected that is not registered.</dd>
 <span class="target" id="module-close"></span><dl class="class">
 <dt id="fife_rpg.actions.close.Close">
 <em class="property">class </em><tt class="descclassname">fife_rpg.actions.close.</tt><tt class="descname">Close</tt><big>(</big><em>application</em>, <em>performer</em>, <em>target</em>, <em>commands=None</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/actions/close.html#Close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.actions.close.Close" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#fife_rpg.actions.base.Base" title="fife_rpg.actions.base.Base"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.actions.base.Base</span></tt></a></p>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.actions.entity_action.EntityAction</span></tt></p>
 <p>Action for closing lockables</p>
 <dl class="classmethod">
 <dt id="fife_rpg.actions.close.Close.check_performer">
@@ -306,7 +276,7 @@ if a command is detected that is not registered.</dd>
 <dd><p>Checks whether the entity qualifies as an performer for this action</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd>entity: The entity to ceck. 
+<dd>entity: The entity to ceck.
 A <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.rpg_entity.RPGEntity" title="fife_rpg.entities.rpg_entity.RPGEntity"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.entities.rpg_entity.RPGEntity</span></tt></a> instance.</dd>
 </dl>
 <p>Returns: True if the entity qualifes. False otherwise</p>
@@ -318,7 +288,7 @@ A <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.r
 <dd><p>Checks whether the entity qualifies as a target for this action</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd>entity: The entity to ceck. 
+<dd>entity: The entity to ceck.
 A <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.rpg_entity.RPGEntity" title="fife_rpg.entities.rpg_entity.RPGEntity"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.entities.rpg_entity.RPGEntity</span></tt></a> instance.</dd>
 </dl>
 <p>Returns: True if the entity qualifes. False otherwise</p>
@@ -361,7 +331,7 @@ if a command is detected that is not registered.</dd>
 <span class="target" id="module-lock"></span><dl class="class">
 <dt id="fife_rpg.actions.lock.Lock">
 <em class="property">class </em><tt class="descclassname">fife_rpg.actions.lock.</tt><tt class="descname">Lock</tt><big>(</big><em>application</em>, <em>performer</em>, <em>target</em>, <em>commands=None</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/actions/lock.html#Lock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.actions.lock.Lock" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#fife_rpg.actions.base.Base" title="fife_rpg.actions.base.Base"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.actions.base.Base</span></tt></a></p>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.actions.entity_action.EntityAction</span></tt></p>
 <p>Action for locking lockables</p>
 <dl class="classmethod">
 <dt id="fife_rpg.actions.lock.Lock.check_performer">
@@ -369,7 +339,7 @@ if a command is detected that is not registered.</dd>
 <dd><p>Checks whether the entity qualifies as an performer for this action</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd>entity: The entity to ceck. 
+<dd>entity: The entity to ceck.
 A <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.rpg_entity.RPGEntity" title="fife_rpg.entities.rpg_entity.RPGEntity"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.entities.rpg_entity.RPGEntity</span></tt></a> instance.</dd>
 </dl>
 <p>Returns: True if the entity qualifes. False otherwise</p>
@@ -381,7 +351,7 @@ A <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.r
 <dd><p>Checks whether the entity qualifies as a target for this action</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd>entity: The entity to ceck. 
+<dd>entity: The entity to ceck.
 A <a class="reference internal" href="fife_rpg.html#fife_rpg.rpg_application.RPGApplication" title="fife_rpg.rpg_application.RPGApplication"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.rpg_application.RPGApplication</span></tt></a> instance.</dd>
 </dl>
 <p>Returns: True if the entity qualifes. False otherwise</p>
@@ -424,7 +394,7 @@ if a command is detected that is not registered.</dd>
 <span class="target" id="module-look"></span><dl class="class">
 <dt id="fife_rpg.actions.look.Look">
 <em class="property">class </em><tt class="descclassname">fife_rpg.actions.look.</tt><tt class="descname">Look</tt><big>(</big><em>application</em>, <em>performer</em>, <em>target</em>, <em>commands=None</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/actions/look.html#Look"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.actions.look.Look" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#fife_rpg.actions.base.Base" title="fife_rpg.actions.base.Base"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.actions.base.Base</span></tt></a></p>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.actions.entity_action.EntityAction</span></tt></p>
 <p>Action for unlocking lockables</p>
 <dl class="classmethod">
 <dt id="fife_rpg.actions.look.Look.check_performer">
@@ -432,7 +402,7 @@ if a command is detected that is not registered.</dd>
 <dd><p>Checks whether the entity qualifies as an performer for this action</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd>entity: The entity to ceck. 
+<dd>entity: The entity to ceck.
 A <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.rpg_entity.RPGEntity" title="fife_rpg.entities.rpg_entity.RPGEntity"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.entities.rpg_entity.RPGEntity</span></tt></a> instance.</dd>
 </dl>
 <p>Returns: True if the entity qualifes. False otherwise</p>
@@ -444,7 +414,7 @@ A <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.r
 <dd><p>Checks whether the entity qualifies as a target for this action</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd>entity: The entity to ceck. 
+<dd>entity: The entity to ceck.
 A <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.rpg_entity.RPGEntity" title="fife_rpg.entities.rpg_entity.RPGEntity"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.entities.rpg_entity.RPGEntity</span></tt></a> instance.</dd>
 </dl>
 <p>Returns: True if the entity qualifes. False otherwise</p>
@@ -488,7 +458,7 @@ if a command is detected that is not registered.</dd>
 <span class="target" id="module-open"></span><dl class="class">
 <dt id="fife_rpg.actions.open.Open">
 <em class="property">class </em><tt class="descclassname">fife_rpg.actions.open.</tt><tt class="descname">Open</tt><big>(</big><em>application</em>, <em>performer</em>, <em>target</em>, <em>commands=None</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/actions/open.html#Open"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.actions.open.Open" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#fife_rpg.actions.base.Base" title="fife_rpg.actions.base.Base"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.actions.base.Base</span></tt></a></p>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.actions.entity_action.EntityAction</span></tt></p>
 <p>Action for opening unlocked lockables</p>
 <dl class="classmethod">
 <dt id="fife_rpg.actions.open.Open.check_performer">
@@ -496,7 +466,7 @@ if a command is detected that is not registered.</dd>
 <dd><p>Checks whether the entity qualifies as an performer for this action</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd>entity: The entity to ceck. 
+<dd>entity: The entity to ceck.
 A <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.rpg_entity.RPGEntity" title="fife_rpg.entities.rpg_entity.RPGEntity"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.entities.rpg_entity.RPGEntity</span></tt></a> instance.</dd>
 </dl>
 <p>Returns: True if the entity qualifes. False otherwise</p>
@@ -508,7 +478,7 @@ A <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.r
 <dd><p>Checks whether the entity qualifies as a target for this action</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd>entity: The entity to ceck. 
+<dd>entity: The entity to ceck.
 A <a class="reference internal" href="fife_rpg.html#fife_rpg.rpg_application.RPGApplication" title="fife_rpg.rpg_application.RPGApplication"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.rpg_application.RPGApplication</span></tt></a> instance.</dd>
 </dl>
 <p>Returns: True if the entity qualifes. False otherwise</p>
@@ -551,7 +521,7 @@ if a command is detected that is not registered.</dd>
 <span class="target" id="module-pick_up"></span><dl class="class">
 <dt id="fife_rpg.actions.pick_up.PickUp">
 <em class="property">class </em><tt class="descclassname">fife_rpg.actions.pick_up.</tt><tt class="descname">PickUp</tt><big>(</big><em>application</em>, <em>performer</em>, <em>target</em>, <em>commands=None</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/actions/pick_up.html#PickUp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.actions.pick_up.PickUp" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#fife_rpg.actions.base.Base" title="fife_rpg.actions.base.Base"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.actions.base.Base</span></tt></a></p>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.actions.entity_action.EntityAction</span></tt></p>
 <p>Action for picking up items from a map</p>
 <dl class="classmethod">
 <dt id="fife_rpg.actions.pick_up.PickUp.check_performer">
@@ -559,7 +529,7 @@ if a command is detected that is not registered.</dd>
 <dd><p>Checks whether the entity qualifies as an performer for this action</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd>entity: The entity to ceck. 
+<dd>entity: The entity to ceck.
 A <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.rpg_entity.RPGEntity" title="fife_rpg.entities.rpg_entity.RPGEntity"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.entities.rpg_entity.RPGEntity</span></tt></a> instance.</dd>
 </dl>
 <p>Returns: True if the entity qualifes. False otherwise</p>
@@ -571,7 +541,7 @@ A <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.r
 <dd><p>Checks whether the entity qualifies as a target for this action</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd>entity: The entity to ceck. 
+<dd>entity: The entity to ceck.
 A <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.rpg_entity.RPGEntity" title="fife_rpg.entities.rpg_entity.RPGEntity"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.entities.rpg_entity.RPGEntity</span></tt></a> instance.</dd>
 </dl>
 <p>Returns: True if the entity qualifes. False otherwise</p>
@@ -620,7 +590,7 @@ if a command is detected that is not registered.</dd>
 <span class="target" id="module-read"></span><dl class="class">
 <dt id="fife_rpg.actions.read.Read">
 <em class="property">class </em><tt class="descclassname">fife_rpg.actions.read.</tt><tt class="descname">Read</tt><big>(</big><em>application</em>, <em>performer</em>, <em>target</em>, <em>commands=None</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/actions/read.html#Read"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.actions.read.Read" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#fife_rpg.actions.base.Base" title="fife_rpg.actions.base.Base"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.actions.base.Base</span></tt></a></p>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.actions.entity_action.EntityAction</span></tt></p>
 <p>Prints the text of a readable</p>
 <dl class="classmethod">
 <dt id="fife_rpg.actions.read.Read.check_performer">
@@ -628,7 +598,7 @@ if a command is detected that is not registered.</dd>
 <dd><p>Checks whether the entity qualifies as an performer for this action</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd>entity: The entity to ceck. 
+<dd>entity: The entity to ceck.
 A <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.rpg_entity.RPGEntity" title="fife_rpg.entities.rpg_entity.RPGEntity"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.entities.rpg_entity.RPGEntity</span></tt></a> instance.</dd>
 </dl>
 <p>Returns: True if the entity qualifes. False otherwise</p>
@@ -640,7 +610,7 @@ A <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.r
 <dd><p>Checks whether the entity qualifies as a target for this action</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd>entity: The entity to ceck. 
+<dd>entity: The entity to ceck.
 A <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.rpg_entity.RPGEntity" title="fife_rpg.entities.rpg_entity.RPGEntity"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.entities.rpg_entity.RPGEntity</span></tt></a> instance.</dd>
 </dl>
 <p>Returns: True if the entity qualifes. False otherwise</p>
@@ -685,7 +655,7 @@ if a command is detected that is not registered.</dd>
 <span class="target" id="module-unlock"></span><dl class="class">
 <dt id="fife_rpg.actions.unlock.Unlock">
 <em class="property">class </em><tt class="descclassname">fife_rpg.actions.unlock.</tt><tt class="descname">Unlock</tt><big>(</big><em>application</em>, <em>performer</em>, <em>target</em>, <em>commands=None</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/actions/unlock.html#Unlock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.actions.unlock.Unlock" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#fife_rpg.actions.base.Base" title="fife_rpg.actions.base.Base"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.actions.base.Base</span></tt></a></p>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.actions.entity_action.EntityAction</span></tt></p>
 <p>Action for unlocking lockables</p>
 <dl class="classmethod">
 <dt id="fife_rpg.actions.unlock.Unlock.check_performer">
@@ -693,7 +663,7 @@ if a command is detected that is not registered.</dd>
 <dd><p>Checks whether the entity qualifies as an performer for this action</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd>entity: The entity to ceck. 
+<dd>entity: The entity to ceck.
 A <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.rpg_entity.RPGEntity" title="fife_rpg.entities.rpg_entity.RPGEntity"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.entities.rpg_entity.RPGEntity</span></tt></a> instance.</dd>
 </dl>
 <p>Returns: True if the entity qualifes. False otherwise</p>
@@ -705,7 +675,7 @@ A <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.r
 <dd><p>Checks whether the entity qualifies as a target for this action</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd>entity: The entity to ceck. 
+<dd>entity: The entity to ceck.
 A <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.rpg_entity.RPGEntity" title="fife_rpg.entities.rpg_entity.RPGEntity"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.entities.rpg_entity.RPGEntity</span></tt></a> instance.</dd>
 </dl>
 <p>Returns: True if the entity qualifes. False otherwise</p>
@@ -811,7 +781,7 @@ if a command is detected that is not registered.</dd>
         <li class="right" >
           <a href="fife_rpg.html" title="fife_rpg Package"
              >previous</a> |</li>
-        <li><a href="index.html">fife-rpg 0.1c documentation</a> &raquo;</li>
+        <li><a href="index.html">fife-rpg 0.2 documentation</a> &raquo;</li>
           <li><a href="modules.html" >fife_rpg</a> &raquo;</li>
           <li><a href="fife_rpg.html" >fife_rpg Package</a> &raquo;</li> 
       </ul>

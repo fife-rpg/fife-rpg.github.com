@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>fife_rpg.actions.open &mdash; fife-rpg 0.1c documentation</title>
+    <title>fife_rpg.actions.open &mdash; fife-rpg 0.2 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.1c',
+        VERSION:     '0.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="top" title="fife-rpg 0.1c documentation" href="../../../index.html" />
+    <link rel="top" title="fife-rpg 0.2 documentation" href="../../../index.html" />
     <link rel="up" title="Module code" href="../../index.html" /> 
   </head>
   <body>
@@ -38,7 +38,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">fife-rpg 0.1c documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">fife-rpg 0.2 documentation</a> &raquo;</li>
           <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
@@ -54,12 +54,12 @@
 <span class="c">#   it under the terms of the GNU General Public License as published by</span>
 <span class="c">#   the Free Software Foundation, either version 3 of the License, or</span>
 <span class="c">#   (at your option) any later version.</span>
-<span class="c">#   </span>
+<span class="c">#</span>
 <span class="c">#   This program is distributed in the hope that it will be useful,</span>
 <span class="c">#   but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
 <span class="c">#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
 <span class="c">#   GNU General Public License for more details.</span>
-<span class="c">#   </span>
+<span class="c">#</span>
 <span class="c">#   You should have received a copy of the GNU General Public License</span>
 <span class="c">#   along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
 
@@ -72,58 +72,59 @@
 <span class="sd">.. moduleauthor:: Karsten Bock &lt;KarstenBock@gmx.net&gt;</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">fife_rpg.actions.base</span> <span class="kn">import</span> <span class="n">Base</span>
+<span class="kn">from</span> <span class="nn">fife_rpg.actions.entity_action</span> <span class="kn">import</span> <span class="n">EntityAction</span>
 <span class="kn">from</span> <span class="nn">fife_rpg.components.lockable</span> <span class="kn">import</span> <span class="n">Lockable</span>
 <span class="kn">from</span> <span class="nn">fife_rpg.components.lockable</span> <span class="kn">import</span> <span class="n">open_lock</span>
 <span class="kn">from</span> <span class="nn">fife_rpg.components.fifeagent</span> <span class="kn">import</span> <span class="n">FifeAgent</span>
 
-<div class="viewcode-block" id="Open"><a class="viewcode-back" href="../../../fife_rpg.actions.html#fife_rpg.actions.open.Open">[docs]</a><span class="k">class</span> <span class="nc">Open</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Open"><a class="viewcode-back" href="../../../fife_rpg.actions.html#fife_rpg.actions.open.Open">[docs]</a><span class="k">class</span> <span class="nc">Open</span><span class="p">(</span><span class="n">EntityAction</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Action for opening unlocked lockables&quot;&quot;&quot;</span>
 
     <span class="n">dependencies</span> <span class="o">=</span> <span class="p">[</span><span class="n">Lockable</span><span class="p">]</span>
-        
+
 <div class="viewcode-block" id="Open.execute"><a class="viewcode-back" href="../../../fife_rpg.actions.html#fife_rpg.actions.open.Open.execute">[docs]</a>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Execute the action</span>
-<span class="sd">        </span>
+
 <span class="sd">        Raises:</span>
 <span class="sd">            :class:`fife_rpg.exceptions.NoSuchCommandError`</span>
 <span class="sd">            if a command is detected that is not registered.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">lockable</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">target</span><span class="p">,</span> <span class="n">Lockable</span><span class="o">.</span><span class="n">registered_as</span><span class="p">)</span>        
+        <span class="n">lockable</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">target</span><span class="p">,</span> <span class="n">Lockable</span><span class="o">.</span><span class="n">registered_as</span><span class="p">)</span>
         <span class="n">open_lock</span><span class="p">(</span><span class="n">lockable</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">FifeAgent</span><span class="o">.</span><span class="n">registered_as</span><span class="p">:</span>
             <span class="n">fifeagent_data</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">target</span><span class="p">,</span> <span class="n">FifeAgent</span><span class="o">.</span><span class="n">registered_as</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">fifeagent_data</span><span class="p">:</span>
                 <span class="n">behaviour</span> <span class="o">=</span> <span class="n">fifeagent_data</span><span class="o">.</span><span class="n">behaviour</span>
                 <span class="n">behaviour</span><span class="o">.</span><span class="n">animate</span><span class="p">(</span><span class="n">lockable</span><span class="o">.</span><span class="n">open_animation</span><span class="p">)</span>
-                <span class="n">behaviour</span><span class="o">.</span><span class="n">queue_animation</span><span class="p">(</span><span class="n">lockable</span><span class="o">.</span><span class="n">opened_animation</span><span class="p">,</span> 
-                                          <span class="n">repeating</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>                
-                      
-        <span class="n">Base</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        </div>
+                <span class="n">behaviour</span><span class="o">.</span><span class="n">queue_animation</span><span class="p">(</span><span class="n">lockable</span><span class="o">.</span><span class="n">opened_animation</span><span class="p">,</span>
+                                          <span class="n">repeating</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+        <span class="n">EntityAction</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+</div>
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="Open.check_performer"><a class="viewcode-back" href="../../../fife_rpg.actions.html#fife_rpg.actions.open.Open.check_performer">[docs]</a>    <span class="k">def</span> <span class="nf">check_performer</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">entity</span><span class="p">):</span> <span class="c">#pylint: disable-msg=W0613</span>
+<div class="viewcode-block" id="Open.check_performer"><a class="viewcode-back" href="../../../fife_rpg.actions.html#fife_rpg.actions.open.Open.check_performer">[docs]</a>    <span class="k">def</span> <span class="nf">check_performer</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">entity</span><span class="p">):</span>  <span class="c"># pylint: disable-msg=W0613</span>
         <span class="sd">&quot;&quot;&quot;Checks whether the entity qualifies as an performer for this action</span>
-<span class="sd">        </span>
+
 <span class="sd">        Args:</span>
-<span class="sd">            entity: The entity to ceck. </span>
+<span class="sd">            entity: The entity to ceck.</span>
 <span class="sd">            A :class:`fife_rpg.entities.rpg_entity.RPGEntity` instance.</span>
 
 <span class="sd">        Returns: True if the entity qualifes. False otherwise</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">True</span>
-    </div>
+</div>
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="Open.check_target"><a class="viewcode-back" href="../../../fife_rpg.actions.html#fife_rpg.actions.open.Open.check_target">[docs]</a>    <span class="k">def</span> <span class="nf">check_target</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">entity</span><span class="p">):</span> <span class="c">#pylint: disable-msg=W0613</span>
+<div class="viewcode-block" id="Open.check_target"><a class="viewcode-back" href="../../../fife_rpg.actions.html#fife_rpg.actions.open.Open.check_target">[docs]</a>    <span class="k">def</span> <span class="nf">check_target</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">entity</span><span class="p">):</span>  <span class="c"># pylint: disable-msg=W0613</span>
         <span class="sd">&quot;&quot;&quot;Checks whether the entity qualifies as a target for this action</span>
-<span class="sd">        </span>
+
 <span class="sd">        Args:</span>
-<span class="sd">            entity: The entity to ceck. </span>
+<span class="sd">            entity: The entity to ceck.</span>
 <span class="sd">            A :class:`fife_rpg.rpg_application.RPGApplication` instance.</span>
 
 <span class="sd">        Returns: True if the entity qualifes. False otherwise</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">lockable</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">Lockable</span><span class="o">.</span><span class="n">registered_as</span><span class="p">)</span> 
+        <span class="n">lockable</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">Lockable</span><span class="o">.</span><span class="n">registered_as</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">lockable</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">lockable</span><span class="o">.</span><span class="n">locked</span> <span class="ow">and</span> <span class="n">lockable</span><span class="o">.</span><span class="n">closed</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">True</span>
         <span class="k">return</span> <span class="bp">False</span>
@@ -172,7 +173,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">fife-rpg 0.1c documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">fife-rpg 0.2 documentation</a> &raquo;</li>
           <li><a href="../../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>

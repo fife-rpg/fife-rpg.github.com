@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>fife_rpg.actions.action_manager &mdash; fife-rpg 0.1c documentation</title>
+    <title>fife_rpg.actions.action_manager &mdash; fife-rpg 0.2 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.1c',
+        VERSION:     '0.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="top" title="fife-rpg 0.1c documentation" href="../../../index.html" />
+    <link rel="top" title="fife-rpg 0.2 documentation" href="../../../index.html" />
     <link rel="up" title="Module code" href="../../index.html" /> 
   </head>
   <body>
@@ -38,7 +38,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">fife-rpg 0.1c documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">fife-rpg 0.2 documentation</a> &raquo;</li>
           <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
@@ -67,7 +67,7 @@
 
 <span class="sd">&quot;&quot;&quot;This module manages the actions of fife-rpg.</span>
 
-<span class="sd">An action is a object that can be executed later. This can be used, </span>
+<span class="sd">An action is a object that can be executed later. This can be used,</span>
 <span class="sd">for example, in menus,</span>
 
 <span class="sd">.. module:: action</span>
@@ -83,60 +83,70 @@
 <span class="n">_ACTIONS</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="n">_COMMANDS</span> <span class="o">=</span> <span class="p">{}</span>
 
+
 <div class="viewcode-block" id="get_actions"><a class="viewcode-back" href="../../../fife_rpg.actions.html#fife_rpg.actions.action_manager.get_actions">[docs]</a><span class="k">def</span> <span class="nf">get_actions</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;Returns the registered actions&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">copy</span><span class="p">(</span><span class="n">_ACTIONS</span><span class="p">)</span>
+
 </div>
 <div class="viewcode-block" id="get_possible_actions"><a class="viewcode-back" href="../../../fife_rpg.actions.html#fife_rpg.actions.action_manager.get_possible_actions">[docs]</a><span class="k">def</span> <span class="nf">get_possible_actions</span><span class="p">(</span><span class="n">performer</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Get the actions that can be performed with the performer and the target</span>
-<span class="sd">    </span>
+    <span class="sd">&quot;&quot;&quot;Get the entity actions that can be performed with the performer and the</span>
+<span class="sd">    target</span>
+
 <span class="sd">    Args:</span>
 <span class="sd">        performer: The performer initiating the action</span>
-<span class="sd">                </span>
+
 <span class="sd">        target: The target of the action</span>
-<span class="sd">    </span>
+
 <span class="sd">    Returns:</span>
-<span class="sd">        A dictionary with the actions that can be performed using the performer </span>
+<span class="sd">        A dictionary with the actions that can be performed using the performer</span>
 <span class="sd">        and the target</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">fife_rpg.actions.entity_action</span> <span class="kn">import</span> <span class="n">EntityAction</span>
     <span class="n">actions</span> <span class="o">=</span> <span class="n">get_actions</span><span class="p">()</span>
     <span class="n">possible_actions</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">action</span> <span class="ow">in</span> <span class="n">actions</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">action</span><span class="p">,</span> <span class="n">EntityAction</span><span class="p">):</span>
+            <span class="k">continue</span>
         <span class="k">if</span> <span class="n">action</span><span class="o">.</span><span class="n">check_performer</span><span class="p">(</span><span class="n">performer</span><span class="p">)</span> <span class="ow">and</span> <span class="n">action</span><span class="o">.</span><span class="n">check_target</span><span class="p">(</span><span class="n">target</span><span class="p">):</span>
             <span class="n">possible_actions</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">action</span>
     <span class="k">return</span> <span class="n">possible_actions</span>
+
 </div>
 <div class="viewcode-block" id="register_action"><a class="viewcode-back" href="../../../fife_rpg.actions.html#fife_rpg.actions.action_manager.register_action">[docs]</a><span class="k">def</span> <span class="nf">register_action</span><span class="p">(</span><span class="n">action_name</span><span class="p">,</span> <span class="n">action_class</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Registers an action</span>
-<span class="sd">    </span>
+
 <span class="sd">    Args:</span>
 <span class="sd">        action_name: The name of the action_class</span>
-<span class="sd">        </span>
+
 <span class="sd">        action_class: The class of the action</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        :class:`fife_rpg.exceptions.AlreadyRegisteredError` </span>
+<span class="sd">        :class:`fife_rpg.exceptions.AlreadyRegisteredError`</span>
 <span class="sd">        if the action already exists.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">action_name</span> <span class="ow">in</span> <span class="n">_ACTIONS</span><span class="p">:</span>
         <span class="n">_ACTIONS</span><span class="p">[</span><span class="n">action_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">action_class</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">AlreadyRegisteredError</span><span class="p">(</span><span class="n">action_name</span><span class="p">,</span>  <span class="s">&quot;action&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">AlreadyRegisteredError</span><span class="p">(</span><span class="n">action_name</span><span class="p">,</span> <span class="s">&quot;action&quot;</span><span class="p">)</span>
+
 </div>
 <div class="viewcode-block" id="clear_actions"><a class="viewcode-back" href="../../../fife_rpg.actions.html#fife_rpg.actions.action_manager.clear_actions">[docs]</a><span class="k">def</span> <span class="nf">clear_actions</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;Removes all actions&quot;&quot;&quot;</span>
     <span class="n">_ACTIONS</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
-    </div>
+
+</div>
 <div class="viewcode-block" id="get_commands"><a class="viewcode-back" href="../../../fife_rpg.actions.html#fife_rpg.actions.action_manager.get_commands">[docs]</a><span class="k">def</span> <span class="nf">get_commands</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;Returns the registered commands&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">copy</span><span class="p">(</span><span class="n">_COMMANDS</span><span class="p">)</span>
+
 </div>
 <div class="viewcode-block" id="register_command"><a class="viewcode-back" href="../../../fife_rpg.actions.html#fife_rpg.actions.action_manager.register_command">[docs]</a><span class="k">def</span> <span class="nf">register_command</span><span class="p">(</span><span class="n">command_name</span><span class="p">,</span> <span class="n">function</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Registers an command</span>
-<span class="sd">    </span>
+
 <span class="sd">    Args:</span>
 <span class="sd">        command_name: The name of the command_class</span>
-<span class="sd">        </span>
+
 <span class="sd">        function: The function to execute</span>
 
 <span class="sd">    Raises:</span>
@@ -147,6 +157,7 @@
         <span class="n">_COMMANDS</span><span class="p">[</span><span class="n">command_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">function</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">AlreadyRegisteredError</span><span class="p">(</span><span class="n">command_name</span><span class="p">,</span> <span class="s">&quot;command&quot;</span><span class="p">)</span>
+
 </div>
 <div class="viewcode-block" id="clear_commands"><a class="viewcode-back" href="../../../fife_rpg.actions.html#fife_rpg.actions.action_manager.clear_commands">[docs]</a><span class="k">def</span> <span class="nf">clear_commands</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;Removes all commands&quot;&quot;&quot;</span>
@@ -184,7 +195,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">fife-rpg 0.1c documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">fife-rpg 0.2 documentation</a> &raquo;</li>
           <li><a href="../../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>

@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>fife_rpg.behaviours.behaviour_manager &mdash; fife-rpg 0.1c documentation</title>
+    <title>fife_rpg.behaviours.behaviour_manager &mdash; fife-rpg 0.2 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.1c',
+        VERSION:     '0.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="top" title="fife-rpg 0.1c documentation" href="../../../index.html" />
+    <link rel="top" title="fife-rpg 0.2 documentation" href="../../../index.html" />
     <link rel="up" title="Module code" href="../../index.html" /> 
   </head>
   <body>
@@ -38,7 +38,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">fife-rpg 0.1c documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">fife-rpg 0.2 documentation</a> &raquo;</li>
           <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
@@ -78,12 +78,13 @@
 
 <span class="n">_BEHAVIOURS</span> <span class="o">=</span> <span class="p">{}</span>
 
+
 <div class="viewcode-block" id="register_behaviour"><a class="viewcode-back" href="../../../fife_rpg.behaviours.html#fife_rpg.behaviours.behaviour_manager.register_behaviour">[docs]</a><span class="k">def</span> <span class="nf">register_behaviour</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">behaviour</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Registers a behaviour</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        name: The name of the behaviour</span>
-<span class="sd">        </span>
+
 <span class="sd">        behaviour: The behaviour class</span>
 
 <span class="sd">    Raises:</span>
@@ -93,10 +94,12 @@
         <span class="k">raise</span> <span class="n">AlreadyRegisteredError</span><span class="p">(</span><span class="s">&quot;behaviour&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">_BEHAVIOURS</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">behaviour</span>
+
 </div>
 <div class="viewcode-block" id="get_behaviours"><a class="viewcode-back" href="../../../fife_rpg.behaviours.html#fife_rpg.behaviours.behaviour_manager.get_behaviours">[docs]</a><span class="k">def</span> <span class="nf">get_behaviours</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;Returns a copy of the behaviour dictionary&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">copy</span><span class="p">(</span><span class="n">_BEHAVIOURS</span><span class="p">)</span>
+
 </div>
 <div class="viewcode-block" id="get_behaviour"><a class="viewcode-back" href="../../../fife_rpg.behaviours.html#fife_rpg.behaviours.behaviour_manager.get_behaviour">[docs]</a><span class="k">def</span> <span class="nf">get_behaviour</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Returns the behaviour with the given name&quot;&quot;&quot;</span>
@@ -136,7 +139,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">fife-rpg 0.1c documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">fife-rpg 0.2 documentation</a> &raquo;</li>
           <li><a href="../../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>

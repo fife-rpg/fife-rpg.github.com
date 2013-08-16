@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>fife_rpg.systems.character_statistics &mdash; fife-rpg 0.1c documentation</title>
+    <title>fife_rpg.systems.character_statistics &mdash; fife-rpg 0.2 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.1c',
+        VERSION:     '0.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="top" title="fife-rpg 0.1c documentation" href="../../../index.html" />
+    <link rel="top" title="fife-rpg 0.2 documentation" href="../../../index.html" />
     <link rel="up" title="Module code" href="../../index.html" /> 
   </head>
   <body>
@@ -38,7 +38,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">fife-rpg 0.1c documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">fife-rpg 0.2 documentation</a> &raquo;</li>
           <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
@@ -54,12 +54,12 @@
 <span class="c">#   it under the terms of the GNU General Public License as published by</span>
 <span class="c">#   the Free Software Foundation, either version 3 of the License, or</span>
 <span class="c">#   (at your option) any later version.</span>
-<span class="c">#   </span>
+<span class="c">#</span>
 <span class="c">#   This program is distributed in the hope that it will be useful,</span>
 <span class="c">#   but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
 <span class="c">#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
 <span class="c">#   GNU General Public License for more details.</span>
-<span class="c">#   </span>
+<span class="c">#</span>
 <span class="c">#   You should have received a copy of the GNU General Public License</span>
 <span class="c">#   along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
 
@@ -71,9 +71,6 @@
 <span class="sd">    :synopsis: Manages the character statistics</span>
 <span class="sd">.. moduleauthor:: Karsten Bock &lt;KarstenBock@gmx.net&gt;</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">import</span> <span class="nn">math</span>
-<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span>
-
 <span class="kn">import</span> <span class="nn">yaml</span>
 
 <span class="kn">from</span> <span class="nn">fife_rpg.systems</span> <span class="kn">import</span> <span class="n">Base</span>
@@ -81,7 +78,8 @@
 <span class="kn">from</span> <span class="nn">fife_rpg.components.character_statistics</span> <span class="kn">import</span> <span class="n">CharacterStatistics</span>
 <span class="kn">from</span> <span class="nn">fife_rpg.exceptions</span> <span class="kn">import</span> <span class="n">AlreadyRegisteredError</span>
 
-<div class="viewcode-block" id="getStatCost"><a class="viewcode-back" href="../../../fife_rpg.systems.html#fife_rpg.systems.character_statistics.getStatCost">[docs]</a><span class="k">def</span> <span class="nf">getStatCost</span><span class="p">(</span><span class="n">offset</span><span class="p">):</span>
+
+<div class="viewcode-block" id="get_stat_cost"><a class="viewcode-back" href="../../../fife_rpg.systems.html#fife_rpg.systems.character_statistics.get_stat_cost">[docs]</a><span class="k">def</span> <span class="nf">get_stat_cost</span><span class="p">(</span><span class="n">offset</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Gets and returns the cost to increase stat based on the offset&quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="n">offset</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
@@ -106,32 +104,34 @@
     <span class="k">elif</span> <span class="n">offset</span> <span class="o">&lt;</span> <span class="mi">41</span><span class="p">:</span>
         <span class="k">return</span> <span class="mi">9</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="mi">10</span> 
+        <span class="k">return</span> <span class="mi">10</span>
+
 </div>
 <div class="viewcode-block" id="NoSuchStatisticError"><a class="viewcode-back" href="../../../fife_rpg.systems.html#fife_rpg.systems.character_statistics.NoSuchStatisticError">[docs]</a><span class="k">class</span> <span class="nc">NoSuchStatisticError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Exception that gets raised when a statistic was tried to be accessed that</span>
-<span class="sd">    does not exist</span>
-<span class="sd">    </span>
-<span class="sd">    Properties:        </span>
+    <span class="sd">&quot;&quot;&quot;Exception that gets raised when a statistic was tried to be accessed</span>
+<span class="sd">    that does not exist</span>
+
+<span class="sd">    Properties:</span>
 <span class="sd">        name: The name of the statistic</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>       
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
         <span class="ne">Exception</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
-    
+
     <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns the message of the Exception&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s">&quot;There is no </span><span class="si">%s</span><span class="s"> statistic&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-    </div>
+
+</div>
 <div class="viewcode-block" id="NoStatisticComponentError"><a class="viewcode-back" href="../../../fife_rpg.systems.html#fife_rpg.systems.character_statistics.NoStatisticComponentError">[docs]</a><span class="k">class</span> <span class="nc">NoStatisticComponentError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Exception that gets raised when an entity does not have a</span>
 <span class="sd">    character_statistics component</span>
-<span class="sd">    </span>
+
 <span class="sd">    Properties:</span>
 <span class="sd">        entity: A :class:`fife_rpg.entities.rpg_entity.RPGEntity`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity</span><span class="p">):</span>
         <span class="ne">Exception</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">entity</span> <span class="o">=</span> <span class="n">entity</span>
@@ -140,64 +140,67 @@
         <span class="sd">&quot;&quot;&quot;Returns the message of the Exception&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">(</span><span class="s">&quot;The </span><span class="si">%s</span><span class="s"> entity does not have character statistics&quot;</span> <span class="o">%</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">entity</span><span class="o">.</span><span class="n">identifier</span><span class="p">)</span>
-        </div>
+
+</div>
 <div class="viewcode-block" id="Statistic"><a class="viewcode-back" href="../../../fife_rpg.systems.html#fife_rpg.systems.character_statistics.Statistic">[docs]</a><span class="k">class</span> <span class="nc">Statistic</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Class to store the data about a statistic</span>
-<span class="sd">    </span>
+
 <span class="sd">    Properties:</span>
 <span class="sd">        name: The internal name of the statistic</span>
-<span class="sd">        </span>
+
 <span class="sd">        view_name: The displayed name of the statistic</span>
-<span class="sd">        </span>
+
 <span class="sd">        description: The description of the statistic</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">view_name</span><span class="p">,</span> <span class="n">description</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">view_name</span> <span class="o">=</span> <span class="n">view_name</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">description</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">description</span>
+
 </div>
 <div class="viewcode-block" id="CalculatedStatistic"><a class="viewcode-back" href="../../../fife_rpg.systems.html#fife_rpg.systems.character_statistics.CalculatedStatistic">[docs]</a><span class="k">class</span> <span class="nc">CalculatedStatistic</span><span class="p">(</span><span class="n">Statistic</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Class to store the data about a calculated statistic</span>
-<span class="sd">    </span>
+
 <span class="sd">    Properties:</span>
 <span class="sd">        name: The internal name of the statistic</span>
-<span class="sd">        </span>
+
 <span class="sd">        view_name: The displayed name of the statistic</span>
-<span class="sd">        </span>
+
 <span class="sd">        influences: The other statistics that influence this</span>
-<span class="sd">        </span>
+
 <span class="sd">        description: The description of the statistic</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">view_name</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">influences</span><span class="p">):</span>
         <span class="n">Statistic</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">view_name</span><span class="p">,</span> <span class="n">description</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">influences</span> <span class="o">=</span> <span class="n">influences</span>
+
 </div>
 <div class="viewcode-block" id="CharacterStatisticSystem"><a class="viewcode-back" href="../../../fife_rpg.systems.html#fife_rpg.systems.character_statistics.CharacterStatisticSystem">[docs]</a><span class="k">class</span> <span class="nc">CharacterStatisticSystem</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;The game environment system manages what variables and functions are </span>
+    <span class="sd">&quot;&quot;&quot;The game environment system manages what variables and functions are</span>
 <span class="sd">    available to scripts.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Properties:</span>
 <span class="sd">        primary_statistics: Dictionary holding the primary statistics</span>
-<span class="sd">        </span>
+
 <span class="sd">        secondary_statistics: Dictionary holfing the secondary statistics</span>
-<span class="sd">        </span>
+
 <span class="sd">        min_stat_value: Class property that determines the minimum value a</span>
 <span class="sd">        statistic can have</span>
-<span class="sd">        </span>
+
 <span class="sd">        default_stat_value: Class property that determines the average value of</span>
 <span class="sd">        the statistic. This is used for offset calculation.</span>
-<span class="sd">        </span>
+
 <span class="sd">        max_stat_value: Class property that determines the maximum value a</span>
 <span class="sd">        statistic can have</span>
-<span class="sd">        </span>
+
 <span class="sd">        dependencies: List of class this system depends on</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">min_stat_value</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">default_stat_value</span> <span class="o">=</span> <span class="mi">50</span>
     <span class="n">max_stat_value</span> <span class="o">=</span> <span class="mi">100</span>
-    
+
     <span class="n">dependencies</span> <span class="o">=</span> <span class="p">[</span><span class="n">CharacterStatistics</span><span class="p">]</span>
 
     <span class="nd">@classmethod</span>
@@ -210,47 +213,49 @@
 <span class="sd">            True if the system was registered, False if not.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">(</span><span class="nb">super</span><span class="p">(</span><span class="n">CharacterStatisticSystem</span><span class="p">,</span> <span class="n">cls</span><span class="p">)</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
-        </div>
+</div>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">Base</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">primary_statistics</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">secondary_statistics</span> <span class="o">=</span> <span class="p">{}</span>
-    
+
 <div class="viewcode-block" id="CharacterStatisticSystem.add_primary_statistic"><a class="viewcode-back" href="../../../fife_rpg.systems.html#fife_rpg.systems.character_statistics.CharacterStatisticSystem.add_primary_statistic">[docs]</a>    <span class="k">def</span> <span class="nf">add_primary_statistic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">view_name</span><span class="p">,</span> <span class="n">description</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Adds a primary statistic to the system</span>
-<span class="sd">        </span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            name: Short internal name for the statistic</span>
-<span class="sd">            </span>
+
 <span class="sd">            view_name: Name that is displayed</span>
-<span class="sd">            </span>
+
 <span class="sd">            description: Text that describes the statistic</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">primary_statistics</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">primary_statistics</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">AlreadyRegisteredError</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="s">&quot;Statistic&quot;</span><span class="p">)</span>
         <span class="n">statistic</span> <span class="o">=</span> <span class="n">Statistic</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">view_name</span><span class="p">,</span> <span class="n">description</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">primary_statistics</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">statistic</span>
-    </div>
-<div class="viewcode-block" id="CharacterStatisticSystem.add_secondary_statistic"><a class="viewcode-back" href="../../../fife_rpg.systems.html#fife_rpg.systems.character_statistics.CharacterStatisticSystem.add_secondary_statistic">[docs]</a>    <span class="k">def</span> <span class="nf">add_secondary_statistic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">view_name</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">influences</span><span class="p">):</span>
+</div>
+<div class="viewcode-block" id="CharacterStatisticSystem.add_secondary_statistic"><a class="viewcode-back" href="../../../fife_rpg.systems.html#fife_rpg.systems.character_statistics.CharacterStatisticSystem.add_secondary_statistic">[docs]</a>    <span class="k">def</span> <span class="nf">add_secondary_statistic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">view_name</span><span class="p">,</span>
+                                <span class="n">description</span><span class="p">,</span> <span class="n">influences</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Adds a secondary statistic to the system</span>
-<span class="sd">        </span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            name: Short internal name for the statistic</span>
-<span class="sd">            </span>
+
 <span class="sd">            view_name: Name that is displayed</span>
-<span class="sd">            </span>
+
 <span class="sd">            description: Text that describes the statistic</span>
-<span class="sd">            </span>
+
 <span class="sd">            influences: The other statistics that influence this</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">secondary_statistics</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">secondary_statistics</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">AlreadyRegisteredError</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="s">&quot;Statistic&quot;</span><span class="p">)</span>
-        <span class="n">statistic</span> <span class="o">=</span> <span class="n">CalculatedStatistic</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">view_name</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">influences</span><span class="p">)</span>
+        <span class="n">statistic</span> <span class="o">=</span> <span class="n">CalculatedStatistic</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">view_name</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span>
+                                        <span class="n">influences</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">secondary_statistics</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">statistic</span>
-    </div>
+</div>
 <div class="viewcode-block" id="CharacterStatisticSystem.load_statistics_from_file"><a class="viewcode-back" href="../../../fife_rpg.systems.html#fife_rpg.systems.character_statistics.CharacterStatisticSystem.load_statistics_from_file">[docs]</a>    <span class="k">def</span> <span class="nf">load_statistics_from_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Clears the statistics and populates them from a file</span>
-<span class="sd">        </span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            filename: The path to the file</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -269,44 +274,44 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">add_secondary_statistic</span><span class="p">(</span><span class="n">name</span><span class="p">,</span>
                                          <span class="n">view_name</span><span class="p">,</span>
                                          <span class="n">desc</span><span class="p">,</span>
-                                         <span class="n">influences</span><span class="p">)</span>        
-    </div>
+                                         <span class="n">influences</span><span class="p">)</span>
+</div>
 <div class="viewcode-block" id="CharacterStatisticSystem.get_statistic_value"><a class="viewcode-back" href="../../../fife_rpg.systems.html#fife_rpg.systems.character_statistics.CharacterStatisticSystem.get_statistic_value">[docs]</a>    <span class="k">def</span> <span class="nf">get_statistic_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity</span><span class="p">,</span> <span class="n">statistic</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the entities value of the given statistic</span>
-<span class="sd">        </span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            entity: An :class:`fife_rpg.entities.rpg_entity.RPGEntity` or the</span>
 <span class="sd">            name of the entity</span>
-<span class="sd">            </span>
+
 <span class="sd">            statistic: The internal name of the statistic</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="n">entity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">world</span><span class="o">.</span><span class="n">get_entity</span><span class="p">(</span><span class="n">entity</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">CharacterStatistics</span><span class="o">.</span><span class="n">registered_as</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="n">NoStatisticComponentError</span><span class="p">(</span><span class="n">entity</span><span class="p">)</span>      
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">primary_statistics</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="n">statistic</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">NoStatisticComponentError</span><span class="p">(</span><span class="n">entity</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">statistic</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">primary_statistics</span><span class="p">:</span>
             <span class="n">statistics</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">CharacterStatistics</span><span class="o">.</span><span class="n">registered_as</span><span class="p">)</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">statistics</span><span class="o">.</span><span class="n">primary_stats</span><span class="p">[</span><span class="n">statistic</span><span class="p">]</span>
             <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
                 <span class="k">return</span> <span class="mi">0</span>
-        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">secondary_statistics</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="n">statistic</span><span class="p">):</span>
+        <span class="k">elif</span> <span class="n">statistic</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">secondary_statistics</span><span class="p">:</span>
             <span class="n">statistics</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">CharacterStatistics</span><span class="o">.</span><span class="n">registered_as</span><span class="p">)</span>
-            <span class="k">try</span><span class="p">:</span>            
+            <span class="k">try</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">statistics</span><span class="o">.</span><span class="n">secondary_stats</span><span class="p">[</span><span class="n">statistic</span><span class="p">]</span>
             <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
                 <span class="k">return</span> <span class="mi">0</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">NoSuchStatisticError</span><span class="p">(</span><span class="n">statistic</span><span class="p">)</span>
-    </div>
+</div>
 <div class="viewcode-block" id="CharacterStatisticSystem.get_primary_statistic_values"><a class="viewcode-back" href="../../../fife_rpg.systems.html#fife_rpg.systems.character_statistics.CharacterStatisticSystem.get_primary_statistic_values">[docs]</a>    <span class="k">def</span> <span class="nf">get_primary_statistic_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Collects and returns the values of the primary statitistic values</span>
 <span class="sd">        of the entity.</span>
-<span class="sd">        </span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            entity: An :class:`fife_rpg.entities.rpg_entity.RPGEntity` or the</span>
 <span class="sd">            name of the entity</span>
-<span class="sd">        </span>
+
 <span class="sd">        Returns:</span>
 <span class="sd">            A dictionary containing the statistic short names and the values</span>
 <span class="sd">            for that entity</span>
@@ -324,11 +329,11 @@
 <div class="viewcode-block" id="CharacterStatisticSystem.get_secondary_statistic_values"><a class="viewcode-back" href="../../../fife_rpg.systems.html#fife_rpg.systems.character_statistics.CharacterStatisticSystem.get_secondary_statistic_values">[docs]</a>    <span class="k">def</span> <span class="nf">get_secondary_statistic_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Collects and returns the values of the secondary statitistic values</span>
 <span class="sd">        of the entity.</span>
-<span class="sd">        </span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            entity: An :class:`fife_rpg.entities.rpg_entity.RPGEntity` or the</span>
 <span class="sd">            name of the entity</span>
-<span class="sd">        </span>
+
 <span class="sd">        Returns:</span>
 <span class="sd">            A dictionary containing the statistic short names and the values</span>
 <span class="sd">            for that entity</span>
@@ -344,13 +349,13 @@
         <span class="k">return</span> <span class="n">secondary_statistics</span>
 </div>
 <div class="viewcode-block" id="CharacterStatisticSystem.get_statistic_values"><a class="viewcode-back" href="../../../fife_rpg.systems.html#fife_rpg.systems.character_statistics.CharacterStatisticSystem.get_statistic_values">[docs]</a>    <span class="k">def</span> <span class="nf">get_statistic_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Collects and returns the combined values of the primary and secondary </span>
-<span class="sd">        statitistic values of the entity.</span>
-<span class="sd">        </span>
+        <span class="sd">&quot;&quot;&quot;Collects and returns the combined values of the primary and</span>
+<span class="sd">        secondary statitistic values of the entity.</span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            entity: An :class:`fife_rpg.entities.rpg_entity.RPGEntity` or the</span>
 <span class="sd">            name of the entity</span>
-<span class="sd">        </span>
+
 <span class="sd">        Returns:</span>
 <span class="sd">            A dictionary containing the statistic short names and the values</span>
 <span class="sd">            for that entity</span>
@@ -359,7 +364,7 @@
         <span class="n">statistics</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_primary_statistic_values</span><span class="p">(</span><span class="n">entity</span><span class="p">))</span>
         <span class="n">statistics</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_secondary_statistic_values</span><span class="p">(</span><span class="n">entity</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">statistics</span>
-    </div>
+</div>
 <div class="viewcode-block" id="CharacterStatisticSystem.get_statistic_points"><a class="viewcode-back" href="../../../fife_rpg.systems.html#fife_rpg.systems.character_statistics.CharacterStatisticSystem.get_statistic_points">[docs]</a>    <span class="k">def</span> <span class="nf">get_statistic_points</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Gets the available statistic points of the entity</span>
 
@@ -373,14 +378,14 @@
             <span class="k">raise</span> <span class="n">NoStatisticComponentError</span><span class="p">(</span><span class="n">entity</span><span class="p">)</span>
         <span class="n">char_stats</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">CharacterStatistics</span><span class="o">.</span><span class="n">registered_as</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">char_stats</span><span class="o">.</span><span class="n">stat_points</span>
-        </div>
+</div>
 <div class="viewcode-block" id="CharacterStatisticSystem.get_statistic_increase_cost"><a class="viewcode-back" href="../../../fife_rpg.systems.html#fife_rpg.systems.character_statistics.CharacterStatisticSystem.get_statistic_increase_cost">[docs]</a>    <span class="k">def</span> <span class="nf">get_statistic_increase_cost</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity</span><span class="p">,</span> <span class="n">statistic</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Calculate and return the cost to increase the statistic</span>
-<span class="sd">        </span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            entity: An :class:`fife_rpg.entities.rpg_entity.RPGEntity` or the</span>
 <span class="sd">            name of the entity</span>
-<span class="sd">            </span>
+
 <span class="sd">            statistic: The internal name of the statistic</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
@@ -390,16 +395,16 @@
         <span class="n">char_stats</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">CharacterStatistics</span><span class="o">.</span><span class="n">registered_as</span><span class="p">)</span>
         <span class="n">cur_value</span> <span class="o">=</span> <span class="n">char_stats</span><span class="o">.</span><span class="n">primary_stats</span><span class="p">[</span><span class="n">statistic</span><span class="p">]</span>
         <span class="n">new_value</span> <span class="o">=</span> <span class="n">cur_value</span> <span class="o">+</span> <span class="mi">1</span>
-        <span class="n">offset</span> <span class="o">=</span>  <span class="n">new_value</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_stat_value</span>
-        <span class="k">return</span> <span class="n">getStatCost</span><span class="p">(</span><span class="n">offset</span><span class="p">)</span>
-    </div>
+        <span class="n">offset</span> <span class="o">=</span> <span class="n">new_value</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_stat_value</span>
+        <span class="k">return</span> <span class="n">get_stat_cost</span><span class="p">(</span><span class="n">offset</span><span class="p">)</span>
+</div>
 <div class="viewcode-block" id="CharacterStatisticSystem.get_statistic_decrease_gain"><a class="viewcode-back" href="../../../fife_rpg.systems.html#fife_rpg.systems.character_statistics.CharacterStatisticSystem.get_statistic_decrease_gain">[docs]</a>    <span class="k">def</span> <span class="nf">get_statistic_decrease_gain</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity</span><span class="p">,</span> <span class="n">statistic</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Calculate and return the gain of decreasing the statistic</span>
-<span class="sd">        </span>
+
 <span class="sd">        Args:</span>
-<span class="sd">            entity: An :class:`fife_rpg.entities.rpg_entity.RPGEntity` or </span>
+<span class="sd">            entity: An :class:`fife_rpg.entities.rpg_entity.RPGEntity` or</span>
 <span class="sd">            the name of the entity</span>
-<span class="sd">            </span>
+
 <span class="sd">            statistic: The internal name of the statistic</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
@@ -409,54 +414,54 @@
         <span class="n">char_stats</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">CharacterStatistics</span><span class="o">.</span><span class="n">registered_as</span><span class="p">)</span>
         <span class="n">cur_value</span> <span class="o">=</span> <span class="n">char_stats</span><span class="o">.</span><span class="n">primary_stats</span><span class="p">[</span><span class="n">statistic</span><span class="p">]</span>
         <span class="n">new_value</span> <span class="o">=</span> <span class="n">cur_value</span> <span class="o">-</span> <span class="mi">1</span>
-        <span class="n">offset</span> <span class="o">=</span>  <span class="n">new_value</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_stat_value</span>
-        <span class="k">return</span> <span class="n">getStatCost</span><span class="p">(</span><span class="n">offset</span><span class="p">)</span>
-    </div>
+        <span class="n">offset</span> <span class="o">=</span> <span class="n">new_value</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_stat_value</span>
+        <span class="k">return</span> <span class="n">get_stat_cost</span><span class="p">(</span><span class="n">offset</span><span class="p">)</span>
+</div>
 <div class="viewcode-block" id="CharacterStatisticSystem.can_increase_statistic"><a class="viewcode-back" href="../../../fife_rpg.systems.html#fife_rpg.systems.character_statistics.CharacterStatisticSystem.can_increase_statistic">[docs]</a>    <span class="k">def</span> <span class="nf">can_increase_statistic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity</span><span class="p">,</span> <span class="n">statistic</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Checks whether the given statistic can be increased or not.</span>
-<span class="sd">        </span>
-<span class="sd">        Args:        </span>
+
+<span class="sd">        Args:</span>
 <span class="sd">            entity: An :class:`fife_rpg.entities.rpg_entity.RPGEntity` or the</span>
 <span class="sd">            name of the entity</span>
-<span class="sd">            </span>
+
 <span class="sd">            statistic: The internal name of the statistic</span>
-<span class="sd">        </span>
+
 <span class="sd">        Returns:</span>
 <span class="sd">            True if the statistic can be increase, False if not.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">primary_statistics</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="n">statistic</span><span class="p">):</span>
-            <span class="k">return</span> <span class="bp">False</span> <span class="c">#Only primary statistics can be increased</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">statistic</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">primary_statistics</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>  <span class="c"># Only primary statistics can be increased</span>
         <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_statistic_value</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">statistic</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_stat_value</span><span class="p">:</span>
             <span class="n">cost</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_statistic_increase_cost</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">statistic</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">cost</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_statistic_points</span><span class="p">(</span><span class="n">entity</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">False</span>
-   </div>
+</div>
 <div class="viewcode-block" id="CharacterStatisticSystem.can_decrease_statistic"><a class="viewcode-back" href="../../../fife_rpg.systems.html#fife_rpg.systems.character_statistics.CharacterStatisticSystem.can_decrease_statistic">[docs]</a>    <span class="k">def</span> <span class="nf">can_decrease_statistic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity</span><span class="p">,</span> <span class="n">statistic</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Checks whether the given statistic can be decreased or not.</span>
-<span class="sd">        </span>
-<span class="sd">        Args:        </span>
+
+<span class="sd">        Args:</span>
 <span class="sd">            entity: An :class:`fife_rpg.entities.rpg_entity.RPGEntity` or the</span>
 <span class="sd">            name of the entity</span>
-<span class="sd">            </span>
+
 <span class="sd">            statistic: The internal name of the statistic</span>
-<span class="sd">        </span>
+
 <span class="sd">        Returns:</span>
 <span class="sd">            True if the statistic can be decrease, False if not.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">primary_statistics</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="n">statistic</span><span class="p">):</span>
-            <span class="k">return</span> <span class="bp">False</span> <span class="c">#Only primary statistics can be decreased</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">statistic</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">primary_statistics</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>  <span class="c"># Only primary statistics can be decreased</span>
         <span class="n">statistic</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_statistic_value</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">statistic</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">statistic</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_stat_value</span>
-    </div>
+</div>
 <div class="viewcode-block" id="CharacterStatisticSystem.increase_statistic"><a class="viewcode-back" href="../../../fife_rpg.systems.html#fife_rpg.systems.character_statistics.CharacterStatisticSystem.increase_statistic">[docs]</a>    <span class="k">def</span> <span class="nf">increase_statistic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity</span><span class="p">,</span> <span class="n">statistic</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Increase the statistic by one, if possible.</span>
-<span class="sd">        </span>
-<span class="sd">        Args:        </span>
+
+<span class="sd">        Args:</span>
 <span class="sd">            entity: An :class:`fife_rpg.entities.rpg_entity.RPGEntity` or the</span>
 <span class="sd">            name of the entity</span>
-<span class="sd">            </span>
-<span class="sd">            statistic: The internal name of the statistic        </span>
+
+<span class="sd">            statistic: The internal name of the statistic</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">can_increase_statistic</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">statistic</span><span class="p">):</span>
             <span class="k">return</span>
@@ -468,15 +473,15 @@
         <span class="n">cost</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_statistic_increase_cost</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">statistic</span><span class="p">)</span>
         <span class="n">char_stats</span><span class="o">.</span><span class="n">primary_stats</span><span class="p">[</span><span class="n">statistic</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="n">char_stats</span><span class="o">.</span><span class="n">stat_points</span> <span class="o">-=</span> <span class="n">cost</span>
-            </div>
+</div>
 <div class="viewcode-block" id="CharacterStatisticSystem.decrease_statistic"><a class="viewcode-back" href="../../../fife_rpg.systems.html#fife_rpg.systems.character_statistics.CharacterStatisticSystem.decrease_statistic">[docs]</a>    <span class="k">def</span> <span class="nf">decrease_statistic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity</span><span class="p">,</span> <span class="n">statistic</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Decrease the statistic by one, if possible.</span>
-<span class="sd">        </span>
-<span class="sd">        Args:        </span>
+
+<span class="sd">        Args:</span>
 <span class="sd">            entity: An :class:`fife_rpg.entities.rpg_entity.RPGEntity` or the</span>
 <span class="sd">            name of the entity</span>
-<span class="sd">            </span>
-<span class="sd">            statistic: The internal name of the statistic        </span>
+
+<span class="sd">            statistic: The internal name of the statistic</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">can_decrease_statistic</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">statistic</span><span class="p">):</span>
             <span class="k">return</span>
@@ -488,8 +493,8 @@
         <span class="n">gain</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_statistic_increase_cost</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">statistic</span><span class="p">)</span>
         <span class="n">char_stats</span><span class="o">.</span><span class="n">primary_stats</span><span class="p">[</span><span class="n">statistic</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
         <span class="n">char_stats</span><span class="o">.</span><span class="n">stat_points</span> <span class="o">+=</span> <span class="n">gain</span>
-    </div>
-<div class="viewcode-block" id="CharacterStatisticSystem.step"><a class="viewcode-back" href="../../../fife_rpg.systems.html#fife_rpg.systems.character_statistics.CharacterStatisticSystem.step">[docs]</a>    <span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time_delta</span><span class="p">):</span> <span class="c">#pylint: disable=W0613</span>
+</div>
+<div class="viewcode-block" id="CharacterStatisticSystem.step"><a class="viewcode-back" href="../../../fife_rpg.systems.html#fife_rpg.systems.character_statistics.CharacterStatisticSystem.step">[docs]</a>    <span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time_delta</span><span class="p">):</span>  <span class="c"># pylint: disable=W0613</span>
         <span class="sd">&quot;&quot;&quot;Execute a time step for the system. Must be defined</span>
 <span class="sd">        by all system classes.</span>
 
@@ -499,9 +504,10 @@
         <span class="n">comp_name</span> <span class="o">=</span> <span class="n">CharacterStatistics</span><span class="o">.</span><span class="n">registered_as</span>
         <span class="n">entity_extent</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">world</span><span class="p">[</span><span class="n">RPGEntity</span><span class="p">],</span> <span class="n">comp_name</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="n">entity_extent</span><span class="p">:</span>
-            <span class="n">stats_component</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">comp_name</span><span class="p">)</span> 
-            <span class="n">comp_secondary_stats</span> <span class="o">=</span> <span class="n">stats_component</span><span class="o">.</span><span class="n">secondary_stats</span>                   
-            <span class="k">for</span> <span class="n">statistic_name</span><span class="p">,</span> <span class="n">statistic</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">secondary_statistics</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="n">stats_component</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">comp_name</span><span class="p">)</span>
+            <span class="n">comp_secondary_stats</span> <span class="o">=</span> <span class="n">stats_component</span><span class="o">.</span><span class="n">secondary_stats</span>
+            <span class="k">for</span> <span class="n">statistic_name</span><span class="p">,</span> <span class="n">statistic</span> <span class="ow">in</span> <span class="p">(</span>
+                                        <span class="bp">self</span><span class="o">.</span><span class="n">secondary_statistics</span><span class="o">.</span><span class="n">iteritems</span><span class="p">()):</span>
                 <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
                 <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">influence</span> <span class="ow">in</span> <span class="n">statistic</span><span class="o">.</span><span class="n">influences</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
                     <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_statistic_value</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
@@ -540,7 +546,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">fife-rpg 0.1c documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">fife-rpg 0.2 documentation</a> &raquo;</li>
           <li><a href="../../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>

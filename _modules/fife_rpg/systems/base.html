@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>fife_rpg.systems.base &mdash; fife-rpg 0.1c documentation</title>
+    <title>fife_rpg.systems.base &mdash; fife-rpg 0.2 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.1c',
+        VERSION:     '0.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="top" title="fife-rpg 0.1c documentation" href="../../../index.html" />
+    <link rel="top" title="fife-rpg 0.2 documentation" href="../../../index.html" />
     <link rel="up" title="Module code" href="../../index.html" /> 
   </head>
   <body>
@@ -38,7 +38,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">fife-rpg 0.1c documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">fife-rpg 0.2 documentation</a> &raquo;</li>
           <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
@@ -76,14 +76,16 @@
 <span class="kn">from</span> <span class="nn">fife_rpg.systems</span> <span class="kn">import</span> <span class="n">SystemManager</span>
 <span class="kn">from</span> <span class="nn">fife_rpg.helpers</span> <span class="kn">import</span> <span class="n">ClassProperty</span>
 
+
 <div class="viewcode-block" id="Base"><a class="viewcode-back" href="../../../fife_rpg.systems.html#fife_rpg.systems.base.Base">[docs]</a><span class="k">class</span> <span class="nc">Base</span><span class="p">(</span><span class="n">System</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Base system for fife-rpg.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Properties:</span>
 <span class="sd">        registered_as: Class property that sets under what name the class is</span>
 <span class="sd">        registered</span>
-<span class="sd">        </span>
-<span class="sd">        dependencies: Class property that sets the classes this System depends on</span>
+
+<span class="sd">        dependencies: Class property that sets the classes this System depends</span>
+<span class="sd">        on</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">__registered_as</span> <span class="o">=</span> <span class="bp">None</span>
@@ -114,8 +116,8 @@
             <span class="k">return</span> <span class="bp">True</span>
         <span class="k">except</span> <span class="n">AlreadyRegisteredError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="k">print</span> <span class="n">error</span>
-            <span class="k">return</span> <span class="bp">False</span>
-</pre></div></div></div>
+            <span class="k">return</span> <span class="bp">False</span></div></div>
+</pre></div>
 
           </div>
         </div>
@@ -148,7 +150,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">fife-rpg 0.1c documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">fife-rpg 0.2 documentation</a> &raquo;</li>
           <li><a href="../../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>

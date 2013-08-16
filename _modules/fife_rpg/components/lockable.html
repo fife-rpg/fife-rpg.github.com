@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>fife_rpg.components.lockable &mdash; fife-rpg 0.1c documentation</title>
+    <title>fife_rpg.components.lockable &mdash; fife-rpg 0.2 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.1c',
+        VERSION:     '0.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="top" title="fife-rpg 0.1c documentation" href="../../../index.html" />
+    <link rel="top" title="fife-rpg 0.2 documentation" href="../../../index.html" />
     <link rel="up" title="Module code" href="../../index.html" /> 
   </head>
   <body>
@@ -38,7 +38,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">fife-rpg 0.1c documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">fife-rpg 0.2 documentation</a> &raquo;</li>
           <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
@@ -76,21 +76,22 @@
 <span class="kn">from</span> <span class="nn">fife_rpg.components.fifeagent</span> <span class="kn">import</span> <span class="n">FifeAgent</span>
 <span class="kn">from</span> <span class="nn">fife_rpg.exceptions</span> <span class="kn">import</span> <span class="n">NotRegisteredError</span>
 
+
 <div class="viewcode-block" id="Lockable"><a class="viewcode-back" href="../../../fife_rpg.components.html#fife_rpg.components.lockable.Lockable">[docs]</a><span class="k">class</span> <span class="nc">Lockable</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Component that stores the data of a lock</span>
-<span class="sd">    </span>
+
 <span class="sd">    Fields:</span>
 <span class="sd">        closed: Is the object closed or open</span>
-<span class="sd">        </span>
+
 <span class="sd">        locked: Is the object locker or unlocked</span>
-<span class="sd">        </span>
-<span class="sd">        open_animation: Name of the animation that is run when the object is being</span>
-<span class="sd">        opened</span>
-<span class="sd">        </span>
+
+<span class="sd">        open_animation: Name of the animation that is run when the object is</span>
+<span class="sd">        being opened</span>
+
 <span class="sd">        opened_animation: Name of the animation that is run when the object is</span>
 <span class="sd">        open</span>
-<span class="sd">        </span>
-<span class="sd">        close_animation: Name of the animation that is run when the object is </span>
+
+<span class="sd">        close_animation: Name of the animation that is run when the object is</span>
 <span class="sd">        being closed</span>
 
 <span class="sd">        closed_animation: Name of the animation that is run when the object is</span>
@@ -98,7 +99,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">Base</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">closed</span><span class="o">=</span><span class="nb">bool</span><span class="p">,</span> <span class="n">locked</span><span class="o">=</span><span class="nb">bool</span><span class="p">,</span> 
+        <span class="n">Base</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">closed</span><span class="o">=</span><span class="nb">bool</span><span class="p">,</span> <span class="n">locked</span><span class="o">=</span><span class="nb">bool</span><span class="p">,</span>
                       <span class="n">open_animation</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">opened_animation</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
                       <span class="n">close_animation</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">closed_animation</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s">&quot;open_animation&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">default</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="s">&quot;open&quot;</span>
@@ -112,7 +113,7 @@
 
 <span class="sd">        Args:</span>
 <span class="sd">            name: The name under which the class should be registered</span>
-<span class="sd">            </span>
+
 <span class="sd">            auto_register: This sets whether components this component</span>
 <span class="sd">            derives from will have their registered_as property set to the same</span>
 <span class="sd">            name as this class.</span>
@@ -121,6 +122,7 @@
 <span class="sd">            True if the component was registered, False if not.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">(</span><span class="nb">super</span><span class="p">(</span><span class="n">Lockable</span><span class="p">,</span> <span class="n">cls</span><span class="p">)</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">auto_register</span><span class="p">))</span>
+
 </div></div>
 <div class="viewcode-block" id="LockedError"><a class="viewcode-back" href="../../../fife_rpg.components.html#fife_rpg.components.lockable.LockedError">[docs]</a><span class="k">class</span> <span class="nc">LockedError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Error that is raised when the lock is locked&quot;&quot;&quot;</span>
@@ -128,6 +130,7 @@
     <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns the string representing the exception&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s">&quot;Is locked&quot;</span>
+
 </div>
 <div class="viewcode-block" id="OpenError"><a class="viewcode-back" href="../../../fife_rpg.components.html#fife_rpg.components.lockable.OpenError">[docs]</a><span class="k">class</span> <span class="nc">OpenError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Error that is raised when the lock is open&quot;&quot;&quot;</span>
@@ -135,6 +138,7 @@
     <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns the string representing the exception&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s">&quot;Is open&quot;</span>
+
 </div>
 <div class="viewcode-block" id="lock_lock"><a class="viewcode-back" href="../../../fife_rpg.components.html#fife_rpg.components.lockable.lock_lock">[docs]</a><span class="k">def</span> <span class="nf">lock_lock</span><span class="p">(</span><span class="n">lockable</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Lock the given lockable.</span>
@@ -143,11 +147,12 @@
 <span class="sd">        lockable: A Lockable instance</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        :class:`fife_rpg.components.lockable.OpenError` if the lockable is open.</span>
+<span class="sd">        :class:`fife_rpg.components.lockable.OpenError` if the lockable is open</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">lockable</span><span class="o">.</span><span class="n">closed</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">OpenError</span>
-    <span class="n">lockable</span><span class="o">.</span><span class="n">locked</span> <span class="o">=</span> <span class="bp">True</span>    
+    <span class="n">lockable</span><span class="o">.</span><span class="n">locked</span> <span class="o">=</span> <span class="bp">True</span>
+
 </div>
 <div class="viewcode-block" id="unlock_lock"><a class="viewcode-back" href="../../../fife_rpg.components.html#fife_rpg.components.lockable.unlock_lock">[docs]</a><span class="k">def</span> <span class="nf">unlock_lock</span><span class="p">(</span><span class="n">lockable</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Unlock the given lockable</span>
@@ -156,8 +161,9 @@
 <span class="sd">        lockable: A :class:`fife_rpg.components.lockable.Lockable` instance</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">lockable</span><span class="o">.</span><span class="n">locked</span> <span class="o">=</span> <span class="bp">False</span>
+
 </div>
-<div class="viewcode-block" id="open_lock"><a class="viewcode-back" href="../../../fife_rpg.components.html#fife_rpg.components.lockable.open_lock">[docs]</a><span class="k">def</span> <span class="nf">open_lock</span><span class="p">(</span><span class="n">lockable</span><span class="p">):</span><span class="c"># pylint: disable-msg=W0622</span>
+<div class="viewcode-block" id="open_lock"><a class="viewcode-back" href="../../../fife_rpg.components.html#fife_rpg.components.lockable.open_lock">[docs]</a><span class="k">def</span> <span class="nf">open_lock</span><span class="p">(</span><span class="n">lockable</span><span class="p">):</span>  <span class="c"># pylint: disable-msg=W0622</span>
     <span class="sd">&quot;&quot;&quot;Open the lockable, if its unlocked.</span>
 
 <span class="sd">    Args:</span>
@@ -170,6 +176,7 @@
     <span class="k">if</span> <span class="n">lockable</span><span class="o">.</span><span class="n">locked</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">LockedError</span>
     <span class="n">lockable</span><span class="o">.</span><span class="n">closed</span> <span class="o">=</span> <span class="bp">False</span>
+
 </div>
 <div class="viewcode-block" id="close_lock"><a class="viewcode-back" href="../../../fife_rpg.components.html#fife_rpg.components.lockable.close_lock">[docs]</a><span class="k">def</span> <span class="nf">close_lock</span><span class="p">(</span><span class="n">lockable</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Close the lockable.</span>
@@ -182,17 +189,18 @@
 </div>
 <div class="viewcode-block" id="check_lockable_fifeagent"><a class="viewcode-back" href="../../../fife_rpg.components.html#fife_rpg.components.lockable.check_lockable_fifeagent">[docs]</a><span class="k">def</span> <span class="nf">check_lockable_fifeagent</span><span class="p">(</span><span class="n">fifeagent</span><span class="p">,</span> <span class="n">lockable</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Checks the lockable for inconsistences with the fifeagent</span>
-<span class="sd">    </span>
+
 <span class="sd">    Args:</span>
 <span class="sd">        fifeagent: A :class:`fife_rpg.components.fifeagent.FifeAgent` instance</span>
-<span class="sd">        </span>
+
 <span class="sd">        locakbe: A :class:`fife_rpg.components.lockable.Lockable` instance</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">lockable</span><span class="o">.</span><span class="n">closed</span><span class="p">:</span>
         <span class="n">fifeagent</span><span class="o">.</span><span class="n">behaviour</span><span class="o">.</span><span class="n">animate</span><span class="p">(</span><span class="n">lockable</span><span class="o">.</span><span class="n">closed_animation</span><span class="p">,</span> <span class="n">repeating</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">fifeagent</span><span class="o">.</span><span class="n">behaviour</span><span class="o">.</span><span class="n">animate</span><span class="p">(</span><span class="n">lockable</span><span class="o">.</span><span class="n">opened_animation</span><span class="p">,</span> <span class="n">repeating</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-        </div>
+
+</div>
 <div class="viewcode-block" id="register_checkers"><a class="viewcode-back" href="../../../fife_rpg.components.html#fife_rpg.components.lockable.register_checkers">[docs]</a><span class="k">def</span> <span class="nf">register_checkers</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;Registers the components checkers&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">Lockable</span><span class="o">.</span><span class="n">registered_as</span><span class="p">:</span>
@@ -234,7 +242,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">fife-rpg 0.1c documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">fife-rpg 0.2 documentation</a> &raquo;</li>
           <li><a href="../../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>

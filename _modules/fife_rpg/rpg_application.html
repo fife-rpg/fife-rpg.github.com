@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>fife_rpg.rpg_application &mdash; fife-rpg 0.1c documentation</title>
+    <title>fife_rpg.rpg_application &mdash; fife-rpg 0.2 documentation</title>
     
     <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.1c',
+        VERSION:     '0.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <link rel="top" title="fife-rpg 0.1c documentation" href="../../index.html" />
+    <link rel="top" title="fife-rpg 0.2 documentation" href="../../index.html" />
     <link rel="up" title="Module code" href="../index.html" /> 
   </head>
   <body>
@@ -38,7 +38,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../index.html">fife-rpg 0.1c documentation</a> &raquo;</li>
+        <li><a href="../../index.html">fife-rpg 0.2 documentation</a> &raquo;</li>
           <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
@@ -73,8 +73,9 @@
 
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span> 
+<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span>
 <span class="kn">import</span> <span class="nn">gettext</span>
+<span class="kn">import</span> <span class="nn">imp</span>
 
 <span class="kn">import</span> <span class="nn">yaml</span>
 <span class="kn">from</span> <span class="nn">bGrease.grease_fife.mode</span> <span class="kn">import</span> <span class="n">FifeManager</span>
@@ -93,6 +94,9 @@
 <span class="kn">from</span> <span class="nn">fife_rpg.systems.scriptingsystem</span> <span class="kn">import</span> <span class="n">ScriptingSystem</span>
 <span class="kn">from</span> <span class="nn">fife_rpg.console_commands</span> <span class="kn">import</span> <span class="n">get_commands</span>
 
+<span class="n">_SCRIPTING_MODULE</span> <span class="o">=</span> <span class="s">&quot;application&quot;</span>
+
+
 <div class="viewcode-block" id="KeyFilter"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.rpg_application.KeyFilter">[docs]</a><span class="k">class</span> <span class="nc">KeyFilter</span><span class="p">(</span><span class="n">fife</span><span class="o">.</span><span class="n">IKeyFilter</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;This is the implementation of the fife.IKeyFilter class.</span>
 
@@ -107,8 +111,8 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">fife</span><span class="o">.</span><span class="n">IKeyFilter</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_keys</span> <span class="o">=</span> <span class="n">keys</span>
-    
-<div class="viewcode-block" id="KeyFilter.isFiltered"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.rpg_application.KeyFilter.isFiltered">[docs]</a>    <span class="k">def</span> <span class="nf">isFiltered</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span> <span class="c"># pylint: disable-msg=W0221</span>
+
+<div class="viewcode-block" id="KeyFilter.isFiltered"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.rpg_application.KeyFilter.isFiltered">[docs]</a>    <span class="k">def</span> <span class="nf">isFiltered</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>  <span class="c"># pylint: disable-msg=W0221, C0103</span>
         <span class="sd">&quot;&quot;&quot;Checks whether the key is filtered or not.</span>
 
 <span class="sd">        Args:</span>
@@ -126,7 +130,7 @@
 <span class="sd">    inputs.</span>
 
 <span class="sd">    Does not process game related input.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Properties:</span>
 <span class="sd">        quit: Sets whether to quit the application on the next pump or not.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -137,7 +141,7 @@
 
 <span class="sd">        Args:</span>
 <span class="sd">            engine: A fife.Engine instance</span>
-<span class="sd">            </span>
+
 <span class="sd">            application: A RPGApplication instance</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span> <span class="o">=</span> <span class="n">engine</span>
@@ -161,7 +165,7 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">quit</span> <span class="o">=</span> <span class="bp">False</span>
 
-<div class="viewcode-block" id="ApplicationListener.keyPressed"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.rpg_application.ApplicationListener.keyPressed">[docs]</a>    <span class="k">def</span> <span class="nf">keyPressed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span><span class="c"># pylint: disable-msg=C0103,W0221</span>
+<div class="viewcode-block" id="ApplicationListener.keyPressed"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.rpg_application.ApplicationListener.keyPressed">[docs]</a>    <span class="k">def</span> <span class="nf">keyPressed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>  <span class="c"># pylint: disable-msg=C0103,W0221</span>
         <span class="sd">&quot;&quot;&quot;Processes any non game related keyboard input.</span>
 
 <span class="sd">        Args:</span>
@@ -171,7 +175,7 @@
             <span class="k">return</span>
 
         <span class="n">keyval</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">getKey</span><span class="p">()</span><span class="o">.</span><span class="n">getValue</span><span class="p">()</span>
-                
+
         <span class="k">if</span> <span class="n">keyval</span> <span class="o">==</span> <span class="n">fife</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">ESCAPE</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">quit</span> <span class="o">=</span> <span class="bp">True</span>
             <span class="n">event</span><span class="o">.</span><span class="n">consume</span><span class="p">()</span>
@@ -183,7 +187,7 @@
                 <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&quot;%Y%m</span><span class="si">%d</span><span class="s">_%H%M%S&quot;</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">localtime</span><span class="p">())</span> <span class="o">+</span> <span class="s">&quot;.png&quot;</span><span class="p">)</span>
             <span class="n">event</span><span class="o">.</span><span class="n">consume</span><span class="p">()</span>
 </div>
-<div class="viewcode-block" id="ApplicationListener.keyReleased"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.rpg_application.ApplicationListener.keyReleased">[docs]</a>    <span class="k">def</span> <span class="nf">keyReleased</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span><span class="c"># pylint: disable-msg=C0103,W0221</span>
+<div class="viewcode-block" id="ApplicationListener.keyReleased"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.rpg_application.ApplicationListener.keyReleased">[docs]</a>    <span class="k">def</span> <span class="nf">keyReleased</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>  <span class="c"># pylint: disable-msg=C0103,W0221</span>
         <span class="sd">&quot;&quot;&quot;Gets called when a key is released</span>
 
 <span class="sd">        Args:</span>
@@ -191,7 +195,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span>
 </div>
-<div class="viewcode-block" id="ApplicationListener.onCommand"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.rpg_application.ApplicationListener.onCommand">[docs]</a>    <span class="k">def</span> <span class="nf">onCommand</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">):</span><span class="c"># pylint: disable-msg=C0103,W0221</span>
+<div class="viewcode-block" id="ApplicationListener.onCommand"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.rpg_application.ApplicationListener.onCommand">[docs]</a>    <span class="k">def</span> <span class="nf">onCommand</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">):</span>  <span class="c"># pylint: disable-msg=C0103,W0221</span>
         <span class="sd">&quot;&quot;&quot;Process commands</span>
 
 <span class="sd">        Args:</span>
@@ -201,7 +205,7 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">quit</span><span class="p">:</span>
             <span class="n">command</span><span class="o">.</span><span class="n">consume</span><span class="p">()</span>
 </div>
-<div class="viewcode-block" id="ApplicationListener.onConsoleCommand"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.rpg_application.ApplicationListener.onConsoleCommand">[docs]</a>    <span class="k">def</span> <span class="nf">onConsoleCommand</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">):</span><span class="c"># pylint: disable-msg=C0103,W0221</span>
+<div class="viewcode-block" id="ApplicationListener.onConsoleCommand"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.rpg_application.ApplicationListener.onConsoleCommand">[docs]</a>    <span class="k">def</span> <span class="nf">onConsoleCommand</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">):</span>  <span class="c"># pylint: disable-msg=C0103,W0221</span>
         <span class="sd">&quot;&quot;&quot;Process console commands</span>
 
 <span class="sd">        Args:</span>
@@ -234,36 +238,36 @@
 
         <span class="k">return</span> <span class="n">result</span>
 </div>
-<div class="viewcode-block" id="ApplicationListener.onToolsClick"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.rpg_application.ApplicationListener.onToolsClick">[docs]</a>    <span class="k">def</span> <span class="nf">onToolsClick</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span><span class="c"># pylint: disable-msg=C0103,W0221</span>
+<div class="viewcode-block" id="ApplicationListener.onToolsClick"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.rpg_application.ApplicationListener.onToolsClick">[docs]</a>    <span class="k">def</span> <span class="nf">onToolsClick</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c"># pylint: disable-msg=C0103,W0221</span>
         <span class="sd">&quot;&quot;&quot;Gets called when the the &#39;tool&#39; button on the console is clicked&quot;&quot;&quot;</span>
         <span class="k">print</span> <span class="s">&quot;No tools set up yet&quot;</span>
 
 </div></div>
 <div class="viewcode-block" id="RPGApplication"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.rpg_application.RPGApplication">[docs]</a><span class="k">class</span> <span class="nc">RPGApplication</span><span class="p">(</span><span class="n">FifeManager</span><span class="p">,</span> <span class="n">ApplicationBase</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;The main application.  It inherits fife.extensions.ApplicationBase.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Properties:</span>
 <span class="sd">        name: The name of the Application</span>
-<span class="sd">        </span>
+
 <span class="sd">        world: The fife_rpg.world.RPGWorld this application uses</span>
-<span class="sd">        </span>
+
 <span class="sd">        language: The language the application uses</span>
-<span class="sd">        </span>
+
 <span class="sd">        settings: A fife_settings.Setting instance that stores the settings of</span>
 <span class="sd">        the application</span>
-<span class="sd">        </span>
+
 <span class="sd">        maps: A dictionary containing the maps the application has</span>
-<span class="sd">        </span>
+
 <span class="sd">        current_map: The current active map</span>
-<span class="sd">        </span>
+
 <span class="sd">        log_manager: The log manager of the application</span>
-<span class="sd">        </span>
-<span class="sd">        engine: A fife.Engine instance        </span>
+
+<span class="sd">        engine: A fife.Engine instance</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">TDS</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Initialized the application</span>
-<span class="sd">        </span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            TDS: A fife_settings.Setting instance</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -271,12 +275,12 @@
         <span class="n">FifeManager</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;fife-rpg&quot;</span><span class="p">,</span> <span class="s">&quot;ProjectName&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s">&quot;The application name is not specified in&quot;</span> 
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s">&quot;The application name is not specified in&quot;</span>
             <span class="s">&quot;the settings file&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_listener</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">world</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__maps</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__current_map</span> <span class="o">=</span> <span class="bp">None</span>           
+        <span class="bp">self</span><span class="o">.</span><span class="n">__current_map</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__languages</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__current_language</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__components</span> <span class="o">=</span> <span class="p">{}</span>
@@ -286,43 +290,43 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">__map_switched_callbacks</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">default_language</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;i18n&quot;</span><span class="p">,</span> <span class="s">&quot;DefaultLanguage&quot;</span><span class="p">,</span> <span class="s">&quot;en&quot;</span><span class="p">)</span>
         <span class="n">languages_dir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;i18n&quot;</span><span class="p">,</span> <span class="s">&quot;Directory&quot;</span><span class="p">,</span> <span class="s">&quot;__languages&quot;</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">language</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;i18n&quot;</span><span class="p">,</span> <span class="s">&quot;Languages&quot;</span><span class="p">,</span> <span class="p">(</span><span class="s">&quot;en&quot;</span><span class="p">,</span> <span class="p">)):</span>
+        <span class="k">for</span> <span class="n">language</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;i18n&quot;</span><span class="p">,</span> <span class="s">&quot;Languages&quot;</span><span class="p">,</span> <span class="p">(</span><span class="s">&quot;en&quot;</span><span class="p">,)):</span>
             <span class="n">fallback</span> <span class="o">=</span> <span class="p">(</span><span class="n">language</span> <span class="o">==</span> <span class="n">default_language</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">__languages</span><span class="p">[</span><span class="n">language</span><span class="p">]</span> <span class="o">=</span> <span class="n">gettext</span><span class="o">.</span><span class="n">translation</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> 
+            <span class="bp">self</span><span class="o">.</span><span class="n">__languages</span><span class="p">[</span><span class="n">language</span><span class="p">]</span> <span class="o">=</span> <span class="n">gettext</span><span class="o">.</span><span class="n">translation</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
                                                             <span class="n">languages_dir</span><span class="p">,</span>
                                                             <span class="p">[</span><span class="n">language</span><span class="p">],</span>
                                                             <span class="n">fallback</span><span class="o">=</span><span class="n">fallback</span><span class="p">)</span>
         <span class="n">language</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;i18n&quot;</span><span class="p">,</span> <span class="s">&quot;Language&quot;</span><span class="p">,</span> <span class="n">default_language</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">switch_language</span><span class="p">(</span><span class="n">language</span><span class="p">)</span>
-    
+
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">language</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns the current set language&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__current_language</span>
-    
+
     <span class="nd">@language.setter</span>
 <div class="viewcode-block" id="RPGApplication.language"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.rpg_application.RPGApplication.language">[docs]</a>    <span class="k">def</span> <span class="nf">language</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">language</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Sets the current language</span>
-<span class="sd">        </span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            language: The language to switch to</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">switch_language</span><span class="p">(</span><span class="n">language</span><span class="p">)</span>
-    </div>
+</div>
     <span class="nd">@property</span>
 <div class="viewcode-block" id="RPGApplication.settings"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.rpg_application.RPGApplication.settings">[docs]</a>    <span class="k">def</span> <span class="nf">settings</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns the settings of the application.</span>
-<span class="sd">        </span>
+
 <span class="sd">        Returns:</span>
 <span class="sd">            A fife_settings.Setting instance that contains the settings of the</span>
 <span class="sd">            application.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_setting</span>
-    </div>
+</div>
     <span class="nd">@property</span>
 <div class="viewcode-block" id="RPGApplication.log_manager"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.rpg_application.RPGApplication.log_manager">[docs]</a>    <span class="k">def</span> <span class="nf">log_manager</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns the log manager of the application.</span>
-<span class="sd">        </span>
+
 <span class="sd">        Returns:</span>
 <span class="sd">            a fifelog.LogManager instance that contains the log manager of</span>
 <span class="sd">            the application.</span>
@@ -341,7 +345,7 @@
 </div>
 <div class="viewcode-block" id="RPGApplication.switch_language"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.rpg_application.RPGApplication.switch_language">[docs]</a>    <span class="k">def</span> <span class="nf">switch_language</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">language</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Switch to the given language&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__languages</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="n">language</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">language</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__languages</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s">&quot;The language &#39;</span><span class="si">%s</span><span class="s">&#39; is not available&quot;</span> <span class="o">%</span> <span class="n">language</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">language</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">__current_language</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__languages</span><span class="p">[</span><span class="n">language</span><span class="p">]</span><span class="o">.</span><span class="n">install</span><span class="p">()</span>
@@ -349,20 +353,22 @@
 </div>
 <div class="viewcode-block" id="RPGApplication.update_game_variables"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.rpg_application.RPGApplication.update_game_variables">[docs]</a>    <span class="k">def</span> <span class="nf">update_game_variables</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Called by the game environment when it wants to update its globals</span>
-<span class="sd">        </span>
+
 <span class="sd">        Args:</span>
-<span class="sd">            globals: The globals dictionary of the GameEnvironment that is </span>
+<span class="sd">            globals: The globals dictionary of the GameEnvironment that is</span>
 <span class="sd">            filled by the GameScene</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">variables</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">maps</span><span class="p">)</span>
-        <span class="n">variables</span><span class="p">[</span><span class="s">&quot;CurrentMap&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_map</span>
+        <span class="n">app_module</span> <span class="o">=</span> <span class="n">imp</span><span class="o">.</span><span class="n">new_module</span><span class="p">(</span><span class="n">_SCRIPTING_MODULE</span><span class="p">)</span>
+        <span class="n">app_module</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="s">&quot;current_map&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_map</span>
+        <span class="n">app_module</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="s">&quot;maps&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">maps</span>
+        <span class="n">variables</span><span class="p">[</span><span class="n">_SCRIPTING_MODULE</span><span class="p">]</span> <span class="o">=</span> <span class="n">app_module</span>
 </div>
 <div class="viewcode-block" id="RPGApplication.add_map"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.rpg_application.RPGApplication.add_map">[docs]</a>    <span class="k">def</span> <span class="nf">add_map</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">filename_or_map</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Adds a map to the maps dictionary.</span>
-<span class="sd">        </span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            name: The name of the map</span>
-<span class="sd">            </span>
+
 <span class="sd">            filename_or_map: The file name map, without the extension,</span>
 <span class="sd">            or a Map instance.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -373,28 +379,28 @@
 </div>
 <div class="viewcode-block" id="RPGApplication.update_agents"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.rpg_application.RPGApplication.update_agents">[docs]</a>    <span class="k">def</span> <span class="nf">update_agents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">game_map</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Updates the map to be in sync with the entities</span>
-<span class="sd">        </span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            game_map: The name of the map, or a Map instance</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">game_map</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="n">game_map</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">maps</span><span class="p">[</span><span class="n">game_map</span><span class="p">]</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">game_map</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span> <span class="c">#The map is not yet loaded</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">game_map</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>  <span class="c"># The map is not yet loaded</span>
             <span class="k">return</span>
-        <span class="n">object_namespace</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;fife-rpg&quot;</span><span class="p">,</span> <span class="s">&quot;ObjectNamespace&quot;</span><span class="p">,</span> 
+        <span class="n">object_namespace</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;fife-rpg&quot;</span><span class="p">,</span> <span class="s">&quot;ObjectNamespace&quot;</span><span class="p">,</span>
                                              <span class="s">&quot;fife-rpg&quot;</span><span class="p">)</span>
         <span class="n">fife_model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">getModel</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="n">game_map</span><span class="o">.</span><span class="n">entities</span><span class="p">:</span>
             <span class="n">agent</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">Agent</span><span class="o">.</span><span class="n">registered_as</span><span class="p">)</span>
-            <span class="n">map_object</span> <span class="o">=</span> <span class="n">fife_model</span><span class="o">.</span><span class="n">getObject</span><span class="p">(</span><span class="n">agent</span><span class="o">.</span><span class="n">gfx</span><span class="p">,</span> 
+            <span class="n">map_object</span> <span class="o">=</span> <span class="n">fife_model</span><span class="o">.</span><span class="n">getObject</span><span class="p">(</span><span class="n">agent</span><span class="o">.</span><span class="n">gfx</span><span class="p">,</span>
                 <span class="n">object_namespace</span><span class="p">)</span>
             <span class="n">general</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">General</span><span class="o">.</span><span class="n">registered_as</span><span class="p">)</span>
             <span class="n">layer</span> <span class="o">=</span> <span class="n">game_map</span><span class="o">.</span><span class="n">get_layer</span><span class="p">(</span><span class="n">agent</span><span class="o">.</span><span class="n">layer</span><span class="p">)</span>
             <span class="n">fife_instance</span> <span class="o">=</span> <span class="n">layer</span><span class="o">.</span><span class="n">getInstance</span><span class="p">(</span><span class="n">general</span><span class="o">.</span><span class="n">identifier</span><span class="p">)</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">fife_instance</span><span class="p">:</span>                 
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">fife_instance</span><span class="p">:</span>
                 <span class="n">fife_instance</span> <span class="o">=</span> <span class="n">layer</span><span class="o">.</span><span class="n">createInstance</span><span class="p">(</span>
-                    <span class="n">map_object</span><span class="p">,</span> 
-                    <span class="n">fife</span><span class="o">.</span><span class="n">ExactModelCoordinate</span><span class="p">(</span><span class="o">*</span><span class="n">agent</span><span class="o">.</span><span class="n">position</span><span class="p">),</span> 
+                    <span class="n">map_object</span><span class="p">,</span>
+                    <span class="n">fife</span><span class="o">.</span><span class="n">ExactModelCoordinate</span><span class="p">(</span><span class="o">*</span><span class="n">agent</span><span class="o">.</span><span class="n">position</span><span class="p">),</span>
                     <span class="n">general</span><span class="o">.</span><span class="n">identifier</span><span class="p">)</span>
                 <span class="n">visual</span> <span class="o">=</span> <span class="n">fife</span><span class="o">.</span><span class="n">InstanceVisual</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">fife_instance</span><span class="p">)</span>
                 <span class="k">if</span> <span class="p">(</span><span class="n">map_object</span><span class="o">.</span><span class="n">getAction</span><span class="p">(</span><span class="s">&#39;default&#39;</span><span class="p">)):</span>
@@ -418,7 +424,7 @@
                 <span class="n">fife_instance</span><span class="o">.</span><span class="n">setLocation</span><span class="p">(</span><span class="n">location</span><span class="p">)</span>
             <span class="n">fife_instance</span><span class="o">.</span><span class="n">setRotation</span><span class="p">(</span><span class="n">agent</span><span class="o">.</span><span class="n">rotation</span><span class="p">)</span>
             <span class="n">visual</span><span class="o">.</span><span class="n">setStackPosition</span><span class="p">(</span><span class="n">STACK_POSITION</span><span class="p">[</span><span class="n">agent</span><span class="o">.</span><span class="n">type</span><span class="p">])</span>
-            </div>
+</div>
 <div class="viewcode-block" id="RPGApplication.load_map"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.rpg_application.RPGApplication.load_map">[docs]</a>    <span class="k">def</span> <span class="nf">load_map</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Load the map with the given name</span>
 
@@ -437,17 +443,17 @@
                              <span class="p">)</span>
                 <span class="n">camera</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
                     <span class="s">&quot;fife-rpg&quot;</span><span class="p">,</span> <span class="s">&quot;Camera&quot;</span><span class="p">,</span> <span class="s">&quot;main&quot;</span><span class="p">)</span>
-                
-                <span class="n">loader</span> <span class="o">=</span> <span class="n">fife</span><span class="o">.</span><span class="n">MapLoader</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">getModel</span><span class="p">(),</span> 
-                                        <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">getVFS</span><span class="p">(),</span> 
-                                        <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">getImageManager</span><span class="p">(),</span> 
+
+                <span class="n">loader</span> <span class="o">=</span> <span class="n">fife</span><span class="o">.</span><span class="n">MapLoader</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">getModel</span><span class="p">(),</span>
+                                        <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">getVFS</span><span class="p">(),</span>
+                                        <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">getImageManager</span><span class="p">(),</span>
                                         <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">getRenderBackend</span><span class="p">())</span>
-                
+
                 <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">maps_path</span><span class="p">,</span> <span class="n">game_map</span> <span class="o">+</span> <span class="s">&#39;.xml&#39;</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">loader</span><span class="o">.</span><span class="n">isLoadable</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>               
-                    <span class="n">fife_map</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>               
-                    
-                <span class="n">regions_filename</span> <span class="o">=</span> <span class="p">(</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">_regions.yaml&quot;</span> <span class="o">%</span> 
+                <span class="k">if</span> <span class="n">loader</span><span class="o">.</span><span class="n">isLoadable</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+                    <span class="n">fife_map</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+                <span class="n">regions_filename</span> <span class="o">=</span> <span class="p">(</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">_regions.yaml&quot;</span> <span class="o">%</span>
                                     <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">filename</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
                 <span class="n">regions</span> <span class="o">=</span> <span class="p">{}</span>
                 <span class="k">try</span><span class="p">:</span>
@@ -457,29 +463,32 @@
                 <span class="k">if</span> <span class="n">regions_file</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
                     <span class="n">regions_data</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">regions_file</span><span class="p">)</span>
                     <span class="k">if</span> <span class="n">regions_data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-                        <span class="k">for</span> <span class="n">region_name</span><span class="p">,</span> <span class="n">region_data</span> <span class="ow">in</span> <span class="n">regions_data</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+                        <span class="k">for</span> <span class="n">region_name</span><span class="p">,</span> <span class="n">region_data</span> <span class="ow">in</span> <span class="p">(</span>
+                                                    <span class="n">regions_data</span><span class="o">.</span><span class="n">iteritems</span><span class="p">()):</span>
                             <span class="n">region</span> <span class="o">=</span> <span class="n">fife</span><span class="o">.</span><span class="n">DoubleRect</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">region_data</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                                                      <span class="n">y</span><span class="o">=</span><span class="n">region_data</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
                                                      <span class="n">width</span><span class="o">=</span><span class="n">region_data</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
                                                      <span class="n">height</span><span class="o">=</span><span class="n">region_data</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
                             <span class="n">regions</span><span class="p">[</span><span class="n">region_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">region</span>
-                <span class="n">game_map</span> <span class="o">=</span> <span class="n">Map</span><span class="p">(</span><span class="n">fife_map</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">camera</span><span class="p">,</span> <span class="n">regions</span><span class="p">)</span>
-                
-                <span class="n">game_map</span><span class="o">.</span><span class="n">update_entities</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">world</span><span class="p">)</span>
+                <span class="n">game_map</span> <span class="o">=</span> <span class="n">Map</span><span class="p">(</span><span class="n">fife_map</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">camera</span><span class="p">,</span> <span class="n">regions</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+
+                <span class="n">game_map</span><span class="o">.</span><span class="n">update_entities</span><span class="p">()</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">__maps</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">game_map</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">update_agents</span><span class="p">(</span><span class="n">game_map</span><span class="p">)</span>
 
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">LookupError</span><span class="p">(</span><span class="s">&quot;The map with the name &#39;</span><span class="si">%s</span><span class="s">&#39; cannot be found&quot;</span>
-                              <span class="o">%</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
-                </div>
+                              <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">))</span>
+</div>
 <div class="viewcode-block" id="RPGApplication.switch_map"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.rpg_application.RPGApplication.switch_map">[docs]</a>    <span class="k">def</span> <span class="nf">switch_map</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Switches to the given map.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            name: The name of the map</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">old_map</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__current_map</span><span class="p">:</span>
+            <span class="n">old_map</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__current_map</span><span class="o">.</span><span class="n">name</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__current_map</span><span class="o">.</span><span class="n">deactivate</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__current_map</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
@@ -489,15 +498,15 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">__current_map</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">maps</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__current_map</span><span class="o">.</span><span class="n">activate</span><span class="p">()</span>
             <span class="k">for</span> <span class="n">callback</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__map_switched_callbacks</span><span class="p">:</span>
-                <span class="n">callback</span><span class="p">()</span>
+                <span class="n">callback</span><span class="p">(</span><span class="n">old_map</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">LookupError</span><span class="p">(</span><span class="s">&quot;The map with the name &#39;</span><span class="si">%s</span><span class="s">&#39; cannot be found&quot;</span> 
-                        <span class="o">%</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
-    </div>
+            <span class="k">raise</span> <span class="ne">LookupError</span><span class="p">(</span><span class="s">&quot;The map with the name &#39;</span><span class="si">%s</span><span class="s">&#39; cannot be found&quot;</span>
+                        <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">))</span>
+</div>
 <div class="viewcode-block" id="RPGApplication.add_map_switch_callback"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.rpg_application.RPGApplication.add_map_switch_callback">[docs]</a>    <span class="k">def</span> <span class="nf">add_map_switch_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">callback</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Adds a callback function which gets called after </span>
+        <span class="sd">&quot;&quot;&quot;Adds a callback function which gets called after</span>
 <span class="sd">        the map switched</span>
-<span class="sd">        </span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            callback: The function to add</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -507,14 +516,14 @@
 <div class="viewcode-block" id="RPGApplication.remove_map_switch_callback"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.rpg_application.RPGApplication.remove_map_switch_callback">[docs]</a>    <span class="k">def</span> <span class="nf">remove_map_switch_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">callback</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Removes a callback function that got called after the map</span>
 <span class="sd">        switched.</span>
-<span class="sd">        </span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            callback: The function to remove</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">callback</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__map_switched_callbacks</span><span class="p">:</span>
             <span class="n">index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__map_switched_callbacks</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">callback</span><span class="p">)</span>
             <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">__map_switched_callbacks</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
-        </div>
+</div>
 <div class="viewcode-block" id="RPGApplication.load_maps"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.rpg_application.RPGApplication.load_maps">[docs]</a>    <span class="k">def</span> <span class="nf">load_maps</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Load the names of the available maps from a map file.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__maps</span> <span class="o">=</span> <span class="p">{}</span>
@@ -524,20 +533,29 @@
         <span class="n">maps_file</span> <span class="o">=</span> <span class="n">vfs</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">maps_path</span><span class="p">,</span> <span class="s">&quot;maps.yaml&quot;</span><span class="p">))</span>
         <span class="n">maps_doc</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">maps_file</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">maps_doc</span><span class="p">[</span><span class="s">&quot;Maps&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">add_map</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>            
-           </div>
-<div class="viewcode-block" id="RPGApplication.createListener"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.rpg_application.RPGApplication.createListener">[docs]</a>    <span class="k">def</span> <span class="nf">createListener</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span><span class="c"># pylint: disable-msg=C0103</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_map</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="RPGApplication.createListener"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.rpg_application.RPGApplication.createListener">[docs]</a>    <span class="k">def</span> <span class="nf">createListener</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c"># pylint: disable-msg=C0103</span>
         <span class="sd">&quot;&quot;&quot;Creates the listener for the application and returns it.&quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_listener</span> <span class="o">=</span> <span class="n">ApplicationListener</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">,</span>  <span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_listener</span> <span class="o">=</span> <span class="n">ApplicationListener</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_listener</span>
 </div>
 <div class="viewcode-block" id="RPGApplication.create_world"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.rpg_application.RPGApplication.create_world">[docs]</a>    <span class="k">def</span> <span class="nf">create_world</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Creates the world used by this application&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">world</span> <span class="o">=</span> <span class="n">RPGWorld</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="n">registered_as</span> <span class="o">=</span> <span class="n">GameVariables</span><span class="o">.</span><span class="n">registered_as</span>            
-        <span class="k">if</span> <span class="n">registered_as</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">world</span><span class="o">.</span><span class="n">systems</span><span class="p">,</span> <span class="n">registered_as</span><span class="p">):</span>
-            <span class="n">environment</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">world</span><span class="o">.</span><span class="n">systems</span><span class="p">,</span> <span class="n">registered_as</span><span class="p">)</span> 
-            <span class="n">environment</span><span class="o">.</span><span class="n">add_callback</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">update_game_variables</span><span class="p">)</span>
+        <span class="n">GameVariables</span><span class="o">.</span><span class="n">add_callback</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">update_game_variables</span><span class="p">)</span>
+        <span class="n">ScriptingSystem</span><span class="o">.</span><span class="n">register_command</span><span class="p">(</span><span class="s">&quot;set_global_lighting&quot;</span><span class="p">,</span>
+                                         <span class="bp">self</span><span class="o">.</span><span class="n">set_global_lighting</span><span class="p">,</span>
+                                         <span class="n">_SCRIPTING_MODULE</span><span class="p">)</span>
+        <span class="n">ScriptingSystem</span><span class="o">.</span><span class="n">register_command</span><span class="p">(</span><span class="s">&quot;get_global_lighting&quot;</span><span class="p">,</span>
+                                         <span class="bp">self</span><span class="o">.</span><span class="n">get_global_lighting</span><span class="p">,</span>
+                                         <span class="n">_SCRIPTING_MODULE</span><span class="p">)</span>
+        <span class="n">ScriptingSystem</span><span class="o">.</span><span class="n">register_command</span><span class="p">(</span><span class="s">&quot;is_location_in_region&quot;</span><span class="p">,</span>
+                                           <span class="bp">self</span><span class="o">.</span><span class="n">is_location_in_region</span><span class="p">,</span>
+                                           <span class="n">_SCRIPTING_MODULE</span><span class="p">)</span>
+        <span class="n">ScriptingSystem</span><span class="o">.</span><span class="n">register_command</span><span class="p">(</span><span class="s">&quot;is_agent_in_region&quot;</span><span class="p">,</span>
+                                           <span class="bp">self</span><span class="o">.</span><span class="n">is_agent_in_region</span><span class="p">,</span>
+                                           <span class="n">_SCRIPTING_MODULE</span><span class="p">)</span>
 </div>
 <div class="viewcode-block" id="RPGApplication.request_quit"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.rpg_application.RPGApplication.request_quit">[docs]</a>    <span class="k">def</span> <span class="nf">request_quit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Sends the quit command to the application&#39;s listener.</span>
@@ -552,13 +570,13 @@
 </div>
 <div class="viewcode-block" id="RPGApplication.screen_coords_to_map_coords"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.rpg_application.RPGApplication.screen_coords_to_map_coords">[docs]</a>    <span class="k">def</span> <span class="nf">screen_coords_to_map_coords</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">click</span><span class="p">,</span> <span class="n">layer</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Converts the screen coordinates to coordinates on the active map</span>
-<span class="sd">        </span>
+
 <span class="sd">        Args:</span>
 
 <span class="sd">           click: Screen coordinates as fife.ScreenPoint or position tuple</span>
-<span class="sd">           </span>
+
 <span class="sd">           layer: The name of the layer the converted position should be on</span>
-<span class="sd">        </span>
+
 <span class="sd">        Returns: Converted coordinates as fife.Location</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">active_map</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_map</span>
@@ -569,37 +587,38 @@
         <span class="n">location</span> <span class="o">=</span> <span class="n">fife</span><span class="o">.</span><span class="n">Location</span><span class="p">(</span><span class="n">active_map</span><span class="o">.</span><span class="n">get_layer</span><span class="p">(</span><span class="n">layer</span><span class="p">))</span>
         <span class="n">location</span><span class="o">.</span><span class="n">setMapCoordinates</span><span class="p">(</span><span class="n">coord</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">location</span>
-        </div>
+</div>
 <div class="viewcode-block" id="RPGApplication.load_components"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.rpg_application.RPGApplication.load_components">[docs]</a>    <span class="k">def</span> <span class="nf">load_components</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Load the component definitions from a file</span>
-<span class="sd">        </span>
+
 <span class="sd">        Args:</span>
-<span class="sd">            filename: The path to the components file. If this is set to None the</span>
-<span class="sd">            ComponentsFile setting will be used.</span>
+<span class="sd">            filename: The path to the components file. If this is set to None</span>
+<span class="sd">            the ComponentsFile setting will be used.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="n">filename</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;fife-rpg&quot;</span><span class="p">,</span> <span class="s">&quot;ComponentsFile&quot;</span><span class="p">,</span> 
+            <span class="n">filename</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;fife-rpg&quot;</span><span class="p">,</span> <span class="s">&quot;ComponentsFile&quot;</span><span class="p">,</span>
                                          <span class="s">&quot;components.yaml&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__components</span> <span class="o">=</span> <span class="p">{}</span>        
+        <span class="bp">self</span><span class="o">.</span><span class="n">__components</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">components_file</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">getVFS</span><span class="p">()</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">components_file</span><span class="p">)[</span><span class="s">&quot;Components&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">__components</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">path</span> 
-        </div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__components</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">path</span>
+</div>
 <div class="viewcode-block" id="RPGApplication.register_component"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.rpg_application.RPGApplication.register_component">[docs]</a>    <span class="k">def</span> <span class="nf">register_component</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">component_name</span><span class="p">,</span> <span class="n">registered_name</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
-                           <span class="n">register_checkers</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> 
+                           <span class="n">register_checkers</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
                            <span class="n">register_script_commands</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Calls the components register method.</span>
-<span class="sd">        </span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            component_name: Name of the component</span>
-<span class="sd">            </span>
-<span class="sd">            registered_name: Name under which the component should be registered</span>
-<span class="sd">            </span>
-<span class="sd">            register_checkers: If True a &quot;register_checkers&quot; function will be searched</span>
-<span class="sd">            in the module and called</span>
-<span class="sd">            </span>
-<span class="sd">            register_script_commands: If True a &quot;register_script_commands&quot; functions</span>
-<span class="sd">            will be searched in the module and called</span>
+
+<span class="sd">            registered_name: Name under which the component should be</span>
+<span class="sd">            registered</span>
+
+<span class="sd">            register_checkers: If True a &quot;register_checkers&quot; function will be</span>
+<span class="sd">            searched in the module and called</span>
+
+<span class="sd">            register_script_commands: If True a &quot;register_script_commands&quot;</span>
+<span class="sd">            functions will be searched in the module and called</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">component_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__components</span><span class="p">[</span><span class="n">component_name</span><span class="p">]</span>
         <span class="n">module</span> <span class="o">=</span> <span class="nb">__import__</span><span class="p">(</span><span class="n">component_path</span><span class="p">,</span> <span class="n">fromlist</span><span class="o">=</span><span class="p">[</span><span class="n">component_path</span><span class="p">])</span>
@@ -610,66 +629,67 @@
             <span class="n">component</span><span class="o">.</span><span class="n">register</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">register_checkers</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="s">&quot;register_checkers&quot;</span><span class="p">):</span>
             <span class="n">module</span><span class="o">.</span><span class="n">register_checkers</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">register_script_commands</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="s">&quot;register_script_commands&quot;</span><span class="p">):</span>
-            <span class="n">module</span><span class="o">.</span><span class="n">register_script_commands</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">register_script_commands</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">module</span><span class="p">,</span>
+                                                <span class="s">&quot;register_script_commands&quot;</span><span class="p">):</span>
+            <span class="n">module</span><span class="o">.</span><span class="n">register_script_commands</span><span class="p">(</span><span class="n">component</span><span class="o">.</span><span class="n">registered_as</span><span class="p">)</span>
 </div>
 <div class="viewcode-block" id="RPGApplication.register_components"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.rpg_application.RPGApplication.register_components">[docs]</a>    <span class="k">def</span> <span class="nf">register_components</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">component_list</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">register_checkers</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
                             <span class="n">register_script_commands</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Calls the register method of the components in the component list</span>
-<span class="sd">        </span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            component_list: A list of components if an item is not a string</span>
 <span class="sd">            it will be interpreted as a tuple or list with the second item</span>
 <span class="sd">            as the name to use when registering. If this is None the Components</span>
 <span class="sd">            settings will be used.</span>
-<span class="sd">            </span>
-<span class="sd">            register_checkers: If True a &quot;register_checkers&quot; function will be search</span>
-<span class="sd">            in the module and called</span>
-<span class="sd">            </span>
-<span class="sd">            register_script_commands: If True a &quot;register_script_commands&quot; functions</span>
-<span class="sd">            will be searched in the module and called            </span>
+
+<span class="sd">            register_checkers: If True a &quot;register_checkers&quot; function will be</span>
+<span class="sd">            search in the module and called</span>
+
+<span class="sd">            register_script_commands: If True a &quot;register_script_commands&quot;</span>
+<span class="sd">            functions will be searched in the module and called</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">component_list</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="n">component_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;fife-rpg&quot;</span><span class="p">,</span> <span class="s">&quot;Components&quot;</span><span class="p">)</span>
-        
+
         <span class="k">if</span> <span class="n">component_list</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;No component list supplied and no </span><span class="se">\&quot;</span><span class="s">Components</span><span class="se">\&quot;</span><span class="s"> &quot;</span>
-                             <span class="s">&quot;Setting found&quot;</span><span class="p">)</span>
-           
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;No component list supplied and no&quot;</span>
+                             <span class="s">&quot; </span><span class="se">\&quot;</span><span class="s">Components</span><span class="se">\&quot;</span><span class="s"> Setting found&quot;</span><span class="p">)</span>
+
         <span class="k">for</span> <span class="n">component</span> <span class="ow">in</span> <span class="n">component_list</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">component</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">register_component</span><span class="p">(</span>
-                            <span class="o">*</span><span class="n">component</span><span class="p">,</span> 
+                            <span class="o">*</span><span class="n">component</span><span class="p">,</span>
                             <span class="n">register_checkers</span><span class="o">=</span><span class="n">register_checkers</span><span class="p">,</span>
                             <span class="n">register_script_commands</span><span class="o">=</span><span class="n">register_script_commands</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">register_component</span><span class="p">(</span>
-                            <span class="n">component</span><span class="p">,</span> 
+                            <span class="n">component</span><span class="p">,</span>
                             <span class="n">register_checkers</span><span class="o">=</span><span class="n">register_checkers</span><span class="p">,</span>
-                            <span class="n">register_script_commands</span><span class="o">=</span><span class="n">register_script_commands</span><span class="p">)</span>                
-                </div>
+                            <span class="n">register_script_commands</span><span class="o">=</span><span class="n">register_script_commands</span><span class="p">)</span>
+</div>
 <div class="viewcode-block" id="RPGApplication.load_actions"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.rpg_application.RPGApplication.load_actions">[docs]</a>    <span class="k">def</span> <span class="nf">load_actions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Load the action definitions from a file</span>
-<span class="sd">        </span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            filename: The path to the actions file. If this is set to None the</span>
 <span class="sd">            ActionsFile setting will be used.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="n">filename</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;fife-rpg&quot;</span><span class="p">,</span> <span class="s">&quot;ActionsFile&quot;</span><span class="p">,</span> 
+            <span class="n">filename</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;fife-rpg&quot;</span><span class="p">,</span> <span class="s">&quot;ActionsFile&quot;</span><span class="p">,</span>
                                          <span class="s">&quot;actions.yaml&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__actions</span> <span class="o">=</span> <span class="p">{}</span>        
+        <span class="bp">self</span><span class="o">.</span><span class="n">__actions</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">actions_file</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">getVFS</span><span class="p">()</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">actions_file</span><span class="p">)[</span><span class="s">&quot;Actions&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">__actions</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">path</span> 
-        </div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__actions</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">path</span>
+</div>
 <div class="viewcode-block" id="RPGApplication.register_action"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.rpg_application.RPGApplication.register_action">[docs]</a>    <span class="k">def</span> <span class="nf">register_action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action_name</span><span class="p">,</span> <span class="n">registered_name</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Calls the actions register method.</span>
-<span class="sd">        </span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            action_name: Name of the action</span>
-<span class="sd">            </span>
-<span class="sd">            registered_name: Name under which the action should be registered            </span>
+
+<span class="sd">            registered_name: Name under which the action should be registered</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">action_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__actions</span><span class="p">[</span><span class="n">action_name</span><span class="p">]</span>
         <span class="n">module</span> <span class="o">=</span> <span class="nb">__import__</span><span class="p">(</span><span class="n">action_path</span><span class="p">,</span> <span class="n">fromlist</span><span class="o">=</span><span class="p">[</span><span class="n">action_path</span><span class="p">])</span>
@@ -681,7 +701,7 @@
 </div>
 <div class="viewcode-block" id="RPGApplication.register_actions"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.rpg_application.RPGApplication.register_actions">[docs]</a>    <span class="k">def</span> <span class="nf">register_actions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action_list</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Calls the register method of the actions in the action list</span>
-<span class="sd">        </span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            action_list: A list of actions if an item is not a string</span>
 <span class="sd">            it will be interpreted as a tuple or list with the second item</span>
@@ -690,39 +710,39 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">action_list</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="n">action_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;fife-rpg&quot;</span><span class="p">,</span> <span class="s">&quot;Actions&quot;</span><span class="p">)</span>
-        
+
         <span class="k">if</span> <span class="n">action_list</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;No action list supplied and no </span><span class="se">\&quot;</span><span class="s">Actions</span><span class="se">\&quot;</span><span class="s"> &quot;</span>
                              <span class="s">&quot;Setting found&quot;</span><span class="p">)</span>
-           
+
         <span class="k">for</span> <span class="n">action</span> <span class="ow">in</span> <span class="n">action_list</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">action</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">register_action</span><span class="p">(</span><span class="o">*</span><span class="n">action</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">register_action</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
-                </div>
+</div>
 <div class="viewcode-block" id="RPGApplication.load_systems"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.rpg_application.RPGApplication.load_systems">[docs]</a>    <span class="k">def</span> <span class="nf">load_systems</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Load the system definitions from a file</span>
-<span class="sd">        </span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            filename: The path to the systems file. If this is set to None the</span>
 <span class="sd">            SystemsFile setting will be used.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="n">filename</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;fife-rpg&quot;</span><span class="p">,</span> <span class="s">&quot;SystemsFile&quot;</span><span class="p">,</span> 
+            <span class="n">filename</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;fife-rpg&quot;</span><span class="p">,</span> <span class="s">&quot;SystemsFile&quot;</span><span class="p">,</span>
                                          <span class="s">&quot;systems.yaml&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__systems</span> <span class="o">=</span> <span class="p">{}</span>        
+        <span class="bp">self</span><span class="o">.</span><span class="n">__systems</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">systems_file</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">getVFS</span><span class="p">()</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">systems_file</span><span class="p">)[</span><span class="s">&quot;Systems&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">__systems</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">path</span> 
-        </div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__systems</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">path</span>
+</div>
 <div class="viewcode-block" id="RPGApplication.register_system"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.rpg_application.RPGApplication.register_system">[docs]</a>    <span class="k">def</span> <span class="nf">register_system</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">system_name</span><span class="p">,</span> <span class="n">registered_name</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Calls the systems register method.</span>
-<span class="sd">        </span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            system_name: Name of the system</span>
-<span class="sd">            </span>
-<span class="sd">            registered_name: Name under which the system should be registered            </span>
+
+<span class="sd">            registered_name: Name under which the system should be registered</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">system_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__systems</span><span class="p">[</span><span class="n">system_name</span><span class="p">]</span>
         <span class="n">module</span> <span class="o">=</span> <span class="nb">__import__</span><span class="p">(</span><span class="n">system_path</span><span class="p">,</span> <span class="n">fromlist</span><span class="o">=</span><span class="p">[</span><span class="n">system_path</span><span class="p">])</span>
@@ -734,7 +754,7 @@
 </div>
 <div class="viewcode-block" id="RPGApplication.register_systems"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.rpg_application.RPGApplication.register_systems">[docs]</a>    <span class="k">def</span> <span class="nf">register_systems</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">system_list</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Calls the register method of the systems in the system list</span>
-<span class="sd">        </span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            system_list: A list of systems if an item is not a string</span>
 <span class="sd">            it will be interpreted as a tuple or list with the second item</span>
@@ -743,11 +763,11 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">system_list</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="n">system_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;fife-rpg&quot;</span><span class="p">,</span> <span class="s">&quot;Systems&quot;</span><span class="p">)</span>
-        
+
         <span class="k">if</span> <span class="n">system_list</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;No system list supplied and no </span><span class="se">\&quot;</span><span class="s">Systems</span><span class="se">\&quot;</span><span class="s"> &quot;</span>
                              <span class="s">&quot;Setting found&quot;</span><span class="p">)</span>
-           
+
         <span class="k">for</span> <span class="n">system</span> <span class="ow">in</span> <span class="n">system_list</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">register_system</span><span class="p">(</span><span class="o">*</span><span class="n">system</span><span class="p">)</span>
@@ -756,26 +776,27 @@
 </div>
 <div class="viewcode-block" id="RPGApplication.load_behaviours"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.rpg_application.RPGApplication.load_behaviours">[docs]</a>    <span class="k">def</span> <span class="nf">load_behaviours</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Load the behaviour definitions from a file</span>
-<span class="sd">        </span>
+
 <span class="sd">        Args:</span>
-<span class="sd">            filename: The path to the behaviours file. If this is set to None the</span>
-<span class="sd">            BehavioursFile setting will be used.</span>
+<span class="sd">            filename: The path to the behaviours file. If this is set to None</span>
+<span class="sd">            the BehavioursFile setting will be used.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="n">filename</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;fife-rpg&quot;</span><span class="p">,</span> <span class="s">&quot;BehavioursFile&quot;</span><span class="p">,</span> 
+            <span class="n">filename</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;fife-rpg&quot;</span><span class="p">,</span> <span class="s">&quot;BehavioursFile&quot;</span><span class="p">,</span>
                                          <span class="s">&quot;behaviours.yaml&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__behaviours</span> <span class="o">=</span> <span class="p">{}</span>        
+        <span class="bp">self</span><span class="o">.</span><span class="n">__behaviours</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">behaviours_file</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">getVFS</span><span class="p">()</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">behaviours_file</span><span class="p">)[</span><span class="s">&quot;Behaviours&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">__behaviours</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">path</span> 
+            <span class="bp">self</span><span class="o">.</span><span class="n">__behaviours</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">path</span>
 </div>
 <div class="viewcode-block" id="RPGApplication.register_behaviour"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.rpg_application.RPGApplication.register_behaviour">[docs]</a>    <span class="k">def</span> <span class="nf">register_behaviour</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">behaviour_name</span><span class="p">,</span> <span class="n">registered_name</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Calls the behaviours register method.</span>
-<span class="sd">        </span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            behaviour_name: Name of the behaviour</span>
-<span class="sd">            </span>
-<span class="sd">            registered_name: Name under which the behaviour should be registered            </span>
+
+<span class="sd">            registered_name: Name under which the behaviour should be</span>
+<span class="sd">            registered</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">behaviour_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__behaviours</span><span class="p">[</span><span class="n">behaviour_name</span><span class="p">]</span>
         <span class="n">module</span> <span class="o">=</span> <span class="nb">__import__</span><span class="p">(</span><span class="n">behaviour_path</span><span class="p">,</span> <span class="n">fromlist</span><span class="o">=</span><span class="p">[</span><span class="n">behaviour_path</span><span class="p">])</span>
@@ -787,7 +808,7 @@
 </div>
 <div class="viewcode-block" id="RPGApplication.register_behaviours"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.rpg_application.RPGApplication.register_behaviours">[docs]</a>    <span class="k">def</span> <span class="nf">register_behaviours</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">behaviour_list</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Calls the register method of the behaviours in the behaviour list</span>
-<span class="sd">        </span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            behaviour_list: A list of behaviours if an item is not a string</span>
 <span class="sd">            it will be interpreted as a tuple or list with the second item</span>
@@ -796,11 +817,11 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">behaviour_list</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="n">behaviour_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;fife-rpg&quot;</span><span class="p">,</span> <span class="s">&quot;Behaviours&quot;</span><span class="p">)</span>
-        
+
         <span class="k">if</span> <span class="n">behaviour_list</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;No behaviour list supplied and no </span><span class="se">\&quot;</span><span class="s">Behaviours</span><span class="se">\&quot;</span><span class="s"> &quot;</span>
-                             <span class="s">&quot;Setting found&quot;</span><span class="p">)</span>
-           
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;No behaviour list supplied and no&quot;</span>
+                             <span class="s">&quot; </span><span class="se">\&quot;</span><span class="s">Behaviours</span><span class="se">\&quot;</span><span class="s"> Setting found&quot;</span><span class="p">)</span>
+
         <span class="k">for</span> <span class="n">behaviour</span> <span class="ow">in</span> <span class="n">behaviour_list</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">behaviour</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">register_behaviour</span><span class="p">(</span><span class="o">*</span><span class="n">behaviour</span><span class="p">)</span>
@@ -809,87 +830,103 @@
 </div>
 <div class="viewcode-block" id="RPGApplication.is_location_in_region"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.rpg_application.RPGApplication.is_location_in_region">[docs]</a>    <span class="k">def</span> <span class="nf">is_location_in_region</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">map_name</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">region_name</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Checks whether the location is in the region of the map</span>
-<span class="sd">        </span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            map_name: Name of the map. If None the current map will be used</span>
-<span class="sd">            </span>
+
 <span class="sd">            region_name: Name of the region</span>
-<span class="sd">            </span>
+
 <span class="sd">            location: A list or tuple containing the location</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">game_map</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">maps</span><span class="p">[</span><span class="n">map_name</span><span class="p">]</span> 
-                    <span class="k">if</span> <span class="ow">not</span> <span class="n">map_name</span> <span class="ow">is</span> <span class="bp">None</span> 
+        <span class="n">game_map</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">maps</span><span class="p">[</span><span class="n">map_name</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">map_name</span> <span class="ow">is</span> <span class="bp">None</span>
                     <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_map</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">game_map</span><span class="o">.</span><span class="n">is_in_region</span><span class="p">(</span><span class="n">location</span><span class="p">,</span> <span class="n">region_name</span><span class="p">)</span>
-                        </div>
+</div>
 <div class="viewcode-block" id="RPGApplication.is_agent_in_region"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.rpg_application.RPGApplication.is_agent_in_region">[docs]</a>    <span class="k">def</span> <span class="nf">is_agent_in_region</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">map_name</span><span class="p">,</span> <span class="n">agent_name</span><span class="p">,</span> <span class="n">region_name</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Checks whether the agent is in the region of the map</span>
-<span class="sd">        </span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            map_name: Name of the map. If None the current map will be used</span>
-<span class="sd">            </span>
+
 <span class="sd">            region_name: Name of the region</span>
-<span class="sd">            </span>
+
 <span class="sd">            agent_name: Name of the agent</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">entity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">world</span><span class="o">.</span><span class="n">get_entity</span><span class="p">(</span><span class="n">agent_name</span><span class="p">)</span>
         <span class="n">agent</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">Agent</span><span class="o">.</span><span class="n">registered_as</span><span class="p">)</span>
         <span class="n">location</span> <span class="o">=</span> <span class="n">agent</span><span class="o">.</span><span class="n">position</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_location_in_region</span><span class="p">(</span><span class="n">map_name</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">region_name</span><span class="p">)</span>
-    </div>
+</div>
 <div class="viewcode-block" id="RPGApplication.execute_console_command"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.rpg_application.RPGApplication.execute_console_command">[docs]</a>    <span class="k">def</span> <span class="nf">execute_console_command</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Executes a console command</span>
-<span class="sd">        </span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            command: The command string to execute</span>
-<span class="sd">            </span>
+
 <span class="sd">        Returns: The result of the command</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_listener</span><span class="o">.</span><span class="n">onConsoleCommand</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
-    </div>
+</div>
 <div class="viewcode-block" id="RPGApplication.check_agent_changes"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.rpg_application.RPGApplication.check_agent_changes">[docs]</a>    <span class="k">def</span> <span class="nf">check_agent_changes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Checks all agents for changes&quot;&quot;&quot;</span>        
+        <span class="sd">&quot;&quot;&quot;Checks all agents for changes&quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">world</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">Agent</span><span class="o">.</span><span class="n">registered_as</span><span class="p">):</span>
-            <span class="n">agent</span> <span class="o">=</span> <span class="n">agent</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> 
+            <span class="n">agent</span> <span class="o">=</span> <span class="n">agent</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
             <span class="k">if</span> <span class="n">agent</span><span class="o">.</span><span class="n">map</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_map</span><span class="o">.</span><span class="n">name</span><span class="p">:</span>
-                <span class="k">continue</span>       
+                <span class="k">continue</span>
             <span class="n">agent</span><span class="o">.</span><span class="n">map</span> <span class="o">=</span> <span class="n">agent</span><span class="o">.</span><span class="n">new_map</span> <span class="ow">or</span> <span class="n">agent</span><span class="o">.</span><span class="n">map</span>
             <span class="n">agent</span><span class="o">.</span><span class="n">layer</span> <span class="o">=</span> <span class="n">agent</span><span class="o">.</span><span class="n">new_layer</span> <span class="ow">or</span> <span class="n">agent</span><span class="o">.</span><span class="n">layer</span>
-            <span class="n">agent</span><span class="o">.</span><span class="n">position</span> <span class="o">=</span> <span class="n">agent</span><span class="o">.</span><span class="n">new_position</span> <span class="ow">or</span> <span class="n">agent</span><span class="o">.</span><span class="n">position</span> 
+            <span class="n">agent</span><span class="o">.</span><span class="n">position</span> <span class="o">=</span> <span class="n">agent</span><span class="o">.</span><span class="n">new_position</span> <span class="ow">or</span> <span class="n">agent</span><span class="o">.</span><span class="n">position</span>
             <span class="n">agent</span><span class="o">.</span><span class="n">rotation</span> <span class="o">=</span> <span class="n">agent</span><span class="o">.</span><span class="n">new_rotation</span> <span class="ow">or</span> <span class="n">agent</span><span class="o">.</span><span class="n">rotation</span>
             <span class="n">agent</span><span class="o">.</span><span class="n">new_map</span> <span class="o">=</span> <span class="bp">None</span>
             <span class="n">agent</span><span class="o">.</span><span class="n">new_layer</span> <span class="o">=</span> <span class="bp">None</span>
             <span class="n">agent</span><span class="o">.</span><span class="n">new_position</span> <span class="o">=</span> <span class="bp">None</span>
-            <span class="n">agent</span><span class="o">.</span><span class="n">new_rotation</span> <span class="o">=</span> <span class="bp">None</span>    
-            <span class="n">game_map</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">maps</span><span class="p">[</span><span class="n">agent</span><span class="o">.</span><span class="n">map</span><span class="p">]</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">game_map</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-                <span class="n">game_map</span><span class="o">.</span><span class="n">update_entities</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">world</span><span class="p">)</span>
-                    </div>
-<div class="viewcode-block" id="RPGApplication.pump"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.rpg_application.RPGApplication.pump">[docs]</a>    <span class="k">def</span> <span class="nf">pump</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Performs actions every frame.        </span>
-<span class="sd">        </span>
+            <span class="n">agent</span><span class="o">.</span><span class="n">new_rotation</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="k">if</span> <span class="n">agent</span><span class="o">.</span><span class="n">map</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">agent</span><span class="o">.</span><span class="n">map</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">maps</span><span class="p">:</span>
+                    <span class="n">game_map</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">maps</span><span class="p">[</span><span class="n">agent</span><span class="o">.</span><span class="n">map</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">game_map</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                        <span class="n">game_map</span><span class="o">.</span><span class="n">update_entities</span><span class="p">()</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">update_agents</span><span class="p">(</span><span class="n">game_map</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s">&quot;Tried to access map `</span><span class="si">%s</span><span class="s">`,&quot;</span>
+                                   <span class="s">&quot; which does not exist&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">agent</span><span class="o">.</span><span class="n">map</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="RPGApplication.set_global_lighting"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.rpg_application.RPGApplication.set_global_lighting">[docs]</a>    <span class="k">def</span> <span class="nf">set_global_lighting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">red</span><span class="p">,</span> <span class="n">green</span><span class="p">,</span> <span class="n">blue</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Sets the color of the current maps lighting</span>
+
 <span class="sd">        Args:</span>
-<span class="sd">            dt: Time elapsed since last call to pump</span>
+<span class="sd">            red: The red value of the light as a float between 0.0 and 1.0</span>
+
+<span class="sd">            green: The green value of the light as a float between 0.0 and 1.0</span>
+
+<span class="sd">            blue: The blue value of the light as a float between 0.0 and 1.0</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_map</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">current_map</span><span class="o">.</span><span class="n">camera</span><span class="o">.</span><span class="n">setLightingColor</span><span class="p">(</span><span class="n">red</span><span class="p">,</span> <span class="n">green</span><span class="p">,</span> <span class="n">blue</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="RPGApplication.get_global_lighting"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.rpg_application.RPGApplication.get_global_lighting">[docs]</a>    <span class="k">def</span> <span class="nf">get_global_lighting</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the values of the current maps lighting&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_map</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">current_map</span><span class="o">.</span><span class="n">camera</span><span class="o">.</span><span class="n">getLightingColor</span><span class="p">()</span>
+        <span class="k">return</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="RPGApplication.pump"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.rpg_application.RPGApplication.pump">[docs]</a>    <span class="k">def</span> <span class="nf">pump</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time_delta</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Performs actions every frame.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            time_delta: Time elapsed since last call to pump</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_listener</span><span class="o">.</span><span class="n">quit</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_map</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">check_agent_changes</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">current_map</span><span class="o">.</span><span class="n">update_entities_fife</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">current_map</span><span class="o">.</span><span class="n">update_entities</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">world</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">current_map</span><span class="o">.</span><span class="n">update_entities</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">current_map</span><span class="o">.</span><span class="n">update_entitities_agent</span><span class="p">()</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">world</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">world</span><span class="o">.</span><span class="n">pump</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>
-        <span class="n">FifeManager</span><span class="o">.</span><span class="n">pump</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
-    
-<span class="c">#Register conditions</span></div></div>
-<span class="n">ScriptingSystem</span><span class="o">.</span><span class="n">register_condition</span><span class="p">(</span><span class="s">&quot;IsLocationInRegion&quot;</span><span class="p">,</span> 
-                                   <span class="n">RPGApplication</span><span class="o">.</span><span class="n">is_location_in_region</span><span class="p">)</span>
-<span class="n">ScriptingSystem</span><span class="o">.</span><span class="n">register_condition</span><span class="p">(</span><span class="s">&quot;IsAgentInRegion&quot;</span><span class="p">,</span> 
-                                   <span class="n">RPGApplication</span><span class="o">.</span><span class="n">is_agent_in_region</span><span class="p">)</span>
-<span class="n">ScriptingSystem</span><span class="o">.</span><span class="n">register_condition</span><span class="p">(</span><span class="s">&quot;CurrentMap&quot;</span><span class="p">,</span> 
-                                   <span class="k">lambda</span> <span class="n">application</span><span class="p">,</span> <span class="n">map_name</span><span class="p">:</span> 
-                                    <span class="n">application</span><span class="o">.</span><span class="n">current_map</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">map_name</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">world</span><span class="o">.</span><span class="n">pump</span><span class="p">(</span><span class="n">time_delta</span><span class="p">)</span>
+        <span class="n">FifeManager</span><span class="o">.</span><span class="n">pump</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time_delta</span><span class="p">)</span></div></div>
 </pre></div>
 
           </div>
@@ -923,7 +960,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../index.html">fife-rpg 0.1c documentation</a> &raquo;</li>
+        <li><a href="../../index.html">fife-rpg 0.2 documentation</a> &raquo;</li>
           <li><a href="../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>

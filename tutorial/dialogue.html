@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Dialogues &mdash; fife-rpg 0.1c documentation</title>
+    <title>Dialogues &mdash; fife-rpg 0.2 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.1c',
+        VERSION:     '0.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="fife-rpg 0.1c documentation" href="../index.html" />
+    <link rel="top" title="fife-rpg 0.2 documentation" href="../index.html" />
     <link rel="up" title="Tutorial" href="tutorial.html" />
     <link rel="next" title="Systems" href="systems.html" />
     <link rel="prev" title="Components" href="components.html" /> 
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="components.html" title="Components"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">fife-rpg 0.1c documentation</a> &raquo;</li>
+        <li><a href="../index.html">fife-rpg 0.2 documentation</a> &raquo;</li>
           <li><a href="tutorial.html" accesskey="U">Tutorial</a> &raquo;</li> 
       </ul>
     </div>  
@@ -59,6 +59,10 @@
   <span class="target" id="dialogues"></span><div class="section" id="id1">
 <h1>Dialogues<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
 <p>This tutorial will explain the dialogue module that is included in FIFErpg.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The conditions section has changed since the 0.1c release.</p>
+</div>
 <div class="section" id="summary">
 <h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
 <p>Here is a quick summary of how the dialogues in this module work.</p>
@@ -116,14 +120,10 @@ every time the identifier is changed.</p>
 </div>
 <div class="section" id="conditions">
 <h2>Conditions<a class="headerlink" href="#conditions" title="Permalink to this headline">¶</a></h2>
-<p>The conditions themselves are dictionaries with 2 keys:
-Type: The type of the condition. What conditions are available is determined
-by what conditions are registered to the <a class="reference internal" href="../fife_rpg.systems.html#fife_rpg.systems.scriptingsystem.ScriptingSystem" title="fife_rpg.systems.scriptingsystem.ScriptingSystem"><tt class="xref py py-class docutils literal"><span class="pre">ScriptingSystem</span></tt></a>. It also follows the
-same rules as for the scripting system: If a condition is prefixed with &#8220;Not_&#8221;
-then the condition will pass if it evaluates to False. The conditions are also
-case sensitive.
-Args: A list of arguments to pass to the condition. This depends on the
-condition.</p>
+<p>The conditions themselves are an python expression that should evaluate
+to either True or False. The expression is evaluated using the
+<a class="reference internal" href="../fife_rpg.systems.html#fife_rpg.systems.scriptingsystem.ScriptingSystem" title="fife_rpg.systems.scriptingsystem.ScriptingSystem"><tt class="xref py py-class docutils literal"><span class="pre">ScriptingSystem</span></tt></a> thus the same variables and functions that scripts
+have available are available to dialogue conditions.</p>
 <p>See also:
 <a class="reference internal" href="scripting.html"><em>Scripting</em></a></p>
 </div>
@@ -135,20 +135,17 @@ Args: A list of arguments to pass to the command. This supports the same
 variable replacement as for the text.</p>
 <p>Here is an example dialogue file:</p>
 <div class="code yaml highlight-python"><pre>Greetings:
+
   - talker: David
     text: Hey, I've seen you before, haven't I?
-    conditions:
-      - Type: Knows
-        Args: [David, PlayerCharacter]
+    conditions: Agent.knows(entities.David, "PlayerCharacter")
     responses:
       - "yes"
       - yes_bye
 
   - talker: David
     text: Hi, I don't know you, do I?
-    conditions:
-      - Type: Not_Knows
-        Args: [David, PlayerCharacter]
+    conditions: not Agent.knows(entities.David, "PlayerCharacter")
     responses:
       - no_introduce
       - no_bye
@@ -288,7 +285,7 @@ a response, of course:</p>
         <li class="right" >
           <a href="components.html" title="Components"
              >previous</a> |</li>
-        <li><a href="../index.html">fife-rpg 0.1c documentation</a> &raquo;</li>
+        <li><a href="../index.html">fife-rpg 0.2 documentation</a> &raquo;</li>
           <li><a href="tutorial.html" >Tutorial</a> &raquo;</li> 
       </ul>
     </div>

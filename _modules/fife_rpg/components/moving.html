@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>fife_rpg.components.moving &mdash; fife-rpg 0.1c documentation</title>
+    <title>fife_rpg.components.moving &mdash; fife-rpg 0.2 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.1c',
+        VERSION:     '0.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="top" title="fife-rpg 0.1c documentation" href="../../../index.html" />
+    <link rel="top" title="fife-rpg 0.2 documentation" href="../../../index.html" />
     <link rel="up" title="Module code" href="../../index.html" /> 
   </head>
   <body>
@@ -38,7 +38,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">fife-rpg 0.1c documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">fife-rpg 0.2 documentation</a> &raquo;</li>
           <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
@@ -73,26 +73,27 @@
 
 <span class="kn">from</span> <span class="nn">fife_rpg.components.base</span> <span class="kn">import</span> <span class="n">Base</span>
 
+
 <div class="viewcode-block" id="Moving"><a class="viewcode-back" href="../../../fife_rpg.components.html#fife_rpg.components.moving.Moving">[docs]</a><span class="k">class</span> <span class="nc">Moving</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Component that stores the values for agents that can move around</span>
 <span class="sd">    the map by using pathfinding.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Fields:</span>
 <span class="sd">        walk_speed: The walking speed</span>
-<span class="sd">        </span>
+
 <span class="sd">        walk_animation: The animation that is played when walking</span>
-<span class="sd">        </span>
+
 <span class="sd">        run_speed: The Running speed</span>
-<span class="sd">        </span>
+
 <span class="sd">        run_animation: The animation that is played when running</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">Base</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">walk_speed</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">walk_animation</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
                       <span class="n">run_speed</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">run_animation</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s">&quot;walk_speed&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">default</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="mf">0.0</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s">&quot;walk_speed&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">default</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="mf">0.0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s">&quot;walk_animation&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">default</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="s">&quot;walk&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s">&quot;run_speed&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">default</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="mf">0.0</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s">&quot;run_speed&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">default</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="mf">0.0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s">&quot;run_animation&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">default</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="s">&quot;run&quot;</span>
 
     <span class="nd">@classmethod</span>
@@ -101,7 +102,7 @@
 
 <span class="sd">        Args:</span>
 <span class="sd">            name: The name under which the class should be registered</span>
-<span class="sd">            </span>
+
 <span class="sd">            auto_register: This sets whether components this component</span>
 <span class="sd">            derives from will have their registered_as property set to the same</span>
 <span class="sd">            name as this class.</span>
@@ -143,7 +144,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">fife-rpg 0.1c documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">fife-rpg 0.2 documentation</a> &raquo;</li>
           <li><a href="../../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>

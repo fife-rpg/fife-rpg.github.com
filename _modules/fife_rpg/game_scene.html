@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>fife_rpg.game_scene &mdash; fife-rpg 0.1c documentation</title>
+    <title>fife_rpg.game_scene &mdash; fife-rpg 0.2 documentation</title>
     
     <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.1c',
+        VERSION:     '0.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <link rel="top" title="fife-rpg 0.1c documentation" href="../../index.html" />
+    <link rel="top" title="fife-rpg 0.2 documentation" href="../../index.html" />
     <link rel="up" title="Module code" href="../index.html" /> 
   </head>
   <body>
@@ -38,7 +38,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../index.html">fife-rpg 0.1c documentation</a> &raquo;</li>
+        <li><a href="../../index.html">fife-rpg 0.2 documentation</a> &raquo;</li>
           <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
@@ -54,12 +54,12 @@
 <span class="c">#   it under the terms of the GNU General Public License as published by</span>
 <span class="c">#   the Free Software Foundation, either version 3 of the License, or</span>
 <span class="c">#   (at your option) any later version.</span>
-<span class="c">#   </span>
+<span class="c">#</span>
 <span class="c">#   This program is distributed in the hope that it will be useful,</span>
 <span class="c">#   but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
 <span class="c">#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
 <span class="c">#   GNU General Public License for more details.</span>
-<span class="c">#   </span>
+<span class="c">#</span>
 <span class="c">#   You should have received a copy of the GNU General Public License</span>
 <span class="c">#   along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
 <span class="c">#</span>
@@ -81,36 +81,38 @@
 <span class="kn">from</span> <span class="nn">fife_rpg</span> <span class="kn">import</span> <span class="n">ViewBase</span>
 <span class="kn">from</span> <span class="nn">fife_rpg</span> <span class="kn">import</span> <span class="n">ControllerBase</span>
 
+
 <div class="viewcode-block" id="BaseOutliner"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.game_scene.BaseOutliner">[docs]</a><span class="k">class</span> <span class="nc">BaseOutliner</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Determines the outline of an instance&quot;&quot;&quot;</span>
-    
+
     <span class="n">__metaclass__</span> <span class="o">=</span> <span class="n">ABCMeta</span>
-    
+
     <span class="nd">@abstractmethod</span>
 <div class="viewcode-block" id="BaseOutliner.get_data"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.game_scene.BaseOutliner.get_data">[docs]</a>    <span class="k">def</span> <span class="nf">get_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">world</span><span class="p">,</span> <span class="n">identifier</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Determines whether an instance should be outline and the data</span>
 <span class="sd">        used for the outline.</span>
-<span class="sd">        </span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            world: The world</span>
 
-<span class="sd">            identifier: The name of the instance            </span>
-<span class="sd">        </span>
+<span class="sd">            identifier: The name of the instance</span>
+
 <span class="sd">        Returns: The data as a list, if the instance should be</span>
 <span class="sd">        outlined. None, if it should not.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        </div></div>
+
+</div></div>
 <div class="viewcode-block" id="SimpleOutliner"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.game_scene.SimpleOutliner">[docs]</a><span class="k">class</span> <span class="nc">SimpleOutliner</span><span class="p">(</span><span class="n">BaseOutliner</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Outliner that determines the outline based on a list of identifiers</span>
 <span class="sd">    to ignore and a single data element for instances that should be outlined.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Properties:</span>
 <span class="sd">        outline_data: A tuple of values for the outlines. It is in the order:</span>
-<span class="sd">        (Red, Green, Blue, Width, Threshold)       </span>
-<span class="sd">       </span>
+<span class="sd">        (Red, Green, Blue, Width, Threshold)</span>
+
 <span class="sd">        outline_ignore: A list of identifiers to ignore when drawing outlines</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outline_data</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">outline_ignore</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">outline_data</span> <span class="o">=</span> <span class="n">outline_data</span> <span class="ow">or</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__outline_ignore</span> <span class="o">=</span> <span class="n">outline_ignore</span> <span class="ow">or</span> <span class="p">[]</span>
@@ -123,19 +125,20 @@
 <div class="viewcode-block" id="SimpleOutliner.get_data"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.game_scene.SimpleOutliner.get_data">[docs]</a>    <span class="k">def</span> <span class="nf">get_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">world</span><span class="p">,</span> <span class="n">identifier</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Determines whether an instance should be outline and the data</span>
 <span class="sd">        used for the outline.</span>
-<span class="sd">        </span>
-<span class="sd">        Args:                </span>
+
+<span class="sd">        Args:</span>
 <span class="sd">            world: The world</span>
-<span class="sd">        </span>
-<span class="sd">            identifier: The name of the instance            </span>
-<span class="sd">        </span>
+
+<span class="sd">            identifier: The name of the instance</span>
+
 <span class="sd">        Returns: The data as a list, if the instance should be</span>
 <span class="sd">        outlined. None, if it should not.</span>
-<span class="sd">        &quot;&quot;&quot;</span>        
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">identifier</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">outline_ignore</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">None</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">outline_data</span>
-            </div></div>
+
+</div></div>
 <div class="viewcode-block" id="GameSceneListener"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.game_scene.GameSceneListener">[docs]</a><span class="k">class</span> <span class="nc">GameSceneListener</span><span class="p">(</span><span class="n">fife</span><span class="o">.</span><span class="n">IMouseListener</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;The game listener.</span>
 
@@ -146,9 +149,9 @@
 <span class="sd">        engine: The FIFE engine</span>
 
 <span class="sd">        gamecontroller: A :class:`fife_rpg.game_scene.GameSceneController`</span>
-<span class="sd">        </span>
-<span class="sd">        eventmanager: The engines eventmanager. A :class:`fife.EventManager`       </span>
-<span class="sd">        </span>
+
+<span class="sd">        eventmanager: The engines eventmanager. A :class:`fife.EventManager`</span>
+
 <span class="sd">        is_outlined: If true then outlines for instances will be drawn.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -159,13 +162,12 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">eventmanager</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">getEventManager</span><span class="p">()</span>
         <span class="n">fife</span><span class="o">.</span><span class="n">IMouseListener</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">is_outlined</span> <span class="o">=</span> <span class="bp">False</span>
-   
-        
+
     <span class="nd">@property</span>
 <div class="viewcode-block" id="GameSceneListener.outline_ignore"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.game_scene.GameSceneListener.outline_ignore">[docs]</a>    <span class="k">def</span> <span class="nf">outline_ignore</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns outline_ignore&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__outline_ignore</span>
-    </div>
+</div>
 <div class="viewcode-block" id="GameSceneListener.activate"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.game_scene.GameSceneListener.activate">[docs]</a>    <span class="k">def</span> <span class="nf">activate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Makes the listener receive events&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">eventmanager</span><span class="o">.</span><span class="n">addMouseListener</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
@@ -173,9 +175,8 @@
 <div class="viewcode-block" id="GameSceneListener.deactivate"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.game_scene.GameSceneListener.deactivate">[docs]</a>    <span class="k">def</span> <span class="nf">deactivate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Makes the listener receive events&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">eventmanager</span><span class="o">.</span><span class="n">removeMouseListener</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-
 </div>
-<div class="viewcode-block" id="GameSceneListener.mousePressed"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.game_scene.GameSceneListener.mousePressed">[docs]</a>    <span class="k">def</span> <span class="nf">mousePressed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span> <span class="c"># pylint: disable-msg=C0103,W0221</span>
+<div class="viewcode-block" id="GameSceneListener.mousePressed"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.game_scene.GameSceneListener.mousePressed">[docs]</a>    <span class="k">def</span> <span class="nf">mousePressed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>  <span class="c"># pylint: disable-msg=C0103,W0221</span>
         <span class="sd">&quot;&quot;&quot;Called when a mouse button was pressed.</span>
 
 <span class="sd">        Args:</span>
@@ -183,7 +184,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span>
 </div>
-<div class="viewcode-block" id="GameSceneListener.mouseMoved"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.game_scene.GameSceneListener.mouseMoved">[docs]</a>    <span class="k">def</span> <span class="nf">mouseMoved</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span> <span class="c"># pylint: disable-msg=C0103,W0221</span>
+<div class="viewcode-block" id="GameSceneListener.mouseMoved"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.game_scene.GameSceneListener.mouseMoved">[docs]</a>    <span class="k">def</span> <span class="nf">mouseMoved</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>  <span class="c"># pylint: disable-msg=C0103,W0221</span>
         <span class="sd">&quot;&quot;&quot;Called when the mouse was moved.</span>
 
 <span class="sd">        Args:</span>
@@ -196,14 +197,14 @@
             <span class="n">game_map</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">current_map</span>
             <span class="k">if</span> <span class="n">game_map</span><span class="p">:</span>
                 <span class="n">renderer</span> <span class="o">=</span> <span class="n">InstanceRenderer</span><span class="o">.</span><span class="n">getInstance</span><span class="p">(</span><span class="n">game_map</span><span class="o">.</span><span class="n">camera</span><span class="p">)</span>
-                
+
                 <span class="n">renderer</span><span class="o">.</span><span class="n">removeAllOutlines</span><span class="p">()</span>
-    
+
                 <span class="n">point</span> <span class="o">=</span> <span class="n">fife</span><span class="o">.</span><span class="n">ScreenPoint</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">getX</span><span class="p">(),</span> <span class="n">event</span><span class="o">.</span><span class="n">getY</span><span class="p">())</span>
                 <span class="n">actor_instances</span> <span class="o">=</span> <span class="n">game_map</span><span class="o">.</span><span class="n">get_instances_at</span><span class="p">(</span>
-                                                <span class="n">point</span><span class="p">,</span> 
+                                                <span class="n">point</span><span class="p">,</span>
                                                 <span class="n">game_map</span><span class="o">.</span><span class="n">get_layer</span><span class="p">(</span><span class="s">&quot;actors&quot;</span><span class="p">))</span>
-      
+
                 <span class="k">for</span> <span class="n">instance</span> <span class="ow">in</span> <span class="n">actor_instances</span><span class="p">:</span>
                     <span class="n">data</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">outliner</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span>
                                                 <span class="n">controller</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">world</span><span class="p">,</span>
@@ -212,7 +213,7 @@
                     <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
                         <span class="n">renderer</span><span class="o">.</span><span class="n">addOutlined</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="o">*</span><span class="n">data</span><span class="p">)</span>
 </div>
-<div class="viewcode-block" id="GameSceneListener.mouseReleased"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.game_scene.GameSceneListener.mouseReleased">[docs]</a>    <span class="k">def</span> <span class="nf">mouseReleased</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span> <span class="c"># pylint: disable-msg=C0103,W0221</span>
+<div class="viewcode-block" id="GameSceneListener.mouseReleased"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.game_scene.GameSceneListener.mouseReleased">[docs]</a>    <span class="k">def</span> <span class="nf">mouseReleased</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>  <span class="c"># pylint: disable-msg=C0103,W0221</span>
         <span class="sd">&quot;&quot;&quot;Called when a mouse button was released.</span>
 
 <span class="sd">        Args:</span>
@@ -220,7 +221,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span>
 </div>
-<div class="viewcode-block" id="GameSceneListener.mouseDragged"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.game_scene.GameSceneListener.mouseDragged">[docs]</a>    <span class="k">def</span> <span class="nf">mouseDragged</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span> <span class="c"># pylint: disable-msg=C0103,W0221</span>
+<div class="viewcode-block" id="GameSceneListener.mouseDragged"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.game_scene.GameSceneListener.mouseDragged">[docs]</a>    <span class="k">def</span> <span class="nf">mouseDragged</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>  <span class="c"># pylint: disable-msg=C0103,W0221</span>
         <span class="sd">&quot;&quot;&quot;Called when the mouse is moved while a button is being pressed.</span>
 
 <span class="sd">        Args:</span>
@@ -228,7 +229,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span>
 </div>
-<div class="viewcode-block" id="GameSceneListener.mouseWheelMovedUp"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.game_scene.GameSceneListener.mouseWheelMovedUp">[docs]</a>    <span class="k">def</span> <span class="nf">mouseWheelMovedUp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+<div class="viewcode-block" id="GameSceneListener.mouseWheelMovedUp"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.game_scene.GameSceneListener.mouseWheelMovedUp">[docs]</a>    <span class="k">def</span> <span class="nf">mouseWheelMovedUp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>  <span class="c"># pylint: disable-msg=W0221, C0103</span>
         <span class="sd">&quot;&quot;&quot;Called when the mouse wheel is moved upwards</span>
 
 <span class="sd">        Args:</span>
@@ -236,34 +237,37 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span>
 </div>
-<div class="viewcode-block" id="GameSceneListener.mouseWheelMovedDown"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.game_scene.GameSceneListener.mouseWheelMovedDown">[docs]</a>    <span class="k">def</span> <span class="nf">mouseWheelMovedDown</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+<div class="viewcode-block" id="GameSceneListener.mouseWheelMovedDown"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.game_scene.GameSceneListener.mouseWheelMovedDown">[docs]</a>    <span class="k">def</span> <span class="nf">mouseWheelMovedDown</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>  <span class="c"># pylint: disable-msg=W0221, C0103</span>
         <span class="sd">&quot;&quot;&quot;Called when the mouse wheel is moved downwards</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            event: The mouse event</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span>
+
 </div></div>
 <div class="viewcode-block" id="GameSceneView"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.game_scene.GameSceneView">[docs]</a><span class="k">class</span> <span class="nc">GameSceneView</span><span class="p">(</span><span class="n">ViewBase</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;The view responsible for showing the in-game gui</span>
 
 <span class="sd">    Properties:</span>
-<span class="sd">        application: A :class:`fife_rpg.rpg_application.RPGApplication` instance</span>
+<span class="sd">        application: A :class:`fife_rpg.rpg_application.RPGApplication`</span>
+<span class="sd">        instance</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">application</span><span class="p">):</span>
         <span class="n">ViewBase</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">application</span><span class="p">)</span>
+
 </div>
 <div class="viewcode-block" id="GameSceneController"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.game_scene.GameSceneController">[docs]</a><span class="k">class</span> <span class="nc">GameSceneController</span><span class="p">(</span><span class="n">ControllerBase</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Handles the input for a game scene</span>
 
 <span class="sd">    Properties:</span>
 <span class="sd">        view: A :class:`fife_rpg.game_scene.GameSceneView`</span>
-<span class="sd">        </span>
+
 <span class="sd">        application: A :class:`fife_rpg.rpg_application.RPGApplication`</span>
-<span class="sd">        </span>
+
 <span class="sd">        listener: The listener used by the game scene</span>
-<span class="sd">        </span>
+
 <span class="sd">        outliner: The outliner that will be used to determine outlines</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -288,8 +292,8 @@
 <span class="sd">        Args:</span>
 <span class="sd">            time_delta: Time that passed since the last call</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">ControllerBase</span><span class="o">.</span><span class="n">pump</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time_delta</span><span class="p">)</span>
-</pre></div></div></div>
+        <span class="n">ControllerBase</span><span class="o">.</span><span class="n">pump</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time_delta</span><span class="p">)</span></div></div>
+</pre></div>
 
           </div>
         </div>
@@ -322,7 +326,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../index.html">fife-rpg 0.1c documentation</a> &raquo;</li>
+        <li><a href="../../index.html">fife-rpg 0.2 documentation</a> &raquo;</li>
           <li><a href="../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>

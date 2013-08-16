@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Scripting &mdash; fife-rpg 0.1c documentation</title>
+    <title>Scripting &mdash; fife-rpg 0.2 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.1c',
+        VERSION:     '0.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="fife-rpg 0.1c documentation" href="../index.html" />
+    <link rel="top" title="fife-rpg 0.2 documentation" href="../index.html" />
     <link rel="up" title="Systems" href="systems.html" />
     <link rel="next" title="GameVariables" href="game_variables.html" />
     <link rel="prev" title="Systems" href="systems.html" /> 
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="systems.html" title="Systems"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">fife-rpg 0.1c documentation</a> &raquo;</li>
+        <li><a href="../index.html">fife-rpg 0.2 documentation</a> &raquo;</li>
           <li><a href="tutorial.html" >Tutorial</a> &raquo;</li>
           <li><a href="systems.html" accesskey="U">Systems</a> &raquo;</li> 
       </ul>
@@ -60,121 +60,88 @@
   <span class="target" id="scripting"></span><div class="section" id="id1">
 <h1>Scripting<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
 <p>This tutorial will explain the scripting system of FIFErpg.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Scripting has changed since the 0.1c release.</p>
+</div>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
-<p>The scripting system evaluates a condition and runs the <a class="reference internal" href="../fife_rpg.actions.html#fife_rpg.actions.base.Base" title="fife_rpg.actions.base.Base"><tt class="xref py py-class docutils literal"><span class="pre">Action</span></tt></a> list of a
-<a class="reference internal" href="../fife_rpg.systems.html#fife_rpg.systems.scriptingsystem.Script" title="fife_rpg.systems.scriptingsystem.Script"><tt class="xref py py-class docutils literal"><span class="pre">Script</span></tt></a> if it evaluates to True.</p>
-</div>
-<div class="section" id="scripts">
-<h2>Scripts<a class="headerlink" href="#scripts" title="Permalink to this headline">¶</a></h2>
-<p>A <a class="reference internal" href="../fife_rpg.systems.html#fife_rpg.systems.scriptingsystem.Script" title="fife_rpg.systems.scriptingsystem.Script"><tt class="xref py py-class docutils literal"><span class="pre">Script</span></tt></a> contains an list of dictionaries, each containing data to create an
-<a class="reference internal" href="../fife_rpg.actions.html#fife_rpg.actions.base.Base" title="fife_rpg.actions.base.Base"><tt class="xref py py-class docutils literal"><span class="pre">Action</span></tt></a>. Scripts are not to be created manually, rather use the methods
-of the <a class="reference internal" href="../fife_rpg.systems.html#fife_rpg.systems.scriptingsystem.ScriptingSystem" title="fife_rpg.systems.scriptingsystem.ScriptingSystem"><tt class="xref py py-class docutils literal"><span class="pre">ScriptingSystem</span></tt></a> explained below.</p>
-<p>The dictionaries can have the following keys, most are the same as for the
-constructor of the <a class="reference internal" href="../fife_rpg.actions.html#fife_rpg.actions.base.Base" title="fife_rpg.actions.base.Base"><tt class="xref py py-class docutils literal"><span class="pre">Action</span></tt></a> class:</p>
-<ul>
-<li><p class="first">Action: The name of the <a class="reference internal" href="../fife_rpg.actions.html#fife_rpg.actions.base.Base" title="fife_rpg.actions.base.Base"><tt class="xref py py-class docutils literal"><span class="pre">Action</span></tt></a></p>
-</li>
-<li><p class="first">Agent: The performer of the <a class="reference internal" href="../fife_rpg.actions.html#fife_rpg.actions.base.Base" title="fife_rpg.actions.base.Base"><tt class="xref py py-class docutils literal"><span class="pre">Action</span></tt></a></p>
-</li>
-<li><p class="first">Target: The target of the <a class="reference internal" href="../fife_rpg.actions.html#fife_rpg.actions.base.Base" title="fife_rpg.actions.base.Base"><tt class="xref py py-class docutils literal"><span class="pre">Action</span></tt></a></p>
-</li>
-<li><p class="first">Time: The seconds to wait after the current action is finished before the
-next <a class="reference internal" href="../fife_rpg.actions.html#fife_rpg.actions.base.Base" title="fife_rpg.actions.base.Base"><tt class="xref py py-class docutils literal"><span class="pre">Action</span></tt></a> should be executed.</p>
-</li>
-<li><p class="first">ActionCommands: The additional commands the <a class="reference internal" href="../fife_rpg.actions.html#fife_rpg.actions.base.Base" title="fife_rpg.actions.base.Base"><tt class="xref py py-class docutils literal"><span class="pre">Action</span></tt></a> should execute.(optional)</p>
-</li>
-<li><p class="first">Command: This will pass the execution of the action over to a script command.
-(optional). The value is also a dictionary:</p>
-<ul class="simple">
-<li>Name: The name of the command</li>
-<li>Variables: A dictionary of variables to pass to the command.</li>
-</ul>
-<blockquote>
-<div><ul class="simple">
-<li>Type: The Type of the variable. (optional) Currently only accepting
-&#8220;Entity&#8221;, which interprets the value as the name of an Entity</li>
-<li>Value: The value of the variables.</li>
-</ul>
-</div></blockquote>
-</li>
-</ul>
+<p>The scripting system keeps a dictionary of scripts and runs specific functions
+on specific events.</p>
 </div>
 <div class="section" id="scripting-system">
 <h2>Scripting System<a class="headerlink" href="#scripting-system" title="Permalink to this headline">¶</a></h2>
-<p>The <a class="reference internal" href="../fife_rpg.systems.html#fife_rpg.systems.scriptingsystem.ScriptingSystem" title="fife_rpg.systems.scriptingsystem.ScriptingSystem"><tt class="xref py py-class docutils literal"><span class="pre">ScriptingSystem</span></tt></a> itself manages a dictionary of scripts and a list of
-conditions. Every time its <a class="reference internal" href="../fife_rpg.systems.html#fife_rpg.systems.scriptingsystem.ScriptingSystem.step" title="fife_rpg.systems.scriptingsystem.ScriptingSystem.step"><tt class="xref py py-func docutils literal"><span class="pre">step()</span></tt></a>
-method is called it will iterate through the
-list of conditions and evaluate them. If the evaluation returns True it will
-run the script set by the condition.</p>
-<p>To add a script to the system you will need to use the <a class="reference internal" href="../fife_rpg.systems.html#fife_rpg.systems.scriptingsystem.ScriptingSystem.set_script" title="fife_rpg.systems.scriptingsystem.ScriptingSystem.set_script"><tt class="xref py py-func docutils literal"><span class="pre">set_script()</span></tt></a> method.
-It takes the scripts name and the dictionary list as explained in the Scripts
-section above.</p>
+<p>The <a class="reference internal" href="../fife_rpg.systems.html#fife_rpg.systems.scriptingsystem.ScriptingSystem" title="fife_rpg.systems.scriptingsystem.ScriptingSystem"><tt class="xref py py-class docutils literal"><span class="pre">ScriptingSystem</span></tt></a> itself manages a dictionary of scripts.</p>
+</div>
+<div class="section" id="scripts">
+<h2>Scripts<a class="headerlink" href="#scripts" title="Permalink to this headline">¶</a></h2>
+<p>A Script is a python file that is being run inside the scripting environment.</p>
+<p>The scripts need to have specific functions that are being called by the
+scripting system for them to actually do something after the initial run.</p>
+<p>Currently there are 2 functions that the scripting system calls, if a script
+has them.</p>
+<p>step(time_delta)
+This is called every time the scripting systems step method is called.
+The time_delta is the time since the last call to step.</p>
+<p>on_map_switched(self, old_map, new_map)
+This is called after the map was switched. The variables have been updated for
+the new map at this point. The old_map is the name of the previous map, the
+new_map is the name of the current map.</p>
+<p>Note that there are NO restrictions on what modules can be imported and used.
+All modules that are available to the python environment in which the main
+application is run are also available in scripts by importing them normally.</p>
+<p>The additional functions and variables available are those that have been made
+available to the <a class="reference internal" href="../fife_rpg.systems.html#fife_rpg.systems.game_variables.GameVariables" title="fife_rpg.systems.game_variables.GameVariables"><tt class="xref py py-class docutils literal"><span class="pre">GameVariables</span></tt></a> system and the commands that have been
+registered to the <a class="reference internal" href="../fife_rpg.systems.html#fife_rpg.systems.scriptingsystem.ScriptingSystem" title="fife_rpg.systems.scriptingsystem.ScriptingSystem"><tt class="xref py py-class docutils literal"><span class="pre">ScriptingSystem</span></tt></a>. These are inside various modules,
+depending on how they were registered or made available.</p>
+<p>These are the current variables and modules available. Note that some may only
+be available if the component or system is registered and active.</p>
+<dl class="docutils">
+<dt>application - Functions and variables from the <a class="reference internal" href="../fife_rpg.html#fife_rpg.rpg_application.RPGApplication" title="fife_rpg.rpg_application.RPGApplication"><tt class="xref py py-class docutils literal"><span class="pre">RPGApplication</span></tt></a></dt>
+<dd><ul class="first last simple">
+<li>current_map: <a class="reference internal" href="../fife_rpg.html#fife_rpg.rpg_application.RPGApplication.current_map" title="fife_rpg.rpg_application.RPGApplication.current_map"><tt class="xref py py-attr docutils literal"><span class="pre">current_map</span></tt></a></li>
+<li>is_agent_in_region: <a class="reference internal" href="../fife_rpg.html#fife_rpg.rpg_application.RPGApplication.is_agent_in_region" title="fife_rpg.rpg_application.RPGApplication.is_agent_in_region"><tt class="xref py py-meth docutils literal"><span class="pre">is_agent_in_region()</span></tt></a></li>
+<li>is_location_in_region: <a class="reference internal" href="../fife_rpg.html#fife_rpg.rpg_application.RPGApplication.is_location_in_region" title="fife_rpg.rpg_application.RPGApplication.is_location_in_region"><tt class="xref py py-meth docutils literal"><span class="pre">is_location_in_region()</span></tt></a></li>
+<li>maps <a class="reference internal" href="../fife_rpg.html#fife_rpg.rpg_application.RPGApplication.maps" title="fife_rpg.rpg_application.RPGApplication.maps"><tt class="xref py py-attr docutils literal"><span class="pre">maps</span></tt></a></li>
+<li>set_global_lighting: <a class="reference internal" href="../fife_rpg.html#fife_rpg.rpg_application.RPGApplication.set_global_lighting" title="fife_rpg.rpg_application.RPGApplication.set_global_lighting"><tt class="xref py py-meth docutils literal"><span class="pre">set_global_lighting()</span></tt></a></li>
+<li>get_global_lighting: <a class="reference internal" href="../fife_rpg.html#fife_rpg.rpg_application.RPGApplication.get_global_lighting" title="fife_rpg.rpg_application.RPGApplication.get_global_lighting"><tt class="xref py py-meth docutils literal"><span class="pre">get_global_lighting()</span></tt></a></li>
+</ul>
+</dd>
+</dl>
+<p>entities - Makes every <a class="reference internal" href="../fife_rpg.entities.html#fife_rpg.entities.rpg_entity.RPGEntity" title="fife_rpg.entities.rpg_entity.RPGEntity"><tt class="xref py py-class docutils literal"><span class="pre">RPGEntity</span></tt></a> of the <a class="reference internal" href="../fife_rpg.html#fife_rpg.world.RPGWorld" title="fife_rpg.world.RPGWorld"><tt class="xref py py-class docutils literal"><span class="pre">RPGWorld</span></tt></a> available by its name.
+For example you just need to type entities.PlayerCharacter</p>
+<p>Note for components:
+These are only the default names. When auto registering script commands
+through the <a class="reference internal" href="../fife_rpg.html#fife_rpg.rpg_application.RPGApplication" title="fife_rpg.rpg_application.RPGApplication"><tt class="xref py py-class docutils literal"><span class="pre">RPGApplication</span></tt></a> the name under which the component is registered
+is used.</p>
+<dl class="docutils">
+<dt>Agent - Functions of the Agent component.</dt>
+<dd><ul class="first last simple">
+<li>knows : <a class="reference internal" href="../fife_rpg.components.html#fife_rpg.components.agent.knows" title="fife_rpg.components.agent.knows"><tt class="xref py py-func docutils literal"><span class="pre">knows()</span></tt></a></li>
+<li>add_knowledge : <a class="reference internal" href="../fife_rpg.components.html#fife_rpg.components.agent.add_knowledge" title="fife_rpg.components.agent.add_knowledge"><tt class="xref py py-func docutils literal"><span class="pre">add_knowledge()</span></tt></a></li>
+</ul>
+</dd>
+<dt>FifeAgent - Functions of the FifeAgent component</dt>
+<dd><ul class="first last simple">
+<li>move : <a class="reference internal" href="../fife_rpg.components.html#fife_rpg.components.fifeagent.approach_and_execute" title="fife_rpg.components.fifeagent.approach_and_execute"><tt class="xref py py-func docutils literal"><span class="pre">approach_and_execute()</span></tt></a></li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="adding-scripts">
+<h2>Adding Scripts<a class="headerlink" href="#adding-scripts" title="Permalink to this headline">¶</a></h2>
+<p>To add a script to the system you will need to use the <a class="reference internal" href="../fife_rpg.systems.html#fife_rpg.systems.scriptingsystem.ScriptingSystem.add_script" title="fife_rpg.systems.scriptingsystem.ScriptingSystem.add_script"><tt class="xref py py-func docutils literal"><span class="pre">add_script()</span></tt></a> method.
+It takes the scripts name and the path to the script file.</p>
 <p>Example:</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="n">action</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="n">action</span><span class="p">[</span><span class="s">&quot;Action&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;MoveAgent&quot;</span>
-<span class="n">action</span><span class="p">[</span><span class="s">&quot;Agent&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;PlayerCharacter&quot;</span>
-<span class="n">action</span><span class="p">[</span><span class="s">&quot;Target&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;ToLevel2&quot;</span>
-<span class="n">action</span><span class="p">[</span><span class="s">&quot;Time&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">command</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="n">command</span><span class="p">[</span><span class="s">&quot;Name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;move&quot;</span>
-<span class="n">command</span><span class="p">[</span><span class="s">&quot;Variables&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">command</span><span class="p">[</span><span class="s">&quot;Variables&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s">&quot;Type&quot;</span><span class="p">:</span> <span class="s">&quot;Entity&quot;</span><span class="p">,</span> <span class="s">&quot;Value&quot;</span><span class="p">:</span> <span class="s">&quot;PlayerCharacter&quot;</span><span class="p">})</span>
-<span class="n">command</span><span class="p">[</span><span class="s">&quot;Variables&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s">&quot;Type&quot;</span><span class="p">:</span> <span class="s">&quot;Entity&quot;</span><span class="p">,</span> <span class="s">&quot;Value&quot;</span><span class="p">:</span> <span class="s">&quot;ToLevel2&quot;</span><span class="p">})</span>
-<span class="n">action</span><span class="p">[</span><span class="s">&quot;Command&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">command</span>
-<span class="n">script</span> <span class="o">=</span> <span class="p">[</span><span class="n">action</span><span class="p">]</span>
-<span class="n">script_system</span><span class="o">.</span><span class="n">set_script</span><span class="p">(</span><span class="s">&quot;Test&quot;</span><span class="p">,</span> <span class="n">script</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">script_system</span><span class="o">.</span><span class="n">add_script</span><span class="p">(</span><span class="s">&quot;Test&quot;</span><span class="p">,</span> <span class="s">&quot;scripts/test.py&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>To add a condition to the system you will need to use the <a class="reference internal" href="../fife_rpg.systems.html#fife_rpg.systems.scriptingsystem.ScriptingSystem.add_condition" title="fife_rpg.systems.scriptingsystem.ScriptingSystem.add_condition"><tt class="xref py py-func docutils literal"><span class="pre">add_condition()</span></tt></a> method. It
-takes a condition_data argument that is a dictionary with 2 values:</p>
-<ul class="simple">
-<li>Script: The name of the script of the condition passes</li>
-<li>Expressions: A list of expressions that form the condition. All expressions
-must evaluate to True for the condition to pass.
-Each expression itself is a dictionary with 2 values:<ul>
-<li>Type: The type of the condition. What conditions are available depends on
-what conditions where registered to the scripting system. The type can be
-prefixed with &#8220;Not_&#8221; to negate its result.</li>
-<li>Args: A list of arguments to pass to the condition. This depends on the
-condition.</li>
-</ul>
-</li>
-</ul>
-<p>Example:</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="n">expression</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="n">expression</span><span class="p">[</span><span class="s">&quot;Type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;Not_Knows&quot;</span>
-<span class="n">expression</span><span class="p">[</span><span class="s">&quot;Args&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;David&quot;</span><span class="p">,</span> <span class="s">&quot;PlayerCharacter&quot;</span><span class="p">]</span>
-<span class="n">condition</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="n">condition</span><span class="p">[</span><span class="s">&quot;Script&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;Test&quot;</span>
-<span class="n">condition</span><span class="p">[</span><span class="s">&quot;Expressions&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">expression</span><span class="p">]</span>
-<span class="n">script_system</span><span class="o">.</span><span class="n">add_condition</span><span class="p">(</span><span class="n">condition</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>It is possible to run a script manually by using the <a class="reference internal" href="../fife_rpg.systems.html#fife_rpg.systems.scriptingsystem.ScriptingSystem.run_script" title="fife_rpg.systems.scriptingsystem.ScriptingSystem.run_script"><tt class="xref py py-func docutils literal"><span class="pre">run_script()</span></tt></a> method.
-It takes the name of the script as an argument.</p>
-<p>It is also possible to add scripts and conditions from a YAML file.
-The structure of the file is a dictionary with 2 keys: Scripts and Conditions.
-The structure of each key is the same as explained above.</p>
+<p>It is also possible to add scripts YAML file.
+The structure of the file is a list where each item has 2 values. The first
+value is the name of the script, the second the path to the script file.</p>
 <p>Example:</p>
 <div class="code yaml highlight-python"><pre>Scripts:
-    Test:
-        - Action: MoveAgent
-          Agent: PlayerCharacter
-          Target: ToLevel2
-          Time: 0
-          Command:
-            Name: move
-            Variables:
-              - Type: Entity
-                Value: PlayerCharacter
-              - Type: Entity
-                Value: ToLevel2
-Conditions:
-  - Script: Test
-    Expressions:
-      - Type: Not_Knows
-        Args: [David, PlayerCharacter]</pre>
+  - [test, scripts/test.py]</pre>
 </div>
 </div>
 </div>
@@ -189,8 +156,9 @@ Conditions:
   <ul>
 <li><a class="reference internal" href="#">Scripting</a><ul>
 <li><a class="reference internal" href="#overview">Overview</a></li>
-<li><a class="reference internal" href="#scripts">Scripts</a></li>
 <li><a class="reference internal" href="#scripting-system">Scripting System</a></li>
+<li><a class="reference internal" href="#scripts">Scripts</a></li>
+<li><a class="reference internal" href="#adding-scripts">Adding Scripts</a></li>
 </ul>
 </li>
 </ul>
@@ -238,7 +206,7 @@ Conditions:
         <li class="right" >
           <a href="systems.html" title="Systems"
              >previous</a> |</li>
-        <li><a href="../index.html">fife-rpg 0.1c documentation</a> &raquo;</li>
+        <li><a href="../index.html">fife-rpg 0.2 documentation</a> &raquo;</li>
           <li><a href="tutorial.html" >Tutorial</a> &raquo;</li>
           <li><a href="systems.html" >Systems</a> &raquo;</li> 
       </ul>

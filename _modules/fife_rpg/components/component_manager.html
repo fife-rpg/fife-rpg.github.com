@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>fife_rpg.components.component_manager &mdash; fife-rpg 0.1c documentation</title>
+    <title>fife_rpg.components.component_manager &mdash; fife-rpg 0.2 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.1c',
+        VERSION:     '0.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="top" title="fife-rpg 0.1c documentation" href="../../../index.html" />
+    <link rel="top" title="fife-rpg 0.2 documentation" href="../../../index.html" />
     <link rel="up" title="Module code" href="../../index.html" /> 
   </head>
   <body>
@@ -38,7 +38,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">fife-rpg 0.1c documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">fife-rpg 0.2 documentation</a> &raquo;</li>
           <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
@@ -77,53 +77,42 @@
 
 <span class="n">_COMPONENTS</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="n">_CHECKERS</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">_SCRIPT_COMMANDS</span> <span class="o">=</span> <span class="p">{}</span>
+
 
 <div class="viewcode-block" id="get_components"><a class="viewcode-back" href="../../../fife_rpg.components.html#fife_rpg.components.component_manager.get_components">[docs]</a><span class="k">def</span> <span class="nf">get_components</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;Returns the registered components&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">copy</span><span class="p">(</span><span class="n">_COMPONENTS</span><span class="p">)</span>
+
 </div>
 <div class="viewcode-block" id="register_component"><a class="viewcode-back" href="../../../fife_rpg.components.html#fife_rpg.components.component_manager.register_component">[docs]</a><span class="k">def</span> <span class="nf">register_component</span><span class="p">(</span><span class="n">component_name</span><span class="p">,</span> <span class="n">component_object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Registers an component</span>
-<span class="sd">    </span>
+
 <span class="sd">    Args:</span>
 <span class="sd">        component_name: The name of the component_object</span>
-<span class="sd">        </span>
+
 <span class="sd">        component_object: A bGrease component object</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">component_name</span> <span class="ow">in</span> <span class="n">_COMPONENTS</span><span class="p">:</span>
         <span class="n">_COMPONENTS</span><span class="p">[</span><span class="n">component_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">component_object</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">AlreadyRegisteredError</span><span class="p">(</span><span class="n">component_name</span><span class="p">,</span>  <span class="s">&quot;component&quot;</span><span class="p">)</span>
-    </div>
+        <span class="k">raise</span> <span class="n">AlreadyRegisteredError</span><span class="p">(</span><span class="n">component_name</span><span class="p">,</span> <span class="s">&quot;component&quot;</span><span class="p">)</span>
+
+</div>
 <div class="viewcode-block" id="get_checkers"><a class="viewcode-back" href="../../../fife_rpg.components.html#fife_rpg.components.component_manager.get_checkers">[docs]</a><span class="k">def</span> <span class="nf">get_checkers</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;Returns the registered checkers&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">copy</span><span class="p">(</span><span class="n">_CHECKERS</span><span class="p">)</span>
+
 </div>
 <div class="viewcode-block" id="register_checker"><a class="viewcode-back" href="../../../fife_rpg.components.html#fife_rpg.components.component_manager.register_checker">[docs]</a><span class="k">def</span> <span class="nf">register_checker</span><span class="p">(</span><span class="n">component_names</span><span class="p">,</span> <span class="n">callback</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Add a checker to the checkers list</span>
-<span class="sd">    </span>
+
 <span class="sd">    Args:</span>
-<span class="sd">        component_name: A list of the names of the components </span>
+<span class="sd">        component_name: A list of the names of the components</span>
 <span class="sd">        which the checker will check</span>
-<span class="sd">        </span>
+
 <span class="sd">        callback: The checker function</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">_CHECKERS</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">component_names</span><span class="p">,</span> <span class="n">callback</span><span class="p">))</span>
-</div>
-<div class="viewcode-block" id="get_script_commands"><a class="viewcode-back" href="../../../fife_rpg.components.html#fife_rpg.components.component_manager.get_script_commands">[docs]</a><span class="k">def</span> <span class="nf">get_script_commands</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;Returns the registered script commands&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">copy</span><span class="p">(</span><span class="n">_SCRIPT_COMMANDS</span><span class="p">)</span>
-</div>
-<div class="viewcode-block" id="register_script_command"><a class="viewcode-back" href="../../../fife_rpg.components.html#fife_rpg.components.component_manager.register_script_command">[docs]</a><span class="k">def</span> <span class="nf">register_script_command</span><span class="p">(</span><span class="n">command_name</span><span class="p">,</span> <span class="n">command</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Add a script command to the commands list</span>
-<span class="sd">    </span>
-<span class="sd">    Args:</span>
-<span class="sd">        command_name: The name of the command</span>
-<span class="sd">        </span>
-<span class="sd">        command: The command function</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">_SCRIPT_COMMANDS</span><span class="p">[</span><span class="n">command_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">command</span></div>
+    <span class="n">_CHECKERS</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">component_names</span><span class="p">,</span> <span class="n">callback</span><span class="p">))</span></div>
 </pre></div>
 
           </div>
@@ -157,7 +146,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">fife-rpg 0.1c documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">fife-rpg 0.2 documentation</a> &raquo;</li>
           <li><a href="../../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>

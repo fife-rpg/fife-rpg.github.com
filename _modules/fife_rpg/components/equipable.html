@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>fife_rpg.components.equipable &mdash; fife-rpg 0.1c documentation</title>
+    <title>fife_rpg.components.equipable &mdash; fife-rpg 0.2 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.1c',
+        VERSION:     '0.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="top" title="fife-rpg 0.1c documentation" href="../../../index.html" />
+    <link rel="top" title="fife-rpg 0.2 documentation" href="../../../index.html" />
     <link rel="up" title="Module code" href="../../index.html" /> 
   </head>
   <body>
@@ -38,7 +38,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">fife-rpg 0.1c documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">fife-rpg 0.2 documentation</a> &raquo;</li>
           <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
@@ -74,15 +74,16 @@
 <span class="kn">from</span> <span class="nn">fife_rpg.components.base</span> <span class="kn">import</span> <span class="n">Base</span>
 <span class="kn">from</span> <span class="nn">fife_rpg.components.containable</span> <span class="kn">import</span> <span class="n">Containable</span>
 
+
 <div class="viewcode-block" id="Equipable"><a class="viewcode-back" href="../../../fife_rpg.components.html#fife_rpg.components.equipable.Equipable">[docs]</a><span class="k">class</span> <span class="nc">Equipable</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Component that stores the data for an entity that can be equipped.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Fields:</span>
 <span class="sd">        possible_slots: The slots that this equipable can be equipped in</span>
-<span class="sd">        </span>
+
 <span class="sd">        wearer: The name of the Entity that has this equipable equipped</span>
-<span class="sd">        </span>
+
 <span class="sd">        in_slot: The slot this equipable is currently in</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -90,7 +91,7 @@
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">Base</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">possible_slots</span><span class="o">=</span><span class="nb">list</span><span class="p">,</span> <span class="n">wearer</span><span class="o">=</span><span class="nb">object</span><span class="p">,</span> <span class="n">in_slot</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
-        
+
     <span class="nd">@property</span>
 <div class="viewcode-block" id="Equipable.saveable_fields"><a class="viewcode-back" href="../../../fife_rpg.components.html#fife_rpg.components.equipable.Equipable.saveable_fields">[docs]</a>    <span class="k">def</span> <span class="nf">saveable_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns the fields of the component that can be saved.&quot;&quot;&quot;</span>
@@ -103,7 +104,7 @@
 
 <span class="sd">        Args:</span>
 <span class="sd">            name: The name under which the class should be registered</span>
-<span class="sd">            </span>
+
 <span class="sd">            auto_register: This sets whether components this component</span>
 <span class="sd">            derives from will have their registered_as property set to the same</span>
 <span class="sd">            name as this class.</span>
@@ -145,7 +146,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">fife-rpg 0.1c documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">fife-rpg 0.2 documentation</a> &raquo;</li>
           <li><a href="../../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>

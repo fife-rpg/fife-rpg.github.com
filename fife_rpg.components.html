@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>components Package &mdash; fife-rpg 0.1c documentation</title>
+    <title>components Package &mdash; fife-rpg 0.2 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '0.1c',
+        VERSION:     '0.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="fife-rpg 0.1c documentation" href="index.html" />
+    <link rel="top" title="fife-rpg 0.2 documentation" href="index.html" />
     <link rel="up" title="fife_rpg Package" href="fife_rpg.html" />
     <link rel="next" title="entities Package" href="fife_rpg.entities.html" />
     <link rel="prev" title="behaviours Package" href="fife_rpg.behaviours.html" /> 
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="fife_rpg.behaviours.html" title="behaviours Package"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">fife-rpg 0.1c documentation</a> &raquo;</li>
+        <li><a href="index.html">fife-rpg 0.2 documentation</a> &raquo;</li>
           <li><a href="modules.html" >fife_rpg</a> &raquo;</li>
           <li><a href="fife_rpg.html" accesskey="U">fife_rpg Package</a> &raquo;</li> 
       </ul>
@@ -64,8 +64,9 @@
 <span class="target" id="module-fife_rpg.components"></span><p>This contains the general components used by fife-rpg</p>
 <span class="target" id="module-components"></span></div>
 <div class="section" id="module-fife_rpg.components.agent">
-<span id="agent-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">agent</span></tt> Module<a class="headerlink" href="#module-fife_rpg.components.agent" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<span id="agent-module"></span><h2><a class="reference internal" href="#module-agent" title="agent: The Agent component and functions"><tt class="xref py py-mod docutils literal"><span class="pre">agent</span></tt></a> Module<a class="headerlink" href="#module-fife_rpg.components.agent" title="Permalink to this headline">¶</a></h2>
+<p>The Agent component and functions</p>
+<span class="target" id="module-agent"></span><dl class="class">
 <dt id="fife_rpg.components.agent.Agent">
 <em class="property">class </em><tt class="descclassname">fife_rpg.components.agent.</tt><tt class="descname">Agent</tt><a class="reference internal" href="_modules/fife_rpg/components/agent.html#Agent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.components.agent.Agent" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#fife_rpg.components.base.Base" title="fife_rpg.components.base.Base"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.components.base.Base</span></tt></a></p>
@@ -79,7 +80,7 @@
 <p>new_layer: The new layer the agent should be move to</p>
 <p>type: The type of the agent. actor, ground_object or item</p>
 <p>position: The position of the agent as a 2 or 3 item list or tuple</p>
-<p>new_position: The position the agent should be moved to 
+<p>new_position: The position the agent should be moved to
 as a 2 or 3 item list or  tuple</p>
 <p>rotation: The rotation of the agent in degrees</p>
 <p>new_rotation: The new rotation of the agent in degrees</p>
@@ -136,6 +137,12 @@ agent component.</p>
 </dl>
 </dd></dl>
 
+<dl class="function">
+<dt id="fife_rpg.components.agent.register_script_commands">
+<tt class="descclassname">fife_rpg.components.agent.</tt><tt class="descname">register_script_commands</tt><big>(</big><em>module=''</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/components/agent.html#register_script_commands"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.components.agent.register_script_commands" title="Permalink to this definition">¶</a></dt>
+<dd><p>Register commands for this module</p>
+</dd></dl>
+
 </div>
 <div class="section" id="module-fife_rpg.components.base">
 <span id="base-module"></span><h2><a class="reference internal" href="fife_rpg.systems.html#module-base" title="base: The base system and functions"><tt class="xref py py-mod docutils literal"><span class="pre">base</span></tt></a> Module<a class="headerlink" href="#module-fife_rpg.components.base" title="Permalink to this headline">¶</a></h2>
@@ -149,7 +156,8 @@ agent component.</p>
 <dt>Properties:</dt>
 <dd><p class="first">registered_as: Class property that sets under what name the class is
 registered</p>
-<p class="last">dependencies: Class property that sets the classes this System depends on</p>
+<p class="last">dependencies: Class property that sets the classes this Component
+depends on</p>
 </dd>
 </dl>
 <dl class="attribute">
@@ -283,18 +291,12 @@ name as this class.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="fife_rpg.components.component_manager.get_script_commands">
-<tt class="descclassname">fife_rpg.components.component_manager.</tt><tt class="descname">get_script_commands</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/fife_rpg/components/component_manager.html#get_script_commands"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.components.component_manager.get_script_commands" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the registered script commands</p>
-</dd></dl>
-
-<dl class="function">
 <dt id="fife_rpg.components.component_manager.register_checker">
 <tt class="descclassname">fife_rpg.components.component_manager.</tt><tt class="descname">register_checker</tt><big>(</big><em>component_names</em>, <em>callback</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/components/component_manager.html#register_checker"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.components.component_manager.register_checker" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add a checker to the checkers list</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd><p class="first">component_name: A list of the names of the components 
+<dd><p class="first">component_name: A list of the names of the components
 which the checker will check</p>
 <p class="last">callback: The checker function</p>
 </dd>
@@ -309,18 +311,6 @@ which the checker will check</p>
 <dt>Args:</dt>
 <dd><p class="first">component_name: The name of the component_object</p>
 <p class="last">component_object: A bGrease component object</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="function">
-<dt id="fife_rpg.components.component_manager.register_script_command">
-<tt class="descclassname">fife_rpg.components.component_manager.</tt><tt class="descname">register_script_command</tt><big>(</big><em>command_name</em>, <em>command</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/components/component_manager.html#register_script_command"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.components.component_manager.register_script_command" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add a script command to the commands list</p>
-<dl class="docutils">
-<dt>Args:</dt>
-<dd><p class="first">command_name: The name of the command</p>
-<p class="last">command: The command function</p>
 </dd>
 </dl>
 </dd></dl>
@@ -376,7 +366,7 @@ name as this class.</p>
 <dt id="fife_rpg.components.container.BulkLimitError">
 <em class="property">exception </em><tt class="descclassname">fife_rpg.components.container.</tt><tt class="descname">BulkLimitError</tt><big>(</big><em>bulk</em>, <em>max_bulk</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/components/container.html#BulkLimitError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.components.container.BulkLimitError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></tt></p>
-<p>Error that gets raised when the item would exceed the 
+<p>Error that gets raised when the item would exceed the
 bulk limit of the container.</p>
 <dl class="docutils">
 <dt>Properties:</dt>
@@ -439,7 +429,7 @@ name as this class.</p>
 <dd><p>Returns the first slot of the container that is not occupied.</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd>container: A <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.rpg_entity.RPGEntity" title="fife_rpg.entities.rpg_entity.RPGEntity"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.entities.rpg_entity.RPGEntity</span></tt></a> with a 
+<dd>container: A <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.rpg_entity.RPGEntity" title="fife_rpg.entities.rpg_entity.RPGEntity"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.entities.rpg_entity.RPGEntity</span></tt></a> with a
 container component</dd>
 <dt>Returns:</dt>
 <dd>The index of a free slot if there is any.</dd>
@@ -455,7 +445,7 @@ if there is no free slot.</dd>
 <dd><p>Returns the item that is in the slot, or has the given type.</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd><p class="first">container: A <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.rpg_entity.RPGEntity" title="fife_rpg.entities.rpg_entity.RPGEntity"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.entities.rpg_entity.RPGEntity</span></tt></a> with a 
+<dd><p class="first">container: A <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.rpg_entity.RPGEntity" title="fife_rpg.entities.rpg_entity.RPGEntity"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.entities.rpg_entity.RPGEntity</span></tt></a> with a
 container component</p>
 <p class="last">slot_or_type: The index of the slot, or an item type</p>
 </dd>
@@ -468,7 +458,7 @@ container component</p>
 <dd><p>Returns the bulk of all items in the container.</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd>container: A <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.rpg_entity.RPGEntity" title="fife_rpg.entities.rpg_entity.RPGEntity"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.entities.rpg_entity.RPGEntity</span></tt></a> with a 
+<dd>container: A <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.rpg_entity.RPGEntity" title="fife_rpg.entities.rpg_entity.RPGEntity"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.entities.rpg_entity.RPGEntity</span></tt></a> with a
 container component</dd>
 </dl>
 </dd></dl>
@@ -479,7 +469,7 @@ container component</dd>
 <dd><p>Returns the weight of all items in the container.</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd>container: A <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.rpg_entity.RPGEntity" title="fife_rpg.entities.rpg_entity.RPGEntity"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.entities.rpg_entity.RPGEntity</span></tt></a> with a 
+<dd>container: A <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.rpg_entity.RPGEntity" title="fife_rpg.entities.rpg_entity.RPGEntity"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.entities.rpg_entity.RPGEntity</span></tt></a> with a
 container component</dd>
 </dl>
 </dd></dl>
@@ -487,15 +477,15 @@ container component</dd>
 <dl class="function">
 <dt id="fife_rpg.components.container.put_item">
 <tt class="descclassname">fife_rpg.components.container.</tt><tt class="descname">put_item</tt><big>(</big><em>container</em>, <em>item</em>, <em>slot=-1</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/components/container.html#put_item"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.components.container.put_item" title="Permalink to this definition">¶</a></dt>
-<dd><p>Puts the item at the given slot in the container and returns the 
+<dd><p>Puts the item at the given slot in the container and returns the
 item previously at the slot.</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd><p class="first">container: A <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.rpg_entity.RPGEntity" title="fife_rpg.entities.rpg_entity.RPGEntity"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.entities.rpg_entity.RPGEntity</span></tt></a> with a 
+<dd><p class="first">container: A <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.rpg_entity.RPGEntity" title="fife_rpg.entities.rpg_entity.RPGEntity"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.entities.rpg_entity.RPGEntity</span></tt></a> with a
 container component</p>
-<p>item: A <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.rpg_entity.RPGEntity" title="fife_rpg.entities.rpg_entity.RPGEntity"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.entities.rpg_entity.RPGEntity</span></tt></a> with a 
+<p>item: A <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.rpg_entity.RPGEntity" title="fife_rpg.entities.rpg_entity.RPGEntity"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.entities.rpg_entity.RPGEntity</span></tt></a> with a
 containable component</p>
-<p class="last">slot: The slot where to pu the item. Defaults to first free slot.</p>
+<p class="last">slot: The slot where to put the item. Defaults to first free slot.</p>
 </dd>
 <dt>Raises:</dt>
 <dd><a class="reference internal" href="#fife_rpg.components.container.BulkLimitError" title="fife_rpg.components.container.BulkLimitError"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.components.container.BulkLimitError</span></tt></a> if the item would
@@ -509,7 +499,7 @@ exceed the containers bulk.</dd>
 <dd><p>Removes the item at the given slot, or with the given type.</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd><p class="first">container: A <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.rpg_entity.RPGEntity" title="fife_rpg.entities.rpg_entity.RPGEntity"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.entities.rpg_entity.RPGEntity</span></tt></a> with a 
+<dd><p class="first">container: A <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.rpg_entity.RPGEntity" title="fife_rpg.entities.rpg_entity.RPGEntity"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.entities.rpg_entity.RPGEntity</span></tt></a> with a
 container component</p>
 <p class="last">slot_or_type: The index of the slot, or an item type</p>
 </dd>
@@ -523,7 +513,7 @@ container component</p>
 out of the container and returns it.</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd><p class="first">container: A <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.rpg_entity.RPGEntity" title="fife_rpg.entities.rpg_entity.RPGEntity"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.entities.rpg_entity.RPGEntity</span></tt></a> with a 
+<dd><p class="first">container: A <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.rpg_entity.RPGEntity" title="fife_rpg.entities.rpg_entity.RPGEntity"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.entities.rpg_entity.RPGEntity</span></tt></a> with a
 container component</p>
 <p class="last">slot_or_type: The index of the slot, or an item type</p>
 </dd>
@@ -555,7 +545,7 @@ container component</p>
 <dl class="docutils">
 <dt>Args:</dt>
 <dd><p class="first">name: The name under which the class should be registered</p>
-<p class="last">auto_register: This sets whether components this component            
+<p class="last">auto_register: This sets whether components this component
 derives from will have their registered_as property set to the same
 name as this class.</p>
 </dd>
@@ -613,7 +603,7 @@ name as this class.</p>
 <dt id="fife_rpg.components.equip.CannotBeEquippedInSlot">
 <em class="property">exception </em><tt class="descclassname">fife_rpg.components.equip.</tt><tt class="descname">CannotBeEquippedInSlot</tt><big>(</big><em>slot</em>, <em>equipable</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/components/equip.html#CannotBeEquippedInSlot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.components.equip.CannotBeEquippedInSlot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></tt></p>
-<p>Error that gets raised when the equipable can&#8217;t be equiped in that 
+<p>Error that gets raised when the equipable can&#8217;t be equiped in that
 slot</p>
 <dl class="docutils">
 <dt>Properties:</dt>
@@ -659,7 +649,7 @@ name as this class.</p>
 <dt id="fife_rpg.components.equip.RPGEquip">
 <em class="property">class </em><tt class="descclassname">fife_rpg.components.equip.</tt><tt class="descname">RPGEquip</tt><a class="reference internal" href="_modules/fife_rpg/components/equip.html#RPGEquip"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.components.equip.RPGEquip" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#fife_rpg.components.equip.Equip" title="fife_rpg.components.equip.Equip"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.components.equip.Equip</span></tt></a></p>
-<p>Example component for storing equipped items 
+<p>Example component for storing equipped items
 (what is being worn/wielded).</p>
 <dl class="docutils">
 <dt>Fields:</dt>
@@ -843,9 +833,9 @@ name as this class.</p>
 execute an action when reaching the target.</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd><p class="first">entity: A <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.rpg_entity.RPGEntity" title="fife_rpg.entities.rpg_entity.RPGEntity"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.entities.rpg_entity.RPGEntity</span></tt></a> with a 
+<dd><p class="first">entity: A <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.rpg_entity.RPGEntity" title="fife_rpg.entities.rpg_entity.RPGEntity"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.entities.rpg_entity.RPGEntity</span></tt></a> with a
 fifeagent and a moving component</p>
-<p>target_or_location: A fife.Location or position tuple 
+<p>target_or_location: A fife.Location or position tuple
 to move to or another entity  to follow</p>
 <p>run_agent: If true the run_animation will be performed otherwise
 the walk_animation.</p>
@@ -857,7 +847,7 @@ its target.</p>
 
 <dl class="function">
 <dt id="fife_rpg.components.fifeagent.register_script_commands">
-<tt class="descclassname">fife_rpg.components.fifeagent.</tt><tt class="descname">register_script_commands</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/fife_rpg/components/fifeagent.html#register_script_commands"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.components.fifeagent.register_script_commands" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">fife_rpg.components.fifeagent.</tt><tt class="descname">register_script_commands</tt><big>(</big><em>module=''</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/components/fifeagent.html#register_script_commands"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.components.fifeagent.register_script_commands" title="Permalink to this definition">¶</a></dt>
 <dd><p>Register commands for this module</p>
 </dd></dl>
 
@@ -867,7 +857,7 @@ its target.</p>
 <dd><p>Makes the entity run to a certain location</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd><p class="first">entity: A <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.rpg_entity.RPGEntity" title="fife_rpg.entities.rpg_entity.RPGEntity"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.entities.rpg_entity.RPGEntity</span></tt></a> with a 
+<dd><p class="first">entity: A <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.rpg_entity.RPGEntity" title="fife_rpg.entities.rpg_entity.RPGEntity"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.entities.rpg_entity.RPGEntity</span></tt></a> with a
 fifeagent and a moving component</p>
 <p class="last">location: A fife.Location or position tuple to run to.</p>
 </dd>
@@ -890,7 +880,7 @@ fifeagent and a moving component</p>
 <dd><p>Makes the entity walk to a certain location</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd><p class="first">entity: A <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.rpg_entity.RPGEntity" title="fife_rpg.entities.rpg_entity.RPGEntity"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.entities.rpg_entity.RPGEntity</span></tt></a> with a 
+<dd><p class="first">entity: A <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.rpg_entity.RPGEntity" title="fife_rpg.entities.rpg_entity.RPGEntity"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.entities.rpg_entity.RPGEntity</span></tt></a> with a
 fifeagent and a moving component</p>
 <p class="last">location: A fife.Location or position tuple to walk to.</p>
 </dd>
@@ -941,11 +931,11 @@ name as this class.</p>
 <dt>Fields:</dt>
 <dd><p class="first">closed: Is the object closed or open</p>
 <p>locked: Is the object locker or unlocked</p>
-<p>open_animation: Name of the animation that is run when the object is being
-opened</p>
+<p>open_animation: Name of the animation that is run when the object is
+being opened</p>
 <p>opened_animation: Name of the animation that is run when the object is
 open</p>
-<p>close_animation: Name of the animation that is run when the object is 
+<p>close_animation: Name of the animation that is run when the object is
 being closed</p>
 <p class="last">closed_animation: Name of the animation that is run when the object is
 being closed</p>
@@ -1013,7 +1003,7 @@ name as this class.</p>
 <dt>Args:</dt>
 <dd>lockable: A Lockable instance</dd>
 <dt>Raises:</dt>
-<dd><a class="reference internal" href="#fife_rpg.components.lockable.OpenError" title="fife_rpg.components.lockable.OpenError"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.components.lockable.OpenError</span></tt></a> if the lockable is open.</dd>
+<dd><a class="reference internal" href="#fife_rpg.components.lockable.OpenError" title="fife_rpg.components.lockable.OpenError"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.components.lockable.OpenError</span></tt></a> if the lockable is open</dd>
 </dl>
 </dd></dl>
 
@@ -1189,7 +1179,7 @@ name as this class.</p>
         <li class="right" >
           <a href="fife_rpg.behaviours.html" title="behaviours Package"
              >previous</a> |</li>
-        <li><a href="index.html">fife-rpg 0.1c documentation</a> &raquo;</li>
+        <li><a href="index.html">fife-rpg 0.2 documentation</a> &raquo;</li>
           <li><a href="modules.html" >fife_rpg</a> &raquo;</li>
           <li><a href="fife_rpg.html" >fife_rpg Package</a> &raquo;</li> 
       </ul>

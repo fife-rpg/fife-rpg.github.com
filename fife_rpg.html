@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>fife_rpg Package &mdash; fife-rpg 0.1c documentation</title>
+    <title>fife_rpg Package &mdash; fife-rpg 0.2 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '0.1c',
+        VERSION:     '0.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="fife-rpg 0.1c documentation" href="index.html" />
+    <link rel="top" title="fife-rpg 0.2 documentation" href="index.html" />
     <link rel="up" title="fife_rpg" href="modules.html" />
     <link rel="next" title="actions Package" href="fife_rpg.actions.html" />
     <link rel="prev" title="fife_rpg" href="modules.html" /> 
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="modules.html" title="fife_rpg"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">fife-rpg 0.1c documentation</a> &raquo;</li>
+        <li><a href="index.html">fife-rpg 0.2 documentation</a> &raquo;</li>
           <li><a href="modules.html" accesskey="U">fife_rpg</a> &raquo;</li> 
       </ul>
     </div>  
@@ -104,7 +104,7 @@ function: The function to call</dd>
 <tt class="descname">create_section</tt><big>(</big><em>section_data</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/dialogue.html#Dialogue.create_section"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.dialogue.Dialogue.create_section" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a section and return it</p>
 <dl class="docutils">
-<dt>Args: </dt>
+<dt>Args:</dt>
 <dd>section_data: A dictionary containing the data of a section</dd>
 </dl>
 </dd></dl>
@@ -140,7 +140,8 @@ used to get dialogue variables</dd>
 <dl class="attribute">
 <dt id="fife_rpg.dialogue.Dialogue.possible_responses">
 <tt class="descname">possible_responses</tt><a class="reference internal" href="_modules/fife_rpg/dialogue.html#Dialogue.possible_responses"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.dialogue.Dialogue.possible_responses" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a dictionary of the possible responses of the current section</p>
+<dd><p>Returns a dictionary of the possible responses of the
+current section</p>
 </dd></dl>
 
 <dl class="method">
@@ -238,7 +239,7 @@ dialogue</p>
 <dd><p class="first">talker: The Entity that is talking</p>
 <p>text: The text that is being said</p>
 <p>conditions: List of conditions that are evaluated</p>
-<p>commands: Commands that are to be executed when 
+<p>commands: Commands that are to be executed when
 the section is displayed</p>
 <p class="last">responses: Possible responses for this section</p>
 </dd>
@@ -451,7 +452,8 @@ with game process.</p>
 <p>The view responsible for showing the in-game gui</p>
 <dl class="docutils">
 <dt>Properties:</dt>
-<dd>application: A <a class="reference internal" href="#fife_rpg.rpg_application.RPGApplication" title="fife_rpg.rpg_application.RPGApplication"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.rpg_application.RPGApplication</span></tt></a> instance</dd>
+<dd>application: A <a class="reference internal" href="#fife_rpg.rpg_application.RPGApplication" title="fife_rpg.rpg_application.RPGApplication"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.rpg_application.RPGApplication</span></tt></a>
+instance</dd>
 </dl>
 </dd></dl>
 
@@ -474,7 +476,7 @@ to ignore and a single data element for instances that should be outlined.</p>
 <dd><p>Determines whether an instance should be outline and the data
 used for the outline.</p>
 <dl class="docutils">
-<dt>Args:                </dt>
+<dt>Args:</dt>
 <dd><p class="first">world: The world</p>
 <p class="last">identifier: The name of the instance</p>
 </dd>
@@ -505,6 +507,7 @@ outlined. None, if it should not.</p>
 <dt id="fife_rpg.helpers.Enum">
 <em class="property">class </em><tt class="descclassname">fife_rpg.helpers.</tt><tt class="descname">Enum</tt><a class="reference internal" href="_modules/fife_rpg/helpers.html#Enum"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.helpers.Enum" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/stdtypes.html#set" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">set</span></tt></a></p>
+<p>A enumeration type</p>
 </dd></dl>
 
 </div>
@@ -513,7 +516,7 @@ outlined. None, if it should not.</p>
 <p>This module contains everything for handling fife-rpg maps</p>
 <span class="target" id="module-map"></span><dl class="class">
 <dt id="fife_rpg.map.Map">
-<em class="property">class </em><tt class="descclassname">fife_rpg.map.</tt><tt class="descname">Map</tt><big>(</big><em>fife_map</em>, <em>name</em>, <em>camera</em>, <em>regions</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/map.html#Map"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.map.Map" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">fife_rpg.map.</tt><tt class="descname">Map</tt><big>(</big><em>fife_map</em>, <em>name</em>, <em>camera</em>, <em>regions</em>, <em>application</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/map.html#Map"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.map.Map" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
 <p>Contains the data of a map</p>
 <dl class="docutils">
@@ -530,6 +533,112 @@ outlined. None, if it should not.</p>
 <dt id="fife_rpg.map.Map.activate">
 <tt class="descname">activate</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/fife_rpg/map.html#Map.activate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.map.Map.activate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Activates the map</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.map.Map.add_light_from_animation">
+<tt class="descname">add_light_from_animation</tt><big>(</big><em>group</em>, <em>animation</em>, <em>agent=None</em>, <em>layer=None</em>, <em>location=None</em>, <em>point=None</em>, <em>blend_mode=(-1</em>, <em>-1)</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/map.html#Map.add_light_from_animation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.map.Map.add_light_from_animation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a light that uses an animation lightmap.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p>group: The name of the group the light should be put in.</p>
+<p>animation: The path to a xml file that contains the animation data
+or a fife.Animation.</p>
+<p>agent: The name of the agent the light should be attached too. If
+empty or None this will be ignored. Please note that the layer and
+location have to be set if this is empty or None.</p>
+<p>layer: The name of the layer the light originates from. Lights will
+illuminate lower layers, but not higher ones. If empty or None this
+will be ignored.</p>
+<p>location: The relative or absolute location of the agent depending
+on whether the agent was set or not. A list with two or three
+values.
+If None this will be ignored.</p>
+<p>point: The relative or absolute window position of the light as
+a list with 2 values or a fife.Point.
+This differs from location as it is in pixels and (0, 0) is the
+upper left position of the window.</p>
+<p>blend_mode: A list with 2 values for the source and
+destination blend modes. If not passed the default values of FIFE
+will be used.</p>
+</div></blockquote>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>The light info of the added light</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.map.Map.add_light_from_lightmap">
+<tt class="descname">add_light_from_lightmap</tt><big>(</big><em>group</em>, <em>lightmap</em>, <em>size=None</em>, <em>agent=None</em>, <em>layer=None</em>, <em>location=None</em>, <em>point=None</em>, <em>blend_mode=(-1</em>, <em>-1)</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/map.html#Map.add_light_from_lightmap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.map.Map.add_light_from_lightmap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a light that uses a lightmap.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p>group: The name of the group the light should be put in.</p>
+<p>lightmap: The path to the lightmap image file or a fife.Image</p>
+<p>size: A list with 2 values that set to what size the lightmap
+should be resized. If None this will be ignored.</p>
+<p>agent: The name of the agent the light should be attached too. If
+empty or None this will be ignored. Please note that the layer and
+location have to be set if this is empty or None.</p>
+<p>layer: The name of the layer the light originates from. Lights will
+illuminate lower layers, but not higher ones. If empty or None this
+will be ignored.</p>
+<p>location: The relative or absolute location of the agent depending
+on whether the agent was set or not. A list with two or three
+values.
+If None this will be ignored.</p>
+<p>point: The relative or absolute window position of the light as
+a list with 2 values or a fife.Point.
+This differs from location as it is in pixels and (0, 0) is the
+upper left position of the window.</p>
+<p>blend_mode: A list with 2 values for the source and
+destination blend modes. If not passed the default values of FIFE
+will be used.</p>
+</div></blockquote>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>The light info of the added light</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.map.Map.add_simple_light">
+<tt class="descname">add_simple_light</tt><big>(</big><em>group</em>, <em>intensity</em>, <em>radius</em>, <em>subdivisions</em>, <em>color</em>, <em>stretch=None</em>, <em>agent=None</em>, <em>layer=None</em>, <em>location=None</em>, <em>point=None</em>, <em>blend_mode=(-1</em>, <em>-1)</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/map.html#Map.add_simple_light"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.map.Map.add_simple_light" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a simple light to the map.</p>
+<p>Arguments:</p>
+<blockquote>
+<div><p>group: The name of the group the light should be put in.</p>
+<p>intensity: The intensity of the radius as a value between 0 and 255</p>
+<p>radius: The radius of the light as a float</p>
+<p>subdivisions: The number of subdivisions of the light. More
+subdivisions mean smoother light.</p>
+<p>color: The color of the light either as a list with with three
+values between 0 and 255 or a fife.Color</p>
+<p>stretch: The x and y stretch factor of the light as a list
+with two float values. If None it will default to both 1.0.</p>
+<p>agent: The name of the agent the light should be attached too. If
+empty or None this will be ignored. Please note that the layer and
+location have to be set if this is empty or None.</p>
+<p>layer: The name of the layer the light originates from. Lights will
+illuminate lower layers, but not higher ones. If empty or None this
+will be ignored.</p>
+<p>location: The relative or absolute location of the agent depending
+on whether the agent was set or not. A list with two or three
+values.
+If None this will be ignored.</p>
+<p>point: The relative or absolute window position of the light as
+a list with 2 values or a fife.Point.
+This differs from location as it is in pixels and (0, 0) is the
+upper left position of the window.</p>
+<p>blend_mode: A list with 2 values for the source and
+destination blend modes. If not passed the default values of FIFE
+will be used.</p>
+</div></blockquote>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>The light info of the added light</dd>
+</dl>
 </dd></dl>
 
 <dl class="attribute">
@@ -578,6 +687,12 @@ outlined. None, if it should not.</p>
 </dl>
 </dd></dl>
 
+<dl class="method">
+<dt id="fife_rpg.map.Map.get_light_renderer">
+<tt class="descname">get_light_renderer</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/fife_rpg/map.html#Map.get_light_renderer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.map.Map.get_light_renderer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the light renderer of the current camera</p>
+</dd></dl>
+
 <dl class="attribute">
 <dt id="fife_rpg.map.Map.is_active">
 <tt class="descname">is_active</tt><a class="reference internal" href="_modules/fife_rpg/map.html#Map.is_active"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.map.Map.is_active" title="Permalink to this definition">¶</a></dt>
@@ -594,8 +709,8 @@ outlined. None, if it should not.</p>
 <p class="last">region: The name of the region</p>
 </dd>
 <dt>Raises:</dt>
-<dd><a class="reference internal" href="#fife_rpg.map.NoSuchRegionError" title="fife_rpg.map.NoSuchRegionError"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.map.NoSuchRegionError</span></tt></a> if the specified region does 
-not exist.</dd>
+<dd><a class="reference internal" href="#fife_rpg.map.NoSuchRegionError" title="fife_rpg.map.NoSuchRegionError"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.map.NoSuchRegionError</span></tt></a> if the specified region
+does not exist.</dd>
 </dl>
 </dd></dl>
 
@@ -627,13 +742,8 @@ not exist.</dd>
 
 <dl class="method">
 <dt id="fife_rpg.map.Map.update_entities">
-<tt class="descname">update_entities</tt><big>(</big><em>world</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/map.html#Map.update_entities"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.map.Map.update_entities" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">update_entities</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/fife_rpg/map.html#Map.update_entities"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.map.Map.update_entities" title="Permalink to this definition">¶</a></dt>
 <dd><p>Update the maps entites from the entities of the world</p>
-<dl class="docutils">
-<dt>Args:</dt>
-<dd>world: The <a class="reference internal" href="#fife_rpg.world.RPGWorld" title="fife_rpg.world.RPGWorld"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.world.RPGWorld</span></tt></a> on which the map looks
-for its entities</dd>
-</dl>
 </dd></dl>
 
 <dl class="method">
@@ -654,7 +764,7 @@ for its entities</dd>
 <dt id="fife_rpg.map.NoSuchRegionError">
 <em class="property">exception </em><tt class="descclassname">fife_rpg.map.</tt><tt class="descname">NoSuchRegionError</tt><big>(</big><em>map_name</em>, <em>region_name</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/map.html#NoSuchRegionError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.map.NoSuchRegionError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></tt></p>
-<p>Gets thrown when the code tried to access a region that does not exits 
+<p>Gets thrown when the code tried to access a region that does not exits
 on the map.</p>
 <dl class="docutils">
 <dt>Properties:</dt>
@@ -700,7 +810,8 @@ controller</p>
 <p>Base class for views</p>
 <dl class="docutils">
 <dt>Properties:</dt>
-<dd>application: A <a class="reference internal" href="#fife_rpg.rpg_application.RPGApplication" title="fife_rpg.rpg_application.RPGApplication"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.rpg_application.RPGApplication</span></tt></a> instance</dd>
+<dd>application: A <a class="reference internal" href="#fife_rpg.rpg_application.RPGApplication" title="fife_rpg.rpg_application.RPGApplication"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.rpg_application.RPGApplication</span></tt></a>
+instance</dd>
 </dl>
 </dd></dl>
 
@@ -823,7 +934,7 @@ or a Map instance.</p>
 <dl class="method">
 <dt id="fife_rpg.rpg_application.RPGApplication.add_map_switch_callback">
 <tt class="descname">add_map_switch_callback</tt><big>(</big><em>callback</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/rpg_application.html#RPGApplication.add_map_switch_callback"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.rpg_application.RPGApplication.add_map_switch_callback" title="Permalink to this definition">¶</a></dt>
-<dd><p>Adds a callback function which gets called after 
+<dd><p>Adds a callback function which gets called after
 the map switched</p>
 <dl class="docutils">
 <dt>Args:</dt>
@@ -864,6 +975,12 @@ the map switched</p>
 <dd>command: The command string to execute</dd>
 </dl>
 <p>Returns: The result of the command</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.rpg_application.RPGApplication.get_global_lighting">
+<tt class="descname">get_global_lighting</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/fife_rpg/rpg_application.html#RPGApplication.get_global_lighting"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.rpg_application.RPGApplication.get_global_lighting" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the values of the current maps lighting</p>
 </dd></dl>
 
 <dl class="method">
@@ -915,8 +1032,8 @@ ActionsFile setting will be used.</dd>
 <dd><p>Load the behaviour definitions from a file</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd>filename: The path to the behaviours file. If this is set to None the
-BehavioursFile setting will be used.</dd>
+<dd>filename: The path to the behaviours file. If this is set to None
+the BehavioursFile setting will be used.</dd>
 </dl>
 </dd></dl>
 
@@ -926,8 +1043,8 @@ BehavioursFile setting will be used.</dd>
 <dd><p>Load the component definitions from a file</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd>filename: The path to the components file. If this is set to None the
-ComponentsFile setting will be used.</dd>
+<dd>filename: The path to the components file. If this is set to None
+the ComponentsFile setting will be used.</dd>
 </dl>
 </dd></dl>
 
@@ -977,11 +1094,11 @@ the application.</dd>
 
 <dl class="method">
 <dt id="fife_rpg.rpg_application.RPGApplication.pump">
-<tt class="descname">pump</tt><big>(</big><em>dt</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/rpg_application.html#RPGApplication.pump"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.rpg_application.RPGApplication.pump" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">pump</tt><big>(</big><em>time_delta</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/rpg_application.html#RPGApplication.pump"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.rpg_application.RPGApplication.pump" title="Permalink to this definition">¶</a></dt>
 <dd><p>Performs actions every frame.</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd>dt: Time elapsed since last call to pump</dd>
+<dd>time_delta: Time elapsed since last call to pump</dd>
 </dl>
 </dd></dl>
 
@@ -1017,7 +1134,8 @@ settings will be used.</dd>
 <dl class="docutils">
 <dt>Args:</dt>
 <dd><p class="first">behaviour_name: Name of the behaviour</p>
-<p class="last">registered_name: Name under which the behaviour should be registered</p>
+<p class="last">registered_name: Name under which the behaviour should be
+registered</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1042,11 +1160,12 @@ settings will be used.</dd>
 <dl class="docutils">
 <dt>Args:</dt>
 <dd><p class="first">component_name: Name of the component</p>
-<p>registered_name: Name under which the component should be registered</p>
-<p>register_checkers: If True a &#8220;register_checkers&#8221; function will be searched
-in the module and called</p>
-<p class="last">register_script_commands: If True a &#8220;register_script_commands&#8221; functions
-will be searched in the module and called</p>
+<p>registered_name: Name under which the component should be
+registered</p>
+<p>register_checkers: If True a &#8220;register_checkers&#8221; function will be
+searched in the module and called</p>
+<p class="last">register_script_commands: If True a &#8220;register_script_commands&#8221;
+functions will be searched in the module and called</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1061,10 +1180,10 @@ will be searched in the module and called</p>
 it will be interpreted as a tuple or list with the second item
 as the name to use when registering. If this is None the Components
 settings will be used.</p>
-<p>register_checkers: If True a &#8220;register_checkers&#8221; function will be search
-in the module and called</p>
-<p class="last">register_script_commands: If True a &#8220;register_script_commands&#8221; functions
-will be searched in the module and called</p>
+<p>register_checkers: If True a &#8220;register_checkers&#8221; function will be
+search in the module and called</p>
+<p class="last">register_script_commands: If True a &#8220;register_script_commands&#8221;
+functions will be searched in the module and called</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1125,6 +1244,19 @@ good example on how to build and dispatch a fife.Command.</p>
 <p>Returns: Converted coordinates as fife.Location</p>
 </dd></dl>
 
+<dl class="method">
+<dt id="fife_rpg.rpg_application.RPGApplication.set_global_lighting">
+<tt class="descname">set_global_lighting</tt><big>(</big><em>red</em>, <em>green</em>, <em>blue</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/rpg_application.html#RPGApplication.set_global_lighting"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.rpg_application.RPGApplication.set_global_lighting" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the color of the current maps lighting</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><p class="first">red: The red value of the light as a float between 0.0 and 1.0</p>
+<p>green: The green value of the light as a float between 0.0 and 1.0</p>
+<p class="last">blue: The blue value of the light as a float between 0.0 and 1.0</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="attribute">
 <dt id="fife_rpg.rpg_application.RPGApplication.settings">
 <tt class="descname">settings</tt><a class="reference internal" href="_modules/fife_rpg/rpg_application.html#RPGApplication.settings"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.rpg_application.RPGApplication.settings" title="Permalink to this definition">¶</a></dt>
@@ -1168,7 +1300,7 @@ application.</dd>
 <dd><p>Called by the game environment when it wants to update its globals</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd>globals: The globals dictionary of the GameEnvironment that is 
+<dd>globals: The globals dictionary of the GameEnvironment that is
 filled by the GameScene</dd>
 </dl>
 </dd></dl>
@@ -1210,8 +1342,8 @@ filled by the GameScene</dd>
 </dd></dl>
 
 <dl class="method">
-<dt id="fife_rpg.sound_engine.SoundEngine.setVolume">
-<tt class="descname">setVolume</tt><big>(</big><em>volume</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/sound_engine.html#SoundEngine.setVolume"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.sound_engine.SoundEngine.setVolume" title="Permalink to this definition">¶</a></dt>
+<dt id="fife_rpg.sound_engine.SoundEngine.set_volume">
+<tt class="descname">set_volume</tt><big>(</big><em>volume</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/sound_engine.html#SoundEngine.set_volume"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.sound_engine.SoundEngine.set_volume" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the volume of the music</p>
 <dl class="docutils">
 <dt>Args:</dt>
@@ -1239,7 +1371,7 @@ filled by the GameScene</dd>
 <p>Sets up the generic systems and components</p>
 <dl class="docutils">
 <dt>Properties:</dt>
-<dd><p class="first">application: The <a class="reference internal" href="#fife_rpg.rpg_application.RPGApplication" title="fife_rpg.rpg_application.RPGApplication"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.rpg_application.RPGApplication</span></tt></a> that 
+<dd><p class="first">application: The <a class="reference internal" href="#fife_rpg.rpg_application.RPGApplication" title="fife_rpg.rpg_application.RPGApplication"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.rpg_application.RPGApplication</span></tt></a> that
 uses this engine</p>
 <p class="last">object_db: Stores the template data</p>
 </dd>
@@ -1255,9 +1387,9 @@ uses this engine</p>
 <dd><p>Configure the worlds components and systems</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="classmethod">
 <dt id="fife_rpg.world.RPGWorld.create_entity_dictionary">
-<tt class="descname">create_entity_dictionary</tt><big>(</big><em>entity</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/world.html#RPGWorld.create_entity_dictionary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.world.RPGWorld.create_entity_dictionary" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><tt class="descname">create_entity_dictionary</tt><big>(</big><em>entity</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/world.html#RPGWorld.create_entity_dictionary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.world.RPGWorld.create_entity_dictionary" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a dictionary containing the values of the Entity</p>
 <dl class="docutils">
 <dt>Args:</dt>
@@ -1411,7 +1543,7 @@ ObjectDBFile setting if not set to None.</dd>
 <dd><p>Called by the game environment when it wants to update its globals</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd>variables: The globals dictionary of the GameEnvironment that is 
+<dd>variables: The globals dictionary of the GameEnvironment that is
 filled by the GameScene</dd>
 </dl>
 </dd></dl>
@@ -1552,7 +1684,7 @@ filled by the GameScene</dd>
         <li class="right" >
           <a href="modules.html" title="fife_rpg"
              >previous</a> |</li>
-        <li><a href="index.html">fife-rpg 0.1c documentation</a> &raquo;</li>
+        <li><a href="index.html">fife-rpg 0.2 documentation</a> &raquo;</li>
           <li><a href="modules.html" >fife_rpg</a> &raquo;</li> 
       </ul>
     </div>

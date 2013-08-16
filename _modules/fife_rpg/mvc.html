@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>fife_rpg.mvc &mdash; fife-rpg 0.1c documentation</title>
+    <title>fife_rpg.mvc &mdash; fife-rpg 0.2 documentation</title>
     
     <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.1c',
+        VERSION:     '0.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <link rel="top" title="fife-rpg 0.1c documentation" href="../../index.html" />
+    <link rel="top" title="fife-rpg 0.2 documentation" href="../../index.html" />
     <link rel="up" title="Module code" href="../index.html" /> 
   </head>
   <body>
@@ -38,7 +38,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../index.html">fife-rpg 0.1c documentation</a> &raquo;</li>
+        <li><a href="../../index.html">fife-rpg 0.2 documentation</a> &raquo;</li>
           <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
@@ -75,15 +75,18 @@
 
 <span class="kn">from</span> <span class="nn">bGrease.grease_fife.mode</span> <span class="kn">import</span> <span class="n">Mode</span>
 
+
 <div class="viewcode-block" id="ViewBase"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.mvc.ViewBase">[docs]</a><span class="k">class</span> <span class="nc">ViewBase</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Base class for views</span>
 
 <span class="sd">    Properties:</span>
-<span class="sd">        application: A :class:`fife_rpg.rpg_application.RPGApplication` instance</span>
+<span class="sd">        application: A :class:`fife_rpg.rpg_application.RPGApplication`</span>
+<span class="sd">        instance</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">application</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">application</span> <span class="o">=</span> <span class="n">application</span>
+
 </div>
 <div class="viewcode-block" id="ControllerBase"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.mvc.ControllerBase">[docs]</a><span class="k">class</span> <span class="nc">ControllerBase</span><span class="p">(</span><span class="n">Mode</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Base of Controllers</span>
@@ -91,11 +94,11 @@
 <span class="sd">    Properties:</span>
 <span class="sd">        application: The :class:`fife_rpg.rpg_application.RPGApplication` that</span>
 <span class="sd">        created this controller</span>
-<span class="sd">        </span>
+
 <span class="sd">        view: The :class:`fife_rpg.mcs.ViewBase` that is used by this</span>
 <span class="sd">        controller</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-        
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">view</span><span class="p">,</span> <span class="n">application</span><span class="p">):</span>
         <span class="n">Mode</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">application</span><span class="o">.</span><span class="n">engine</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">view</span> <span class="o">=</span> <span class="n">view</span>
@@ -141,7 +144,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../index.html">fife-rpg 0.1c documentation</a> &raquo;</li>
+        <li><a href="../../index.html">fife-rpg 0.2 documentation</a> &raquo;</li>
           <li><a href="../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>

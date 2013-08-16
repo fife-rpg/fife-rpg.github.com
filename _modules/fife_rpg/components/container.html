@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>fife_rpg.components.container &mdash; fife-rpg 0.1c documentation</title>
+    <title>fife_rpg.components.container &mdash; fife-rpg 0.2 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.1c',
+        VERSION:     '0.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="top" title="fife-rpg 0.1c documentation" href="../../../index.html" />
+    <link rel="top" title="fife-rpg 0.2 documentation" href="../../../index.html" />
     <link rel="up" title="Module code" href="../../index.html" /> 
   </head>
   <body>
@@ -38,7 +38,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">fife-rpg 0.1c documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">fife-rpg 0.2 documentation</a> &raquo;</li>
           <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
@@ -49,7 +49,9 @@
           <div class="body">
             
   <h1>Source code for fife_rpg.components.container</h1><div class="highlight"><pre>
+<span class="c">#!/usr/bin/python</span>
 <span class="c"># -*- coding: utf-8 -*-</span>
+
 <span class="c">#   This program is free software: you can redistribute it and/or modify</span>
 <span class="c">#   it under the terms of the GNU General Public License as published by</span>
 <span class="c">#   the Free Software Foundation, either version 3 of the License, or</span>
@@ -74,12 +76,14 @@
 <span class="kn">from</span> <span class="nn">fife_rpg.components.base</span> <span class="kn">import</span> <span class="n">Base</span>
 <span class="kn">from</span> <span class="nn">fife_rpg.components.containable</span> <span class="kn">import</span> <span class="n">Containable</span>
 
+
 <div class="viewcode-block" id="Container"><a class="viewcode-back" href="../../../fife_rpg.components.html#fife_rpg.components.container.Container">[docs]</a><span class="k">class</span> <span class="nc">Container</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+
     <span class="sd">&quot;&quot;&quot;Component that allows an entity to contain one or more child entities.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Fields:</span>
 <span class="sd">        children: The entites that are in this container</span>
-<span class="sd">        </span>
+
 <span class="sd">        max_bulk: How much place the container has</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -87,21 +91,22 @@
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">Base</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">children</span><span class="o">=</span><span class="nb">list</span><span class="p">,</span> <span class="n">max_bulk</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s">&quot;children&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">default</span> <span class="o">=</span> <span class="nb">list</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s">&#39;children&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">default</span> <span class="o">=</span> <span class="nb">list</span>
 
     <span class="nd">@property</span>
 <div class="viewcode-block" id="Container.saveable_fields"><a class="viewcode-back" href="../../../fife_rpg.components.html#fife_rpg.components.container.Container.saveable_fields">[docs]</a>    <span class="k">def</span> <span class="nf">saveable_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns the fields of the component that can be saved.&quot;&quot;&quot;</span>
+
         <span class="n">fields</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">fields</span>
 </div>
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="Container.register"><a class="viewcode-back" href="../../../fife_rpg.components.html#fife_rpg.components.container.Container.register">[docs]</a>    <span class="k">def</span> <span class="nf">register</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;Container&quot;</span><span class="p">,</span> <span class="n">auto_register</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+<div class="viewcode-block" id="Container.register"><a class="viewcode-back" href="../../../fife_rpg.components.html#fife_rpg.components.container.Container.register">[docs]</a>    <span class="k">def</span> <span class="nf">register</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&#39;Container&#39;</span><span class="p">,</span> <span class="n">auto_register</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Registers the class as a component</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            name: The name under which the class should be registered</span>
-<span class="sd">            </span>
+
 <span class="sd">            auto_register: This sets whether components this component</span>
 <span class="sd">            derives from will have their registered_as property set to the same</span>
 <span class="sd">            name as this class.</span>
@@ -109,39 +114,47 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            True if the component was registered, False if not.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">(</span><span class="nb">super</span><span class="p">(</span><span class="n">Container</span><span class="p">,</span> <span class="n">cls</span><span class="p">)</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">auto_register</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">Container</span><span class="p">,</span> <span class="n">cls</span><span class="p">)</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">auto_register</span><span class="p">)</span>
+
 </div></div>
 <div class="viewcode-block" id="BulkLimitError"><a class="viewcode-back" href="../../../fife_rpg.components.html#fife_rpg.components.container.BulkLimitError">[docs]</a><span class="k">class</span> <span class="nc">BulkLimitError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Error that gets raised when the item would exceed the </span>
+
+    <span class="sd">&quot;&quot;&quot;Error that gets raised when the item would exceed the</span>
 <span class="sd">    bulk limit of the container.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Properties:</span>
 <span class="sd">        bulk: What the bulk would be</span>
-<span class="sd">        </span>
+
 <span class="sd">        max_bulk: What the max bulk is</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bulk</span><span class="p">,</span> <span class="n">max_bulk</span><span class="p">):</span>
         <span class="ne">Exception</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">bulk</span> <span class="o">=</span> <span class="n">bulk</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">max_bulk</span> <span class="o">=</span> <span class="n">max_bulk</span>
-    
+
     <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns the string representing the exception&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="s">&quot;Item would exceed the bulk limit of the container.&quot;</span>
+
+        <span class="k">return</span> <span class="s">&#39;Item would exceed the bulk limit of the container.&#39;</span>
+
 </div>
 <div class="viewcode-block" id="NoFreeSlotError"><a class="viewcode-back" href="../../../fife_rpg.components.html#fife_rpg.components.container.NoFreeSlotError">[docs]</a><span class="k">class</span> <span class="nc">NoFreeSlotError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+
     <span class="sd">&quot;&quot;&quot;Error that gets raised when the container has no free slots.&quot;&quot;&quot;</span>
-  
+
     <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns the string representing the exception&quot;&quot;&quot;</span>
+
         <span class="k">return</span> <span class="s">&quot;Container can&#39;t hold any more items.&quot;</span>
+
 </div>
 <div class="viewcode-block" id="get_free_slot"><a class="viewcode-back" href="../../../fife_rpg.components.html#fife_rpg.components.container.get_free_slot">[docs]</a><span class="k">def</span> <span class="nf">get_free_slot</span><span class="p">(</span><span class="n">container</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Returns the first slot of the container that is not occupied.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        container: A :class:`fife_rpg.entities.rpg_entity.RPGEntity` with a </span>
+<span class="sd">        container: A :class:`fife_rpg.entities.rpg_entity.RPGEntity` with a</span>
 <span class="sd">        container component</span>
 
 <span class="sd">    Returns:</span>
@@ -151,6 +164,7 @@
 <span class="sd">        :class:`fife_rpg.components.container.NoFreeSlotError`</span>
 <span class="sd">        if there is no free slot.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">container</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="n">Container</span><span class="o">.</span><span class="n">registered_as</span><span class="p">)</span>
     <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">container</span><span class="o">.</span><span class="n">children</span><span class="p">:</span>
@@ -158,74 +172,83 @@
             <span class="k">return</span> <span class="n">index</span>
         <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
     <span class="k">raise</span> <span class="n">NoFreeSlotError</span>
+
 </div>
 <div class="viewcode-block" id="get_total_bulk"><a class="viewcode-back" href="../../../fife_rpg.components.html#fife_rpg.components.container.get_total_bulk">[docs]</a><span class="k">def</span> <span class="nf">get_total_bulk</span><span class="p">(</span><span class="n">container</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Returns the bulk of all items in the container.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        container: A :class:`fife_rpg.entities.rpg_entity.RPGEntity` with a </span>
+<span class="sd">        container: A :class:`fife_rpg.entities.rpg_entity.RPGEntity` with a</span>
 <span class="sd">        container component</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">world</span> <span class="o">=</span> <span class="n">container</span><span class="o">.</span><span class="n">world</span>
     <span class="n">container</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="n">Container</span><span class="o">.</span><span class="n">registered_as</span><span class="p">)</span>
     <span class="n">total_bulk</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">container</span><span class="o">.</span><span class="n">children</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">child</span><span class="p">:</span>
             <span class="n">child_entity</span> <span class="o">=</span> <span class="n">world</span><span class="o">.</span><span class="n">get_entity</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
-            <span class="n">child_component</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">child_entity</span><span class="p">,</span> 
-                                      <span class="n">Containable</span><span class="o">.</span><span class="n">registered_as</span><span class="p">)</span>
+            <span class="n">child_component</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">child_entity</span><span class="p">,</span>
+                    <span class="n">Containable</span><span class="o">.</span><span class="n">registered_as</span><span class="p">)</span>
             <span class="n">total_bulk</span> <span class="o">+=</span> <span class="n">child_component</span><span class="o">.</span><span class="n">bulk</span>
     <span class="k">return</span> <span class="n">total_bulk</span>
+
 </div>
 <div class="viewcode-block" id="get_total_weight"><a class="viewcode-back" href="../../../fife_rpg.components.html#fife_rpg.components.container.get_total_weight">[docs]</a><span class="k">def</span> <span class="nf">get_total_weight</span><span class="p">(</span><span class="n">container</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Returns the weight of all items in the container.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Args:</span>
-<span class="sd">        container: A :class:`fife_rpg.entities.rpg_entity.RPGEntity` with a </span>
+<span class="sd">        container: A :class:`fife_rpg.entities.rpg_entity.RPGEntity` with a</span>
 <span class="sd">        container component</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">world</span> <span class="o">=</span> <span class="n">container</span><span class="o">.</span><span class="n">world</span>
     <span class="n">container</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="n">Container</span><span class="o">.</span><span class="n">registered_as</span><span class="p">)</span>
     <span class="n">total_weight</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">container</span><span class="o">.</span><span class="n">children</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">child</span><span class="p">:</span>
             <span class="n">child_entity</span> <span class="o">=</span> <span class="n">world</span><span class="o">.</span><span class="n">get_entity</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
-            <span class="n">child_component</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">child_entity</span><span class="p">,</span> 
-                                      <span class="n">Containable</span><span class="o">.</span><span class="n">registered_as</span><span class="p">)</span>
+            <span class="n">child_component</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">child_entity</span><span class="p">,</span>
+                    <span class="n">Containable</span><span class="o">.</span><span class="n">registered_as</span><span class="p">)</span>
             <span class="n">total_weight</span> <span class="o">+=</span> <span class="n">child_component</span><span class="o">.</span><span class="n">weight</span>
     <span class="k">return</span> <span class="n">total_weight</span>
+
 </div>
 <div class="viewcode-block" id="get_item"><a class="viewcode-back" href="../../../fife_rpg.components.html#fife_rpg.components.container.get_item">[docs]</a><span class="k">def</span> <span class="nf">get_item</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="n">slot_or_type</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Returns the item that is in the slot, or has the given type.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        container: A :class:`fife_rpg.entities.rpg_entity.RPGEntity` with a </span>
+<span class="sd">        container: A :class:`fife_rpg.entities.rpg_entity.RPGEntity` with a</span>
 <span class="sd">        container component</span>
-<span class="sd">        </span>
+
 <span class="sd">        slot_or_type: The index of the slot, or an item type</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">world</span> <span class="o">=</span> <span class="n">container</span><span class="o">.</span><span class="n">world</span>
     <span class="n">container_data</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="n">Container</span><span class="o">.</span><span class="n">registered_as</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">slot_or_type</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">container_data</span><span class="o">.</span><span class="n">children</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="n">slot_or_type</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">container_data</span><span class="o">.</span><span class="n">children</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">slot_or_type</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">world</span><span class="o">.</span><span class="n">get_entity</span><span class="p">(</span><span class="n">container_data</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="n">slot_or_type</span><span class="p">])</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">container_data</span><span class="o">.</span><span class="n">children</span><span class="p">:</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">child</span><span class="p">):</span> 
-                <span class="n">child_component</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="n">Containable</span><span class="o">.</span><span class="n">registered_as</span><span class="p">)</span>
-                <span class="k">if</span> <span class="p">(</span><span class="n">child_component</span><span class="o">.</span><span class="n">item_type</span> <span class="o">==</span> <span class="n">slot_or_type</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">child</span><span class="p">:</span>
+                <span class="n">child_component</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">child</span><span class="p">,</span>
+                        <span class="n">Containable</span><span class="o">.</span><span class="n">registered_as</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">child_component</span><span class="o">.</span><span class="n">item_type</span> <span class="o">==</span> <span class="n">slot_or_type</span><span class="p">:</span>
                     <span class="k">return</span> <span class="n">world</span><span class="o">.</span><span class="n">get_entity</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
     <span class="k">return</span> <span class="bp">None</span>
+
 </div>
 <div class="viewcode-block" id="remove_item"><a class="viewcode-back" href="../../../fife_rpg.components.html#fife_rpg.components.container.remove_item">[docs]</a><span class="k">def</span> <span class="nf">remove_item</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="n">slot_or_type</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Removes the item at the given slot, or with the given type.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        container: A :class:`fife_rpg.entities.rpg_entity.RPGEntity` with a </span>
+<span class="sd">        container: A :class:`fife_rpg.entities.rpg_entity.RPGEntity` with a</span>
 <span class="sd">        container component</span>
-<span class="sd">        </span>
+
 <span class="sd">        slot_or_type: The index of the slot, or an item type</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">container_data</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="n">Container</span><span class="o">.</span><span class="n">registered_as</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">slot_or_type</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">:</span>
         <span class="n">item</span> <span class="o">=</span> <span class="n">get_item</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="n">slot_or_type</span><span class="p">)</span>
@@ -234,43 +257,47 @@
             <span class="n">container_data</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="n">item</span><span class="o">.</span><span class="n">slot</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
             <span class="n">item</span><span class="o">.</span><span class="n">container</span> <span class="o">=</span> <span class="bp">None</span>
             <span class="n">item</span><span class="o">.</span><span class="n">slot</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+
 </div>
 <div class="viewcode-block" id="take_item"><a class="viewcode-back" href="../../../fife_rpg.components.html#fife_rpg.components.container.take_item">[docs]</a><span class="k">def</span> <span class="nf">take_item</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="n">slot_or_type</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Moves the item at the given slot, or with the given type,</span>
 <span class="sd">    out of the container and returns it.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        container: A :class:`fife_rpg.entities.rpg_entity.RPGEntity` with a </span>
+<span class="sd">        container: A :class:`fife_rpg.entities.rpg_entity.RPGEntity` with a</span>
 <span class="sd">        container component</span>
-<span class="sd">        </span>
+
 <span class="sd">        slot_or_type: The index of the slot, or an item type</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        The item as an RPGEntity</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">item</span> <span class="o">=</span> <span class="n">get_item</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="n">slot_or_type</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">item</span><span class="p">:</span>
         <span class="n">item_data</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">Containable</span><span class="o">.</span><span class="n">registered_as</span><span class="p">)</span>
         <span class="n">remove_item</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="n">item_data</span><span class="o">.</span><span class="n">slot</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">item</span>
+
 </div>
 <div class="viewcode-block" id="put_item"><a class="viewcode-back" href="../../../fife_rpg.components.html#fife_rpg.components.container.put_item">[docs]</a><span class="k">def</span> <span class="nf">put_item</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">slot</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Puts the item at the given slot in the container and returns the </span>
+    <span class="sd">&quot;&quot;&quot;Puts the item at the given slot in the container and returns the</span>
 <span class="sd">    item previously at the slot.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        container: A :class:`fife_rpg.entities.rpg_entity.RPGEntity` with a </span>
+<span class="sd">        container: A :class:`fife_rpg.entities.rpg_entity.RPGEntity` with a</span>
 <span class="sd">        container component</span>
-<span class="sd">        </span>
-<span class="sd">        item: A :class:`fife_rpg.entities.rpg_entity.RPGEntity` with a </span>
+
+<span class="sd">        item: A :class:`fife_rpg.entities.rpg_entity.RPGEntity` with a</span>
 <span class="sd">        containable component</span>
-<span class="sd">        </span>
-<span class="sd">        slot: The slot where to pu the item. Defaults to first free slot.</span>
+
+<span class="sd">        slot: The slot where to put the item. Defaults to first free slot.</span>
 
 <span class="sd">    Raises:</span>
 <span class="sd">        :class:`fife_rpg.components.container.BulkLimitError` if the item would</span>
 <span class="sd">        exceed the containers bulk.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">container_data</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="n">Container</span><span class="o">.</span><span class="n">registered_as</span><span class="p">)</span>
     <span class="n">item_data</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">Containable</span><span class="o">.</span><span class="n">registered_as</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">slot</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
@@ -323,7 +350,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">fife-rpg 0.1c documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">fife-rpg 0.2 documentation</a> &raquo;</li>
           <li><a href="../../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>
