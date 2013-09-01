@@ -1,0 +1,294 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Getting something displayed &mdash; fife-rpg 0.2 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="fife-rpg 0.2 documentation" href="../index.html" />
+    <link rel="up" title="Tutorial" href="tutorial.html" />
+    <link rel="next" title="Filling the map" href="entities.html" />
+    <link rel="prev" title="Basics" href="basics.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="entities.html" title="Filling the map"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="basics.html" title="Basics"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">fife-rpg 0.2 documentation</a> &raquo;</li>
+          <li><a href="tutorial.html" accesskey="U">Tutorial</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <span class="target" id="display"></span><div class="section" id="getting-something-displayed">
+<h1>Getting something displayed<a class="headerlink" href="#getting-something-displayed" title="Permalink to this headline">¶</a></h1>
+<p>The last Tutorial was about the general setup of FIFErpg projects and ended
+with getting a black window displayed. Since that is not very interesting this
+tutorial will be about loading and displaying maps.</p>
+<div class="section" id="maps">
+<h2>Maps<a class="headerlink" href="#maps" title="Permalink to this headline">¶</a></h2>
+<p>FIFErpg uses the normal FIFE map files for the static non-interactive objects
+of a map and thus the first thing needed is an actual map. If you don&#8217;t have a
+map yourself you can download this <a class="reference download internal" href="../_downloads/maps.7z"><tt class="xref download docutils literal"><span class="pre">archive</span></tt></a>. Extract
+that archive to the directory where your settings-dist.xml is. It should create
+a maps and a objects directory. The latter contains the graphics for the map.
+The map itself is in the maps directory. It is the same map that is used in
+the RPG demo of FIFE.</p>
+</div>
+<div class="section" id="new-settings">
+<h2>New Settings<a class="headerlink" href="#new-settings" title="Permalink to this headline">¶</a></h2>
+<p>Before this map can be loaded you need to add settings to your
+settings-dist.xml.
+The first is a &#8216;Camera&#8217; setting. This is the camera that will be used after
+loading the map. For the downloaded map this is &#8216;camera1&#8217;. Change this if you
+use a different map.
+The second is the &#8216;Components&#8217; setting. This is a list that tells FIFErpg which
+components are used by the application. This will be explained more later.
+For now the list only needs to contain &#8216;Agent&#8217;.</p>
+<p>You can verify with the updated
+<a class="reference download internal" href="../_downloads/settings-dist2.xml"><tt class="xref download docutils literal"><span class="pre">settings-dist.xml</span></tt></a> file.</p>
+<script type="text/javascript">
+    function showhide(element){
+        if (!document.getElementById)
+            return
+
+        if (element.style.display == "block")
+            element.style.display = "none"
+        else
+            element.style.display = "block"
+    };
+</script>
+<a href="javascript:showhide(document.getElementById('hiddencodeblock3'))">+ show/hide contents</a><br /><div id="hiddencodeblock3" style="display: block"><div class="highlight-python"><pre>&lt;?xml version='1.0' encoding='UTF-8'?&gt;
+&lt;Settings&gt;
+	&lt;Module name="FIFE"&gt;
+		&lt;Setting name="FullScreen" type="bool"&gt; False &lt;/Setting&gt;
+		&lt;Setting name="PlaySounds" type="bool"&gt; True &lt;/Setting&gt;
+		&lt;Setting name="RenderBackend" type="str"&gt; OpenGL &lt;/Setting&gt;
+		&lt;Setting name="ScreenResolution" type="str"&gt;1024x768&lt;/Setting&gt;
+		&lt;Setting name="BitsPerPixel" type="int"&gt; 0 &lt;/Setting&gt;
+		&lt;Setting name="InitialVolume" type="float"&gt; 5.0 &lt;/Setting&gt;
+		&lt;Setting name="SDLRemoveFakeAlpha" type="int"&gt; 1 &lt;/Setting&gt;
+		&lt;Setting name="GLCompressImages" type="bool"&gt; False &lt;/Setting&gt;
+		&lt;Setting name="WindowTitle" type="str"&gt; FIFErpg Tutorial &lt;/Setting&gt;
+		&lt;Setting name="WindowIcon" type="str"&gt; &lt;/Setting&gt;
+		&lt;Setting name="Font" type="str"&gt; fonts/FreeSans.ttf &lt;/Setting&gt;
+		&lt;Setting name="FontGlyphs" strip="0" type="str"&gt; abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!?-+/():;%&amp;amp;`'*#=[]\"&lt;/Setting&gt;
+		&lt;Setting name="DefaultFontSize" type="int"&gt; 16 &lt;/Setting&gt;
+		&lt;Setting name="LogModules" type="list"&gt; controller ; script &lt;/Setting&gt;
+		&lt;Setting name="PychanDebug" type="bool"&gt; False &lt;/Setting&gt;
+		&lt;Setting name="LogToPrompt" type="int"&gt; 1 &lt;/Setting&gt;
+ 		&lt;Setting name="UsePsyco" type="bool"&gt; False &lt;/Setting&gt;
+		&lt;Setting name="ProfilingOn" type="bool"&gt; False &lt;/Setting&gt;
+		&lt;Setting name="LogToFile" type="int"&gt; 0 &lt;/Setting&gt;
+    	&lt;Setting name="Lighting" type="int"&gt; 0 &lt;/Setting&gt;
+	&lt;/Module&gt;
+	&lt;Module name="fife-rpg"&gt;
+    	&lt;Setting name="ProjectName" type="str"&gt;Tutorial 2&lt;/Setting&gt;
+    	&lt;Setting name="Camera" type="str"&gt;camera1&lt;/Setting&gt;
+        &lt;Setting name="Components" type="list"&gt;Agent&lt;/Setting&gt;
+    &lt;/Module&gt;
+&lt;/Settings&gt;
+</pre>
+</div>
+</div></div>
+<div class="section" id="new-files">
+<h2>New Files<a class="headerlink" href="#new-files" title="Permalink to this headline">¶</a></h2>
+<p>There are also new definition files that need to be created.
+First you need a file that contains a list of what components are available and
+what names they have. That file is a YAML file with a simple structure:</p>
+<div class="code yaml highlight-python"><pre>Components:
+   &lt;component_name&gt;: &lt;python path to the component module&gt;</pre>
+</div>
+<p>Example:</p>
+<div class="code yaml highlight-python"><pre>Components:
+   Agent: fife_rpg.components.agent</pre>
+</div>
+<p><a class="reference download internal" href="../_downloads/combined.yaml"><tt class="xref download docutils literal"><span class="pre">combined.yaml</span></tt></a> contains the standard FIFErpg components, as well as
+a list of systems, actions and behaviours which will be explained later.
+Also a list of the available map is needed. By default FIFErpg looks for a
+&#8216;maps.yaml&#8217; file inside the &#8216;maps&#8217; subdirectory. This is a simple YAML file
+with that has the following structure:</p>
+<div class="code yaml highlight-python"><pre>Maps:
+   &lt;name of the map&gt;: &lt;filename of the map, without the extension&gt;</pre>
+</div>
+<p>Example:</p>
+<div class="code yaml highlight-python"><pre>Maps:
+   Level1: "level1"</pre>
+</div>
+<p>The above example is also what is needed for this tutorial, but you can download
+the file <a class="reference download internal" href="../_downloads/maps.yaml"><tt class="xref download docutils literal"><span class="pre">here</span></tt></a>.</p>
+</div>
+<div class="section" id="the-code">
+<h2>The code<a class="headerlink" href="#the-code" title="Permalink to this headline">¶</a></h2>
+<p>With those changes down we can get to the additions to the code.</p>
+<p>The components have to be loaded and activated after creating the application
+and before creating the world. After creating the application here:</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">app</span> <span class="o">=</span> <span class="n">RPGApplication</span><span class="p">(</span><span class="n">settings</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Add the following lines:</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">app</span><span class="o">.</span><span class="n">load_components</span><span class="p">(</span><span class="s">&quot;combined.yaml&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">register_components</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="../fife_rpg.html#fife_rpg.rpg_application.RPGApplication.load_components" title="fife_rpg.rpg_application.RPGApplication.load_components"><tt class="xref py py-meth docutils literal"><span class="pre">load_components(&quot;combined.yaml&quot;)</span></tt></a>
+loads the components that are in the &#8220;combined.yaml&#8221; file and adds them to an
+internal list.</p>
+<p><a class="reference internal" href="../fife_rpg.html#fife_rpg.rpg_application.RPGApplication.register_components" title="fife_rpg.rpg_application.RPGApplication.register_components"><tt class="xref py py-meth docutils literal"><span class="pre">register_components()</span></tt></a>
+registers the components that are set in the &#8216;Components&#8217; setting.</p>
+<p>The maps can be loaded and activated anywhere between creating the world and
+running the main loop of the application. After the line:</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">app</span><span class="o">.</span><span class="n">create_world</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Add the following:</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">app</span><span class="o">.</span><span class="n">load_maps</span><span class="p">()</span>
+<span class="n">app</span><span class="o">.</span><span class="n">switch_map</span><span class="p">(</span><span class="s">&quot;Level1&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="../fife_rpg.html#fife_rpg.rpg_application.RPGApplication.load_maps" title="fife_rpg.rpg_application.RPGApplication.load_maps"><tt class="xref py py-meth docutils literal"><span class="pre">load_maps()</span></tt></a>
+loads the list of maps from the maps.yaml file.</p>
+<p><a class="reference internal" href="../fife_rpg.html#fife_rpg.rpg_application.RPGApplication.switch_map" title="fife_rpg.rpg_application.RPGApplication.switch_map"><tt class="xref py py-meth docutils literal"><span class="pre">switch_map(&quot;Level1&quot;)</span></tt></a>
+changes the active map to &#8220;Level1&#8221;.</p>
+<p>Here is the complete code:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">fife_rpg</span> <span class="kn">import</span> <span class="n">RPGApplication</span>
+<span class="kn">from</span> <span class="nn">fife_rpg</span> <span class="kn">import</span> <span class="n">GameSceneView</span>
+<span class="kn">from</span> <span class="nn">fife_rpg</span> <span class="kn">import</span> <span class="n">GameSceneController</span>
+<span class="kn">from</span> <span class="nn">fife.extensions.fife_settings</span> <span class="kn">import</span> <span class="n">Setting</span>
+
+<span class="n">settings</span> <span class="o">=</span> <span class="n">Setting</span><span class="p">(</span><span class="n">app_name</span><span class="o">=</span><span class="s">&quot;Tutorial 2&quot;</span><span class="p">,</span> <span class="n">settings_file</span><span class="o">=</span><span class="s">&quot;settings.xml&quot;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">RPGApplication</span><span class="p">(</span><span class="n">settings</span><span class="p">)</span>
+<span class="hll">    <span class="n">app</span><span class="o">.</span><span class="n">load_components</span><span class="p">(</span><span class="s">&quot;combined.yaml&quot;</span><span class="p">)</span>
+</span><span class="hll">    <span class="n">app</span><span class="o">.</span><span class="n">register_components</span><span class="p">()</span>
+</span>    <span class="n">view</span> <span class="o">=</span> <span class="n">GameSceneView</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+    <span class="n">controller</span> <span class="o">=</span> <span class="n">GameSceneController</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">app</span><span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">create_world</span><span class="p">()</span>
+<span class="hll">    <span class="n">app</span><span class="o">.</span><span class="n">load_maps</span><span class="p">()</span>
+</span><span class="hll">    <span class="n">app</span><span class="o">.</span><span class="n">switch_map</span><span class="p">(</span><span class="s">&quot;Level1&quot;</span><span class="p">)</span>
+</span>    <span class="n">app</span><span class="o">.</span><span class="n">push_mode</span><span class="p">(</span><span class="n">controller</span><span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>If you run this code you should see something like this:</p>
+<div class="figure align-center">
+<img alt="../_images/screenshot.png" src="../_images/screenshot.png" />
+<p class="caption">Empty map. This may vary if you used a different map.</p>
+</div>
+<p>If it appears that there are graphical problems you might want to check out the <a class="reference external" href="http://wiki.fifengine.net/Known_Problems">Known
+Problems</a> section of FIFE.</p>
+<p>In the <a class="reference internal" href="entities.html#entities"><em>next</em></a> part of the Tutorial we will be adding the Dynamic objects
+to the map.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Getting something displayed</a><ul>
+<li><a class="reference internal" href="#maps">Maps</a></li>
+<li><a class="reference internal" href="#new-settings">New Settings</a></li>
+<li><a class="reference internal" href="#new-files">New Files</a></li>
+<li><a class="reference internal" href="#the-code">The code</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="basics.html"
+                        title="previous chapter">Basics</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="entities.html"
+                        title="next chapter">Filling the map</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/tutorial/display.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="entities.html" title="Filling the map"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="basics.html" title="Basics"
+             >previous</a> |</li>
+        <li><a href="../index.html">fife-rpg 0.2 documentation</a> &raquo;</li>
+          <li><a href="tutorial.html" >Tutorial</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012-2013, Karsten Bock.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
