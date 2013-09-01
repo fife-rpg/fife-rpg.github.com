@@ -1,0 +1,344 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Filling the map &mdash; fife-rpg 0.2 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="fife-rpg 0.2 documentation" href="../index.html" />
+    <link rel="up" title="Tutorial" href="tutorial.html" />
+    <link rel="next" title="Accessing and controlling entities" href="controlling.html" />
+    <link rel="prev" title="Getting something displayed" href="display.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="controlling.html" title="Accessing and controlling entities"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="display.html" title="Getting something displayed"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">fife-rpg 0.2 documentation</a> &raquo;</li>
+          <li><a href="tutorial.html" accesskey="U">Tutorial</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <span class="target" id="entities"></span><div class="section" id="filling-the-map">
+<h1>Filling the map<a class="headerlink" href="#filling-the-map" title="Permalink to this headline">¶</a></h1>
+<p>After we are able to load maps we now want to be able to have objects on them
+with which we can interact or control.</p>
+<div class="section" id="entities-and-components">
+<h2>Entities and Components<a class="headerlink" href="#entities-and-components" title="Permalink to this headline">¶</a></h2>
+<p>FIFErpg uses a modified version of the
+<a class="reference external" href="http://packages.python.org/grease/index.html">Grease Framework</a> which uses a
+Component Based Entity System. Components simply store various data values. The
+component classes used do not have any methods to work with these values. They
+are like database tables. An entity is a container that has components attached
+to it. What component an entity has determines what it can do, or what can be
+done with it or to it. FIFErpg entities have two mandatory components, namely
+the &#8220;<a class="reference internal" href="../fife_rpg.components.html#fife_rpg.components.general.General" title="fife_rpg.components.general.General"><tt class="xref py py-class docutils literal"><span class="pre">General</span></tt></a>&#8221; component,
+which sets the unique identifier of the component and the
+&#8220;<a class="reference internal" href="../fife_rpg.components.html#fife_rpg.components.agent.Agent" title="fife_rpg.components.agent.Agent"><tt class="xref py py-class docutils literal"><span class="pre">Agent</span></tt></a>&#8221; component, which contains
+the basic information needed to place the Entity on a map. Agents that are
+actually displayed on a map also have a
+&#8220;<a class="reference internal" href="../fife_rpg.components.html#fife_rpg.components.fifeagent.FifeAgent" title="fife_rpg.components.fifeagent.FifeAgent"><tt class="xref py py-class docutils literal"><span class="pre">FifeAgent</span></tt></a>&#8221; component,
+but that is automatically created as these are placed on the map. All other
+components can be set freely for each entity.</p>
+</div>
+<div class="section" id="setting-up-components">
+<h2>Setting up Components<a class="headerlink" href="#setting-up-components" title="Permalink to this headline">¶</a></h2>
+<p>We already added the &#8220;Components&#8221; setting in the previous tutorial, but did not
+explain what it does. FIFErpg allows one to customize what components are
+actually wanted and also to add custom components. The actual details for
+adding components will not be discussed in this tutorial, but may be in a
+separate one. Basically, though, each component needs to register itself to the
+<a class="reference internal" href="../fife_rpg.components.html#module-fife_rpg.components.component_manager" title="fife_rpg.components.component_manager"><tt class="xref py py-mod docutils literal"><span class="pre">ComponentManager</span></tt></a>. To make
+that easier FIFErpg can read the available components from a file and it then
+it just needs a list of the components that it should register. The easiest
+method to set the list is the &#8220;Components&#8221; setting in the FIFE settings file.
+Then you just need to call</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">app</span><span class="o">.</span><span class="n">register_components</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>In the last tutorial we need to register the Agent component since FIFErpg
+looks for entities with that component if a map is loaded.</p>
+<p>To actually place entities on a map we need to activate two more components.
+They are, as already said in the previous section, General and FifeAgent. You
+need to change the component setting to this:</p>
+<div class="code highlight-python"><div class="highlight"><pre><span class="n">General</span> <span class="p">;</span> <span class="n">Agent</span> <span class="p">;</span> <span class="n">FifeAgent</span>
+</pre></div>
+</div>
+<p>Note that the delimiter for lists in FIFE setting files is &#8221; ; &#8221;. The spaces
+are important, if you forget them you will get an error.</p>
+</div>
+<div class="section" id="behaviours">
+<h2>Behaviours<a class="headerlink" href="#behaviours" title="Permalink to this headline">¶</a></h2>
+<p>Behaviours are FIFE <a class="reference external" href="http://www.fifengine.net/epydoc/fife.fife.InstanceActionListener-class.html">InstanceActionListeners</a>
+thus have a method that gets called when the instance has finished doing an
+action, allowing one to set what the agent does next and create daily routines.
+They also manage the animation queue of an agent, which allows the agent
+to queue animations.</p>
+<p>Currently FIFErpg only has one behaviour: The Base Behaviour. This is the
+most simple behaviour which only provides the basic functionality.</p>
+<p>Like components behaviours have to be registered first. This can be done
+similar to components through the settings file. The structure is the same,
+a list that sets what Behaviours to register. The <a class="reference download internal" href="../_downloads/combined.yaml"><tt class="xref download docutils literal"><span class="pre">combined.yaml</span></tt></a>
+also contains the standard behaviours of FIFErpg. If you downloaded that file
+before this tutorial was made you may want to re download it though.</p>
+<p>For this tutorial you will need to add the &#8220;Base&#8221; behaviour to this list.</p>
+<p>You can review the changes in the
+<a class="reference download internal" href="../_downloads/settings-dist3.xml"><tt class="xref download docutils literal"><span class="pre">settings</span></tt></a> file.</p>
+<script type="text/javascript">
+    function showhide(element){
+        if (!document.getElementById)
+            return
+
+        if (element.style.display == "block")
+            element.style.display = "none"
+        else
+            element.style.display = "block"
+    };
+</script>
+<a href="javascript:showhide(document.getElementById('hiddencodeblock4'))">+ show/hide contents</a><br /><div id="hiddencodeblock4" style="display: block"><div class="highlight-python"><pre>&lt;?xml version='1.0' encoding='UTF-8'?&gt;
+&lt;Settings&gt;
+	&lt;Module name="FIFE"&gt;
+		&lt;Setting name="FullScreen" type="bool"&gt; False &lt;/Setting&gt;
+		&lt;Setting name="PlaySounds" type="bool"&gt; True &lt;/Setting&gt;
+		&lt;Setting name="RenderBackend" type="str"&gt; OpenGL &lt;/Setting&gt;
+		&lt;Setting name="ScreenResolution" type="str"&gt;1024x768&lt;/Setting&gt;
+		&lt;Setting name="BitsPerPixel" type="int"&gt; 0 &lt;/Setting&gt;
+		&lt;Setting name="InitialVolume" type="float"&gt; 5.0 &lt;/Setting&gt;
+		&lt;Setting name="SDLRemoveFakeAlpha" type="int"&gt; 1 &lt;/Setting&gt;
+		&lt;Setting name="GLCompressImages" type="bool"&gt; False &lt;/Setting&gt;
+		&lt;Setting name="WindowTitle" type="str"&gt; FIFErpg Tutorial &lt;/Setting&gt;
+		&lt;Setting name="WindowIcon" type="str"&gt; &lt;/Setting&gt;
+		&lt;Setting name="Font" type="str"&gt; fonts/FreeSans.ttf &lt;/Setting&gt;
+		&lt;Setting name="FontGlyphs" strip="0" type="str"&gt; abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!?-+/():;%&amp;amp;`'*#=[]\"&lt;/Setting&gt;
+		&lt;Setting name="DefaultFontSize" type="int"&gt; 16 &lt;/Setting&gt;
+		&lt;Setting name="LogModules" type="list"&gt; controller ; script &lt;/Setting&gt;
+		&lt;Setting name="PychanDebug" type="bool"&gt; False &lt;/Setting&gt;
+		&lt;Setting name="LogToPrompt" type="int"&gt; 1 &lt;/Setting&gt;
+ 		&lt;Setting name="UsePsyco" type="bool"&gt; False &lt;/Setting&gt;
+		&lt;Setting name="ProfilingOn" type="bool"&gt; False &lt;/Setting&gt;
+		&lt;Setting name="LogToFile" type="int"&gt; 0 &lt;/Setting&gt;
+    	&lt;Setting name="Lighting" type="int"&gt; 0 &lt;/Setting&gt;
+	&lt;/Module&gt;
+	&lt;Module name="fife-rpg"&gt;
+    	&lt;Setting name="ProjectName" type="str"&gt;Tutorial 3&lt;/Setting&gt;
+    	&lt;Setting name="Camera" type="str"&gt;camera1&lt;/Setting&gt;
+        &lt;Setting name="Components" type="list"&gt;General ; Agent ; FifeAgent&lt;/Setting&gt;
+        &lt;Setting name="Behaviours" type="list"&gt;Base&lt;/Setting&gt;
+    &lt;/Module&gt;
+&lt;/Settings&gt;
+</pre>
+</div>
+</div></div>
+<div class="section" id="adding-entities">
+<h2>Adding Entities<a class="headerlink" href="#adding-entities" title="Permalink to this headline">¶</a></h2>
+<p>With these preparations complete we can move on to place entities on the map.
+FIFErpg offers a method to load entities from a file. Each entity is a
+YAML document in that file. The default file name and location is
+&#8220;objects/entities.yaml&#8221;.</p>
+<p>The structure of each document is simple:</p>
+<div class="code yaml highlight-python"><pre>!Entity
+Template: Name of Template
+Components:
+    Name of component:
+      component field: value
+      component field: value
+      ...
+    Another component:
+      another component field: value
+      ...
+    ...</pre>
+</div>
+<p>The Template line is optional. The &#8221;!Entity&#8221; line is a special command for
+<a class="reference external" href="http://pyyaml.org/">PyYAML</a>, which FIFErpg uses. The Components part is
+basically a list of Components, using the name they are registered with,
+and their field values. The standard components are set to use their class
+name, which is also the name in the <a class="reference download internal" href="../_downloads/combined.yaml"><tt class="xref download docutils literal"><span class="pre">combined.yaml</span></tt></a> file.</p>
+<p>With that we can add our first entity. Create a file named entities.yaml
+inside the objects subdirectory and put the following in it:</p>
+<div class="code yaml highlight-python"><pre>!Entity
+Components:
+  General:
+      identifier: PlayerCharacter
+  Agent:
+      gfx: player
+      map: Level1
+      layer: actors
+      position: [-5, 0]
+      rotation: 180
+      behaviour_type: Base</pre>
+</div>
+<p>The field values are explained in the respective component modules.</p>
+<p>To actually have the entity appear on the map we need to add more code to load
+and register the behaviours and load and place the agents.</p>
+<p>The behaviours are loaded and registered similar to components, add the
+following lines before creating the world:</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">app</span><span class="o">.</span><span class="n">load_behaviours</span><span class="p">(</span><span class="s">&quot;combined.yaml&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">register_behaviours</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The entities and components are managed by the world, which can be accessed
+through the application.</p>
+<p>The following code is all that is needed to load and the entities:</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">world</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">world</span>
+<span class="n">world</span><span class="o">.</span><span class="n">import_agent_objects</span><span class="p">()</span>
+<span class="n">world</span><span class="o">.</span><span class="n">load_and_create_entities</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="../fife_rpg.html#fife_rpg.world.RPGWorld.import_agent_objects" title="fife_rpg.world.RPGWorld.import_agent_objects"><tt class="xref py py-meth docutils literal"><span class="pre">import_agent_objects()</span></tt></a>
+will import fife object definitions from a specific directory. By default it
+will use the &#8220;AgentObjectsPath&#8221; setting which defaults to &#8220;objects/agents&#8221;.</p>
+<p><a class="reference internal" href="../fife_rpg.html#fife_rpg.world.RPGWorld.load_and_create_entities" title="fife_rpg.world.RPGWorld.load_and_create_entities"><tt class="xref py py-meth docutils literal"><span class="pre">load_and_create_entities()</span></tt></a>
+will load the entities from the entities file and create them.</p>
+<p>The actual placement of entities that are on a map is done when switching to
+the map. So, since loading the entities needs a world object, these lines have
+to be added after creating the world and before switching to a map.
+be loaded before doing that.</p>
+<p>Here is the complete code with the changes:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">fife_rpg</span> <span class="kn">import</span> <span class="n">RPGApplication</span>
+<span class="kn">from</span> <span class="nn">fife_rpg</span> <span class="kn">import</span> <span class="n">GameSceneView</span>
+<span class="kn">from</span> <span class="nn">fife_rpg</span> <span class="kn">import</span> <span class="n">GameSceneController</span>
+<span class="kn">from</span> <span class="nn">fife.extensions.fife_settings</span> <span class="kn">import</span> <span class="n">Setting</span>
+
+<span class="n">settings</span> <span class="o">=</span> <span class="n">Setting</span><span class="p">(</span><span class="n">app_name</span><span class="o">=</span><span class="s">&quot;Tutorial 3&quot;</span><span class="p">,</span> <span class="n">settings_file</span><span class="o">=</span><span class="s">&quot;settings.xml&quot;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">RPGApplication</span><span class="p">(</span><span class="n">settings</span><span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">load_components</span><span class="p">(</span><span class="s">&quot;combined.yaml&quot;</span><span class="p">)</span>
+<span class="hll">    <span class="n">app</span><span class="o">.</span><span class="n">load_behaviours</span><span class="p">(</span><span class="s">&quot;combined.yaml&quot;</span><span class="p">)</span>
+</span>    <span class="n">app</span><span class="o">.</span><span class="n">register_components</span><span class="p">()</span>
+<span class="hll">    <span class="n">app</span><span class="o">.</span><span class="n">register_behaviours</span><span class="p">()</span>
+</span>    <span class="n">view</span> <span class="o">=</span> <span class="n">GameSceneView</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+    <span class="n">controller</span> <span class="o">=</span> <span class="n">GameSceneController</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">app</span><span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">create_world</span><span class="p">()</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">load_maps</span><span class="p">()</span>
+<span class="hll">    <span class="n">world</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">world</span>
+</span><span class="hll">    <span class="n">world</span><span class="o">.</span><span class="n">import_agent_objects</span><span class="p">()</span>
+</span><span class="hll">    <span class="n">world</span><span class="o">.</span><span class="n">load_and_create_entities</span><span class="p">()</span>
+</span>    <span class="n">app</span><span class="o">.</span><span class="n">switch_map</span><span class="p">(</span><span class="s">&quot;Level1&quot;</span><span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">push_mode</span><span class="p">(</span><span class="n">controller</span><span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>You will need the &#8220;player&#8221; object to be able to run that code. The one used
+for the tutorial is inside the
+<a class="reference download internal" href="../_downloads/agents.7z"><tt class="xref download docutils literal"><span class="pre">agents.7z</span></tt></a> archive. Extract it into
+the objects subdirectory. It should create a agents subdirectory there.</p>
+<p>If you run this code you should see something like this:</p>
+<div class="figure align-center">
+<img alt="../_images/entities_screenshot.png" src="../_images/entities_screenshot.png" />
+<p class="caption">This may vary if you used a different map.</p>
+</div>
+<p>The <a class="reference internal" href="controlling.html#controlling"><em>next</em></a> tutorial will show how to control entities.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Filling the map</a><ul>
+<li><a class="reference internal" href="#entities-and-components">Entities and Components</a></li>
+<li><a class="reference internal" href="#setting-up-components">Setting up Components</a></li>
+<li><a class="reference internal" href="#behaviours">Behaviours</a></li>
+<li><a class="reference internal" href="#adding-entities">Adding Entities</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="display.html"
+                        title="previous chapter">Getting something displayed</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="controlling.html"
+                        title="next chapter">Accessing and controlling entities</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/tutorial/entities.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="controlling.html" title="Accessing and controlling entities"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="display.html" title="Getting something displayed"
+             >previous</a> |</li>
+        <li><a href="../index.html">fife-rpg 0.2 documentation</a> &raquo;</li>
+          <li><a href="tutorial.html" >Tutorial</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012-2013, Karsten Bock.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

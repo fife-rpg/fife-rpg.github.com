@@ -1,0 +1,184 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>entities Package &mdash; fife-rpg 0.1c documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1c',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="fife-rpg 0.1c documentation" href="index.html" />
+    <link rel="up" title="fife_rpg Package" href="fife_rpg.html" />
+    <link rel="next" title="systems Package" href="fife_rpg.systems.html" />
+    <link rel="prev" title="components Package" href="fife_rpg.components.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="fife_rpg.systems.html" title="systems Package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="fife_rpg.components.html" title="components Package"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">fife-rpg 0.1c documentation</a> &raquo;</li>
+          <li><a href="modules.html" >fife_rpg</a> &raquo;</li>
+          <li><a href="fife_rpg.html" accesskey="U">fife_rpg Package</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="entities-package">
+<h1>entities Package<a class="headerlink" href="#entities-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2><a class="reference internal" href="fife_rpg.systems.html#module-entities" title="entities: Contains the classes for the component system."><tt class="xref py py-mod docutils literal"><span class="pre">entities</span></tt></a> Package<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-fife_rpg.entities"></span><p>This package contains the entities for the component system.</p>
+<span class="target" id="module-entities"></span></div>
+<div class="section" id="module-fife_rpg.entities.rpg_entity">
+<span id="rpg-entity-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">rpg_entity</span></tt> Module<a class="headerlink" href="#module-fife_rpg.entities.rpg_entity" title="Permalink to this headline">¶</a></h2>
+<p>This module contains the RPGEntity entity class.</p>
+<span class="target" id="module-general"></span><dl class="class">
+<dt id="fife_rpg.entities.rpg_entity.RPGEntity">
+<em class="property">class </em><tt class="descclassname">fife_rpg.entities.rpg_entity.</tt><tt class="descname">RPGEntity</tt><big>(</big><em>world</em>, <em>identifier</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/entities/rpg_entity.html#RPGEntity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.entities.rpg_entity.RPGEntity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">bGrease.entity.Entity</span></tt></p>
+<p>The Base for all fife-rpg entities</p>
+<dl class="docutils">
+<dt>Properties:</dt>
+<dd><p class="first">world: The world the entity belongs to. 
+A <a class="reference internal" href="fife_rpg.html#fife_rpg.world.RPGWorld" title="fife_rpg.world.RPGWorld"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.world.RPGWorld</span></tt></a></p>
+<p class="last">identifier: A unique identifier</p>
+</dd>
+</dl>
+<dl class="attribute">
+<dt id="fife_rpg.entities.rpg_entity.RPGEntity.entity_id">
+<tt class="descname">entity_id</tt><a class="headerlink" href="#fife_rpg.entities.rpg_entity.RPGEntity.entity_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="fife_rpg.entities.rpg_entity.RPGEntity.identifier">
+<tt class="descname">identifier</tt><a class="reference internal" href="_modules/fife_rpg/entities/rpg_entity.html#RPGEntity.identifier"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.entities.rpg_entity.RPGEntity.identifier" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the identifier of the entity</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fife_rpg.entities.rpg_entity.RPGEntity.world">
+<tt class="descname">world</tt><a class="headerlink" href="#fife_rpg.entities.rpg_entity.RPGEntity.world" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="fife_rpg.entities.rpg_entity.set_component_value">
+<tt class="descclassname">fife_rpg.entities.rpg_entity.</tt><tt class="descname">set_component_value</tt><big>(</big><em>entity</em>, <em>component</em>, <em>field</em>, <em>value</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/entities/rpg_entity.html#set_component_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.entities.rpg_entity.set_component_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the field value of an entities component to the specified value</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><p class="first">entity: A <a class="reference internal" href="#fife_rpg.entities.rpg_entity.RPGEntity" title="fife_rpg.entities.rpg_entity.RPGEntity"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.entities.rpg_entity.RPGEntity</span></tt></a></p>
+<p>component: The name of the component</p>
+<p>field: The field of the component</p>
+<p class="last">value: The value to which the field is set</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">entities Package</a><ul>
+<li><a class="reference internal" href="#id1"><tt class="docutils literal"><span class="pre">entities</span></tt> Package</a></li>
+<li><a class="reference internal" href="#module-fife_rpg.entities.rpg_entity"><tt class="docutils literal"><span class="pre">rpg_entity</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="fife_rpg.components.html"
+                        title="previous chapter">components Package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="fife_rpg.systems.html"
+                        title="next chapter">systems Package</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/fife_rpg.entities.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="fife_rpg.systems.html" title="systems Package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="fife_rpg.components.html" title="components Package"
+             >previous</a> |</li>
+        <li><a href="index.html">fife-rpg 0.1c documentation</a> &raquo;</li>
+          <li><a href="modules.html" >fife_rpg</a> &raquo;</li>
+          <li><a href="fife_rpg.html" >fife_rpg Package</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012-2013, Karsten Bock.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

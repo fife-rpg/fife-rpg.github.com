@@ -1,0 +1,762 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>systems Package &mdash; fife-rpg 0.1c documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1c',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="fife-rpg 0.1c documentation" href="index.html" />
+    <link rel="up" title="fife_rpg Package" href="fife_rpg.html" />
+    <link rel="prev" title="entities Package" href="fife_rpg.entities.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="fife_rpg.entities.html" title="entities Package"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">fife-rpg 0.1c documentation</a> &raquo;</li>
+          <li><a href="modules.html" >fife_rpg</a> &raquo;</li>
+          <li><a href="fife_rpg.html" accesskey="U">fife_rpg Package</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="systems-package">
+<h1>systems Package<a class="headerlink" href="#systems-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2><tt class="xref py py-mod docutils literal"><span class="pre">systems</span></tt> Package<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-fife_rpg.systems"></span><p>This package contains the systems for the component system.</p>
+<span class="target" id="module-entities"></span></div>
+<div class="section" id="module-fife_rpg.systems.base">
+<span id="base-module"></span><h2><a class="reference internal" href="#module-base" title="base: The base system and functions"><tt class="xref py py-mod docutils literal"><span class="pre">base</span></tt></a> Module<a class="headerlink" href="#module-fife_rpg.systems.base" title="Permalink to this headline">¶</a></h2>
+<p>The base system and functions</p>
+<span class="target" id="module-base"></span><dl class="class">
+<dt id="fife_rpg.systems.base.Base">
+<em class="property">class </em><tt class="descclassname">fife_rpg.systems.base.</tt><tt class="descname">Base</tt><a class="reference internal" href="_modules/fife_rpg/systems/base.html#Base"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.systems.base.Base" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">bGrease.System</span></tt></p>
+<p>Base system for fife-rpg.</p>
+<dl class="docutils">
+<dt>Properties:</dt>
+<dd><p class="first">registered_as: Class property that sets under what name the class is
+registered</p>
+<p class="last">dependencies: Class property that sets the classes this System depends on</p>
+</dd>
+</dl>
+<dl class="attribute">
+<dt id="fife_rpg.systems.base.Base.dependencies">
+<tt class="descname">dependencies</tt><em class="property"> = []</em><a class="headerlink" href="#fife_rpg.systems.base.Base.dependencies" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="fife_rpg.systems.base.Base.register">
+<em class="property">classmethod </em><tt class="descname">register</tt><big>(</big><em>name</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/systems/base.html#Base.register"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.systems.base.Base.register" title="Permalink to this definition">¶</a></dt>
+<dd><p>Registers the class as a system</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>name: The name under which the class should be registered</dd>
+<dt>Returns:</dt>
+<dd>True if the system was registered, False if not.</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fife_rpg.systems.base.Base.registered_as">
+<tt class="descname">registered_as</tt><em class="property"> = None</em><a class="reference internal" href="_modules/fife_rpg/systems/base.html#Base.registered_as"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.systems.base.Base.registered_as" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-fife_rpg.systems.character_statistics">
+<span id="character-statistics-module"></span><h2><a class="reference internal" href="#module-character_statistics" title="character_statistics: Manages the character statistics"><tt class="xref py py-mod docutils literal"><span class="pre">character_statistics</span></tt></a> Module<a class="headerlink" href="#module-fife_rpg.systems.character_statistics" title="Permalink to this headline">¶</a></h2>
+<p>The character statistics system manages the character statistics.</p>
+<span class="target" id="module-character_statistics"></span><dl class="class">
+<dt id="fife_rpg.systems.character_statistics.CalculatedStatistic">
+<em class="property">class </em><tt class="descclassname">fife_rpg.systems.character_statistics.</tt><tt class="descname">CalculatedStatistic</tt><big>(</big><em>name</em>, <em>view_name</em>, <em>description</em>, <em>influences</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/systems/character_statistics.html#CalculatedStatistic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.systems.character_statistics.CalculatedStatistic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#fife_rpg.systems.character_statistics.Statistic" title="fife_rpg.systems.character_statistics.Statistic"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.systems.character_statistics.Statistic</span></tt></a></p>
+<p>Class to store the data about a calculated statistic</p>
+<dl class="docutils">
+<dt>Properties:</dt>
+<dd><p class="first">name: The internal name of the statistic</p>
+<p>view_name: The displayed name of the statistic</p>
+<p>influences: The other statistics that influence this</p>
+<p class="last">description: The description of the statistic</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="fife_rpg.systems.character_statistics.CharacterStatisticSystem">
+<em class="property">class </em><tt class="descclassname">fife_rpg.systems.character_statistics.</tt><tt class="descname">CharacterStatisticSystem</tt><a class="reference internal" href="_modules/fife_rpg/systems/character_statistics.html#CharacterStatisticSystem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.systems.character_statistics.CharacterStatisticSystem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#fife_rpg.systems.base.Base" title="fife_rpg.systems.base.Base"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.systems.base.Base</span></tt></a></p>
+<p>The game environment system manages what variables and functions are 
+available to scripts.</p>
+<dl class="docutils">
+<dt>Properties:</dt>
+<dd><p class="first">primary_statistics: Dictionary holding the primary statistics</p>
+<p>secondary_statistics: Dictionary holfing the secondary statistics</p>
+<p>min_stat_value: Class property that determines the minimum value a
+statistic can have</p>
+<p>default_stat_value: Class property that determines the average value of
+the statistic. This is used for offset calculation.</p>
+<p>max_stat_value: Class property that determines the maximum value a
+statistic can have</p>
+<p class="last">dependencies: List of class this system depends on</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="fife_rpg.systems.character_statistics.CharacterStatisticSystem.add_primary_statistic">
+<tt class="descname">add_primary_statistic</tt><big>(</big><em>name</em>, <em>view_name</em>, <em>description</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/systems/character_statistics.html#CharacterStatisticSystem.add_primary_statistic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.systems.character_statistics.CharacterStatisticSystem.add_primary_statistic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a primary statistic to the system</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><p class="first">name: Short internal name for the statistic</p>
+<p>view_name: Name that is displayed</p>
+<p class="last">description: Text that describes the statistic</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.systems.character_statistics.CharacterStatisticSystem.add_secondary_statistic">
+<tt class="descname">add_secondary_statistic</tt><big>(</big><em>name</em>, <em>view_name</em>, <em>description</em>, <em>influences</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/systems/character_statistics.html#CharacterStatisticSystem.add_secondary_statistic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.systems.character_statistics.CharacterStatisticSystem.add_secondary_statistic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a secondary statistic to the system</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><p class="first">name: Short internal name for the statistic</p>
+<p>view_name: Name that is displayed</p>
+<p>description: Text that describes the statistic</p>
+<p class="last">influences: The other statistics that influence this</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.systems.character_statistics.CharacterStatisticSystem.can_decrease_statistic">
+<tt class="descname">can_decrease_statistic</tt><big>(</big><em>entity</em>, <em>statistic</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/systems/character_statistics.html#CharacterStatisticSystem.can_decrease_statistic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.systems.character_statistics.CharacterStatisticSystem.can_decrease_statistic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether the given statistic can be decreased or not.</p>
+<dl class="docutils">
+<dt>Args:        </dt>
+<dd><p class="first">entity: An <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.rpg_entity.RPGEntity" title="fife_rpg.entities.rpg_entity.RPGEntity"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.entities.rpg_entity.RPGEntity</span></tt></a> or the
+name of the entity</p>
+<p class="last">statistic: The internal name of the statistic</p>
+</dd>
+<dt>Returns:</dt>
+<dd>True if the statistic can be decrease, False if not.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.systems.character_statistics.CharacterStatisticSystem.can_increase_statistic">
+<tt class="descname">can_increase_statistic</tt><big>(</big><em>entity</em>, <em>statistic</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/systems/character_statistics.html#CharacterStatisticSystem.can_increase_statistic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.systems.character_statistics.CharacterStatisticSystem.can_increase_statistic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether the given statistic can be increased or not.</p>
+<dl class="docutils">
+<dt>Args:        </dt>
+<dd><p class="first">entity: An <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.rpg_entity.RPGEntity" title="fife_rpg.entities.rpg_entity.RPGEntity"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.entities.rpg_entity.RPGEntity</span></tt></a> or the
+name of the entity</p>
+<p class="last">statistic: The internal name of the statistic</p>
+</dd>
+<dt>Returns:</dt>
+<dd>True if the statistic can be increase, False if not.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.systems.character_statistics.CharacterStatisticSystem.decrease_statistic">
+<tt class="descname">decrease_statistic</tt><big>(</big><em>entity</em>, <em>statistic</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/systems/character_statistics.html#CharacterStatisticSystem.decrease_statistic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.systems.character_statistics.CharacterStatisticSystem.decrease_statistic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decrease the statistic by one, if possible.</p>
+<dl class="docutils">
+<dt>Args:        </dt>
+<dd><p class="first">entity: An <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.rpg_entity.RPGEntity" title="fife_rpg.entities.rpg_entity.RPGEntity"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.entities.rpg_entity.RPGEntity</span></tt></a> or the
+name of the entity</p>
+<p class="last">statistic: The internal name of the statistic</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fife_rpg.systems.character_statistics.CharacterStatisticSystem.default_stat_value">
+<tt class="descname">default_stat_value</tt><em class="property"> = 50</em><a class="headerlink" href="#fife_rpg.systems.character_statistics.CharacterStatisticSystem.default_stat_value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="fife_rpg.systems.character_statistics.CharacterStatisticSystem.dependencies">
+<tt class="descname">dependencies</tt><em class="property"> = [&lt;class 'fife_rpg.components.character_statistics.CharacterStatistics'&gt;]</em><a class="headerlink" href="#fife_rpg.systems.character_statistics.CharacterStatisticSystem.dependencies" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.systems.character_statistics.CharacterStatisticSystem.get_primary_statistic_values">
+<tt class="descname">get_primary_statistic_values</tt><big>(</big><em>entity</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/systems/character_statistics.html#CharacterStatisticSystem.get_primary_statistic_values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.systems.character_statistics.CharacterStatisticSystem.get_primary_statistic_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>Collects and returns the values of the primary statitistic values
+of the entity.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>entity: An <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.rpg_entity.RPGEntity" title="fife_rpg.entities.rpg_entity.RPGEntity"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.entities.rpg_entity.RPGEntity</span></tt></a> or the
+name of the entity</dd>
+<dt>Returns:</dt>
+<dd>A dictionary containing the statistic short names and the values
+for that entity</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.systems.character_statistics.CharacterStatisticSystem.get_secondary_statistic_values">
+<tt class="descname">get_secondary_statistic_values</tt><big>(</big><em>entity</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/systems/character_statistics.html#CharacterStatisticSystem.get_secondary_statistic_values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.systems.character_statistics.CharacterStatisticSystem.get_secondary_statistic_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>Collects and returns the values of the secondary statitistic values
+of the entity.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>entity: An <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.rpg_entity.RPGEntity" title="fife_rpg.entities.rpg_entity.RPGEntity"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.entities.rpg_entity.RPGEntity</span></tt></a> or the
+name of the entity</dd>
+<dt>Returns:</dt>
+<dd>A dictionary containing the statistic short names and the values
+for that entity</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.systems.character_statistics.CharacterStatisticSystem.get_statistic_decrease_gain">
+<tt class="descname">get_statistic_decrease_gain</tt><big>(</big><em>entity</em>, <em>statistic</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/systems/character_statistics.html#CharacterStatisticSystem.get_statistic_decrease_gain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.systems.character_statistics.CharacterStatisticSystem.get_statistic_decrease_gain" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate and return the gain of decreasing the statistic</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><p class="first">entity: An <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.rpg_entity.RPGEntity" title="fife_rpg.entities.rpg_entity.RPGEntity"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.entities.rpg_entity.RPGEntity</span></tt></a> or 
+the name of the entity</p>
+<p class="last">statistic: The internal name of the statistic</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.systems.character_statistics.CharacterStatisticSystem.get_statistic_increase_cost">
+<tt class="descname">get_statistic_increase_cost</tt><big>(</big><em>entity</em>, <em>statistic</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/systems/character_statistics.html#CharacterStatisticSystem.get_statistic_increase_cost"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.systems.character_statistics.CharacterStatisticSystem.get_statistic_increase_cost" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate and return the cost to increase the statistic</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><p class="first">entity: An <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.rpg_entity.RPGEntity" title="fife_rpg.entities.rpg_entity.RPGEntity"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.entities.rpg_entity.RPGEntity</span></tt></a> or the
+name of the entity</p>
+<p class="last">statistic: The internal name of the statistic</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.systems.character_statistics.CharacterStatisticSystem.get_statistic_points">
+<tt class="descname">get_statistic_points</tt><big>(</big><em>entity</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/systems/character_statistics.html#CharacterStatisticSystem.get_statistic_points"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.systems.character_statistics.CharacterStatisticSystem.get_statistic_points" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the available statistic points of the entity</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>entity: An <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.rpg_entity.RPGEntity" title="fife_rpg.entities.rpg_entity.RPGEntity"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.entities.rpg_entity.RPGEntity</span></tt></a> or the
+name of the entity</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.systems.character_statistics.CharacterStatisticSystem.get_statistic_value">
+<tt class="descname">get_statistic_value</tt><big>(</big><em>entity</em>, <em>statistic</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/systems/character_statistics.html#CharacterStatisticSystem.get_statistic_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.systems.character_statistics.CharacterStatisticSystem.get_statistic_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the entities value of the given statistic</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><p class="first">entity: An <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.rpg_entity.RPGEntity" title="fife_rpg.entities.rpg_entity.RPGEntity"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.entities.rpg_entity.RPGEntity</span></tt></a> or the
+name of the entity</p>
+<p class="last">statistic: The internal name of the statistic</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.systems.character_statistics.CharacterStatisticSystem.get_statistic_values">
+<tt class="descname">get_statistic_values</tt><big>(</big><em>entity</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/systems/character_statistics.html#CharacterStatisticSystem.get_statistic_values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.systems.character_statistics.CharacterStatisticSystem.get_statistic_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>Collects and returns the combined values of the primary and secondary 
+statitistic values of the entity.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>entity: An <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.rpg_entity.RPGEntity" title="fife_rpg.entities.rpg_entity.RPGEntity"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.entities.rpg_entity.RPGEntity</span></tt></a> or the
+name of the entity</dd>
+<dt>Returns:</dt>
+<dd>A dictionary containing the statistic short names and the values
+for that entity</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.systems.character_statistics.CharacterStatisticSystem.increase_statistic">
+<tt class="descname">increase_statistic</tt><big>(</big><em>entity</em>, <em>statistic</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/systems/character_statistics.html#CharacterStatisticSystem.increase_statistic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.systems.character_statistics.CharacterStatisticSystem.increase_statistic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Increase the statistic by one, if possible.</p>
+<dl class="docutils">
+<dt>Args:        </dt>
+<dd><p class="first">entity: An <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.rpg_entity.RPGEntity" title="fife_rpg.entities.rpg_entity.RPGEntity"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.entities.rpg_entity.RPGEntity</span></tt></a> or the
+name of the entity</p>
+<p class="last">statistic: The internal name of the statistic</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.systems.character_statistics.CharacterStatisticSystem.load_statistics_from_file">
+<tt class="descname">load_statistics_from_file</tt><big>(</big><em>filename</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/systems/character_statistics.html#CharacterStatisticSystem.load_statistics_from_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.systems.character_statistics.CharacterStatisticSystem.load_statistics_from_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clears the statistics and populates them from a file</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>filename: The path to the file</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fife_rpg.systems.character_statistics.CharacterStatisticSystem.max_stat_value">
+<tt class="descname">max_stat_value</tt><em class="property"> = 100</em><a class="headerlink" href="#fife_rpg.systems.character_statistics.CharacterStatisticSystem.max_stat_value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="fife_rpg.systems.character_statistics.CharacterStatisticSystem.min_stat_value">
+<tt class="descname">min_stat_value</tt><em class="property"> = 0</em><a class="headerlink" href="#fife_rpg.systems.character_statistics.CharacterStatisticSystem.min_stat_value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="fife_rpg.systems.character_statistics.CharacterStatisticSystem.register">
+<em class="property">classmethod </em><tt class="descname">register</tt><big>(</big><em>name='character_statistics'</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/systems/character_statistics.html#CharacterStatisticSystem.register"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.systems.character_statistics.CharacterStatisticSystem.register" title="Permalink to this definition">¶</a></dt>
+<dd><p>Registers the class as a system</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>name: The name under which the class should be registered</dd>
+<dt>Returns:</dt>
+<dd>True if the system was registered, False if not.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.systems.character_statistics.CharacterStatisticSystem.step">
+<tt class="descname">step</tt><big>(</big><em>time_delta</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/systems/character_statistics.html#CharacterStatisticSystem.step"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.systems.character_statistics.CharacterStatisticSystem.step" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute a time step for the system. Must be defined
+by all system classes.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>time_delta: Time elapsed since last step</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="fife_rpg.systems.character_statistics.NoStatisticComponentError">
+<em class="property">exception </em><tt class="descclassname">fife_rpg.systems.character_statistics.</tt><tt class="descname">NoStatisticComponentError</tt><big>(</big><em>entity</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/systems/character_statistics.html#NoStatisticComponentError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.systems.character_statistics.NoStatisticComponentError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></tt></p>
+<p>Exception that gets raised when an entity does not have a
+character_statistics component</p>
+<dl class="docutils">
+<dt>Properties:</dt>
+<dd>entity: A <a class="reference internal" href="fife_rpg.entities.html#fife_rpg.entities.rpg_entity.RPGEntity" title="fife_rpg.entities.rpg_entity.RPGEntity"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.entities.rpg_entity.RPGEntity</span></tt></a></dd>
+</dl>
+</dd></dl>
+
+<dl class="exception">
+<dt id="fife_rpg.systems.character_statistics.NoSuchStatisticError">
+<em class="property">exception </em><tt class="descclassname">fife_rpg.systems.character_statistics.</tt><tt class="descname">NoSuchStatisticError</tt><big>(</big><em>name</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/systems/character_statistics.html#NoSuchStatisticError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.systems.character_statistics.NoSuchStatisticError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></tt></p>
+<p>Exception that gets raised when a statistic was tried to be accessed that
+does not exist</p>
+<dl class="docutils">
+<dt>Properties:        </dt>
+<dd>name: The name of the statistic</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="fife_rpg.systems.character_statistics.Statistic">
+<em class="property">class </em><tt class="descclassname">fife_rpg.systems.character_statistics.</tt><tt class="descname">Statistic</tt><big>(</big><em>name</em>, <em>view_name</em>, <em>description</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/systems/character_statistics.html#Statistic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.systems.character_statistics.Statistic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Class to store the data about a statistic</p>
+<dl class="docutils">
+<dt>Properties:</dt>
+<dd><p class="first">name: The internal name of the statistic</p>
+<p>view_name: The displayed name of the statistic</p>
+<p class="last">description: The description of the statistic</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="fife_rpg.systems.character_statistics.getStatCost">
+<tt class="descclassname">fife_rpg.systems.character_statistics.</tt><tt class="descname">getStatCost</tt><big>(</big><em>offset</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/systems/character_statistics.html#getStatCost"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.systems.character_statistics.getStatCost" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets and returns the cost to increase stat based on the offset</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-fife_rpg.systems.game_variables">
+<span id="game-variables-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">game_variables</span></tt> Module<a class="headerlink" href="#module-fife_rpg.systems.game_variables" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="fife_rpg.systems.game_variables.GameVariables">
+<em class="property">class </em><tt class="descclassname">fife_rpg.systems.game_variables.</tt><tt class="descname">GameVariables</tt><a class="reference internal" href="_modules/fife_rpg/systems/game_variables.html#GameVariables"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.systems.game_variables.GameVariables" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#fife_rpg.systems.base.Base" title="fife_rpg.systems.base.Base"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.systems.base.Base</span></tt></a></p>
+<p>The game environment system manages what variables and functions are 
+available to scripts.</p>
+<dl class="method">
+<dt id="fife_rpg.systems.game_variables.GameVariables.add_callback">
+<tt class="descname">add_callback</tt><big>(</big><em>callback</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/systems/game_variables.html#GameVariables.add_callback"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.systems.game_variables.GameVariables.add_callback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a callback function to the GameVariables</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>callback: The function to add</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.systems.game_variables.GameVariables.delete_variable">
+<tt class="descname">delete_variable</tt><big>(</big><em>name</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/systems/game_variables.html#GameVariables.delete_variable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.systems.game_variables.GameVariables.delete_variable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deletes a dynamic variable</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>name: The name of the varriable</dd>
+</dl>
+<p>Returns: None or an error message</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.systems.game_variables.GameVariables.get_variable">
+<tt class="descname">get_variable</tt><big>(</big><em>name</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/systems/game_variables.html#GameVariables.get_variable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.systems.game_variables.GameVariables.get_variable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the value of a variable</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>name: The name of the variable</dd>
+<dt>Raises:</dt>
+<dd>NameError: If there is no variable with that name</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.systems.game_variables.GameVariables.get_variables">
+<tt class="descname">get_variables</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/fife_rpg/systems/game_variables.html#GameVariables.get_variables"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.systems.game_variables.GameVariables.get_variables" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the the variables as a dictionary</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="fife_rpg.systems.game_variables.GameVariables.register">
+<em class="property">classmethod </em><tt class="descname">register</tt><big>(</big><em>name='game_variables'</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/systems/game_variables.html#GameVariables.register"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.systems.game_variables.GameVariables.register" title="Permalink to this definition">¶</a></dt>
+<dd><p>Registers the class as a system</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>name: The name under which the class should be registered</dd>
+<dt>Returns:</dt>
+<dd>True if the system was registered, False if not.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.systems.game_variables.GameVariables.set_variable">
+<tt class="descname">set_variable</tt><big>(</big><em>name</em>, <em>value</em>, <em>allow_static_hide=False</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/systems/game_variables.html#GameVariables.set_variable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.systems.game_variables.GameVariables.set_variable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets a dynamic variable to the specified value</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><p class="first">name: The name of the variable</p>
+<p>value: The value the variables should be set to</p>
+<p class="last">allow_static_hide: If set to True the function will allow setting
+the value even if there is already a static variable with this
+name. The static value will then be hidden, but not deleted.</p>
+</dd>
+<dt>Returns:</dt>
+<dd>The (new) value of the variable or an error string.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.systems.game_variables.GameVariables.step">
+<tt class="descname">step</tt><big>(</big><em>time_delta</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/systems/game_variables.html#GameVariables.step"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.systems.game_variables.GameVariables.step" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute a time step for the system. Must be defined
+by all system classes.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>time_delta: Time since last step invocation</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-fife_rpg.systems.scriptingsystem">
+<span id="scriptingsystem-module"></span><h2><a class="reference internal" href="#module-scriptingsystem" title="scriptingsystem: Manages the scripts of fife-rpg games."><tt class="xref py py-mod docutils literal"><span class="pre">scriptingsystem</span></tt></a> Module<a class="headerlink" href="#module-fife_rpg.systems.scriptingsystem" title="Permalink to this headline">¶</a></h2>
+<p>The scripting system manages the scripts of fife-rpg games.</p>
+<span class="target" id="module-scriptingsystem"></span><dl class="class">
+<dt id="fife_rpg.systems.scriptingsystem.Script">
+<em class="property">class </em><tt class="descclassname">fife_rpg.systems.scriptingsystem.</tt><tt class="descname">Script</tt><big>(</big><em>actions</em>, <em>system</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/systems/scriptingsystem.html#Script"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.systems.scriptingsystem.Script" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Script object</p>
+<dl class="docutils">
+<dt>Properties:</dt>
+<dd><p class="first">actions: The actions that the script will run</p>
+<p>system: The ScriptingSystem that this script will run on</p>
+<p>running_actions: The actions that are currently running</p>
+<p>running: Whether the script is currently running or not</p>
+<p>finished: Whether the script has finished running or not</p>
+<p>wait: The seconds that have to pass before the next action is run.</p>
+<p class="last">cur_action: The current running action</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="fife_rpg.systems.scriptingsystem.Script.reset">
+<tt class="descname">reset</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/fife_rpg/systems/scriptingsystem.html#Script.reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.systems.scriptingsystem.Script.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resets the state of the script</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.systems.scriptingsystem.Script.update">
+<tt class="descname">update</tt><big>(</big><em>time</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/systems/scriptingsystem.html#Script.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.systems.scriptingsystem.Script.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Advance the script</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>time: The time to advance the script by</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="fife_rpg.systems.scriptingsystem.ScriptingSystem">
+<em class="property">class </em><tt class="descclassname">fife_rpg.systems.scriptingsystem.</tt><tt class="descname">ScriptingSystem</tt><a class="reference internal" href="_modules/fife_rpg/systems/scriptingsystem.html#ScriptingSystem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.systems.scriptingsystem.ScriptingSystem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#fife_rpg.systems.base.Base" title="fife_rpg.systems.base.Base"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.systems.base.Base</span></tt></a></p>
+<p>System responsible for managing scripts.</p>
+<dl class="docutils">
+<dt>Properties:</dt>
+<dd><p class="first">commands: The commands available to scripts</p>
+<p>actions: Actions that the scripts can do</p>
+<p>scripts: Dictionary of the registered scripts</p>
+<p class="last">conditions: List of the registered conditions</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="fife_rpg.systems.scriptingsystem.ScriptingSystem.add_condition">
+<tt class="descname">add_condition</tt><big>(</big><em>condition_data</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/systems/scriptingsystem.html#ScriptingSystem.add_condition"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.systems.scriptingsystem.ScriptingSystem.add_condition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a condition.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>condition_data: Dictionary containing the data of the condition</dd>
+</dl>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="fife_rpg.systems.scriptingsystem.ScriptingSystem.check_condition">
+<em class="property">classmethod </em><tt class="descname">check_condition</tt><big>(</big><em>application</em>, <em>expressions</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/systems/scriptingsystem.html#ScriptingSystem.check_condition"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.systems.scriptingsystem.ScriptingSystem.check_condition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iterates over the expressions of the condition and returns
+whether all evaluate to True or not.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><p class="first">application: A <a class="reference internal" href="fife_rpg.html#fife_rpg.rpg_application.RPGApplication" title="fife_rpg.rpg_application.RPGApplication"><tt class="xref py py-class docutils literal"><span class="pre">fife_rpg.rpg_application.RPGApplication</span></tt></a>
+object</p>
+<p class="last">expressions: A list of expressions</p>
+</dd>
+<dt>Returns:</dt>
+<dd><p class="first">True: If ALL expressions evaluate to True</p>
+<p class="last">False: If one of the expressions evaluates to False</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fife_rpg.systems.scriptingsystem.ScriptingSystem.condition_dictionary">
+<tt class="descname">condition_dictionary</tt><em class="property"> = {'CurrentMap': &lt;function &lt;lambda&gt; at 0x02169870&gt;, 'IsLocationInRegion': &lt;unbound method RPGApplication.is_location_in_region&gt;, 'Knows': &lt;function &lt;lambda&gt; at 0x020CEEF0&gt;, 'IsAgentInRegion': &lt;unbound method RPGApplication.is_agent_in_region&gt;}</em><a class="reference internal" href="_modules/fife_rpg/systems/scriptingsystem.html#ScriptingSystem.condition_dictionary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.systems.scriptingsystem.ScriptingSystem.condition_dictionary" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="fife_rpg.systems.scriptingsystem.ScriptingSystem.dependencies">
+<tt class="descname">dependencies</tt><em class="property"> = []</em><a class="headerlink" href="#fife_rpg.systems.scriptingsystem.ScriptingSystem.dependencies" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.systems.scriptingsystem.ScriptingSystem.load_scripts">
+<tt class="descname">load_scripts</tt><big>(</big><em>filename=None</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/systems/scriptingsystem.html#ScriptingSystem.load_scripts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.systems.scriptingsystem.ScriptingSystem.load_scripts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load scripts from a file</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>filename: The path to the scripts file. If set to None the 
+&#8220;ScriptsFile&#8221; setting will be used.</dd>
+</dl>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="fife_rpg.systems.scriptingsystem.ScriptingSystem.register">
+<em class="property">classmethod </em><tt class="descname">register</tt><big>(</big><em>name='scripting'</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/systems/scriptingsystem.html#ScriptingSystem.register"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.systems.scriptingsystem.ScriptingSystem.register" title="Permalink to this definition">¶</a></dt>
+<dd><p>Registers the class as a system</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>name: The name under which the class should be registered</dd>
+<dt>Returns:</dt>
+<dd>True if the system was registered, False if not.</dd>
+</dl>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="fife_rpg.systems.scriptingsystem.ScriptingSystem.register_condition">
+<em class="property">classmethod </em><tt class="descname">register_condition</tt><big>(</big><em>name</em>, <em>condition_function</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/systems/scriptingsystem.html#ScriptingSystem.register_condition"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.systems.scriptingsystem.ScriptingSystem.register_condition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Register a condition to the condition dictionary.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>name: The name of the condition
+condition_function: The condition function. This should be a
+function that returns True or False</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.systems.scriptingsystem.ScriptingSystem.reset">
+<tt class="descname">reset</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/fife_rpg/systems/scriptingsystem.html#ScriptingSystem.reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.systems.scriptingsystem.ScriptingSystem.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resets the script and condition collections</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.systems.scriptingsystem.ScriptingSystem.run_script">
+<tt class="descname">run_script</tt><big>(</big><em>name</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/systems/scriptingsystem.html#ScriptingSystem.run_script"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.systems.scriptingsystem.ScriptingSystem.run_script" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs a script with the given name</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>name: The name of the script</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.systems.scriptingsystem.ScriptingSystem.set_script">
+<tt class="descname">set_script</tt><big>(</big><em>name</em>, <em>actions</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/systems/scriptingsystem.html#ScriptingSystem.set_script"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.systems.scriptingsystem.ScriptingSystem.set_script" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets a script.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><p class="first">name: The name of the script</p>
+<p class="last">actions: What the script does</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="fife_rpg.systems.scriptingsystem.ScriptingSystem.step">
+<tt class="descname">step</tt><big>(</big><em>time_delta</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/systems/scriptingsystem.html#ScriptingSystem.step"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.systems.scriptingsystem.ScriptingSystem.step" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute a _time step for the system. Must be defined
+by all system classes.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>time_delta: Time since last step invocation</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-fife_rpg.systems.system_manager">
+<span id="system-manager-module"></span><h2><a class="reference internal" href="#module-system_manager" title="system_manager: Functions for managing systems"><tt class="xref py py-mod docutils literal"><span class="pre">system_manager</span></tt></a> Module<a class="headerlink" href="#module-fife_rpg.systems.system_manager" title="Permalink to this headline">¶</a></h2>
+<p>This module contains functions for managing systems</p>
+<span class="target" id="module-system_manager"></span><dl class="function">
+<dt id="fife_rpg.systems.system_manager.get_systems">
+<tt class="descclassname">fife_rpg.systems.system_manager.</tt><tt class="descname">get_systems</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/fife_rpg/systems/system_manager.html#get_systems"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.systems.system_manager.get_systems" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the registered systems</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="fife_rpg.systems.system_manager.register_system">
+<tt class="descclassname">fife_rpg.systems.system_manager.</tt><tt class="descname">register_system</tt><big>(</big><em>system_name</em>, <em>system_object</em><big>)</big><a class="reference internal" href="_modules/fife_rpg/systems/system_manager.html#register_system"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fife_rpg.systems.system_manager.register_system" title="Permalink to this definition">¶</a></dt>
+<dd><p>Registers an system</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><p class="first">system_name: The name of the system_object</p>
+<p class="last">system_object: A bGrease system object</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">systems Package</a><ul>
+<li><a class="reference internal" href="#id1"><tt class="docutils literal"><span class="pre">systems</span></tt> Package</a></li>
+<li><a class="reference internal" href="#module-fife_rpg.systems.base"><tt class="docutils literal"><span class="pre">base</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-fife_rpg.systems.character_statistics"><tt class="docutils literal"><span class="pre">character_statistics</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-fife_rpg.systems.game_variables"><tt class="docutils literal"><span class="pre">game_variables</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-fife_rpg.systems.scriptingsystem"><tt class="docutils literal"><span class="pre">scriptingsystem</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-fife_rpg.systems.system_manager"><tt class="docutils literal"><span class="pre">system_manager</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="fife_rpg.entities.html"
+                        title="previous chapter">entities Package</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/fife_rpg.systems.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="fife_rpg.entities.html" title="entities Package"
+             >previous</a> |</li>
+        <li><a href="index.html">fife-rpg 0.1c documentation</a> &raquo;</li>
+          <li><a href="modules.html" >fife_rpg</a> &raquo;</li>
+          <li><a href="fife_rpg.html" >fife_rpg Package</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012-2013, Karsten Bock.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

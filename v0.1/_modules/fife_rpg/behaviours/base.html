@@ -1,0 +1,278 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>fife_rpg.behaviours.base &mdash; fife-rpg 0.1c documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.1c',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="fife-rpg 0.1c documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">fife-rpg 0.1c documentation</a> &raquo;</li>
+          <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for fife_rpg.behaviours.base</h1><div class="highlight"><pre>
+<span class="c"># -*- coding: utf-8 -*-</span>
+<span class="c">#   This program is free software: you can redistribute it and/or modify</span>
+<span class="c">#   it under the terms of the GNU General Public License as published by</span>
+<span class="c">#   the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c">#   (at your option) any later version.</span>
+<span class="c">#</span>
+<span class="c">#   This program is distributed in the hope that it will be useful,</span>
+<span class="c">#   but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c">#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c">#   GNU General Public License for more details.</span>
+<span class="c">#</span>
+<span class="c">#   You should have received a copy of the GNU General Public License</span>
+<span class="c">#   along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+
+<span class="c">#  This module is based on the behaviour package from PARPG</span>
+
+<span class="sd">&quot;&quot;&quot;This module contains the basic behaviour for agents.</span>
+
+<span class="sd">.. module:: base</span>
+<span class="sd">    :synopsis: Contains the basic behaviour for agents.</span>
+
+<span class="sd">.. moduleauthor:: Karsten Bock &lt;KarstenBock@gmx.net&gt;</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+<span class="kn">from</span> <span class="nn">fife</span> <span class="kn">import</span> <span class="n">fife</span>
+
+<span class="kn">from</span> <span class="nn">fife_rpg.exceptions</span> <span class="kn">import</span> <span class="n">AlreadyRegisteredError</span><span class="p">,</span> <span class="n">NotRegisteredError</span>
+<span class="kn">from</span> <span class="nn">fife_rpg.components.fifeagent</span> <span class="kn">import</span> <span class="n">FifeAgent</span>
+<span class="kn">from</span> <span class="nn">fife_rpg.behaviours</span> <span class="kn">import</span> <span class="n">BehaviourManager</span>
+<span class="kn">from</span> <span class="nn">fife_rpg.behaviours</span> <span class="kn">import</span> <span class="n">AGENT_STATES</span>
+
+<div class="viewcode-block" id="Base"><a class="viewcode-back" href="../../../fife_rpg.behaviours.html#fife_rpg.behaviours.base.Base">[docs]</a><span class="k">class</span> <span class="nc">Base</span> <span class="p">(</span><span class="n">fife</span><span class="o">.</span><span class="n">InstanceActionListener</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Behaviour that contains the basic methods for actors</span>
+<span class="sd">    </span>
+<span class="sd">    Properties:</span>
+<span class="sd">        agent: A :class:`fife_rpg.components.fifeagent.FifeAgent` instance</span>
+<span class="sd">        </span>
+<span class="sd">        state: The current state of the behaviour</span>
+<span class="sd">        </span>
+<span class="sd">        animation_queue: A deque that contains the queued animations</span>
+<span class="sd">        </span>
+<span class="sd">        callback: The function that will be called after the current animation</span>
+<span class="sd">        is finished</span>
+
+<span class="sd">        registered_as: Class property that sets under what name the class is</span>
+<span class="sd">        registered</span>
+<span class="sd">        </span>
+<span class="sd">        dependencies: Class property that sets the classes this System depends</span>
+<span class="sd">        on</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__registered_as</span> <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">fife</span><span class="o">.</span><span class="n">InstanceActionListener</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">agent</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">animation_queue</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">callback</span> <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="Base.location"><a class="viewcode-back" href="../../../fife_rpg.behaviours.html#fife_rpg.behaviours.base.Base.location">[docs]</a>    <span class="k">def</span> <span class="nf">location</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the location of the agent&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">instance</span><span class="o">.</span><span class="n">getLocation</span><span class="p">()</span><span class="o">.</span><span class="n">getLayerCoordinates</span><span class="p">()</span>
+    </div>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">rotation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the rotation of the agent&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">instance</span><span class="o">.</span><span class="n">getRotation</span><span class="p">()</span>
+    
+    <span class="nd">@rotation.setter</span>
+<div class="viewcode-block" id="Base.rotation"><a class="viewcode-back" href="../../../fife_rpg.behaviours.html#fife_rpg.behaviours.base.Base.rotation">[docs]</a>    <span class="k">def</span> <span class="nf">rotation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rotation</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Sets the rotation of the agent&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">instance</span><span class="o">.</span><span class="n">setRotation</span><span class="p">(</span><span class="n">rotation</span><span class="p">)</span>
+    </div>
+<div class="viewcode-block" id="Base.attach_to_agent"><a class="viewcode-back" href="../../../fife_rpg.behaviours.html#fife_rpg.behaviours.base.Base.attach_to_agent">[docs]</a>    <span class="k">def</span> <span class="nf">attach_to_agent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Attaches to a certain agent</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">           agent: A :class:`fife_rpg.components.fifeagent.FifeAgent` instance</span>
+<span class="sd">           </span>
+<span class="sd">           layer: :class:`fife.Layer` of the agent to attach the behaviour to</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">fifeagent_name</span> <span class="o">=</span> <span class="n">FifeAgent</span><span class="o">.</span><span class="n">registered_as</span>
+        <span class="k">if</span> <span class="n">fifeagent_name</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">NotRegisteredError</span><span class="p">(</span><span class="s">&quot;Component&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">agent</span> <span class="o">=</span> <span class="n">agent</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">instance</span><span class="o">.</span><span class="n">addActionListener</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">AGENT_STATES</span><span class="o">.</span><span class="n">NONE</span>
+</div>
+<div class="viewcode-block" id="Base.idle"><a class="viewcode-back" href="../../../fife_rpg.behaviours.html#fife_rpg.behaviours.base.Base.idle">[docs]</a>    <span class="k">def</span> <span class="nf">idle</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set the state to idle&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">AGENT_STATES</span><span class="o">.</span><span class="n">IDLE</span>
+</div>
+<div class="viewcode-block" id="Base.onInstanceActionFinished"><a class="viewcode-back" href="../../../fife_rpg.behaviours.html#fife_rpg.behaviours.base.Base.onInstanceActionFinished">[docs]</a>    <span class="k">def</span> <span class="nf">onInstanceActionFinished</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">animation</span><span class="p">):</span>
+        <span class="c">#pylint: disable=C0103,W0613,W0221</span>
+        <span class="sd">&quot;&quot;&quot;Called by FIFE when an animation of an agent is finished</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            instance: The agent instance</span>
+<span class="sd">            </span>
+<span class="sd">            animation: The animation that the agent was doing</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c"># First we reset the next behavior </span>
+        <span class="n">callback</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">callback</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">callback</span> <span class="o">=</span> <span class="bp">None</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">idle</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">callback</span><span class="p">:</span>
+            <span class="n">callback</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">animtion</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">animation_queue</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">animate</span><span class="p">(</span><span class="o">**</span><span class="n">animtion</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">idle</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="Base.onInstanceActionFrame"><a class="viewcode-back" href="../../../fife_rpg.behaviours.html#fife_rpg.behaviours.base.Base.onInstanceActionFrame">[docs]</a>    <span class="k">def</span> <span class="nf">onInstanceActionFrame</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">animation</span><span class="p">,</span> <span class="n">frame</span><span class="p">):</span>
+        <span class="c">#pylint: disable=C0103,W0613,W0221</span>
+        <span class="sd">&quot;&quot;&quot;Called by FIFE when a frame of an animation of an agent is finished</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            instance: The agent instance</span>
+<span class="sd">            </span>
+<span class="sd">            animation: The animation that the agent was doing</span>
+<span class="sd">            </span>
+<span class="sd">            frame: The frame that the was done</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+</div>
+<div class="viewcode-block" id="Base.talk"><a class="viewcode-back" href="../../../fife_rpg.behaviours.html#fife_rpg.behaviours.base.Base.talk">[docs]</a>    <span class="k">def</span> <span class="nf">talk</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set the agent to their talking animation&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">AGENT_STATES</span><span class="o">.</span><span class="n">TALK</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">clear_animations</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">idle</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="Base.animate"><a class="viewcode-back" href="../../../fife_rpg.behaviours.html#fife_rpg.behaviours.base.Base.animate">[docs]</a>    <span class="k">def</span> <span class="nf">animate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">animation</span><span class="p">,</span> <span class="n">direction</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">repeating</span> <span class="o">=</span> <span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Perform an animation</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            animation: The animation to perform</span>
+<span class="sd">            </span>
+<span class="sd">            direction: The direction to which the agent should face</span>
+<span class="sd">            </span>
+<span class="sd">            repeating: Whether to repeat the animation or not</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">direction</span> <span class="o">=</span> <span class="n">direction</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">instance</span><span class="o">.</span><span class="n">getFacingLocation</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">instance</span><span class="o">.</span><span class="n">act</span><span class="p">(</span><span class="n">animation</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">repeating</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="Base.queue_animation"><a class="viewcode-back" href="../../../fife_rpg.behaviours.html#fife_rpg.behaviours.base.Base.queue_animation">[docs]</a>    <span class="k">def</span> <span class="nf">queue_animation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">animation</span><span class="p">,</span> <span class="n">direction</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">repeating</span> <span class="o">=</span> <span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add an animation to the queue</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            animation: The animation to perform</span>
+<span class="sd">            </span>
+<span class="sd">            direction: The direction to which the agent should face</span>
+<span class="sd">            </span>
+<span class="sd">            repeating: Whether to repeat the animation or not</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">animation_queue</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s">&quot;animation&quot;</span><span class="p">:</span> <span class="n">animation</span><span class="p">,</span> 
+                                     <span class="s">&quot;direction&quot;</span><span class="p">:</span> <span class="n">direction</span><span class="p">,</span>
+                                  <span class="s">&quot;repeating&quot;</span><span class="p">:</span> <span class="n">repeating</span><span class="p">})</span>
+        </div>
+<div class="viewcode-block" id="Base.clear_animations"><a class="viewcode-back" href="../../../fife_rpg.behaviours.html#fife_rpg.behaviours.base.Base.clear_animations">[docs]</a>    <span class="k">def</span> <span class="nf">clear_animations</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Remove all actions from the queue&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">animation_queue</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+</div>
+    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="Base.register"><a class="viewcode-back" href="../../../fife_rpg.behaviours.html#fife_rpg.behaviours.base.Base.register">[docs]</a>    <span class="k">def</span> <span class="nf">register</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;Base&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Registers the class as a behaviour</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name: The name under which the class should be registered</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            True if the behaviour was registered, False if not.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">BehaviourManager</span><span class="o">.</span><span class="n">register_behaviour</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">cls</span><span class="p">)</span>
+            <span class="n">cls</span><span class="o">.</span><span class="n">__registered_as</span> <span class="o">=</span> <span class="n">name</span>
+            <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">except</span> <span class="n">AlreadyRegisteredError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="k">print</span> <span class="n">error</span>
+            <span class="k">return</span> <span class="bp">False</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">fife-rpg 0.1c documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012-2013, Karsten Bock.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

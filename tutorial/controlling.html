@@ -1,0 +1,335 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Accessing and controlling entities &mdash; fife-rpg 0.2 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="fife-rpg 0.2 documentation" href="../index.html" />
+    <link rel="up" title="Tutorial" href="tutorial.html" />
+    <link rel="next" title="Context based actions" href="actions.html" />
+    <link rel="prev" title="Filling the map" href="entities.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="actions.html" title="Context based actions"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="entities.html" title="Filling the map"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">fife-rpg 0.2 documentation</a> &raquo;</li>
+          <li><a href="tutorial.html" accesskey="U">Tutorial</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <span class="target" id="controlling"></span><div class="section" id="accessing-and-controlling-entities">
+<h1>Accessing and controlling entities<a class="headerlink" href="#accessing-and-controlling-entities" title="Permalink to this headline">¶</a></h1>
+<p>Now that we have entities we will want to access them and control them. This
+tutorial will show how that can be done.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">From now on I will not explain how to activate Components or
+Behaviours.</p>
+</div>
+<div class="section" id="getting-an-entity">
+<h2>Getting an entity<a class="headerlink" href="#getting-an-entity" title="Permalink to this headline">¶</a></h2>
+<p>Of course the first thing is to actually get the entity. This can simply be done
+with the <a class="reference internal" href="../fife_rpg.html#fife_rpg.world.RPGWorld.get_entity" title="fife_rpg.world.RPGWorld.get_entity"><tt class="xref py py-meth docutils literal"><span class="pre">get_entity()</span></tt></a> method
+of the world. It takes the identifier of the entity, which is set in the
+identifier field of the General component. For the character from our last
+tutorial it is &#8220;PlayerCharacter&#8221;. So to get this entity you need to add this
+line of code after the world and the entities have been created:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">player</span> <span class="o">=</span> <span class="n">world</span><span class="o">.</span><span class="n">get_entity</span><span class="p">(</span><span class="s">&quot;PlayerCharacter&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This will store the entity in the &#8220;player&#8221; variable.</p>
+<p>The components and fields of each component can be accessed like a member
+variable.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="n">player</span><span class="o">.</span><span class="n">Agent</span><span class="o">.</span><span class="n">position</span>
+</pre></div>
+</div>
+<p>This should print &#8220;[-5, 0]&#8221; to the console.</p>
+<p>You can also set the component fields:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">player</span><span class="o">.</span><span class="n">Agent</span><span class="o">.</span><span class="n">position</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Note that changing the fields does not necessarily have an immediate effect.
+Also the new value will, in most cases, not be validated automatically.
+If it is safe to directly modify the values depends on the actual component.</p>
+</div>
+<div class="section" id="component-functions">
+<h2>Component functions<a class="headerlink" href="#component-functions" title="Permalink to this headline">¶</a></h2>
+<p>The component modules can have functions that work with entities that have
+that component.</p>
+<p>The fifeagent module, for example, has functions that can used to make the
+agent walk or run to a location or another agent. However the entity needs
+to have another component which stores the walk and run speed and animations:
+The Moving component. For the object used in the tutorial we only need to set
+the speeds, as the default values for the animations can be used with it.</p>
+<p>For the tutorial we set the fields to the following values:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span class="l-Scalar-Plain">Moving</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">walk_speed</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">1</span>
+    <span class="l-Scalar-Plain">run_speed</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">4</span>
+</pre></div>
+</div>
+<p>We will use the <a class="reference internal" href="../fife_rpg.components.html#fife_rpg.components.fifeagent.run" title="fife_rpg.components.fifeagent.run"><tt class="xref py py-func docutils literal"><span class="pre">run()</span></tt></a> function,
+which takes two arguments, entity and location. The entity is a
+<a class="reference internal" href="../fife_rpg.entities.html#fife_rpg.entities.rpg_entity.RPGEntity" title="fife_rpg.entities.rpg_entity.RPGEntity"><tt class="xref py py-class docutils literal"><span class="pre">RPGEntity</span></tt></a> and the location
+can be a <a class="reference external" href="http://www.fifengine.net/epydoc/fife.fife.Location-class.html">fife.Location</a>
+or a position tuple (Like (0, 7)).</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">fifeagent</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">player</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>The import line for fifeagent is:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">fife_rpg.components</span> <span class="kn">import</span> <span class="n">fifeagent</span>
+</pre></div>
+</div>
+<p>If you add the example code after switching to &#8220;Level1&#8221; the entity will run to
+the right.</p>
+</div>
+<div class="section" id="a-practical-example">
+<h2>A practical example<a class="headerlink" href="#a-practical-example" title="Permalink to this headline">¶</a></h2>
+<p>To close this part of the tutorial off we will look at a practical example of
+what we just learned: Using the mouse to let an entity move to a position.</p>
+<p>For that we first need a custom Listener for the GameSceneController.</p>
+<p>Create a new module and add the following imports:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">fife</span> <span class="kn">import</span> <span class="n">fife</span>
+
+<span class="kn">from</span> <span class="nn">fife_rpg.game_scene</span> <span class="kn">import</span> <span class="n">GameSceneListener</span>
+<span class="kn">from</span> <span class="nn">fife_rpg.components</span> <span class="kn">import</span> <span class="n">fifeagent</span>
+</pre></div>
+</div>
+<p>A Listener is a class that receives events from FIFE. The default
+GameSceneListener already listens for mouse events , so we only need to
+override the event method that we want.</p>
+<p>For other events, such as key presses, you would need to derive from the
+respective fife listener and add that listener to the event manager when
+the listener is activated, and remove it when the listener is deactivated.
+Also you need to add all possible events from the fife listener or you will
+get errors.</p>
+<p>If we would want to add key events, for example, we would need the following
+definition:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Listener</span><span class="p">(</span><span class="n">GameSceneListener</span><span class="p">,</span> <span class="n">fife</span><span class="o">.</span><span class="n">IKeyListener</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">engine</span><span class="p">,</span> <span class="n">gamecontroller</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="n">GameSceneListener</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">engine</span><span class="p">,</span> <span class="n">gamecontroller</span><span class="p">)</span>
+        <span class="n">fife</span><span class="o">.</span><span class="n">IKeyListener</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">activate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">GameSceneListener</span><span class="o">.</span><span class="n">activate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">eventmanager</span><span class="o">.</span><span class="n">addKeyListener</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">deactivate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">GameSceneListener</span><span class="o">.</span><span class="n">deactivate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">eventmanager</span><span class="o">.</span><span class="n">removeKeyListener</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">keyPressed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">keyReleased</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="k">pass</span>
+</pre></div>
+</div>
+<p>self._eventmanager.addMouseListener will add our Listener as a
+KeyListener and removeKeyListener will remove it.
+The activate, and deactivate methods are called by the GameSceneController when
+it gets activated and deactivated, respectively.</p>
+<p>We only need to override the mousePressed method, though, with the following code:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">mousePressed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+    <span class="n">player</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_application</span><span class="o">.</span><span class="n">world</span><span class="o">.</span><span class="n">get_entity</span><span class="p">(</span><span class="s">&quot;PlayerCharacter&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">getButton</span><span class="p">()</span> <span class="o">==</span> <span class="n">fife</span><span class="o">.</span><span class="n">MouseEvent</span><span class="o">.</span><span class="n">LEFT</span><span class="p">:</span>
+        <span class="n">scr_point</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_application</span><span class="o">.</span><span class="n">screen_coords_to_map_coords</span><span class="p">(</span>
+                        <span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">getX</span><span class="p">(),</span> <span class="n">event</span><span class="o">.</span><span class="n">getY</span><span class="p">()),</span> <span class="s">&quot;actors&quot;</span>
+                        <span class="p">)</span>
+        <span class="n">fifeagent</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">player</span><span class="p">,</span> <span class="n">scr_point</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>So our listener looks like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Listener</span><span class="p">(</span><span class="n">GameSceneListener</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">mousePressed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="n">player</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamecontroller</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">world</span><span class="o">.</span><span class="n">get_entity</span><span class="p">(</span><span class="s">&quot;PlayerCharacter&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">getButton</span><span class="p">()</span> <span class="o">==</span> <span class="n">fife</span><span class="o">.</span><span class="n">MouseEvent</span><span class="o">.</span><span class="n">LEFT</span><span class="p">:</span>
+            <span class="n">scr_point</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamecontroller</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">screen_coords_to_map_coords</span><span class="p">(</span>
+                            <span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">getX</span><span class="p">(),</span> <span class="n">event</span><span class="o">.</span><span class="n">getY</span><span class="p">()),</span> <span class="s">&quot;actors&quot;</span>
+                            <span class="p">)</span>
+            <span class="n">fifeagent</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">player</span><span class="p">,</span> <span class="n">scr_point</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>First we get the entity with the identifier &#8220;PlayerCharacter&#8221;.
+Then we check if it was the left mouse button that was clicked with, as we only
+want to react to clicks with that button.
+Next we use the applications <a class="reference internal" href="../fife_rpg.html#fife_rpg.rpg_application.RPGApplication.screen_coords_to_map_coords" title="fife_rpg.rpg_application.RPGApplication.screen_coords_to_map_coords"><tt class="xref py py-meth docutils literal"><span class="pre">screen_coords_to_map_coords()</span></tt></a>
+method which takes a <a class="reference external" href="http://www.fifengine.net/epydoc/fife.fife.ScreenPoint-class.html">fife.ScreenPoint</a>
+or a tuple of a position on the screen and the name of a layer and returns
+the matching coordinates on given layer of the current map as a <a class="reference external" href="http://www.fifengine.net/epydoc/fife.fife.Location-class.html">fife.Location</a>.
+We give it the location of the mouse click.
+Last we call the fifeagent.run function with the entity and the converted
+coordinates.</p>
+<p>Now we need to modify the main module to use our Listener instead of the
+default one. Just replace &#8220;controller = GameSceneController(view, app)&#8221; with
+&#8220;controller = GameSceneController(view, app, listener=Listener(app.engine))&#8221;,
+and import the module containing the listener.</p>
+<p>If you run the code now the entity should run to the location on the map you
+click on.</p>
+<p>Here is the complete code for this tutorial:</p>
+<p>tutorial_scene.py</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="hll"><span class="kn">from</span> <span class="nn">fife</span> <span class="kn">import</span> <span class="n">fife</span>
+</span><span class="hll">
+</span><span class="hll"><span class="kn">from</span> <span class="nn">fife_rpg.game_scene</span> <span class="kn">import</span> <span class="n">GameSceneListener</span>
+</span><span class="hll"><span class="kn">from</span> <span class="nn">fife_rpg.components</span> <span class="kn">import</span> <span class="n">fifeagent</span>
+</span><span class="hll">
+</span><span class="hll"><span class="k">class</span> <span class="nc">Listener</span><span class="p">(</span><span class="n">GameSceneListener</span><span class="p">):</span>
+</span><span class="hll">
+</span><span class="hll">    <span class="k">def</span> <span class="nf">mousePressed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+</span><span class="hll">        <span class="n">player</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamecontroller</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">world</span><span class="o">.</span><span class="n">get_entity</span><span class="p">(</span><span class="s">&quot;PlayerCharacter&quot;</span><span class="p">)</span>
+</span><span class="hll">        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">getButton</span><span class="p">()</span> <span class="o">==</span> <span class="n">fife</span><span class="o">.</span><span class="n">MouseEvent</span><span class="o">.</span><span class="n">LEFT</span><span class="p">:</span>
+</span><span class="hll">            <span class="n">scr_point</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamecontroller</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">screen_coords_to_map_coords</span><span class="p">(</span>
+</span><span class="hll">                            <span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">getX</span><span class="p">(),</span> <span class="n">event</span><span class="o">.</span><span class="n">getY</span><span class="p">()),</span> <span class="s">&quot;actors&quot;</span>
+</span><span class="hll">                            <span class="p">)</span>
+</span><span class="hll">            <span class="n">fifeagent</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">player</span><span class="p">,</span> <span class="n">scr_point</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<p>run.py</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">fife_rpg</span> <span class="kn">import</span> <span class="n">RPGApplication</span>
+<span class="kn">from</span> <span class="nn">fife_rpg</span> <span class="kn">import</span> <span class="n">GameSceneView</span>
+<span class="kn">from</span> <span class="nn">fife_rpg</span> <span class="kn">import</span> <span class="n">GameSceneController</span>
+<span class="kn">from</span> <span class="nn">fife.extensions.fife_settings</span> <span class="kn">import</span> <span class="n">Setting</span>
+<span class="kn">from</span> <span class="nn">fife_rpg.components</span> <span class="kn">import</span> <span class="n">fifeagent</span>
+
+<span class="hll"><span class="kn">from</span> <span class="nn">tutorial_scene</span> <span class="kn">import</span> <span class="n">Listener</span>
+</span>
+<span class="n">settings</span> <span class="o">=</span> <span class="n">Setting</span><span class="p">(</span><span class="n">app_name</span><span class="o">=</span><span class="s">&quot;Tutorial 4&quot;</span><span class="p">,</span> <span class="n">settings_file</span><span class="o">=</span><span class="s">&quot;settings.xml&quot;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">RPGApplication</span><span class="p">(</span><span class="n">settings</span><span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">load_components</span><span class="p">(</span><span class="s">&quot;combined.yaml&quot;</span><span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">load_behaviours</span><span class="p">(</span><span class="s">&quot;combined.yaml&quot;</span><span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">register_components</span><span class="p">()</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">register_behaviours</span><span class="p">()</span>
+    <span class="n">view</span> <span class="o">=</span> <span class="n">GameSceneView</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+<span class="hll">    <span class="n">controller</span> <span class="o">=</span> <span class="n">GameSceneController</span><span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">app</span><span class="p">,</span> <span class="n">listener</span><span class="o">=</span><span class="n">Listener</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">engine</span><span class="p">))</span>
+</span>    <span class="n">app</span><span class="o">.</span><span class="n">create_world</span><span class="p">()</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">load_maps</span><span class="p">()</span>
+    <span class="n">world</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">world</span>
+    <span class="n">world</span><span class="o">.</span><span class="n">import_agent_objects</span><span class="p">()</span>
+    <span class="n">world</span><span class="o">.</span><span class="n">load_and_create_entities</span><span class="p">()</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">switch_map</span><span class="p">(</span><span class="s">&quot;Level1&quot;</span><span class="p">)</span>
+<span class="hll">    <span class="n">player</span> <span class="o">=</span> <span class="n">world</span><span class="o">.</span><span class="n">get_entity</span><span class="p">(</span><span class="s">&quot;PlayerCharacter&quot;</span><span class="p">)</span>
+</span><span class="hll">    <span class="n">fifeagent</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">player</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+</span>    <span class="n">app</span><span class="o">.</span><span class="n">push_mode</span><span class="p">(</span><span class="n">controller</span><span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="actions.html#actions"><em>next</em></a> Tutorial will look at the actions system of FIFErpg.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Accessing and controlling entities</a><ul>
+<li><a class="reference internal" href="#getting-an-entity">Getting an entity</a></li>
+<li><a class="reference internal" href="#component-functions">Component functions</a></li>
+<li><a class="reference internal" href="#a-practical-example">A practical example</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="entities.html"
+                        title="previous chapter">Filling the map</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="actions.html"
+                        title="next chapter">Context based actions</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/tutorial/controlling.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="actions.html" title="Context based actions"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="entities.html" title="Filling the map"
+             >previous</a> |</li>
+        <li><a href="../index.html">fife-rpg 0.2 documentation</a> &raquo;</li>
+          <li><a href="tutorial.html" >Tutorial</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012-2013, Karsten Bock.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

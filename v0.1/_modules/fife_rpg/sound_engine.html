@@ -1,0 +1,179 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>fife_rpg.sound_engine &mdash; fife-rpg 0.1c documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1c',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="fife-rpg 0.1c documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">fife-rpg 0.1c documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for fife_rpg.sound_engine</h1><div class="highlight"><pre>
+<span class="c"># -*- coding: utf-8 -*-</span>
+<span class="c">#   This program is free software: you can redistribute it and/or modify</span>
+<span class="c">#   it under the terms of the GNU General Public License as published by</span>
+<span class="c">#   the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c">#   (at your option) any later version.</span>
+
+<span class="c">#   This program is distributed in the hope that it will be useful,</span>
+<span class="c">#   but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c">#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c">#   GNU General Public License for more details.</span>
+
+<span class="c">#   You should have received a copy of the GNU General Public License</span>
+<span class="c">#   along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+
+<span class="c">#This module was originally taken from the sounds module of PARPG</span>
+
+<span class="sd">&quot;&quot;&quot;This module holds the object code to play sounds and sound effects</span>
+
+<span class="sd">.. module:: __sound_manager</span>
+<span class="sd">    :synopsis: Holds the object code to play sounds and sound effects</span>
+
+<span class="sd">.. moduleauthor:: Karsten Bock &lt;KarstenBock@gmx.net&gt;</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="SoundEngine"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.sound_engine.SoundEngine">[docs]</a><span class="k">class</span> <span class="nc">SoundEngine</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Plays sounds and __music</span>
+<span class="sd">    </span>
+<span class="sd">    Properties:</span>
+<span class="sd">        is_music_on: Indicates whether there is currently music playing or not</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fife_engine</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialise the SoundEngine instance</span>
+<span class="sd">           @type fife_engine: fine.Engine</span>
+<span class="sd">           @param fife_engine: Instance of the Fife __engine</span>
+<span class="sd">           @return: None&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__engine</span> <span class="o">=</span> <span class="n">fife_engine</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__sound_manager</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__engine</span><span class="o">.</span><span class="n">getSoundManager</span><span class="p">()</span>
+        <span class="c">#self.__sound_manager.init()</span>
+        <span class="c"># set up the sound</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__music</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__sound_manager</span><span class="o">.</span><span class="n">createEmitter</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__is_music_on</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__music_init</span> <span class="o">=</span> <span class="bp">False</span>
+    
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="SoundEngine.is_music_on"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.sound_engine.SoundEngine.is_music_on">[docs]</a>    <span class="k">def</span> <span class="nf">is_music_on</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Indicates whether there is currently music playing or not&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__is_music_on</span> 
+    </div>
+<div class="viewcode-block" id="SoundEngine.play_music"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.sound_engine.SoundEngine.play_music">[docs]</a>    <span class="k">def</span> <span class="nf">play_music</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sfile</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Play music, with the given file if passed</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            sfile: Filename to play</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">sfile</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">):</span>
+            <span class="c"># setup the new sound</span>
+            <span class="n">sound</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__engine</span><span class="o">.</span><span class="n">getSoundClipManager</span><span class="p">()</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">sfile</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__music</span><span class="o">.</span><span class="n">setSoundClip</span><span class="p">(</span><span class="n">sound</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__music</span><span class="o">.</span><span class="n">setLooping</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__music_init</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__music</span><span class="o">.</span><span class="n">play</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__is_music_on</span> <span class="o">=</span> <span class="bp">True</span>
+</div>
+<div class="viewcode-block" id="SoundEngine.pause_music"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.sound_engine.SoundEngine.pause_music">[docs]</a>    <span class="k">def</span> <span class="nf">pause_music</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Pauses current music playback&quot;&quot;&quot;</span>
+        <span class="k">if</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__music_init</span> <span class="o">==</span> <span class="bp">True</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__music</span><span class="o">.</span><span class="n">pause</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__is_music_on</span> <span class="o">=</span> <span class="bp">False</span>
+</div>
+<div class="viewcode-block" id="SoundEngine.toggle_music"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.sound_engine.SoundEngine.toggle_music">[docs]</a>    <span class="k">def</span> <span class="nf">toggle_music</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Toggle status of music, either on or off&quot;&quot;&quot;</span>
+        <span class="k">if</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">__is_music_on</span> <span class="o">==</span> <span class="bp">False</span><span class="p">)</span><span class="ow">and</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__music_init</span> <span class="o">==</span> <span class="bp">True</span><span class="p">)):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">play_music</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pause_music</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="SoundEngine.setVolume"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.sound_engine.SoundEngine.setVolume">[docs]</a>    <span class="k">def</span> <span class="nf">setVolume</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">volume</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set the volume of the music</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">           volume: The volume wanted, 0 to 100</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__sound_manager</span><span class="o">.</span><span class="n">setVolume</span><span class="p">(</span><span class="mf">0.01</span> <span class="o">*</span> <span class="n">volume</span><span class="p">)</span>
+</pre></div></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">fife-rpg 0.1c documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012-2013, Karsten Bock.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
