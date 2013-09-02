@@ -10,8 +10,9 @@ date: 2013-09-01 15:12:00
 
 Heya!
 
-We just released the 0.2 version of FIFErpg. Download it [here](https://sourceforge.net/projects/fife-rpg/files/)
-The online documentation and tutorials for this version can be found at http://fife-rpg.github.io/docs/v0.2/.
+We just released the 0.2 version of FIFErpg. Download it [here](https://sourceforge.net/projects/fife-rpg/files/).
+
+The online documentation and tutorials for this version can be found at [http://fife-rpg.github.io/docs/v0.2/](http://fife-rpg.github.io/docs/v0.2/).
 
 This release works with both FIFE 0.3.4 and 0.3.5.
 
