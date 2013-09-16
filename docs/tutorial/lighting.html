@@ -1,0 +1,212 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Lighting &mdash; fife-rpg 0.2 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="fife-rpg 0.2 documentation" href="../index.html" />
+    <link rel="up" title="Tutorial" href="tutorial.html" />
+    <link rel="next" title="fife_rpg" href="../modules.html" />
+    <link rel="prev" title="Character Statistics" href="char_stats.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../modules.html" title="fife_rpg"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="char_stats.html" title="Character Statistics"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">fife-rpg 0.2 documentation</a> &raquo;</li>
+          <li><a href="tutorial.html" accesskey="U">Tutorial</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <span class="target" id="lighting"></span><div class="section" id="id1">
+<h1>Lighting<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>This tutorial will explain the Lighting system of FIFE and how it can be
+accessed in FIFErpg.</p>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>The Lighting system is used to set and add lights to FIFE maps. We will
+first look at the types of light FIFE uses and later how to add to a map with
+FIFErpg.</p>
+<p>FIFE distinguishes between 3 light types: Simple, (Resized) Image and Animation
+and a camera specific lighting color.</p>
+</div>
+<div class="section" id="camera-lighting-color">
+<h2>Camera lighting color<a class="headerlink" href="#camera-lighting-color" title="Permalink to this headline">¶</a></h2>
+<p>This determines the global lighting used by the camera.</p>
+</div>
+<div class="section" id="simple-lights">
+<h2>Simple lights<a class="headerlink" href="#simple-lights" title="Permalink to this headline">¶</a></h2>
+<p>A simple light is a circular or elliptic light that is created from 4 values:</p>
+<ul class="simple">
+<li>Intensity: A value between 0 and 255. Determines the brightness of the light.
+The light will be weaker towards the edges of the circle.</li>
+<li>Radius: The radius of the circle in pixels.</li>
+<li>Subdivisions: How many points the circle will have. More means that the edges
+of the circle are smoother.</li>
+<li>Color: The color of the light as 3 values (RGB) between 0 and 255.</li>
+<li>x- and y-stretch: A float value by which the light should be stretched in the
+x- and y-direction respectively.</li>
+</ul>
+</div>
+<div class="section" id="resized-image-lights-lightmap">
+<h2>(Resized) Image lights (lightmap)<a class="headerlink" href="#resized-image-lights-lightmap" title="Permalink to this headline">¶</a></h2>
+<p>An image light is a light that is created from a lightmap. The color values of
+the lightmap will determine the form, color and brightness of the light. A
+resized image light is like a image light with the image being resized to a
+specific height and width.</p>
+</div>
+<div class="section" id="animation">
+<h2>Animation<a class="headerlink" href="#animation" title="Permalink to this headline">¶</a></h2>
+<p>This is like an image light but with an animated lightmap. There is no resized
+version of this.</p>
+</div>
+<div class="section" id="common-arguments">
+<h2>Common Arguments<a class="headerlink" href="#common-arguments" title="Permalink to this headline">¶</a></h2>
+<p>All lights have 3 arguments in common:</p>
+<ul class="simple">
+<li>n (RendererNode): This determines the position of the light. A detailed
+explanation is below.</li>
+<li>dst/src: The destination and source blend modes.</li>
+</ul>
+</div>
+<div class="section" id="renderernode">
+<h2>RendererNode<a class="headerlink" href="#renderernode" title="Permalink to this headline">¶</a></h2>
+<p>The RendererNode determines the position of the light. For lights this means
+specifically:</p>
+<p>Instance : A fife.instance which the light will follow.</p>
+<p>Layer: The layer the light originates from. Lights will
+illuminate lower layers, but not higher ones.</p>
+<p>Location: The relative or absolute location of the light depending
+on whether the Instance was set or not.</p>
+<p>point: The relative or absolute window position as a fife.Point.
+This differs from location as it is in pixels and (0, 0) is the
+upper left position of the window.</p>
+</div>
+<div class="section" id="usage-in-fiferpg">
+<h2>Usage in FIFErpg<a class="headerlink" href="#usage-in-fiferpg" title="Permalink to this headline">¶</a></h2>
+<p>For FIFErpg the lighting color for the camera of the current map can be set
+by using the
+<a class="reference internal" href="../fife_rpg.html#fife_rpg.rpg_application.RPGApplication.set_global_lighting" title="fife_rpg.rpg_application.RPGApplication.set_global_lighting"><tt class="xref py py-meth docutils literal"><span class="pre">set_global_lighting()</span></tt></a>
+method of the <a class="reference internal" href="../fife_rpg.html#fife_rpg.rpg_application.RPGApplication" title="fife_rpg.rpg_application.RPGApplication"><tt class="xref py py-class docutils literal"><span class="pre">RPGApplication</span></tt></a>.</p>
+<p>The other lights can be added by using methods of the <a class="reference internal" href="../fife_rpg.html#fife_rpg.map.Map" title="fife_rpg.map.Map"><tt class="xref py py-class docutils literal"><span class="pre">Map</span></tt></a>, specifically
+<a class="reference internal" href="../fife_rpg.html#fife_rpg.map.Map.add_simple_light" title="fife_rpg.map.Map.add_simple_light"><tt class="xref py py-meth docutils literal"><span class="pre">add_simple_light()</span></tt></a>,
+<a class="reference internal" href="../fife_rpg.html#fife_rpg.map.Map.add_light_from_lightmap" title="fife_rpg.map.Map.add_light_from_lightmap"><tt class="xref py py-meth docutils literal"><span class="pre">add_light_from_lightmap()</span></tt></a> and
+<a class="reference internal" href="../fife_rpg.html#fife_rpg.map.Map.add_light_from_animation" title="fife_rpg.map.Map.add_light_from_animation"><tt class="xref py py-meth docutils literal"><span class="pre">add_light_from_animation()</span></tt></a>.</p>
+<p>These will take the arguments for the light and also those for the renderer
+node. They will also return the LightInfo for the newly created light which can
+be used to access and set the information of that light.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Lighting</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#camera-lighting-color">Camera lighting color</a></li>
+<li><a class="reference internal" href="#simple-lights">Simple lights</a></li>
+<li><a class="reference internal" href="#resized-image-lights-lightmap">(Resized) Image lights (lightmap)</a></li>
+<li><a class="reference internal" href="#animation">Animation</a></li>
+<li><a class="reference internal" href="#common-arguments">Common Arguments</a></li>
+<li><a class="reference internal" href="#renderernode">RendererNode</a></li>
+<li><a class="reference internal" href="#usage-in-fiferpg">Usage in FIFErpg</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="char_stats.html"
+                        title="previous chapter">Character Statistics</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../modules.html"
+                        title="next chapter">fife_rpg</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/tutorial/lighting.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../modules.html" title="fife_rpg"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="char_stats.html" title="Character Statistics"
+             >previous</a> |</li>
+        <li><a href="../index.html">fife-rpg 0.2 documentation</a> &raquo;</li>
+          <li><a href="tutorial.html" >Tutorial</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012-2013, Karsten Bock.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
