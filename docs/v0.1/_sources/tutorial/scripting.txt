@@ -7,123 +7,93 @@ Scripting
 
 This tutorial will explain the scripting system of FIFErpg.
 
+.. note::
+
+   Scripting has changed since the 0.1c release.
+
 Overview
 --------
-The scripting system evaluates a condition and runs the |Action| list of a
-|Script| if it evaluates to True.
-
-Scripts
--------
-A |Script| contains an list of dictionaries, each containing data to create an
-|Action|. Scripts are not to be created manually, rather use the methods
-of the |ScriptingSystem| explained below.
-
-The dictionaries can have the following keys, most are the same as for the
-constructor of the |Action| class:
-
-- Action: The name of the |Action|
-- Agent: The performer of the |Action|
-- Target: The target of the |Action|
-- Time: The seconds to wait after the current action is finished before the
-  next |Action| should be executed.
-- ActionCommands: The additional commands the |Action| should execute.(optional)
-- Command: This will pass the execution of the action over to a script command.
-  (optional). The value is also a dictionary:
-
-  - Name: The name of the command
-  - Variables: A dictionary of variables to pass to the command.
-
-   - Type: The Type of the variable. (optional) Currently only accepting
-     "Entity", which interprets the value as the name of an Entity
-   - Value: The value of the variables.
+The scripting system keeps a dictionary of scripts and runs specific functions
+on specific events.
 
 Scripting System
 ----------------
-The |ScriptingSystem| itself manages a dictionary of scripts and a list of
-conditions. Every time its :py:func:`step() <fife_rpg.systems.scriptingsystem.ScriptingSystem.step()>`
-method is called it will iterate through the
-list of conditions and evaluate them. If the evaluation returns True it will
-run the script set by the condition.
+The |ScriptingSystem| itself manages a dictionary of scripts.
 
-To add a script to the system you will need to use the :py:func:`set_script()
-<fife_rpg.systems.scriptingsystem.ScriptingSystem.set_script()>` method.
-It takes the scripts name and the dictionary list as explained in the Scripts
-section above.
+Scripts
+-------
+A Script is a python file that is being run inside the scripting environment.
+
+The scripts need to have specific functions that are being called by the
+scripting system for them to actually do something after the initial run.
+
+Currently there are 2 functions that the scripting system calls, if a script
+has them.
+
+step(time_delta)
+This is called every time the scripting systems step method is called.
+The time_delta is the time since the last call to step.
+
+on_map_switched(self, old_map, new_map)
+This is called after the map was switched. The variables have been updated for
+the new map at this point. The old_map is the name of the previous map, the
+new_map is the name of the current map.
+
+Note that there are NO restrictions on what modules can be imported and used.
+All modules that are available to the python environment in which the main
+application is run are also available in scripts by importing them normally.
+
+The additional functions and variables available are those that have been made
+available to the |GameVariables| system and the commands that have been
+registered to the |ScriptingSystem|. These are inside various modules,
+depending on how they were registered or made available.
+
+These are the current variables and modules available. Note that some may only
+be available if the component or system is registered and active.
+
+application - Functions and variables from the |Application|
+   - current_map: :attr:`~fife_rpg.rpg_application.RPGApplication.current_map`
+   - is_agent_in_region: :meth:`~fife_rpg.rpg_application.RPGApplication.is_agent_in_region`
+   - is_location_in_region: :meth:`~fife_rpg.rpg_application.RPGApplication.is_location_in_region`
+   - maps :attr:`~fife_rpg.rpg_application.RPGApplication.maps`
+   - set_global_lighting: :meth:`~fife_rpg.rpg_application.RPGApplication.set_global_lighting`
+   - get_global_lighting: :meth:`~fife_rpg.rpg_application.RPGApplication.get_global_lighting`
+
+entities - Makes every |RPGEntity| of the |RPGWorld| available by its name.
+For example you just need to type entities.PlayerCharacter
+
+Note for components:
+These are only the default names. When auto registering script commands
+through the |Application| the name under which the component is registered
+is used.
+
+Agent - Functions of the Agent component.
+   - knows : :func:`~fife_rpg.components.agent.knows`
+   - add_knowledge : :func:`~fife_rpg.components.agent.add_knowledge`
+
+FifeAgent - Functions of the FifeAgent component
+   - move : :func:`~fife_rpg.components.fifeagent.approach_and_execute`
+
+Adding Scripts
+--------------
+To add a script to the system you will need to use the :py:func:`add_script()
+<fife_rpg.systems.scriptingsystem.ScriptingSystem.add_script()>` method.
+It takes the scripts name and the path to the script file.
 
 Example:
 
 .. code:: python
 
-   action = {}
-   action["Action"] = "MoveAgent"
-   action["Agent"] = "PlayerCharacter"
-   action["Target"] = "ToLevel2"
-   action["Time"] = 0
-   command = {}
-   command["Name"] = "move"
-   command["Variables"] = []
-   command["Variables"].append({"Type": "Entity", "Value": "PlayerCharacter"})
-   command["Variables"].append({"Type": "Entity", "Value": "ToLevel2"})
-   action["Command"] = command
-   script = [action]
-   script_system.set_script("Test", script)
+   script_system.add_script("Test", "scripts/test.py")
 
-To add a condition to the system you will need to use the :py:func:`add_condition()
-<fife_rpg.systems.scriptingsystem.ScriptingSystem.add_condition()>` method. It
-takes a condition_data argument that is a dictionary with 2 values:
-
-- Script: The name of the script of the condition passes
-- Expressions: A list of expressions that form the condition. All expressions
-  must evaluate to True for the condition to pass.
-  Each expression itself is a dictionary with 2 values:
-
-  - Type: The type of the condition. What conditions are available depends on
-    what conditions where registered to the scripting system. The type can be
-    prefixed with "Not\_" to negate its result.
-  - Args: A list of arguments to pass to the condition. This depends on the
-    condition.
-
-Example:
-
-.. code:: python
-
-   expression = {}
-   expression["Type"] = "Not_Knows"
-   expression["Args"] = ["David", "PlayerCharacter"]
-   condition = {}
-   condition["Script"] = "Test"
-   condition["Expressions"] = [expression]
-   script_system.add_condition(condition)
-
-It is possible to run a script manually by using the :py:func:`run_script()
-<fife_rpg.systems.scriptingsystem.ScriptingSystem.run_script()>` method.
-It takes the name of the script as an argument.
-
-It is also possible to add scripts and conditions from a YAML file.
-The structure of the file is a dictionary with 2 keys: Scripts and Conditions.
-The structure of each key is the same as explained above.
+It is also possible to add scripts YAML file.
+The structure of the file is a list where each item has 2 values. The first
+value is the name of the script, the second the path to the script file.
 
 Example:
 
 .. code:: yaml
 
    Scripts:
-       Test:
-           - Action: MoveAgent
-             Agent: PlayerCharacter
-             Target: ToLevel2
-             Time: 0
-             Command:
-               Name: move
-               Variables:
-                 - Type: Entity
-                   Value: PlayerCharacter
-                 - Type: Entity
-                   Value: ToLevel2               
-   Conditions:
-     - Script: Test
-       Expressions:
-         - Type: Not_Knows
-           Args: [David, PlayerCharacter]
-    
-    
+     - [test, scripts/test.py]
+

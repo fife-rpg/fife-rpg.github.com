@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -311,7 +309,7 @@
 <span class="sd">            illuminate lower layers, but not higher ones. If empty or None this</span>
 <span class="sd">            will be ignored.</span>
 
-<span class="sd">            location: The relative or absolute location of the agent depending</span>
+<span class="sd">            location: The relative or absolute location of the light depending</span>
 <span class="sd">            on whether the agent was set or not. A list with two or three</span>
 <span class="sd">            values.</span>
 <span class="sd">            If None this will be ignored.</span>
@@ -322,9 +320,13 @@
 <span class="sd">            upper left position of the window.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">agent</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">agent</span> <span class="o">!=</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
-            <span class="n">agent</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__application</span><span class="o">.</span><span class="n">world</span><span class="o">.</span><span class="n">get_entity</span><span class="p">(</span><span class="n">agent</span><span class="p">)</span>
-            <span class="n">fifeagent</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span> <span class="n">FifeAgent</span><span class="o">.</span><span class="n">registered_as</span><span class="p">)</span>
-            <span class="n">agent</span> <span class="o">=</span> <span class="n">fifeagent</span><span class="o">.</span><span class="n">instance</span>
+            <span class="n">entity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__application</span><span class="o">.</span><span class="n">world</span><span class="o">.</span><span class="n">get_entity</span><span class="p">(</span><span class="n">agent</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">entity</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">entities</span><span class="p">:</span>
+                <span class="n">fifeagent</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">FifeAgent</span><span class="o">.</span><span class="n">registered_as</span><span class="p">)</span>
+                <span class="n">agent</span> <span class="o">=</span> <span class="n">fifeagent</span><span class="o">.</span><span class="n">instance</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;The map </span><span class="si">%s</span><span class="s"> has no entity </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                                                                 <span class="n">agent</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">agent</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="k">if</span> <span class="n">layer</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">layer</span> <span class="o">!=</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
@@ -561,7 +563,7 @@
     </div>
     <div class="footer">
         &copy; Copyright 2012-2013, Karsten Bock.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
     </div>
   </body>
 </html>

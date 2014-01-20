@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -27,7 +25,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="fife-rpg 0.2 documentation" href="../index.html" />
     <link rel="up" title="Systems" href="systems.html" />
-    <link rel="next" title="fife_rpg" href="../modules.html" />
+    <link rel="next" title="Lighting" href="lighting.html" />
     <link rel="prev" title="GameVariables" href="game_variables.html" /> 
   </head>
   <body>
@@ -41,7 +39,7 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="../modules.html" title="fife_rpg"
+          <a href="lighting.html" title="Lighting"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="game_variables.html" title="GameVariables"
@@ -94,7 +92,7 @@ the value of the secondary statistic. Example:</p>
 <p>The easiest way to add statistics is to create a yaml file and load it with
 <a class="reference internal" href="../fife_rpg.systems.html#fife_rpg.systems.character_statistics.CharacterStatisticSystem.load_statistics_from_file" title="fife_rpg.systems.character_statistics.CharacterStatisticSystem.load_statistics_from_file"><tt class="xref py py-func docutils literal"><span class="pre">load_statistics_from_file()</span></tt></a></p>
 <p>Here is an example:</p>
-<div class="code highlight-python"><pre>primary:
+<div class="code highlight-python"><div class="highlight"><pre>primary:
   ST:
     name: Strength
     description:
@@ -107,7 +105,8 @@ secondary:
     description:
     influences:
       ST: 0.7
-      CO: 0.3</pre>
+      CO: 0.3
+</pre></div>
 </div>
 <p>ST, CO and MD are the short forms of the statistic and used for accessing these.</p>
 <p>You can also use the
@@ -180,8 +179,8 @@ or decreased and adjust the statistic points to the cost or gain.</p>
   <p class="topless"><a href="game_variables.html"
                         title="previous chapter">GameVariables</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="../modules.html"
-                        title="next chapter">fife_rpg</a></p>
+  <p class="topless"><a href="lighting.html"
+                        title="next chapter">Lighting</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../_sources/tutorial/char_stats.txt"
@@ -214,7 +213,7 @@ or decreased and adjust the statistic points to the cost or gain.</p>
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="../modules.html" title="fife_rpg"
+          <a href="lighting.html" title="Lighting"
              >next</a> |</li>
         <li class="right" >
           <a href="game_variables.html" title="GameVariables"
@@ -226,7 +225,7 @@ or decreased and adjust the statistic points to the cost or gain.</p>
     </div>
     <div class="footer">
         &copy; Copyright 2012-2013, Karsten Bock.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
     </div>
   </body>
 </html>

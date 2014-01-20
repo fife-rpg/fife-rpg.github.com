@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -134,18 +132,18 @@ have available are available to dialogue conditions.</p>
 Args: A list of arguments to pass to the command. This supports the same
 variable replacement as for the text.</p>
 <p>Here is an example dialogue file:</p>
-<div class="code yaml highlight-python"><pre>Greetings:
+<div class="code yaml highlight-python"><div class="highlight"><pre>Greetings:
 
   - talker: David
-    text: Hey, I've seen you before, haven't I?
-    conditions: Agent.knows(entities.David, "PlayerCharacter")
+    text: Hey, I&#39;ve seen you before, haven&#39;t I?
+    conditions: Agent.knows(entities.David, &quot;PlayerCharacter&quot;)
     responses:
-      - "yes"
+      - &quot;yes&quot;
       - yes_bye
 
   - talker: David
-    text: Hi, I don't know you, do I?
-    conditions: not Agent.knows(entities.David, "PlayerCharacter")
+    text: Hi, I don&#39;t know you, do I?
+    conditions: not Agent.knows(entities.David, &quot;PlayerCharacter&quot;)
     responses:
       - no_introduce
       - no_bye
@@ -161,8 +159,8 @@ Sections:
       - introduce_reply
   no_bye:
     talker: PlayerCharacter
-    text: No, and I don't want to change that.
-  "yes":
+    text: No, and I don&#39;t want to change that.
+  &quot;yes&quot;:
     talker: PlayerCharacter
     text: Yes, I am {DialogueTalker.Description.view_name}. Remember?
     responses:
@@ -175,12 +173,13 @@ Sections:
     text: Nice to meet you, my name is {DialogueTalker.Description.real_name}
     commands:
       - Name: SetComponentValue
-        Args: [David, Description, view_name, "{DialogueTalker.Description.real_name}"]
+        Args: [David, Description, view_name, &quot;{DialogueTalker.Description.real_name}&quot;]
       - Name: AddKnowledge
         Args: [PlayerCharacter, David]
   yes_reply:
     talker: David
-    text: Ah, right.</pre>
+    text: Ah, right.
+</pre></div>
 </div>
 </div>
 <div class="section" id="accessing-dialogue-data-and-selecting-responses">
@@ -291,7 +290,7 @@ a response, of course:</p>
     </div>
     <div class="footer">
         &copy; Copyright 2012-2013, Karsten Bock.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
     </div>
   </body>
 </html>

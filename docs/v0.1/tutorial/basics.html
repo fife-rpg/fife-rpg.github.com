@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -8,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Basics &mdash; fife-rpg 0.1c documentation</title>
+    <title>Basics &mdash; fife-rpg 0.2 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.1c',
+        VERSION:     '0.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +23,7 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="fife-rpg 0.1c documentation" href="../index.html" />
+    <link rel="top" title="fife-rpg 0.2 documentation" href="../index.html" />
     <link rel="up" title="Tutorial" href="tutorial.html" />
     <link rel="next" title="Getting something displayed" href="display.html" />
     <link rel="prev" title="Tutorial" href="tutorial.html" /> 
@@ -46,7 +44,7 @@
         <li class="right" >
           <a href="tutorial.html" title="Tutorial"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">fife-rpg 0.1c documentation</a> &raquo;</li>
+        <li><a href="../index.html">fife-rpg 0.2 documentation</a> &raquo;</li>
           <li><a href="tutorial.html" accesskey="U">Tutorial</a> &raquo;</li> 
       </ul>
     </div>  
@@ -78,35 +76,35 @@ in this tutorial.</p>
             element.style.display = "block"
     };
 </script>
-<a href="javascript:showhide(document.getElementById('hiddencodeblock2'))">+ show/hide contents</a><br /><div id="hiddencodeblock2" style="display: block"><div class="highlight-python"><pre>&lt;?xml version='1.0' encoding='UTF-8'?&gt;
+<a href="javascript:showhide(document.getElementById('hiddencodeblock2'))">+ show/hide contents</a><br /><div id="hiddencodeblock2" style="display: block"><div class="highlight-python"><div class="highlight"><pre>&lt;?xml version=&#39;1.0&#39; encoding=&#39;UTF-8&#39;?&gt;
 &lt;Settings&gt;
-	&lt;Module name="FIFE"&gt;
-		&lt;Setting name="FullScreen" type="bool"&gt; False &lt;/Setting&gt;
-		&lt;Setting name="PlaySounds" type="bool"&gt; True &lt;/Setting&gt;
-		&lt;Setting name="RenderBackend" type="str"&gt; OpenGL &lt;/Setting&gt;
-		&lt;Setting name="ScreenResolution" type="str"&gt;1024x768&lt;/Setting&gt;
-		&lt;Setting name="BitsPerPixel" type="int"&gt; 0 &lt;/Setting&gt;
-		&lt;Setting name="InitialVolume" type="float"&gt; 5.0 &lt;/Setting&gt;
-		&lt;Setting name="SDLRemoveFakeAlpha" type="int"&gt; 1 &lt;/Setting&gt;
-		&lt;Setting name="GLCompressImages" type="bool"&gt; False &lt;/Setting&gt;
-		&lt;Setting name="WindowTitle" type="str"&gt; FIFErpg Tutorial &lt;/Setting&gt;
-		&lt;Setting name="WindowIcon" type="str"&gt; &lt;/Setting&gt;
-		&lt;Setting name="Font" type="str"&gt; fonts/FreeSans.ttf &lt;/Setting&gt;
-		&lt;Setting name="FontGlyphs" strip="0" type="str"&gt; abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!?-+/():;%&amp;amp;`'*#=[]\"&lt;/Setting&gt;
-		&lt;Setting name="DefaultFontSize" type="int"&gt; 16 &lt;/Setting&gt;
-		&lt;Setting name="LogModules" type="list"&gt; controller ; script &lt;/Setting&gt;
-		&lt;Setting name="PychanDebug" type="bool"&gt; False &lt;/Setting&gt;
-		&lt;Setting name="LogToPrompt" type="int"&gt; 1 &lt;/Setting&gt;
- 		&lt;Setting name="UsePsyco" type="bool"&gt; False &lt;/Setting&gt;
-		&lt;Setting name="ProfilingOn" type="bool"&gt; False &lt;/Setting&gt;
-		&lt;Setting name="LogToFile" type="int"&gt; 0 &lt;/Setting&gt;
-    	&lt;Setting name="Lighting" type="int"&gt; 0 &lt;/Setting&gt;
+	&lt;Module name=&quot;FIFE&quot;&gt;
+		&lt;Setting name=&quot;FullScreen&quot; type=&quot;bool&quot;&gt; False &lt;/Setting&gt;
+		&lt;Setting name=&quot;PlaySounds&quot; type=&quot;bool&quot;&gt; True &lt;/Setting&gt;
+		&lt;Setting name=&quot;RenderBackend&quot; type=&quot;str&quot;&gt; OpenGL &lt;/Setting&gt;
+		&lt;Setting name=&quot;ScreenResolution&quot; type=&quot;str&quot;&gt;1024x768&lt;/Setting&gt;
+		&lt;Setting name=&quot;BitsPerPixel&quot; type=&quot;int&quot;&gt; 0 &lt;/Setting&gt;
+		&lt;Setting name=&quot;InitialVolume&quot; type=&quot;float&quot;&gt; 5.0 &lt;/Setting&gt;
+		&lt;Setting name=&quot;SDLRemoveFakeAlpha&quot; type=&quot;int&quot;&gt; 1 &lt;/Setting&gt;
+		&lt;Setting name=&quot;GLCompressImages&quot; type=&quot;bool&quot;&gt; False &lt;/Setting&gt;
+		&lt;Setting name=&quot;WindowTitle&quot; type=&quot;str&quot;&gt; FIFErpg Tutorial &lt;/Setting&gt;
+		&lt;Setting name=&quot;WindowIcon&quot; type=&quot;str&quot;&gt; &lt;/Setting&gt;
+		&lt;Setting name=&quot;Font&quot; type=&quot;str&quot;&gt; fonts/FreeSans.ttf &lt;/Setting&gt;
+		&lt;Setting name=&quot;FontGlyphs&quot; strip=&quot;0&quot; type=&quot;str&quot;&gt; abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!?-+/():;%&amp;amp;`&#39;*#=[]\&quot;&lt;/Setting&gt;
+		&lt;Setting name=&quot;DefaultFontSize&quot; type=&quot;int&quot;&gt; 16 &lt;/Setting&gt;
+		&lt;Setting name=&quot;LogModules&quot; type=&quot;list&quot;&gt; controller ; script &lt;/Setting&gt;
+		&lt;Setting name=&quot;PychanDebug&quot; type=&quot;bool&quot;&gt; False &lt;/Setting&gt;
+		&lt;Setting name=&quot;LogToPrompt&quot; type=&quot;int&quot;&gt; 1 &lt;/Setting&gt;
+ 		&lt;Setting name=&quot;UsePsyco&quot; type=&quot;bool&quot;&gt; False &lt;/Setting&gt;
+		&lt;Setting name=&quot;ProfilingOn&quot; type=&quot;bool&quot;&gt; False &lt;/Setting&gt;
+		&lt;Setting name=&quot;LogToFile&quot; type=&quot;int&quot;&gt; 0 &lt;/Setting&gt;
+    	&lt;Setting name=&quot;Lighting&quot; type=&quot;int&quot;&gt; 0 &lt;/Setting&gt;
 	&lt;/Module&gt;
-	&lt;Module name="fife-rpg"&gt;
-    	&lt;Setting name="ProjectName" type="str"&gt;Tutorial 1&lt;/Setting&gt;
+	&lt;Module name=&quot;fife-rpg&quot;&gt;
+    	&lt;Setting name=&quot;ProjectName&quot; type=&quot;str&quot;&gt;Tutorial 1&lt;/Setting&gt;
     &lt;/Module&gt;
 &lt;/Settings&gt;
-</pre>
+</pre></div>
 </div>
 </div><p>Note that it is named &#8220;settings-dist.xml&#8221; and not &#8220;settings.xml&#8221;. This is a
 feature that is already in FIFE itself. If it can&#8217;t find the &#8220;settings.xml&#8221;
@@ -176,7 +174,7 @@ FIFErpg controllers are specialized modes.</p>
 <span class="kn">from</span> <span class="nn">fife_rpg</span> <span class="kn">import</span> <span class="n">GameSceneController</span>
 <span class="kn">from</span> <span class="nn">fife.extensions.fife_settings</span> <span class="kn">import</span> <span class="n">Setting</span>
 
-<span class="n">settings</span> <span class="o">=</span> <span class="n">Setting</span><span class="p">(</span><span class="n">app_name</span><span class="o">=</span><span class="s">&quot;Tutorial 1&quot;</span><span class="p">)</span>
+<span class="n">settings</span> <span class="o">=</span> <span class="n">Setting</span><span class="p">(</span><span class="n">app_name</span><span class="o">=</span><span class="s">&quot;Tutorial 1&quot;</span><span class="p">,</span> <span class="n">settings_file</span><span class="o">=</span><span class="s">&quot;settings.xml&quot;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
     <span class="n">app</span> <span class="o">=</span> <span class="n">RPGApplication</span><span class="p">(</span><span class="n">settings</span><span class="p">)</span>
@@ -245,13 +243,13 @@ window to close it.</p>
         <li class="right" >
           <a href="tutorial.html" title="Tutorial"
              >previous</a> |</li>
-        <li><a href="../index.html">fife-rpg 0.1c documentation</a> &raquo;</li>
+        <li><a href="../index.html">fife-rpg 0.2 documentation</a> &raquo;</li>
           <li><a href="tutorial.html" >Tutorial</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
         &copy; Copyright 2012-2013, Karsten Bock.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
     </div>
   </body>
 </html>

@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -85,27 +83,27 @@
 
 <span class="sd">        locked: Is the object locker or unlocked</span>
 
-<span class="sd">        open_animation: Name of the animation that is run when the object is</span>
+<span class="sd">        open_action: Name of the action that is run when the object is</span>
 <span class="sd">        being opened</span>
 
-<span class="sd">        opened_animation: Name of the animation that is run when the object is</span>
+<span class="sd">        opened_action: Name of the action that is run when the object is</span>
 <span class="sd">        open</span>
 
-<span class="sd">        close_animation: Name of the animation that is run when the object is</span>
+<span class="sd">        close_action: Name of the action that is run when the object is</span>
 <span class="sd">        being closed</span>
 
-<span class="sd">        closed_animation: Name of the animation that is run when the object is</span>
+<span class="sd">        closed_action: Name of the action that is run when the object is</span>
 <span class="sd">        being closed</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">Base</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">closed</span><span class="o">=</span><span class="nb">bool</span><span class="p">,</span> <span class="n">locked</span><span class="o">=</span><span class="nb">bool</span><span class="p">,</span>
-                      <span class="n">open_animation</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">opened_animation</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
-                      <span class="n">close_animation</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">closed_animation</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s">&quot;open_animation&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">default</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="s">&quot;open&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s">&quot;opened_animation&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">default</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="s">&quot;opened&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s">&quot;close_animation&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">default</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="s">&quot;close&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s">&quot;closed_animation&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">default</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="s">&quot;closed&quot;</span>
+                      <span class="n">open_action</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">opened_action</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+                      <span class="n">close_action</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">closed_action</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s">&quot;open_action&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">default</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="s">&quot;open&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s">&quot;opened_action&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">default</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="s">&quot;opened&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s">&quot;close_action&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">default</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="s">&quot;close&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s">&quot;closed_action&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">default</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="s">&quot;closed&quot;</span>
 
     <span class="nd">@classmethod</span>
 <div class="viewcode-block" id="Lockable.register"><a class="viewcode-back" href="../../../fife_rpg.components.html#fife_rpg.components.lockable.Lockable.register">[docs]</a>    <span class="k">def</span> <span class="nf">register</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;Lockable&quot;</span><span class="p">,</span> <span class="n">auto_register</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
@@ -196,9 +194,9 @@
 <span class="sd">        locakbe: A :class:`fife_rpg.components.lockable.Lockable` instance</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">lockable</span><span class="o">.</span><span class="n">closed</span><span class="p">:</span>
-        <span class="n">fifeagent</span><span class="o">.</span><span class="n">behaviour</span><span class="o">.</span><span class="n">animate</span><span class="p">(</span><span class="n">lockable</span><span class="o">.</span><span class="n">closed_animation</span><span class="p">,</span> <span class="n">repeating</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">fifeagent</span><span class="o">.</span><span class="n">behaviour</span><span class="o">.</span><span class="n">act</span><span class="p">(</span><span class="n">lockable</span><span class="o">.</span><span class="n">closed_action</span><span class="p">,</span> <span class="n">repeating</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">fifeagent</span><span class="o">.</span><span class="n">behaviour</span><span class="o">.</span><span class="n">animate</span><span class="p">(</span><span class="n">lockable</span><span class="o">.</span><span class="n">opened_animation</span><span class="p">,</span> <span class="n">repeating</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">fifeagent</span><span class="o">.</span><span class="n">behaviour</span><span class="o">.</span><span class="n">act</span><span class="p">(</span><span class="n">lockable</span><span class="o">.</span><span class="n">opened_action</span><span class="p">,</span> <span class="n">repeating</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
 </div>
 <div class="viewcode-block" id="register_checkers"><a class="viewcode-back" href="../../../fife_rpg.components.html#fife_rpg.components.lockable.register_checkers">[docs]</a><span class="k">def</span> <span class="nf">register_checkers</span><span class="p">():</span>
@@ -248,7 +246,7 @@
     </div>
     <div class="footer">
         &copy; Copyright 2012-2013, Karsten Bock.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
     </div>
   </body>
 </html>

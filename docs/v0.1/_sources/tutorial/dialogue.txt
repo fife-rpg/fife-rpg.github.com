@@ -7,6 +7,10 @@ Dialogues
 
 This tutorial will explain the dialogue module that is included in FIFErpg.
 
+.. note::
+
+   The conditions section has changed since the 0.1c release.
+
 Summary
 -------
 
@@ -71,14 +75,10 @@ every time the identifier is changed.
 
 Conditions
 ----------
-The conditions themselves are dictionaries with 2 keys:
-Type: The type of the condition. What conditions are available is determined
-by what conditions are registered to the |ScriptingSystem|. It also follows the
-same rules as for the scripting system: If a condition is prefixed with "Not\_"
-then the condition will pass if it evaluates to False. The conditions are also
-case sensitive.
-Args: A list of arguments to pass to the condition. This depends on the
-condition.
+The conditions themselves are an python expression that should evaluate
+to either True or False. The expression is evaluated using the
+|ScriptingSystem| thus the same variables and functions that scripts
+have available are available to dialogue conditions.
 
 See also:
 :doc:`scripting`
@@ -95,21 +95,18 @@ Here is an example dialogue file:
 
 .. code:: yaml
 
-   Greetings:     
+   Greetings:
+     
      - talker: David
        text: Hey, I've seen you before, haven't I?
-       conditions:
-         - Type: Knows
-           Args: [David, PlayerCharacter]
+       conditions: Agent.knows(entities.David, "PlayerCharacter")
        responses:
          - "yes"
          - yes_bye
              
      - talker: David
        text: Hi, I don't know you, do I?
-       conditions:
-         - Type: Not_Knows
-           Args: [David, PlayerCharacter]
+       conditions: not Agent.knows(entities.David, "PlayerCharacter")
        responses:
          - no_introduce
          - no_bye

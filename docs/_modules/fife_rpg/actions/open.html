@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -96,8 +94,8 @@
             <span class="n">fifeagent_data</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">target</span><span class="p">,</span> <span class="n">FifeAgent</span><span class="o">.</span><span class="n">registered_as</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">fifeagent_data</span><span class="p">:</span>
                 <span class="n">behaviour</span> <span class="o">=</span> <span class="n">fifeagent_data</span><span class="o">.</span><span class="n">behaviour</span>
-                <span class="n">behaviour</span><span class="o">.</span><span class="n">animate</span><span class="p">(</span><span class="n">lockable</span><span class="o">.</span><span class="n">open_animation</span><span class="p">)</span>
-                <span class="n">behaviour</span><span class="o">.</span><span class="n">queue_animation</span><span class="p">(</span><span class="n">lockable</span><span class="o">.</span><span class="n">opened_animation</span><span class="p">,</span>
+                <span class="n">behaviour</span><span class="o">.</span><span class="n">act</span><span class="p">(</span><span class="n">lockable</span><span class="o">.</span><span class="n">open_action</span><span class="p">)</span>
+                <span class="n">behaviour</span><span class="o">.</span><span class="n">queue_action</span><span class="p">(</span><span class="n">lockable</span><span class="o">.</span><span class="n">opened_action</span><span class="p">,</span>
                                           <span class="n">repeating</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
         <span class="n">EntityAction</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
@@ -179,7 +177,7 @@
     </div>
     <div class="footer">
         &copy; Copyright 2012-2013, Karsten Bock.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
     </div>
   </body>
 </html>

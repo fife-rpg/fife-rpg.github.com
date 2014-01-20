@@ -43,7 +43,7 @@ First we need to import three classes from FIFErpg:
    from fife_rpg import RPGApplication
    from fife_rpg import GameSceneView
    from fife_rpg import GameSceneController
-   
+
 The RPGApplication class is the main class for FIFErpg, it takes care of most
 of the automatic discovery and activation features. It also stores the world,
 which is like the model in a model-view-controller pattern. Every FIFErpg
@@ -61,31 +61,31 @@ Also you will need to import the settings extension from fife:
 .. code:: python
 
    from fife.extensions.fife_settings import Setting
-   
+
 This will be used to load the settings file, which is the next step:
 
 .. code:: python
 
    settings = Setting(app_name="Tutorial 1", settings_file="settings.xml")
-   
+
 The next thing is to create the application, using the settings:
 
 .. code:: python
 
    app = RPGApplication(settings)
-   
+
 The view and controller also need to be created. Note the order, it is
 important:
 
 .. code :: python
 
     view = GameSceneView(app)
-    controller = GameSceneController(view, app)   
+    controller = GameSceneController(view, app)
 
 The next step is to have the application create the world:
 
 .. code :: python
-   
+
    app.create_world()
 
 Now everything is set up. But you will need to tell the application to use
@@ -94,7 +94,7 @@ the controller. This is done with the following code:
 .. code :: python
 
    app.push_mode(controller)
-   
+
 The "push_mode" method is inherited from the bGrease class BaseManager_ and the
 FIFErpg controllers are specialized modes.
 
@@ -110,24 +110,24 @@ Here is the complete code:
 
 .. code :: python
 
-   from fife_rpg import RPGApplication
-   from fife_rpg import GameSceneView
-   from fife_rpg import GameSceneController
-   from fife.extensions.fife_settings import Setting
-   
-   settings = Setting(app_name="Tutorial 1")
-   
-   def main():
-       app = RPGApplication(settings)
-       view = GameSceneView(app)
-       controller = GameSceneController(view, app)
-       app.create_world()
-       app.push_mode(controller)
-       app.run()
-       
-   if __name__ == '__main__':
-       main()
-       
+	from fife_rpg import RPGApplication
+	from fife_rpg import GameSceneView
+	from fife_rpg import GameSceneController
+	from fife.extensions.fife_settings import Setting
+
+	settings = Setting(app_name="Tutorial 1", settings_file="settings.xml")
+
+	def main():
+	    app = RPGApplication(settings)
+	    view = GameSceneView(app)
+	    controller = GameSceneController(view, app)
+	    app.create_world()
+	    app.push_mode(controller)
+	    app.run()
+
+	if __name__ == '__main__':
+	    main()
+
 If you run this code a window with a black background will appear.
 You can either use the Escape key, or the X button in the title bar of the
 window to close it.

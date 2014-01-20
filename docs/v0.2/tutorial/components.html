@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -84,7 +82,8 @@ component class.</p>
 </pre></div>
 </div>
 <p>Then make a class that derives from that.</p>
-<div class="code python highlight-python"><pre>class Health(Base):</pre>
+<div class="code python highlight-python"><div class="highlight"><pre>class Health(Base):
+</pre></div>
 </div>
 <p>To define the fields you will need to call the Base class constructor with
 their information:</p>
@@ -144,7 +143,8 @@ system is activated.</p>
 </pre></div>
 </div>
 <p>Then to register a command:</p>
-<div class="code python highlight-python"><pre>ComponentManager.register_script_command(&lt;command_name&gt;, &lt;function&gt;)</pre>
+<div class="code python highlight-python"><div class="highlight"><pre>ComponentManager.register_script_command(&lt;command_name&gt;, &lt;function&gt;)
+</pre></div>
 </div>
 <p>When registering the components to the application one can disable the
 auto registering of script commands. For this to work the register commands
@@ -160,9 +160,10 @@ possibly attached fifeagent is playing the appropriate animation. The functions
 are called every pump/tick by the world.</p>
 <p>As for component functions what the functions actually do is up to you.</p>
 <p>Registering such a function is done as follows:</p>
-<div class="code python highlight-python"><pre>ComponentManager.register_checker(
+<div class="code python highlight-python"><div class="highlight"><pre>ComponentManager.register_checker(
     &lt;list of component names&gt;,
-    &lt;checker function&gt;)</pre>
+    &lt;checker function&gt;)
+</pre></div>
 </div>
 <p>As with the script commands you should these functions inside a
 &#8220;register_checkers&#8221; function inside the same module as the component.</p>
@@ -237,7 +238,7 @@ are called every pump/tick by the world.</p>
     </div>
     <div class="footer">
         &copy; Copyright 2012-2013, Karsten Bock.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
     </div>
   </body>
 </html>
