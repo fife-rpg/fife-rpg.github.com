@@ -98,7 +98,7 @@ switched:
 
 .. code :: python
 
-    def on_map_switched(self):
+    def on_map_switched(self, old_map, new_map):
         renderer = fife.FloatingTextRenderer.getInstance(self.application.current_map.camera)
         font = get_manager().getDefaultFont()
         renderer.setFont(font)

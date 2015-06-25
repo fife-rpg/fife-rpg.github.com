@@ -835,8 +835,8 @@ execute an action when reaching the target.</p>
 fifeagent and a moving component</p>
 <p>target_or_location: A fife.Location or position tuple
 to move to or another entity  to follow</p>
-<p>run_agent: If true the run_animation will be performed otherwise
-the walk_animation.</p>
+<p>run_agent: If true the run_action will be performed otherwise
+the walk_action.</p>
 <p class="last">callback: A function, that will be called after the agent has reached
 its target.</p>
 </dd>
@@ -929,13 +929,13 @@ name as this class.</p>
 <dt>Fields:</dt>
 <dd><p class="first">closed: Is the object closed or open</p>
 <p>locked: Is the object locker or unlocked</p>
-<p>open_animation: Name of the animation that is run when the object is
+<p>open_action: Name of the action that is run when the object is
 being opened</p>
-<p>opened_animation: Name of the animation that is run when the object is
+<p>opened_action: Name of the action that is run when the object is
 open</p>
-<p>close_animation: Name of the animation that is run when the object is
+<p>close_action: Name of the action that is run when the object is
 being closed</p>
-<p class="last">closed_animation: Name of the animation that is run when the object is
+<p class="last">closed_action: Name of the action that is run when the object is
 being closed</p>
 </dd>
 </dl>
@@ -1078,9 +1078,9 @@ the map by using pathfinding.</p>
 <dl class="docutils">
 <dt>Fields:</dt>
 <dd><p class="first">walk_speed: The walking speed</p>
-<p>walk_animation: The animation that is played when walking</p>
+<p>walk_action: The action that is played when walking</p>
 <p>run_speed: The Running speed</p>
-<p class="last">run_animation: The animation that is played when running</p>
+<p class="last">run_action: The action that is played when running</p>
 </dd>
 </dl>
 <dl class="classmethod">
@@ -1184,7 +1184,7 @@ name as this class.</p>
     </div>
     <div class="footer">
         &copy; Copyright 2012-2013, Karsten Bock.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
     </div>
   </body>
 </html>

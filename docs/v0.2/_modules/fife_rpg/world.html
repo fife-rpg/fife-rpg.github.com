@@ -75,8 +75,7 @@
 <span class="kn">import</span> <span class="nn">imp</span>
 
 <span class="kn">from</span> <span class="nn">bGrease.grease_fife.world</span> <span class="kn">import</span> <span class="n">World</span>
-<span class="kn">from</span> <span class="nn">fife.extensions.serializers.xmlobject</span> <span class="kn">import</span> <span class="n">XMLObjectLoader</span>
-<span class="kn">from</span> <span class="nn">fife.extensions.serializers.xml_loader_tools</span> <span class="kn">import</span> <span class="n">loadImportDirRec</span>
+<span class="kn">from</span> <span class="nn">fife.fife</span> <span class="kn">import</span> <span class="n">MapLoader</span>
 <span class="kn">import</span> <span class="nn">yaml</span>
 
 <span class="kn">from</span> <span class="nn">fife_rpg.components</span> <span class="kn">import</span> <span class="n">ComponentManager</span>
@@ -231,9 +230,11 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="n">object_path</span><span class="p">:</span>
             <span class="n">object_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
                 <span class="s">&quot;fife-rpg&quot;</span><span class="p">,</span> <span class="s">&quot;AgentObjectsPath&quot;</span><span class="p">,</span> <span class="s">&quot;objects/agents&quot;</span><span class="p">)</span>
-        <span class="n">engine</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span>
-        <span class="n">obj_loader</span> <span class="o">=</span> <span class="n">XMLObjectLoader</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span>
-        <span class="n">loadImportDirRec</span><span class="p">(</span><span class="n">obj_loader</span><span class="p">,</span> <span class="n">object_path</span><span class="p">,</span> <span class="n">engine</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+        <span class="n">loader</span> <span class="o">=</span> <span class="n">MapLoader</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">getModel</span><span class="p">(),</span>
+                                <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">getVFS</span><span class="p">(),</span>
+                                <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">getImageManager</span><span class="p">(),</span>
+                                <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">getRenderBackend</span><span class="p">())</span>
+        <span class="n">loader</span><span class="o">.</span><span class="n">loadImportDirectory</span><span class="p">(</span><span class="n">object_path</span><span class="p">)</span>
 </div>
 <div class="viewcode-block" id="RPGWorld.read_object_db"><a class="viewcode-back" href="../../fife_rpg.html#fife_rpg.world.RPGWorld.read_object_db">[docs]</a>    <span class="k">def</span> <span class="nf">read_object_db</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">db_filename</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Reads the Object Information Database from a file</span>
@@ -416,7 +417,7 @@
     </div>
     <div class="footer">
         &copy; Copyright 2012-2013, Karsten Bock.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
     </div>
   </body>
 </html>
