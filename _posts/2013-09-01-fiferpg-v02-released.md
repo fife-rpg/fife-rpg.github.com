@@ -4,7 +4,7 @@ title: "FIFErpg v0.2 released"
 description: ""
 category: 
 tags: [fiferpg, release, 0.2]
-date: 2013-09-01 15:12:00
+date: 2013-09-01 15:12:00 +0100
 ---
 {% include JB/setup %}
 

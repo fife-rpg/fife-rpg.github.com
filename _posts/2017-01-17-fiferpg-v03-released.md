@@ -4,7 +4,7 @@ title: "FIFErpg v0.3 released/Python 3 branch"
 description: ""
 category: 
 tags: [fiferpg, release, 0.3]
-date: 2017-01-17 10:05:00
+date: 2017-01-17 10:05:00 +0100
 ---
 {% include JB/setup %}
 
